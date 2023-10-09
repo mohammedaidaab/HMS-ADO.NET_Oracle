@@ -1,0 +1,457 @@
+﻿@* @model HMS.Domain.Entities.SiteRole *@
+@model HMS.Domain.Entities.ViewModels.RolePermissionVM
+
+
+@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+	string[] sections = { "halls", "reservations", "buildings", "colleges" };
+    string[] permissions = { "Read","Create", "Update", "Delete" };
+}
+
+
+
+<div class="mg-div" style="background-image:url('/assets/media/images/setting.png')">
+	<div class="card card-custom mg-card">
+        <div class="card-header">
+            <div class="card-title">
+                <center>
+                    <h2> تعديل بيانات الصلاحية (@Model.Role.Name) </h2>
+                </center>
+            </div>
+        </div>
+      
+            @using (Html.BeginForm("Update", "Role", FormMethod.Post))
+            {
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-6" style="align-self:center">
+						<br />
+						<br />
+						@Html.TextBoxFor(Model => Model.Role.Id,new{@hidden="hidden"})
+						<br />
+						<br />
+						<br />
+						<br />
+						@Html.LabelFor(Model => Model.Role.Name)
+						@Html.TextBoxFor(Model => Model.Role.Name,new{@class="form-control",@autocomplete="off",onkeypress="return /[0-9a-zA-Z-ا-ي- -]/i.test(event.key)"} )
+						@Html.ValidationMessageFor(Model => Model.Role.Name,null,new{@class="text-danger"})
+						<br />
+						@Html.LabelFor(Model=>Model.Role.Description)
+						@Html.TextBoxFor(Model => Model.Role.Description,new{@class="form-control",@autocomplete="off",})
+						@Html.ValidationMessageFor(Model => Model.Role.Description,null,new{@class="text-danger"})
+						<br />
+						<br />
+						@Html.TextBoxFor(Model => Model.Role.NormalizedName,new{@hidden="hidden"})
+						<br />
+						<br />
+						<br>
+					</div>
+
+					<div class="col-md-6">
+						<div class="col-xl-12">
+							<!--begin::Tables Widget 4-->
+							<div class="card card-xl-stretch mb-5 mb-xl-8">
+								<!--begin::Header-->
+								<div class="card-header border-0 pt-5">
+									<h3 class="card-title align-items-center flex-column" style="width:-webkit-fill-available">
+										<center>
+											<span class="card-label fw-bolder fs-3 mb-1">صلاحيات الوصول الخاصة بالدور</span>
+											<br><br>
+											<ul class="nav">
+												@foreach (var sectab in sections)
+												{
+													@if(@sectab == "halls")
+													{
+														<li class="nav-item">
+															<a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-light-primary fw-bolder px-4 me-1" data-bs-toggle="tab" href="#kt_table_widget_4_tab_1">
+																القاعات
+															</a>
+														</li>
+													}
+													@if (@sectab == "reservations")
+													{
+														<li class="nav-item">
+															<a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-light-primary fw-bolder px-4 me-1" data-bs-toggle="tab" href="#kt_table_widget_4_tab_2">
+																الحجوزات
+															</a>
+														</li>
+													}
+													@if (@sectab == "colleges")
+													{
+														<li class="nav-item">
+															<a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-light-primary fw-bolder px-4 me-1" data-bs-toggle="tab" href="#kt_table_widget_4_tab_3">
+																الكليات
+															</a>
+														</li>
+													}
+													@if (@sectab == "buildings")
+													{
+														<li class="nav-item">
+															<a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-light-primary fw-bolder px-4 me-1" data-bs-toggle="tab" href="#kt_table_widget_4_tab_4">
+																المباني
+															</a>
+														</li>
+													}
+												}
+											</ul>
+										</center>
+									</h3>
+									
+								</div>
+								<!--end::Header-->
+								<!--begin::Body-->
+								<div class="card-body py-3">
+									<div class="tab-content">
+
+										<!--begin::Tap pane-->
+										<div class="tab-pane fade " id="kt_table_widget_4_tab_1">
+											<!--begin::Table container-->
+											<div class="table-responsive">
+												<!--begin::Table-->
+												<table class="table align-middle gs-0 gy-3">
+													<!--begin::Table head-->
+													<thead>
+														<tr>
+															<th class="p-0 w-220px"></th>
+															<th class="p-0 min-w-100px"></th>
+															<th class="p-0 min-w-108px"></th>
+														</tr>
+													</thead>
+													<!--end::Table head-->
+													<!--begin::Table body-->
+													<tbody>
+														@foreach (var sec in sections)
+														{
+															@if (sec == "halls")
+															{
+																@foreach (var perm in permissions)
+																{
+																	var name = sec+"-"+perm;
+																	<tr style="border-bottom: outset;    border-color: #61e3ed7a;">
+																		<td>
+																			@if (name == "halls-Read")
+																			{
+																			<div class="symbol symbol-50px">
+																				اطلاع
+																			</div>
+																			}
+																			@if (name == "halls-Create")
+																			{
+																				<div class="symbol symbol-50px">
+																					انشاء
+																				</div>
+																			}
+																			@if (name == "halls-Delete")
+																			{
+																				<div class="symbol symbol-50px">
+																					حذف
+																				</div>
+																			}
+																			@if (name == "halls-Update")
+																			{
+																				<div class="symbol symbol-50px">
+																					تحديث
+																				</div>
+																			}
+																		</td>
+																		<td>
+
+																		</td>
+																		<td class="text-end" style="direction:ltr">
+																			<label class="form-check form-switch form-check-custom form-check-solid">
+																				<input class="form-check-input" type="checkbox" name="Perms" value="@sec-@perm" @foreach (var item in Model.permissions)
+																				{
+																					if(item.Name == name)
+																					{
+																						<text>
+																							checked
+																						</text>
+																					}
+																				}
+																				>
+																			</label>
+																		</td>
+																	</tr>
+																}
+															}
+														}
+														
+													</tbody>
+													<!--end::Table body-->
+												</table>
+											</div>
+											<!--end::Table-->
+										</div>
+										<!--end::Tap pane-->
+										<!--begin::Tap pane-->
+										<div class="tab-pane fade" id="kt_table_widget_4_tab_2">
+											<!--begin::Table container-->
+											<div class="table-responsive">
+												<!--begin::Table-->
+												<table class="table align-middle gs-0 gy-3">
+													<!--begin::Table head-->
+													<thead>
+														<tr>
+															<th class="p-0 w-220px"></th>
+															<th class="p-0 min-w-100px"></th>
+															<th class="p-0 min-w-108px"></th>
+														</tr>
+													</thead>
+													<!--end::Table head-->
+													<!--begin::Table body-->
+													<tbody>
+														@foreach (var sec in sections)
+														{
+															@if (sec == "reservations")
+															{
+																@foreach (var perm in permissions)
+																{
+																	var name = sec + "-" + perm;
+																	<tr style="border-bottom: outset;    border-color: #61e3ed7a;">
+																		<td>
+																			@if (name == "reservations-Read")
+																			{
+																				<div class="symbol symbol-50px">
+																					اطلاع
+																				</div>
+																			}
+																			@if (name == "reservations-Create")
+																			{
+																				<div class="symbol symbol-50px">
+																					انشاء
+																				</div>
+																			}
+																			@if (name == "reservations-Delete")
+																			{
+																				<div class="symbol symbol-50px">
+																					حذف
+																				</div>
+																			}
+																			@if (name == "reservations-Update")
+																			{
+																				<div class="symbol symbol-50px">
+																					تحديث
+																				</div>
+																			}
+																		</td>
+																		<td>
+																		</td>
+																		<td class="text-end" style="direction:ltr">
+																			<label class="form-check form-switch form-check-custom form-check-solid">
+																				<input class="form-check-input" type="checkbox" name="Perms" value="@sec-@perm" @foreach (var item in Model.permissions)
+																				{
+																					if (item.Name == name)
+																					{
+																						<text>
+																							checked
+																						</text>
+																					}
+																				}
+																				>
+																			</label>
+																		</td>
+																	</tr>
+																}
+															}
+														}
+														
+													</tbody>
+													<!--end::Table body-->
+												</table>
+											</div>
+											<!--end::Table-->
+										</div>
+										<!--end::Tap pane-->
+										<!--begin::Tap pane-->
+										<div class="tab-pane fade" id="kt_table_widget_4_tab_4">
+											<!--begin::Table container-->
+											<div class="table-responsive">
+												<!--begin::Table-->
+												<table class="table align-middle gs-0 gy-3">
+													<!--begin::Table head-->
+													<thead>
+														<tr>
+															<th class="p-0 w-220px"></th>
+															<th class="p-0 min-w-100px"></th>
+															<th class="p-0 min-w-108px"></th>
+														</tr>
+													</thead>
+													<!--end::Table head-->
+													<!--begin::Table body-->
+													<tbody>
+														@foreach (var sec in sections)
+														{
+															@if (sec == "buildings")
+															{
+																@foreach (var perm in permissions)
+																{
+																	var name = sec + "-" + perm;
+																	<tr style="border-bottom: outset;    border-color: #61e3ed7a;">
+																		<td>
+																			@if (name == "buildings-Read")
+																			{
+																				<div class="symbol symbol-50px">
+																					اطلاع
+																				</div>
+																			}
+																			@if (name == "buildings-Create")
+																			{
+																				<div class="symbol symbol-50px">
+																					انشاء
+																				</div>
+																			}
+																			@if (name == "buildings-Delete")
+																			{
+																				<div class="symbol symbol-50px">
+																					حذف
+																				</div>
+																			}
+																			@if (name == "buildings-Update")
+																			{
+																				<div class="symbol symbol-50px">
+																					تحديث
+																				</div>
+																			}
+																		</td>
+																		<td>
+																		</td>
+																		<td class="text-end" style="direction:ltr">
+																			<label class="form-check form-switch form-check-custom form-check-solid">
+																				<input class="form-check-input" type="checkbox" name="Perms" value="@sec-@perm" @foreach (var item in Model.permissions)
+																				{
+																					if (item.Name == name)
+																					{
+																						<text>
+																							checked
+																						</text>
+																					}
+																				}
+																				>
+																			</label>
+																		</td>
+																	</tr>
+																}
+															}
+														}
+													</tbody>
+													<!--end::Table body-->
+												</table>
+											</div>
+											<!--end::Table-->
+										</div>
+										<!--end::Tap pane-->
+										<!--begin::Tap pane-->
+										<div class="tab-pane fade" id="kt_table_widget_4_tab_3">
+											<!--begin::Table container-->
+											<div class="table-responsive">
+												<!--begin::Table-->
+												<table class="table align-middle gs-0 gy-3">
+													<!--begin::Table head-->
+													<thead>
+														<tr>
+															<th class="p-0 w-220px"></th>
+															<th class="p-0 min-w-100px"></th>
+															<th class="p-0 min-w-108px"></th>
+														</tr>
+													</thead>
+													<!--end::Table head-->
+													<!--begin::Table body-->
+													<tbody>
+														@foreach (var sec in sections)
+														{
+															@if (sec == "colleges")
+															{
+																@foreach (var perm in permissions)
+																{
+																	var name = sec + "-" + perm;
+																	<tr style="border-bottom: outset;    border-color: #61e3ed7a;">
+																		<td>
+																			@if (name == "colleges-Read")
+																			{
+																				<div class="symbol symbol-50px">
+																					اطلاع
+																				</div>
+																			}
+																			@if (name == "colleges-Create")
+																			{
+																				<div class="symbol symbol-50px">
+																					انشاء
+																				</div>
+																			}
+																			@if (name == "colleges-Delete")
+																			{
+																				<div class="symbol symbol-50px">
+																					حذف
+																				</div>
+																			}
+																			@if (name == "colleges-Update")
+																			{
+																				<div class="symbol symbol-50px">
+																					تحديث
+																				</div>
+																			}
+																		</td>
+																		<td>
+																		</td>
+																		<td class="text-end" style="direction:ltr">
+																			<label class="form-check form-switch form-check-custom form-check-solid">
+																				<input class="form-check-input" type="checkbox" name="Perms" value="@sec-@perm" @foreach (var item in Model.permissions)
+																				{
+																					if (item.Name == name)
+																					{
+																						<text>
+																							checked
+																						</text>
+																					}
+																				}
+																				>
+																			</label>
+																		</td>
+																	</tr>
+																}
+															}
+														}
+													</tbody>
+													<!--end::Table body-->
+												</table>
+											</div>
+											<!--end::Table-->
+										</div>
+										<!--end::Tap pane-->
+									</div>
+								</div>
+								<!--end::Body-->
+							</div>
+							<!--end::Tables Widget 4-->
+						</div>
+
+						<br />
+						<br />
+
+					</div>
+                </div>
+        </div>
+		<div class="card-footer">
+			<input type="submit" name="save" value="حفظ التغيرات" class="btn btn-primary">
+			<button type="reset" class="btn btn-secondary">
+				<a href="/role"> عودة  <i class="fa-solid fa-circle-left fa-2xl"></i></a>
+			</button>
+		</div>
+			}
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+	
+}

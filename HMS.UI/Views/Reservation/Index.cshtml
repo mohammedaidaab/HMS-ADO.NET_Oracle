@@ -1,0 +1,102 @@
+﻿@model IEnumerable<HMS.Domain.Entities.ViewModels.ReservationHallVM>
+
+@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+}
+
+
+<div class="mg-div" style="background-image:url('/assets/media/images/clock.png')">
+    <div class="card card-custom mg-card">
+        <div class="card-header">
+            <div class="card-title">
+                <div class="text-center">
+                    <center>
+                      الحجوزات
+                    </center>
+                </div>
+            </div>
+        </div>
+            <div class="card-body">
+               <table id="example" class="hover" style="width:100%" style="text-align:right">
+                <thead>
+                    <tr>
+                        <th style="text-align:center">اسم الحجز</th>
+                        <th style="text-align:center">اسم القاعة</th>
+                        @if(User.IsInRole("super_admin")){
+                            <th style="text-align:center">اسم المستخدم</th>
+                        }
+                        <th style="text-align:center">تاريخ الحجز</th>
+                        <th style="text-align:center"> وقت البداية</th>
+                        <th style="text-align:center"> وقت النهاية</th>
+                        <th style="text-align:center">  العمليات</th>
+                    </tr>
+                </thead>
+
+                <tbody style="text-align:center">
+
+                    @foreach (var rev in Model)
+                    {
+                        <tr>
+                            <td>@rev.Name</td>
+                            <td>@rev.Hall_name</td>
+                            @if (User.IsInRole("super_admin"))
+                            {
+                                @if (rev.User_Name == "") {
+                                    <td>  "المستخدم ليص لديه اسم على النظام" </td>
+                                    }else{
+                                    <td> @rev.User_Name  </td>
+                                }
+                            }
+                            <td>@rev.Date.ToShortDateString()</td>
+                            <td style="width:10%">
+                                <input type="datetime" value="@rev.Time_Start.ToShortTimeString()" class="form-control" disabled  > 
+                            </td>
+                             <td style="width:10%">
+                                <input type="datetime" value="@rev.Time_End.ToShortTimeString()" class="form-control" disabled>
+                            </td>
+                            <td>
+                                <a href="/Reservation/edit/@rev.Id" alt="edit data">
+                                    <button class="btn btn-warning">
+                                        <i class="fa fa-edit" ></i>
+                                    </button>    
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+
+           
+            </table>
+            </div>
+        <div class="card-fotter">
+        </div>
+
+
+    </div>
+</div>
+
+
+@section Scripts {
+
+    @if (TempData["message"] != null)
+    {
+        <script>messagebox.swall('@TempData["message"]', '@TempData["type"]')</script>
+    }
+
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+
+
+    <script>
+        new DataTable('#example');
+    </script>
+}

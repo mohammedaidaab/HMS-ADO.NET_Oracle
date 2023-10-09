@@ -1,0 +1,72 @@
+﻿@model HMS.Data.collage
+
+@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+}
+
+<div class="card card-custom">
+	<div class="card-header">
+		<h3 class="card-title">
+			تعديل بيانات الكلية
+		</h3>
+		<div class="card-toolbar">
+			<div class="example-tools justify-content-center">
+				<span class="example-toggle" data-toggle="tooltip" title="View code"></span>
+				<span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
+			</div>
+		</div>
+	</div>
+	<!--begin::Form-->
+	@using (Html.BeginForm("update", "collage", FormMethod.Post))
+	{
+		<div class="card-body">
+
+			@Html.TextBoxFor(Model=>Model.ID,null,new{@hidden="hidden"})
+
+			<div class="form-group">
+				@Html.LabelFor(Model => Model.Name) <span class="text-danger">*</span>
+				@Html.TextBoxFor(Model => Model.Name,new{@class="form-control",@autocomplete="off",onkeypress="return /[0-9a-zA-Z-ا-ي- -]/i.test(event.key)"} )
+				@Html.ValidationMessageFor(Model => Model.Name,null,new{@class="text-danger"})
+				<span class="form-text text-muted">يرجى التحقق من ادخال اسم الكلية بصورة صحيحة املائيا تفاديا لاي اخطاء</span>
+			</div>
+			<br>
+			<div class="form-group">
+				@Html.LabelFor(Model => Model.Code) <span class="text-danger">*</span>
+				@Html.TextBoxFor(Model => Model.Code,new{@class="form-control",@autocomplete="off",onkeypress="return /[0-9a-zA-Z-ا-ي- -]/i.test(event.key)"} )
+				@Html.ValidationMessageFor(Model => Model.Code,null,new{@class="text-danger"})
+			</div>
+
+		</div>
+		<div class="card-footer">
+			<button type="submit" class="btn btn-primary mr-2">تعديل</button>
+			<button type="reset" class="btn btn-secondary">الغاء</button>
+		</div>
+	}
+
+	<!--end::Form-->
+
+</div>
+
+<br />
+<br />
+<br />
+
+@section Scripts {
+
+	@if (TempData["message"] != null)
+	{
+		<script>messagebox.swall('@TempData["message"]', '@TempData["type"]')</script>
+	}
+
+
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

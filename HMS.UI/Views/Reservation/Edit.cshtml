@@ -1,0 +1,130 @@
+﻿@model HMS.Domain.Entities.ViewModels.ReservationHallVM
+
+
+@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+}
+
+<div class="card card-custom">
+	<div class="card-header">
+		<div class="card-title">
+			<center>
+				<h2>تعديل بيانات الحجز</h2>
+			</center>
+		</div>
+	</div>
+	<div class="card-body">
+		@using (Html.BeginForm("Update", "Reservation", FormMethod.Post))
+		{
+			<div class="m-portlet__body">
+
+				@Html.TextBoxFor(Model => Model.Id , new{@hidden="hidden"})
+				
+				<div class="form-group m-form__group row">
+					<div class="col-12">
+						@Html.LabelFor(Model => Model.Name)
+						@Html.TextBoxFor(Model => Model.Name,new{@class="form-control m-input",@autocomplete="off",onkeypress="return /[0-9a-zA-Z-ا-ي- -]/i.test(event.key)"} )
+						@Html.ValidationMessageFor(Model => Model.Name,null,new{@class="text-danger"})
+					</div>
+				</div>
+				<br />
+				<div class="form-group m-form__group row">
+					<div class="col-12">
+						@Html.LabelFor(Model => Model.Hall_Id)
+						@Html.DropDownList("Hall_Id" , (IEnumerable<SelectListItem>)ViewBag.HallList,"",new{@class="form-control"})
+						@Html.ValidationMessageFor(Model => Model.Hall_Id,null,new{@class="text-danger"})
+					</div>
+				</div>
+				<br />
+				<!--//////////////////////////////////////////////////  new reservation date section //////////////////////////////////////////////////////////////-->
+				<div class="form-group m-form__group row">
+					<div class="col-6">
+						<label>تاريخ  الحجز السابق</label>
+						<input class="form-control m-input" type="datetime" name="Date" value="@Model.Date.ToShortDateString()" min="@DateTime.Now.ToString("yyyy-MM-dd")" disabled>
+					</div>
+					<div class="col-6">
+						@Html.LabelFor(Model => Model.Date)
+						<input class="form-control m-input" type="date" name="Date" value="@Model.Date.ToShortDateString()" min="@DateTime.Now.ToString("yyyy-MM-dd")">
+						@Html.ValidationMessageFor(Model => Model.Date,null,new{@class="text-danger"})
+					</div>
+				</div>
+				<br />
+
+					<!--//////////////////////////////////////////////////   new reservation start time  //////////////////////////////////////////////////////////////-->
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group m-form__group row">
+							<div class="col-12">
+								<label>وقت بداية الحجز السابق</label>
+								<input type="datetime" value="@Model.Time_Start.ToShortTimeString()" class="form-control" disabled>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group m-form__group row">
+							<div class="col-12">
+								@Html.LabelFor(Model => Model.Time_Start)
+								<input type="time" name="Time_Start" value="@Model.Time_Start.ToShortTimeString()" class="form-control" >
+								@Html.ValidationMessageFor(Model => Model.Time_Start,null,new{@class="text-danger"})
+							</div>
+						</div>
+					</div>
+					<br />
+					<!--//////////////////////////////////////////////////new reservation end time//////////////////////////////////////////////////////////////-->
+
+					<div class="col-3">
+						<div class="form-group m-form__group row">
+							<div class="col-12">
+								<label>وقت نهاية الحجز السابق</label>
+								<input type="datetime" value="@Model.Time_End.ToShortTimeString()" class="form-control" disabled>
+							</div>
+						</div>
+					</div>
+					<div class="col-3">
+						<div class="form-group m-form__group row">
+							<div class="col-12">
+								@Html.LabelFor(Model => Model.Time_End)
+								<input type="time" name="Time_End" value="@Model.Time_End.ToShortTimeString()" class="form-control">
+								@Html.ValidationMessageFor(Model => Model.Time_End,null,new{@class="text-danger"})
+							</div>
+						</div>
+					</div>
+				</div>
+				<br />
+			</div>
+
+			<div class="m-portlet__foot m-portlet__foot--fit">
+				<div class="m-form__actions">
+					<div class="row">
+
+						<div class="col-12" style="text-align:left">
+							<button type="submit" class="btn btn-success">حفظ التعديلات </button>
+							<button type="reset" class="btn btn-secondary">
+								<a href="/reservation/">
+									الغاء
+								</a>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+@section Scripts {
+
+
+	@if (TempData["message"] != null)
+	{
+		<script>messagebox.swall('@TempData["message"]', '@TempData["type"]')</script>
+	}
+
+}

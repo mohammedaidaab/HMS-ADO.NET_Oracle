@@ -1,0 +1,144 @@
+﻿@model IEnumerable<HMS.Domain.Entities.ViewModels.BuildingCollegeVM>
+
+@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+}
+
+@{
+    ViewData["title"] = "Bulddings";
+}
+
+
+<div style="text-align:end">
+  
+</div>
+
+<br />
+<div class="mg-div" style="background-image:url('/assets/media/images/college.png')">
+
+<div class="card card-custom mg-card">
+    <div class="card-header">
+        <div class="card-title">
+            <div class="text-center">
+                <center>
+                    بيانات المباني
+                </center>
+            </div>
+        </div>
+    </div>
+        <div class="card-body">
+            <table id="hallsTable" class="hover" style="width:100%;text-align:center">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.buldingName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.buldingnumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(Model => Model.BuldingCollageName)
+                        </th>
+                        <th style="text-align:end">
+                            العمليات
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@item.buldingName</td>
+                                <td>@item.buldingnumber</td>
+                                <td>@item.BuldingCollageName</td>
+
+                                <td style="text-align:end">
+                                   @if (User.IsInRole("super_admin") || User.IsInRole("supervisor"))
+                                    {
+
+                                        <a href="/building/edit/@item.ID">
+                                            <button class="btn btn-warning">
+                                                تعدل المبنى
+                                                <i class="fa-regular fa-pen-to-square fa-2xl"></i>
+                                            </button>
+                                        </a>
+                                    }
+                                    @if (User.IsInRole("super_admin"))
+                                    {
+
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop-@item.ID">
+                                            حذف القاعة <i class="fa-solid fa-trash-can fa-2xl"></i>
+                                        </button>
+
+                                    }
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop-@item.ID" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content" style="text-align:right">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">تاكيد الحذف</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="text-dark-25 text-danger" style="text-align:center;opacity:0.5">
+                                                        هذا الاجراء نهائي ولا يمكن العودة بعده
+                                                    </p>
+                                                    <lable>اسم المبنى</lable>
+                                                    <input type="text" value="@item.buldingName" class="form-control" readonly disabled>
+                                                    <br>
+                                                    <label>رقم المبنى</label>
+                                                    <input type="text" value="@item.buldingnumber" class="form-control" readonly disabled>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="/Building/delete/@item.ID">
+                                                        <button type="button" class="btn btn-danger">تاكيد الحذف</button>
+                                                    </a>
+
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    <div class="card-fotter">
+        <center>
+            <p class="form-label">
+                في حال عدم توفر المبنى المراد حجز القاعة به الرجاء لتواصل مع مشرف النظام
+            </p>
+        </center>
+    </div>
+
+</div>
+</div>
+
+@section scripts{
+      @if (TempData["message"] != null)
+    {
+        <script>messagebox.swall('@TempData["message"]','@TempData["type"]')</script>
+    }
+
+    <script>
+        new DataTable('#hallsTable');
+    </script>
+}

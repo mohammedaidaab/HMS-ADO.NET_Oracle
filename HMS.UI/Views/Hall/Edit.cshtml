@@ -1,0 +1,62 @@
+﻿@model HMS.Data.Entities.Hall
+
+@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+}
+
+<div class="col-md-12">
+    <div class="card card-custom">
+        <div class="card-header">
+            <div class="card-title">
+                <center>
+                    <h2> تعديل بيانات القاعة (@Model.Name) </h2>
+                </center>
+            </div>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Edit", "Hall", FormMethod.Post))
+            {
+                @Html.TextBoxFor(Model => Model.ID,new{@hidden="hidden"})
+
+                @Html.LabelFor(Model => Model.Name)
+                @Html.TextBoxFor(Model => Model.Name,new{@class="form-control",@autocomplete="off",onkeypress="return /[0-9a-zA-Z-ا-ي- -]/i.test(event.key)"} )
+                @Html.ValidationMessageFor(Model => Model.Name,null,new{@class="text-danger"})
+                <br />
+                @Html.LabelFor(Model=>Model.Number)
+                @Html.TextBoxFor(Model => Model.Number,new{@class="form-control",@type="number",@autocomplete="off",@max="2147483647"})
+                @Html.ValidationMessageFor(Model => Model.Number,null,new{@class="text-danger"})
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(Model=>Model.Building_ID)
+                    @Html.DropDownList("Building_ID" , (IEnumerable<SelectListItem>)ViewBag.Buildings,"",new{@class="form-control"})
+                    @Html.ValidationMessageFor(Model => Model.Building_ID,null,new{@class="text-danger"})
+                </div>
+
+                <br />
+                <input type="submit" name="save" value="حفظ التغيرات" class="btn btn-primary">
+                <button type="reset" class="btn btn-secondary">
+                    <a href="/hall/index"> عودة  <i class="fa-solid fa-circle-left fa-2xl"></i></a>
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @if (TempData["message"] != null)
+    {
+        <script>messagebox.swall('@TempData["message"]', '@TempData["type"]')</script>
+    }
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

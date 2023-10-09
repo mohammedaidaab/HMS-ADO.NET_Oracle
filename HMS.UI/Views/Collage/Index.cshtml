@@ -1,0 +1,148 @@
+﻿@model IEnumerable<HMS.Data.collage>
+
+@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+}
+
+@{
+    ViewData["title"] = "collages";
+ 
+}
+
+    <div class="mg-div" style="background-image:url('/assets/media/images/university.png')">
+    <div class="card card-custom mg-card">
+        <div class="card-header">
+            <div class="card-title">
+                <div class="text-center">
+                    <center>
+                        بيانات الكليات
+                    </center>
+                </div>
+            </div>
+        </div>
+            <div class="card-body">
+                <table id="cOLLEGESTABLE" class="hover" style="width:100%;text-align:center">
+                <thead>
+                    <tr>
+                        <th style="text-align:center">
+                            @Html.DisplayNameFor(Model => Model.Name)
+                        </th>
+
+                        <th style="text-align:center">
+                            @Html.DisplayNameFor(Model => Model.Code)
+                        </th>
+
+                        <th style="text-align:center">
+                            العمليات
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td style="text-align:center">@item.Name</td>
+                                <td style="text-align:center">@item.Code</td>
+                                <td style="text-align:center">
+                                   
+                                    @if (User.IsInRole("supervisor") || User.IsInRole("super_admin"))
+                                    {
+                                        <a href="/collage/edit/@item.ID">
+                                            <button class="btn btn-warning">
+                                                تعدل البيانات
+                                                <i class="fa-regular fa-pen-to-square fa-2xl"></i>
+                                            </button>
+                                        </a>
+                                    }
+                                    @if (User.IsInRole("super_admin"))
+                                    {
+
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop-@item.ID">
+                                            حذف الكلية <i class="fa-solid fa-trash-can fa-2xl"></i>
+                                        </button>
+
+                                    }
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop-@item.ID" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content" style="text-align:right">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">تاكيد الحذف</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="text-dark-25 text-danger" style="text-align:center;opacity:0.5">
+                                                        هذا الاجراء نهائي ولا يمكن العودة بعده
+                                                    </p>
+                                                    <lable>اسم القاعة</lable>
+                                                    <input type="text" value="@item.Name" class="form-control" readonly disabled>
+                                                    <br>
+                                                    <label>رقم القاعة</label>
+                                                    <input type="text" value="@item.Code" class="form-control" readonly disabled>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="/collage/delete/@item.ID">
+                                                        <button type="button" class="btn btn-danger">تاكيد الحذف</button>
+                                                    </a>
+
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+            </div>
+        <div class="card-fotter">
+
+
+            <center>
+                <p class="form-label">
+                    في حال عدم توفر الكلية المراد حجز القاعة بها الرجاء لتواصل مع مشرف النظام
+                </p>
+            </center>
+          
+        </div>
+    </div>
+    </div>
+
+
+@section scripts{
+
+
+    @if (TempData["message"] != null)
+    {
+        <script>messagebox.swall('@TempData["message"]', '@TempData["type"]')</script>
+    }
+
+
+    <script>
+        new DataTable('#cOLLEGESTABLE');
+    </script>
+
+
+    <script>
+        $('#staticBackdrop').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+        })
+    </script>
+}

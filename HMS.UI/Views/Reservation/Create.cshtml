@@ -1,0 +1,110 @@
+﻿@model HMS.Domain.Entities.Reservation
+
+@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+}
+
+
+<div class="col-md-12">
+
+	<div class="card card-custom">
+		<div class="card-header">
+			<div class="card-title">
+				<center>
+					<h2>اضافة حجز</h2>
+				</center>
+			</div>
+		</div>
+		<div class="card-body">
+			@using (Html.BeginForm("store", "Reservation", FormMethod.Post))
+			{
+				<div class="m-portlet__body">
+
+					<div class="form-group m-form__group row">
+						<div class="col-12">
+							@Html.LabelFor(Model => Model.Name)
+							@Html.TextBoxFor(Model => Model.Name,new{@class="form-control m-input",@autocomplete="off",onkeypress="return /[0-9a-zA-Z-ا-ي- -]/i.test(event.key)"} )
+							@Html.ValidationMessageFor(Model => Model.Name,null,new{@class="text-danger"})
+						</div>
+					</div>
+					<br />
+					<div class="form-group m-form__group row">
+						<div class="col-12">
+							@Html.LabelFor(Model => Model.Hall_Id)
+							@Html.DropDownList("Hall_Id" , (IEnumerable<SelectListItem>)ViewBag.HallList,"",new{@class="form-control"})
+							@Html.ValidationMessageFor(Model => Model.Hall_Id,null,new{@class="text-danger"})
+						</div>
+					</div>
+					<br />
+					<div class="form-group m-form__group row">
+						<div class="col-12">
+							@Html.LabelFor(Model => Model.Date)
+							<input class="form-control m-input" type="date" name="Date" min="@DateTime.Now.ToString("yyyy-MM-dd")">
+							@Html.ValidationMessageFor(Model => Model.Date,null,new{@class="text-danger"})
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group m-form__group row">
+								<div class="col-12">
+									@Html.LabelFor(Model => Model.Time_Start)
+									<input class="form-control m-input" type="time" name="Time_Start" step='3600'>
+									@Html.ValidationMessageFor(Model => Model.Time_Start,null,new{@class="text-danger"})
+								</div>
+							</div>
+						</div>
+						<br />
+						<div class="col-6">
+							<div class="form-group m-form__group row">
+								<div class="col-12">
+									@Html.LabelFor(Model => Model.Time_End)
+									<input class="form-control m-input" type="time" name="Time_End" step='3600'>
+									@Html.ValidationMessageFor(Model => Model.Time_End,null,new{@class="text-danger"})
+								</div>
+							</div>
+						</div>
+					</div>
+					<br />
+				</div>
+
+				<div class="m-portlet__foot m-portlet__foot--fit">
+					<div class="m-form__actions">
+						<div class="row">
+							
+							<div class="col-12" style="text-align:left">
+								<button type="submit" class="btn btn-success">حفظ</button>
+								<button type="reset" class="btn btn-secondary">
+									<a href="/reservation/">
+										الغاء
+									</a>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+
+@section Scripts {
+
+
+	@if (TempData["message"] != null)
+	{
+		<script>messagebox.swall('@TempData["message"]', '@TempData["type"]')</script>
+	}
+
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

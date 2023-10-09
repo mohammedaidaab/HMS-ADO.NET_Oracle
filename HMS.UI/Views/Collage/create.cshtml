@@ -1,0 +1,68 @@
+﻿@model HMS.Data.collage
+
+@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+}
+
+
+<div class="mg-div" style="background-image:url('/assets/media/images/new.png');background-size:contain">
+	<div class="card card-custom mg-card">
+	<div class="card-header">
+		<h3 class="card-title">
+			اضافة كلية جديدة
+		</h3>
+
+	</div>
+	<!--begin::Form-->
+	@using (Html.BeginForm("store", "collage", FormMethod.Post))
+	{
+		<div class="card-body">
+
+			@* @Html.TextBoxFor(Model=>Model.ID,null,new{@class="form-control"}) *@
+
+			<div class="form-group">
+				@Html.LabelFor(Model => Model.Name) <span class="text-danger">*</span>
+				@Html.TextBoxFor(Model => Model.Name,new{@class="form-control",@autocomplete="off"})
+				@Html.ValidationMessageFor(Model => Model.Name,null,new{@class="text-danger"})
+				<span class="form-text text-muted">يرجى التحقق من ادخال اسم الكلية بصورة صحيحة املائيا تفاديا لاي اخطاء</span>
+			</div>
+
+			<div class="form-group">
+				@Html.LabelFor(Model => Model.Code) <span class="text-danger">*</span>
+				@Html.TextBoxFor(Model => Model.Code,new{@class="form-control",@type="number",@autocomplete="off",@max="2147483647"})
+				@Html.ValidationMessageFor(Model => Model.Code,null,new{@class="text-danger"})
+			</div>
+
+		</div>
+		<div class="card-footer">
+			<button type="submit" class="btn btn-primary mr-2">حفظ</button>
+			<button type="reset" class="btn btn-secondary">
+				<a href="/collage/index">عودة</a>
+			</button>
+		</div>
+	}
+
+	<!--end::Form-->
+
+</div>
+</div>
+
+
+@section Scripts {
+
+	@if (TempData["message"] != null)
+	{
+		<script>messagebox.swall('@TempData["message"]', '@TempData["type"]')</script>
+	}
+
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

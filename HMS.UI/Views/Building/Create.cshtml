@@ -1,0 +1,61 @@
+﻿@model HMS.Domain.Entities.ViewModels.BuildingCollegeVM
+
+@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+}
+
+<div class="mg-div" style="background-image:url('/assets/media/images/new.png');background-size:contain">
+    <div class="card card-custom mg-card">
+        <div class="card-header">
+            <div class="card-title">
+                <center>
+                    <h2> اضافة مبنى كلية  </h2>
+                </center>
+            </div>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("store", "Building", FormMethod.Post))
+            {
+                @Html.LabelFor(Model => Model.ID,new{@Value = "0",@hidden="hidden"})
+
+                @Html.LabelFor(Model => Model.buldingName)
+                @Html.TextBoxFor(Model => Model.buldingName,new{@class="form-control",@autocomplete="off",onkeypress="return /[0-9a-zA-Z-ا-ي- -]/i.test(event.key)"} )
+                @Html.ValidationMessageFor(Model => Model.buldingName,null,new{@class="text-danger"})
+                <br />
+                @Html.LabelFor(Model=>Model.buldingnumber)
+                @Html.TextBoxFor(Model => Model.buldingnumber,new{@class="form-control",@type="number",@autocomplete="off",@max="2147483647",onkeypress="return /[0-9a-zA-Z-ا-ي- -]/i.test(event.key)"} )
+                @Html.ValidationMessageFor(Model => Model.buldingnumber,null,new{@class="text-danger"})
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.BuldingCollageNumber)
+                    @Html.DropDownList("BuldingCollageNumber" , (IEnumerable<SelectListItem>)ViewBag.collageselct,"",new{@class="form-control"})
+                    @Html.ValidationMessageFor(Model => Model.BuldingCollageNumber,null,new{@class="text-danger"})
+                </div>
+                <br />
+                <input type="submit" name="save" value="اضافة مينى الكلية" class="btn btn-primary">
+                <button type="reset" class="btn btn-secondary">
+                    <a href="/building/index"> عودة  <i class="fa-solid fa-circle-left fa-2xl"></i></a>
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @if (TempData["message"] != null)
+    {
+        <script>messagebox.swall('@TempData["message"]', '@TempData["type"]')</script>
+    }
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

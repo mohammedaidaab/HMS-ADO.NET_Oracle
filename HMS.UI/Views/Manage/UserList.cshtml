@@ -1,0 +1,79 @@
+﻿@* @model UserListViewModel *@
+@model IEnumerable<HMS.Domain.Entities.SiteUser>
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="card-title">
+            <div class="text-center">
+                <center>
+                    بيانات المستخدمين
+                </center>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-hover" style="text-align:center">
+    <thead>
+        <tr>
+            <th>
+                اسم المستخدم
+            </th>
+            <th>
+                رقم الهاتف
+            </th>
+            <th>
+                البريد الإلكتروني
+            </th>
+            <th>
+                العمليات
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+              
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">
+                        <button class="btn btn-warning">
+                            <i class="fa-regular fa-pen-to-square fa-2xl"></i>
+                        </button>
+                    </a> |
+                   
+                    <a asp-action="Delete" asp-route-id="@item.Id">
+                        <button type="button" class="btn btn-danger">
+                            <i class="fa-solid fa-trash-can fa-2xl"></i>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+    </div>
+    <div class="card-fotter">
+    </div>
+
+
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

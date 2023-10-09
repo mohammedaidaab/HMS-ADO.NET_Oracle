@@ -1,0 +1,83 @@
+﻿@model HMS.Domain.Entities.ViewModels.BuildingCollegeVM
+
+
+@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+}
+
+
+<div class="card card-custom">
+	<div class="card-header">
+		<h3 class="card-title">
+			تعديل بيانات المبنى
+		</h3>
+		<div class="card-toolbar">
+			<div class="example-tools justify-content-center">
+				<span class="example-toggle" data-toggle="tooltip" title="View code"></span>
+				<span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
+			</div>
+		</div>
+	</div>
+	<!--begin::Form-->
+	@using (Html.BeginForm("update", "building", FormMethod.Post))
+	{
+		<div class="card-body">
+
+			@Html.TextBoxFor(Model=>Model.ID,null,new{@hidden="hidden"})
+
+			<div class="form-group">
+				@Html.LabelFor(Model => Model.buldingName) <span class="text-danger">*</span>
+				@Html.TextBoxFor(Model => Model.buldingName,new{@class="form-control",@autocomplete="off",onkeypress="return /[0-9a-zA-Z-ا-ي- -]/i.test(event.key)"} )
+				@Html.ValidationMessageFor(Model => Model.buldingName,null,new{@class="text-danger"})
+			</div>
+			<br>
+			<div class="form-group">
+				@Html.LabelFor(Model => Model.buldingnumber) <span class="text-danger">*</span>
+				@Html.TextBoxFor(Model => Model.buldingnumber,new{@class="form-control",onkeypress="return /[0-9a-zA-Z-ا-ي- -]/i.test(event.key)"})
+				@Html.ValidationMessageFor(Model => Model.buldingnumber,null,new{@class="text-danger"})
+			</div>
+			<br>
+			<div class="form-group">
+				@Html.LabelFor(Model => Model.BuldingCollageNumber) <span class="text-danger">*</span>
+				@Html.DropDownList("BuldingCollageNumber" , (IEnumerable<SelectListItem>)ViewBag.collegelist,"",new{@class="form-control"})
+				@Html.ValidationMessageFor(Model => Model.BuldingCollageNumber,null,new{@class="text-danger"})
+			</div>
+
+			<div class="form-group">
+				@Html.TextBoxFor(Model => Model.BuldingCollageName,new{@class="form-control",@hidden="hidden"})
+			</div>
+
+		</div>
+		<div class="card-footer">
+			<button type="submit" class="btn btn-primary mr-2">تعديل</button>
+			<button type="reset" class="btn btn-secondary">
+				<a href="/building/index"> عودة  <i class="fa-solid fa-circle-left fa-2xl"></i></a>
+			</button>
+		</div>
+	}
+
+	<!--end::Form-->
+
+</div>
+
+<br />
+<br />
+<br />
+
+@section Scripts {
+	  @if (TempData["message"] != null)
+    {
+        <script>messagebox.swall('@TempData["message"]','@TempData["type"]')</script>
+    }
+
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

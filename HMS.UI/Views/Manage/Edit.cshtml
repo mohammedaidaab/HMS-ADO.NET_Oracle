@@ -1,0 +1,57 @@
+﻿@model IndexViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="card card-custom">
+    <div action="card-header">
+        <div class="card-title">
+            <br /><br />
+           <center>
+                تعديل بيانات المستخدم
+           </center>
+        </div>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("EditUser","Manage",FormMethod.Post))
+        {
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" disabled />
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" />
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="Surname"></label>
+                <input asp-for="Surname" class="form-control" />
+            </div>
+           <br />
+            @Html.LabelFor(Model => Model.Email)
+            @Html.TextBoxFor(Model => Model.Email,new{@class="form-control"})
+            <br />
+            @Html.LabelFor(Model => Model.PhoneNumber)
+            @Html.TextBoxFor(Model => Model.PhoneNumber,new{@class="form-control"})
+            <br />
+             @Html.Label("NewPassword","كلمة المرور",new{@class="form-control",@placeholder="اتركه فارغا في حال عدم الرغبة في تغير كلمة المرور"})
+            <input type="text" name="newPassword" class="form-control">
+
+            <div style="text-align:right">
+                <input type="submit" value="حفظ التغيرات" class="btn btn-success">
+                <button type="reset" class="btn btn-secondary">
+                    <a href="/manage/userlist">عودة</a>
+                </button>
+            </div>
+
+        }
+    </div>
+    <div class="card-fotter">
+
+    </div>
+
+</div>
