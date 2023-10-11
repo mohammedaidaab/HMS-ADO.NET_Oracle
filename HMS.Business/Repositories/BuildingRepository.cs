@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using HMS.Domain.Entities.ViewModels;
 using HMS.Domain.Entities;
 using HMS.Domain.Entities.Shared;
+using Oracle.ManagedDataAccess.Client;
 
 namespace HMS.Business.Repositories
 {
@@ -33,42 +34,83 @@ namespace HMS.Business.Repositories
 
         public async Task<BaseResponse> create(BuildingCollegeVM buildingCollegeVM)
         {
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Building_create", sqlcon);
+                OracleCommand sqlcom = new OracleCommand("Building_create", oracon);
                 sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("Name", buildingCollegeVM.buldingName);
-                sqlcom.Parameters.AddWithValue("Number", buildingCollegeVM.buldingnumber);
-                sqlcom.Parameters.AddWithValue("College_Id", buildingCollegeVM.BuldingCollageNumber);
+
+                OracleParameter qres = new OracleParameter
+                {
+                    Direction = ParameterDirection.Output,
+                    OracleDbType = OracleDbType.Int32,
+                };
+
+                OracleParameter BName = new OracleParameter
+                {
+                    Direction = ParameterDirection.Input,
+                    OracleDbType = OracleDbType.NVarchar2,
+                    Value = buildingCollegeVM.buldingName.ToString(),
+                };
+
+                OracleParameter BNumber = new OracleParameter
+                {
+                    Direction = ParameterDirection.Input,
+                    OracleDbType = OracleDbType.Int32,
+                    Value = buildingCollegeVM.buldingnumber,
+                };
+
+                OracleParameter BCollege_Id = new OracleParameter
+                {
+                    Direction = ParameterDirection.Input,
+                    OracleDbType = OracleDbType.Int32,
+                    Value = buildingCollegeVM.BuldingCollageNumber,
+                };
+
+                sqlcom.Parameters.Add(BName);
+                sqlcom.Parameters.Add(BNumber);
+                sqlcom.Parameters.Add(BCollege_Id);
+                sqlcom.Parameters.Add(qres);
 
                 try
                 {
-					sqlcon.Open();
-					if (sqlcom.ExecuteNonQuery() > 0)
-					{
-						sqlcon.Close();
-						return new BaseResponse
-						{
-							Message = "تم اضافة بيانات المبنى بنجاح",
+                    oracon.Open();
+                   // sqlcom.ExecuteScalar();
+                    var dr = sqlcom.ExecuteNonQuery();
+                    
+                    if (sqlcom.("qres").value == -1)
+                    {
+                        oracon.Close();
+                        return new BaseResponse
+                        {
+                            Message = "تم اضافة بيانات المبنى بنجاح",
                             Type = "success",
-							IsSuccess = true
-						};
-					}
-					else
-					{
-						sqlcon.Close();
-						return new BaseResponse
-						{
-							Message = "لم تتم اضافة البيانات الخاصة بالمبنى بنجاح لوجود بيانات مطابقة ",
+                            IsSuccess = true
+                        };
+                    }
+                    else
+                    {
+                        oracon.Close();
+                        return new BaseResponse
+                        {
+                            Message = "لم تتم اضافة البيانات الخاصة بالمبنى بنجاح لوجود بيانات مطابقة ",
                             Type = "warning",
                             IsSuccess = false
-						};
+                        };
 
-					}
-				}
+                    }
+                    
+                    oracon.Close();
+                    return new BaseResponse
+                    {
+                        Message = "لم تتم اضافة البيانات الخاصة بالمبنى بنجاح لوجود بيانات مطابقة ",
+                        Type = "warning",
+                        IsSuccess = false
+                    };
+
+                }
                 catch (Exception e)
                 {
-					sqlcon.Close();
+                    oracon.Close();
 					return new BaseResponse
 					{
 						Message = e.ToString(),
@@ -119,13 +161,21 @@ namespace HMS.Business.Repositories
         {
             List<BuildingCollegeVM> BulList = new List<BuildingCollegeVM>();
 
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection sqlcon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Get_College_Building", sqlcon);
+                OracleCommand sqlcom = new OracleCommand("Get_College_Building", sqlcon);
                 sqlcom.CommandType = CommandType.StoredProcedure;
 
+                OracleParameter res = new OracleParameter
+                {
+                    Direction = ParameterDirection.Output,
+                    OracleDbType = OracleDbType.RefCursor,
+
+                };
+                sqlcom.Parameters.Add(res);
+
                 sqlcon.Open();
-                SqlDataReader dr = sqlcom.ExecuteReader();
+                OracleDataReader dr = sqlcom.ExecuteReader();
                 while (dr.Read())
                 {
                     BuildingCollegeVM buldding = new BuildingCollegeVM();

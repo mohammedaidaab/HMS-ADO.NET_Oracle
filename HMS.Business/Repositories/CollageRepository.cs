@@ -9,6 +9,7 @@ using HMS.Data;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Configuration;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -103,14 +104,22 @@ namespace HMS.Business.Repositories
         public async Task<IEnumerable<collage>> GetAll()
         {
             List<collage> ColList = new List<collage>();
-            using (SqlConnection _SqlConnection = new SqlConnection(con))
+            using (OracleConnection _SqlConnection = new OracleConnection(con))
             {
-                _SqlConnection.Open();
-                _SqlConnection.CreateCommand();
-                string s = "Collages_GetAll";
-                SqlCommand sqlcom = new SqlCommand(s, _SqlConnection);
-                SqlDataReader dr = sqlcom.ExecuteReader();
+               
+                OracleCommand sqlcom = new OracleCommand("Collages_GetAll", _SqlConnection);
+                sqlcom.CommandType = CommandType.StoredProcedure;
 
+                OracleParameter res = new OracleParameter
+                {
+                    Direction = ParameterDirection.Output,
+                    OracleDbType = OracleDbType.RefCursor,
+
+                };
+                sqlcom.Parameters.Add(res);
+
+                _SqlConnection.Open();
+                OracleDataReader dr = sqlcom.ExecuteReader();
                 while (dr.Read())
                 {
                     collage collage = new collage();
