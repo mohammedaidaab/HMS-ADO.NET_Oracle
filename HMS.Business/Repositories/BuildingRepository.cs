@@ -41,8 +41,10 @@ namespace HMS.Business.Repositories
 
                 OracleParameter qres = new OracleParameter
                 {
+                    ParameterName="qres",
                     Direction = ParameterDirection.Output,
-                    OracleDbType = OracleDbType.Int32,
+                    OracleDbType = OracleDbType.NVarchar2,
+                    Size = 200,
                 };
 
                 OracleParameter BName = new OracleParameter
@@ -71,13 +73,18 @@ namespace HMS.Business.Repositories
                 sqlcom.Parameters.Add(BCollege_Id);
                 sqlcom.Parameters.Add(qres);
 
+               // sqlcom.Parameters.Add("qres",OracleDbType.NVarchar2,10).Direction = ParameterDirection.Output;
+
+
                 try
-                {
+				{
                     oracon.Open();
                    // sqlcom.ExecuteScalar();
-                    var dr = sqlcom.ExecuteNonQuery();
-                    
-                    if (sqlcom.("qres").value == -1)
+                    sqlcom.ExecuteNonQuery();
+
+                    //string dr = sqlcom.Parameters["qres"].Value.ToString(); 
+
+					if (sqlcom.Parameters["qres"].Value.ToString() == "success" )
                     {
                         oracon.Close();
                         return new BaseResponse
