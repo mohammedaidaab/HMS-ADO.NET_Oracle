@@ -9,6 +9,7 @@ using HMS.Domain.Entities;
 using HMS.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -278,12 +279,21 @@ namespace HMS.Infrastructure.Repositories
 		{
 		    List<SiteRole> roles = new List<SiteRole>();
 
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oraccon = new OracleConnection(con))
             {
-                sqlcon.Open();
-                SqlCommand sqlcom = new SqlCommand("identity_GetAllRoles", sqlcon);
+                
+                OracleCommand oracom = new OracleCommand("identity_GetAllRoles", oraccon);
+                oracom.CommandType = CommandType.StoredProcedure;
+                OracleParameter res = new OracleParameter
+                {
+                    ParameterName = "res",
+                    OracleDbType = OracleDbType.RefCursor,
+                    Direction = ParameterDirection.Output,
+                };
+                oracom.Parameters.Add(res);
 
-                SqlDataReader dr = sqlcom.ExecuteReader();
+                oraccon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
                     SiteRole role = new SiteRole
@@ -296,7 +306,7 @@ namespace HMS.Infrastructure.Repositories
                     roles.Add(role);
                 }
 
-                sqlcom.Clone();
+                oraccon.Close();
 
                 return roles;
             }
