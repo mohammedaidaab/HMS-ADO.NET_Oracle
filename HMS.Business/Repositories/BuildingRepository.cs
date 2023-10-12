@@ -179,6 +179,7 @@ namespace HMS.Business.Repositories
                     OracleDbType = OracleDbType.RefCursor,
 
                 };
+
                 sqlcom.Parameters.Add(res);
 
                 sqlcon.Open();

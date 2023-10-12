@@ -97,42 +97,56 @@ namespace HMS.Infrastructure.Repositories
                 {
                     await conn.OpenAsync(cancellationToken);
 
-                    using (OracleCommand cmd = new OracleCommand())
+                    using (OracleCommand oracom = new OracleCommand())
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "identity_InsertUser";
+                        oracom.Connection = conn;
+                        oracom.CommandType = CommandType.StoredProcedure;
+                        oracom.CommandText = "identity_InsertUser";
 
                         OracleParameter uname = new OracleParameter{ParameterName= "Username", Direction = ParameterDirection.Input,OracleDbType = OracleDbType.NVarchar2,Value=user.Username};
                         OracleParameter NormalizedUserName = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.NormalizedUserName };
                         OracleParameter Forename = new OracleParameter { ParameterName = "Forename", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Forename };
+                        OracleParameter Surname = new OracleParameter { ParameterName = "Surname", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Surname };
                         OracleParameter Email = new OracleParameter { ParameterName = "Email", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Email };
                         OracleParameter NormalizedEmail = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.NormalizedEmail };
-                        OracleParameter EmailConfirmed = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.EmailConfirmed };
-                        OracleParameter PasswordHash = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PasswordHash };
-                        OracleParameter PhoneNumber = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PhoneNumber };
-                        OracleParameter PhoneNumberConfirmed = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PhoneNumberConfirmed };
-                        OracleParameter TwoFactorEnabled = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.TwoFactorEnabled };
-                        OracleParameter Created = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = DateTime.Now };
+                        OracleParameter EmailConfirmed = new OracleParameter { ParameterName = "EmailConfirmed", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = user.EmailConfirmed };
+                        OracleParameter PasswordHash = new OracleParameter { ParameterName = "PasswordHash", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PasswordHash };
+                        OracleParameter PhoneNumber = new OracleParameter { ParameterName = "PhoneNumber", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PhoneNumber };
+                        OracleParameter PhoneNumberConfirmed = new OracleParameter { ParameterName = "PhoneNumberConfirmed", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = user.PhoneNumberConfirmed };
+                        OracleParameter TwoFactorEnabled = new OracleParameter { ParameterName = "TwoFactorEnabled", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = user.TwoFactorEnabled };
+                        OracleParameter Created = new OracleParameter { ParameterName = "Created", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Date, Value = DateTime.Now };
+                        
+                        OracleParameter qres = new OracleParameter { ParameterName = "qres", Direction = ParameterDirection.Output, OracleDbType = OracleDbType.NVarchar2, Size = 200, };
 
+                        oracom.Parameters.Add(uname);
+                        oracom.Parameters.Add(NormalizedUserName);
+                        oracom.Parameters.Add(Forename);
+                        oracom.Parameters.Add(Surname);
+                        oracom.Parameters.Add(Email);
+                        oracom.Parameters.Add(NormalizedEmail);
+                        oracom.Parameters.Add(EmailConfirmed);
+                        oracom.Parameters.Add(PasswordHash);
+                        oracom.Parameters.Add(PhoneNumber);
+                        oracom.Parameters.Add(PhoneNumberConfirmed);
+                        oracom.Parameters.Add(TwoFactorEnabled);
+                        oracom.Parameters.Add(Created);
 
+                        oracom.Parameters.Add(qres);
 
+                        //cmd.Parameters.Add("@Username", user.Username);
+                        //cmd.Parameters.Add("@NormalizedUserName", user.NormalizedUserName);
+                        //cmd.Parameters.Add("@Forename", user.Forename ?? "");
+                        //cmd.Parameters.Add("@Surname", user.Surname ?? "");
+                        //cmd.Parameters.Add("@Email", user.Email);
+                        //cmd.Parameters.Add("@NormalizedEmail", user.NormalizedEmail);
+                        //cmd.Parameters.Add("@EmailConfirmed", user.EmailConfirmed);
+                        //cmd.Parameters.Add("@PasswordHash", user.PasswordHash ?? "");
+                        //cmd.Parameters.Add("@PhoneNumber", user.PhoneNumber ?? "");
+                        //cmd.Parameters.Add("@PhoneNumberConfirmed", user.PhoneNumberConfirmed);
+                        //cmd.Parameters.Add("@TwoFactorEnabled", user.TwoFactorEnabled);
+                        //cmd.Parameters.Add("@Created", DateTime.Now);
 
-
-                        cmd.Parameters.Add("@Username", user.Username);
-                        cmd.Parameters.Add("@NormalizedUserName", user.NormalizedUserName);
-                        cmd.Parameters.Add("@Forename", user.Forename ?? "");
-                        cmd.Parameters.Add("@Surname", user.Surname ?? "");
-                        cmd.Parameters.Add("@Email", user.Email);
-                        cmd.Parameters.Add("@NormalizedEmail", user.NormalizedEmail);
-                        cmd.Parameters.Add("@EmailConfirmed", user.EmailConfirmed);
-                        cmd.Parameters.Add("@PasswordHash", user.PasswordHash ?? "");
-                        cmd.Parameters.Add("@PhoneNumber", user.PhoneNumber ?? "");
-                        cmd.Parameters.Add("@PhoneNumberConfirmed", user.PhoneNumberConfirmed);
-                        cmd.Parameters.Add("@TwoFactorEnabled", user.TwoFactorEnabled);
-                        cmd.Parameters.Add("@Created", DateTime.Now);
-
-                        await cmd.ExecuteNonQueryAsync(cancellationToken);
+                        await oracom.ExecuteNonQueryAsync(cancellationToken);
 
                         return IdentityResult.Success;
                     }
