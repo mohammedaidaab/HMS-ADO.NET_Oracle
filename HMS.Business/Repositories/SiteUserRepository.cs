@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////
 
 using HMS.Domain.Entities;
+using HMS.Domain.Entities.ViewModels;
 using HMS.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -101,6 +102,22 @@ namespace HMS.Infrastructure.Repositories
                         cmd.Connection = conn;
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandText = "identity_InsertUser";
+
+                        OracleParameter uname = new OracleParameter{ParameterName= "Username", Direction = ParameterDirection.Input,OracleDbType = OracleDbType.NVarchar2,Value=user.Username};
+                        OracleParameter NormalizedUserName = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.NormalizedUserName };
+                        OracleParameter Forename = new OracleParameter { ParameterName = "Forename", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Forename };
+                        OracleParameter Email = new OracleParameter { ParameterName = "Email", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Email };
+                        OracleParameter NormalizedEmail = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.NormalizedEmail };
+                        OracleParameter EmailConfirmed = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.EmailConfirmed };
+                        OracleParameter PasswordHash = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PasswordHash };
+                        OracleParameter PhoneNumber = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PhoneNumber };
+                        OracleParameter PhoneNumberConfirmed = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PhoneNumberConfirmed };
+                        OracleParameter TwoFactorEnabled = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.TwoFactorEnabled };
+                        OracleParameter Created = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = DateTime.Now };
+
+
+
+
 
                         cmd.Parameters.Add("@Username", user.Username);
                         cmd.Parameters.Add("@NormalizedUserName", user.NormalizedUserName);

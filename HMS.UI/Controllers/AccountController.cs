@@ -292,6 +292,7 @@ namespace HMS.MVC.Controllers
                     return RedirectToAction("userlist", "Manage");
                 }
             }
+            ViewBag.roles = new SelectList(await _ISiteRoleRepository.GetAllRoles(), nameof(SiteRole.Name), nameof(SiteRole.Name));
 
             return View();
         }
