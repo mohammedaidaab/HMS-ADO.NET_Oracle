@@ -151,19 +151,25 @@ namespace HMS.Infrastructure.Repositories
             try
             {
                 var role = new SiteRole();
-                using (var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+                using (var oracon = new OracleConnection(_config.GetConnectionString("DefaultConnection")))
                 {
-                    await conn.OpenAsync(cancellationToken);
+                    await oracon.OpenAsync(cancellationToken);
 
-                    using (SqlCommand cmd = new SqlCommand())
+                    using (OracleCommand oracom = new OracleCommand())
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "identity_FindRoleByName";
+                        oracom.Connection = oracon;
+                        oracom.CommandType = CommandType.StoredProcedure;
+                        oracom.CommandText = "identity_FindRoleByName";
 
-                        cmd.Parameters.AddWithValue("@NormalizedRoleName", normalizedRoleName);
+                        OracleParameter NorRoleName = new OracleParameter {ParameterName= "NorRoleName",OracleDbType=OracleDbType.NVarchar2,Direction=ParameterDirection.Input, Value = normalizedRoleName };
+                        OracleParameter res = new OracleParameter {ParameterName= "res",OracleDbType=OracleDbType.RefCursor,Direction=ParameterDirection.Output };
 
-                        using (var rdr = await cmd.ExecuteReaderAsync(CommandBehavior.SingleRow))
+                        oracom.Parameters.Add(NorRoleName);
+                        oracom.Parameters.Add(res);
+
+						//oracom.Parameters.AddWithValue("@NormalizedRoleName", normalizedRoleName);
+
+                        using (var rdr = await oracom.ExecuteReaderAsync(CommandBehavior.SingleRow))
                         {
                             if (rdr.Read())
                             {
@@ -246,19 +252,25 @@ namespace HMS.Infrastructure.Repositories
 
             try
             {
-                using (var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+                using (var oracon = new OracleConnection(_config.GetConnectionString("DefaultConnection")))
                 {
-                    await conn.OpenAsync(cancellationToken);
+                    await oracon.OpenAsync(cancellationToken);
 
-                    using (SqlCommand cmd = new SqlCommand())
+                    using (OracleCommand oracom = new OracleCommand())
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "identity_GetUserRolesByUserId";
+                        oracom.Connection = oracon;
+                        oracom.CommandType = CommandType.StoredProcedure;
+                        oracom.CommandText = "identity_GetUserRolesByUserId";
 
-                        cmd.Parameters.AddWithValue("@UserId", user.Id);
+                        OracleParameter userid = new OracleParameter { ParameterName="USERID",OracleDbType=OracleDbType.Int32,Direction=ParameterDirection.Input };
+                        OracleParameter res = new OracleParameter { ParameterName="res",OracleDbType=OracleDbType.RefCursor,Direction=ParameterDirection.Output };
 
-                        SqlDataReader rdr = cmd.ExecuteReader();
+                        oracom.Parameters.Add(userid);
+                        oracom.Parameters.Add(res);
+
+                       // oracom.Parameters.AddWithValue("@UserId", user.Id);
+
+                        OracleDataReader rdr = oracom.ExecuteReader();
 
                         while (rdr.Read())
                         {

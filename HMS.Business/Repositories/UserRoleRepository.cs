@@ -8,6 +8,7 @@
 using HMS.Domain.Entities;
 using HMS.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Configuration;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -38,20 +39,28 @@ namespace HMS.Infrastructure.Repositories
         {
             try
             {
-                using (var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+                using (var oracon = new OracleConnection(_config.GetConnectionString("DefaultConnection")))
                 {
-                    await conn.OpenAsync(cancellationToken);
+                    await oracon.OpenAsync(cancellationToken);
 
-                    using (SqlCommand cmd = new SqlCommand())
+                    using (OracleCommand oracom = new OracleCommand())
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "identity_AddUserToRole";
+                        oracom.Connection = oracon;
+                        oracom.CommandType = CommandType.StoredProcedure;
+                        oracom.CommandText = "identity_AddUserToRole";
 
-                        cmd.Parameters.AddWithValue("@UserId", UserId);
-                        cmd.Parameters.AddWithValue("@RoleId", RoleId);
+						OracleParameter U_ID = new OracleParameter { ParameterName = "U_ID", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = UserId };
+						OracleParameter R_ID = new OracleParameter { ParameterName = "R_ID", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = RoleId };
+						//OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 200, Direction = ParameterDirection.Output };
 
-                        await cmd.ExecuteNonQueryAsync(cancellationToken);
+						oracom.Parameters.Add(U_ID);
+						oracom.Parameters.Add(R_ID);
+						//oracom.Parameters.Add(res);
+
+						//oracom.Parameters.AddWithValue("@UserId", UserId);
+						//oracom.Parameters.AddWithValue("@RoleId", RoleId);
+
+						await oracom.ExecuteNonQueryAsync(cancellationToken);
                     }
                 }
             }
@@ -107,20 +116,29 @@ namespace HMS.Infrastructure.Repositories
         {
             try
             {
-                using (var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+                using (var oracon = new OracleConnection(_config.GetConnectionString("DefaultConnection")))
                 {
-                    await conn.OpenAsync(cancellationToken);
+                    await oracon.OpenAsync(cancellationToken);
 
-                    using (SqlCommand cmd = new SqlCommand())
+                    using (OracleCommand oracom = new OracleCommand())
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "identity_IsUserInRole";
+						oracom.Connection = oracon;
+						oracom.CommandType = CommandType.StoredProcedure;
+                        oracom.CommandText = "identity_IsUserInRole";
 
-                        cmd.Parameters.AddWithValue("@UserId", UserId);
-                        cmd.Parameters.AddWithValue("@RoleId", RoleId);
 
-                        var value = Convert.ToInt32(cmd.ExecuteScalar());
+						OracleParameter U_ID = new OracleParameter { ParameterName = "U_ID", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = UserId };
+						OracleParameter R_ID = new OracleParameter { ParameterName = "R_ID", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = RoleId };
+						OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 200, Direction = ParameterDirection.Output };
+
+						oracom.Parameters.Add(U_ID);
+						oracom.Parameters.Add(R_ID);
+						oracom.Parameters.Add(res);
+
+						//oracom.Parameters.AddWithValue("@UserId", UserId);
+                        //oracom.Parameters.AddWithValue("@RoleId", RoleId);
+
+                        var value = Convert.ToInt32(oracom.ExecuteScalar());
 
                         if (value > 0)
                         {

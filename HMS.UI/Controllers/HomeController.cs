@@ -15,6 +15,7 @@ using System.Diagnostics;
 
 namespace HMS.MVC.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private IDashBordRepository _dashBordRepository;
