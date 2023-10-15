@@ -44,13 +44,16 @@ namespace HMS.Infrastructure.Repositories
                 {
                     conn.Open();
 
-                    using (OracleCommand cmd = new OracleCommand())
+                    using (OracleCommand oracom = new OracleCommand())
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "identity_GetAllUsers";
+                        oracom.Connection = conn;
+                        oracom.CommandType = CommandType.StoredProcedure;
+                        oracom.CommandText = "identity_GetAllUsers";
 
-                        OracleDataReader rdr = cmd.ExecuteReader();
+                        OracleParameter res = new OracleParameter { ParameterName = "res", Direction = ParameterDirection.Output, OracleDbType = OracleDbType.RefCursor, Size = 200, };
+                        oracom.Parameters.Add(res);
+
+                        OracleDataReader rdr = oracom.ExecuteReader();
 
                         while (rdr.Read())
                         {
@@ -134,19 +137,6 @@ namespace HMS.Infrastructure.Repositories
 
                         oracom.Parameters.Add(qres);
 
-                        //cmd.Parameters.Add("@Username", user.Username);
-                        //cmd.Parameters.Add("@NormalizedUserName", user.NormalizedUserName);
-                        //cmd.Parameters.Add("@Forename", user.Forename ?? "");
-                        //cmd.Parameters.Add("@Surname", user.Surname ?? "");
-                        //cmd.Parameters.Add("@Email", user.Email);
-                        //cmd.Parameters.Add("@NormalizedEmail", user.NormalizedEmail);
-                        //cmd.Parameters.Add("@EmailConfirmed", user.EmailConfirmed);
-                        //cmd.Parameters.Add("@PasswordHash", user.PasswordHash ?? "");
-                        //cmd.Parameters.Add("@PhoneNumber", user.PhoneNumber ?? "");
-                        //cmd.Parameters.Add("@PhoneNumberConfirmed", user.PhoneNumberConfirmed);
-                        //cmd.Parameters.Add("@TwoFactorEnabled", user.TwoFactorEnabled);
-                        //cmd.Parameters.Add("@Created", DateTime.Now);
-
                         await oracom.ExecuteNonQueryAsync(cancellationToken);
 
                         return IdentityResult.Success;
@@ -173,39 +163,48 @@ namespace HMS.Infrastructure.Repositories
                 {
                     await conn.OpenAsync(cancellationToken);
 
-                    using (OracleCommand cmd = new OracleCommand())
+                    using (OracleCommand oracom = new OracleCommand())
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "identity_UpdateUser";
+                        oracom.Connection = conn;
+                        oracom.CommandType = CommandType.StoredProcedure;
+                        oracom.CommandText = "identity_UpdateUser";
 
-                        //OracleParameter res = new OracleParameter
-                        //{
-                        //    Direction = ParameterDirection.Output,
-                        //    OracleDbType = OracleDbType.RefCursor,
-
-                        //};
-
-                        //cmd.Parameters.Add(res);
-                        //cmd.CommandType = CommandType.StoredProcedure;
+                        //==============================parms================================================
 
 
+                        OracleParameter U_ID = new OracleParameter { ParameterName = "U_ID", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Id };
 
+                        OracleParameter uname = new OracleParameter { ParameterName = "Username", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Username };
+                        OracleParameter NormalizedUserName = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.NormalizedUserName };
+                        OracleParameter Forename = new OracleParameter { ParameterName = "Forename", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Forename };
+                        OracleParameter Surname = new OracleParameter { ParameterName = "Surname", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Surname };
+                        OracleParameter Email = new OracleParameter { ParameterName = "Email", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Email };
+                        OracleParameter NormalizedEmail = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.NormalizedEmail };
+                        OracleParameter EmailConfirmed = new OracleParameter { ParameterName = "EmailConfirmed", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = user.EmailConfirmed };
+                        OracleParameter PasswordHash = new OracleParameter { ParameterName = "PasswordHash", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PasswordHash };
+                        OracleParameter PhoneNumber = new OracleParameter { ParameterName = "PhoneNumber", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PhoneNumber };
+                        OracleParameter PhoneNumberConfirmed = new OracleParameter { ParameterName = "PhoneNumberConfirmed", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = Convert.ToBoolean(user.PhoneNumberConfirmed) };
+                        OracleParameter TwoFactorEnabled = new OracleParameter { ParameterName = "TwoFactorEnabled", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = Convert.ToBoolean(user.TwoFactorEnabled) };
+                        OracleParameter Created = new OracleParameter { ParameterName = "Created", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Date, Value = DateTime.Now };
 
-                        cmd.Parameters.Add("@Id", user.Id);
-                        cmd.Parameters.Add("@Username", user.Username);
-                        cmd.Parameters.Add("@NormalizedUserName", user.NormalizedUserName);
-                        cmd.Parameters.Add("@Forename", user.Forename);
-                        cmd.Parameters.Add("@Surname", user.Surname);
-                        cmd.Parameters.Add("@NormalizedEmail", user.NormalizedEmail);
-                        cmd.Parameters.Add("@Email", user.Email);
-                        cmd.Parameters.Add("@EmailConfirmed", user.EmailConfirmed);
-                        cmd.Parameters.Add("@PasswordHash", user.PasswordHash);
-                        cmd.Parameters.Add("@PhoneNumber", user.PhoneNumber);
-                        cmd.Parameters.Add("@PhoneNumberConfirmed", user.PhoneNumberConfirmed);
-                        cmd.Parameters.Add("@TwoFactorEnabled", user.TwoFactorEnabled);
+                        OracleParameter qres = new OracleParameter { ParameterName = "qres", Direction = ParameterDirection.Output, OracleDbType = OracleDbType.NVarchar2, Size = 200, };
 
-                        await cmd.ExecuteNonQueryAsync(cancellationToken);
+                        oracom.Parameters.Add(U_ID);
+                        oracom.Parameters.Add(uname);
+                        oracom.Parameters.Add(NormalizedUserName);
+                        oracom.Parameters.Add(Forename);
+                        oracom.Parameters.Add(Surname);
+                        oracom.Parameters.Add(Email);
+                        oracom.Parameters.Add(NormalizedEmail);
+                        oracom.Parameters.Add(EmailConfirmed);
+                        oracom.Parameters.Add(PasswordHash);
+                        oracom.Parameters.Add(PhoneNumber);
+                        oracom.Parameters.Add(PhoneNumberConfirmed);
+                        oracom.Parameters.Add(TwoFactorEnabled);
+
+                        oracom.Parameters.Add(qres);
+
+                        await oracom.ExecuteNonQueryAsync(cancellationToken);
 
                         return IdentityResult.Success;
                     }
@@ -232,19 +231,24 @@ namespace HMS.Infrastructure.Repositories
                 {
                     await conn.OpenAsync(cancellationToken);
 
-                    using (OracleCommand cmd = new OracleCommand())
+                    using (OracleCommand oracom = new OracleCommand())
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "identity_FindById";
+                        oracom.Connection = conn;
+                        oracom.CommandType = CommandType.StoredProcedure;
+                        oracom.CommandText = "identity_FindById";
 
-                        cmd.Parameters.Add("@Id", userId);
+                        OracleParameter user_id = new OracleParameter { ParameterName = "U_ID", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = userId };
+                        OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 200, Direction = ParameterDirection.Output };
 
-                        using (var rdr = await cmd.ExecuteReaderAsync(CommandBehavior.SingleRow))
+                        oracom.Parameters.Add(user_id);
+                        oracom.Parameters.Add(res);
+
+                        //oracom.Parameters.Add("@Id", userId);
+
+                        using (var rdr = await oracom.ExecuteReaderAsync(CommandBehavior.SingleRow))
                         {
                             if (rdr.Read())
                             {
-                               
                                 user = new SiteUser
                                 {
                                     Id = int.Parse(rdr["Id"].ToString()),
@@ -260,10 +264,6 @@ namespace HMS.Infrastructure.Repositories
                                     PhoneNumberConfirmed = bool.Parse(rdr["PhoneNumberConfirmed"].ToString()),
                                     TwoFactorEnabled = bool.Parse(rdr["TwoFactorEnabled"].ToString()),
                                     Created = DateTime.Parse(rdr["Created"].ToString()),
-                                    // Facebook = rdr["Facebook"].ToString(),
-                                    // Twitter = rdr["Twitter"].ToString(),
-                                    //Instagram = rdr["Instagram"].ToString(),
-                                    //Website = rdr["Website"].ToString()
                                 };
                             }
                             return user;

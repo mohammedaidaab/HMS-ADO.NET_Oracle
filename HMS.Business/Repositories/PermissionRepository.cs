@@ -10,6 +10,7 @@ using HMS.Domain.Entities;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Configuration;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -67,19 +68,22 @@ namespace HMS.Business.Repositories
 
         public async Task<List<Permission>> GetAllByRole(SiteRole role)
         {
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
                 List<Permission> RolePermissions = new List<Permission>();
                 List<Permission> Permissions = new List<Permission>();
 
+                OracleCommand oracom = new OracleCommand("Permission_get_all_By_Role", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-                SqlCommand sqlcom = new SqlCommand("Permission_get_all_By_Role", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("RoleId",role.Id);
+				OracleParameter role_id = new OracleParameter {ParameterName= "ROLE_ID",OracleDbType=OracleDbType.Int32,Direction=ParameterDirection.Input,Value=role.Id };
+				OracleParameter res = new OracleParameter {ParameterName= "res",OracleDbType=OracleDbType.RefCursor,Direction=ParameterDirection.Output};
+
+				oracom.Parameters.Add(role_id);
+				oracom.Parameters.Add(res);	
                 
-                sqlcon.Open();
-                SqlDataReader dr = sqlcom.ExecuteReader();
-
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
                     Permission RolePermission = new Permission();
@@ -88,19 +92,24 @@ namespace HMS.Business.Repositories
 
                     RolePermissions.Add(RolePermission);
                 }
-                sqlcon.Close();
+                oracon.Close();
 
-                using (SqlConnection sqlcon2 = new SqlConnection(con))
+                using (OracleConnection oracon2 = new OracleConnection(con))
                 {
                     foreach (var perm in RolePermissions)
                     {
 
-                        SqlCommand sqlcom2 = new SqlCommand("Permission_get_by_Id", sqlcon);
+                        OracleCommand sqlcom2 = new OracleCommand("Permission_get_by_Id", oracon);
                         sqlcom2.CommandType = CommandType.StoredProcedure;
-                        sqlcom2.Parameters.AddWithValue("id", perm.Name);
 
-                        sqlcon.Open();
-                        SqlDataReader dr2 = sqlcom2.ExecuteReader();
+                        OracleParameter PERM_ID = new OracleParameter { ParameterName = "PERM_ID", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Input, Value = role.Id };
+                        OracleParameter res2 = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Direction = ParameterDirection.Output };
+
+                        oracom.Parameters.Add(role_id);
+                        oracom.Parameters.Add(res2);
+
+                        oracon2.Open();
+                        OracleDataReader dr2 = sqlcom2.ExecuteReader();
 
                         while (dr2.Read())
                         {
@@ -110,7 +119,7 @@ namespace HMS.Business.Repositories
 
                             Permissions.Add(Perms);
                         }
-                        sqlcon.Close();
+                        oracon2.Close();
 
                     }
                 }
@@ -195,22 +204,30 @@ namespace HMS.Business.Repositories
 
 		public async Task<Permission> GetSingleByName(string permition)
 		{
-			using (SqlConnection sqlcon = new SqlConnection(con))
+			using (OracleConnection oracon = new OracleConnection(con))
 			{
 				Permission permission = new Permission();
-				SqlCommand sqlcom = new SqlCommand("Permissions_getByName", sqlcon);
-				sqlcom.CommandType = CommandType.StoredProcedure;
-				sqlcom.Parameters.AddWithValue("@PermissionName", permition);
+				OracleCommand oracom = new OracleCommand("Permissions_getByName", oracon);
 
-				sqlcon.Open();
-				SqlDataReader dr = sqlcom.ExecuteReader();
+                oracom.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter perm_name = new OracleParameter { ParameterName = "PermissionName", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = permition };
+                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 200, Direction = ParameterDirection.Output };
+
+                oracom.Parameters.Add(perm_name);
+                oracom.Parameters.Add(res);
+
+                //oracom.Parameters.AddWithValue("@PermissionName", permition);
+
+                oracon.Open();
+				OracleDataReader dr = oracom.ExecuteReader();
 				while (dr.Read())
 				{
 					permission.ID = Convert.ToInt32(dr["ID"]);
 					permission.Name = dr["Name"].ToString();
 				}
 
-				sqlcon.Close();
+				oracon.Close();
 				return permission;
 			}
 		}
@@ -225,20 +242,27 @@ namespace HMS.Business.Repositories
 			Permission checkpermission = await GetSingleByName(permission);
 			try
 			{
-				using (var conn = new SqlConnection(con))
+				using (var oracon = new OracleConnection(con))
 				{
-					 conn.Open();
-
-					using (SqlCommand cmd = new SqlCommand())
+					oracon.Open();
+					using (OracleCommand oracom = new OracleCommand())
 					{
-						cmd.Connection = conn;
-						cmd.CommandType = CommandType.StoredProcedure;
-						cmd.CommandText = "Permission_UserhasPermission";
+                        oracom.Connection = oracon;
+						oracom.CommandType = CommandType.StoredProcedure;
+						oracom.CommandText = "Permission_UserhasPermission";
 
-						cmd.Parameters.AddWithValue("RoleID", role.Id);
-						cmd.Parameters.AddWithValue("PermissionID", checkpermission.ID);
+                        OracleParameter role_id = new OracleParameter { ParameterName = "U_ID", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = role.Id };
+                        OracleParameter perm_id = new OracleParameter { ParameterName = "U_ID", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = checkpermission.ID };
+                        OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 200, Direction = ParameterDirection.Output };
 
-						var value = Convert.ToInt32(cmd.ExecuteScalar());
+                        oracom.Parameters.Add(role_id);
+                        oracom.Parameters.Add(perm_id);
+                        oracom.Parameters.Add(res);
+
+						// oracom.Parameters.AddWithValue("RoleID", role.Id);
+						//oracom.Parameters.AddWithValue("PermissionID", checkpermission.ID);
+
+						var value = Convert.ToInt32(oracom.ExecuteScalar());
 
 						if (value > 0)
 						{

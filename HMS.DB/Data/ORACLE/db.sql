@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  File created - Thursday-October-12-2023   
+--  File created - Sunday-October-15-2023   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Sequence BUILDING_SEQ
@@ -140,17 +140,17 @@
 
   CREATE TABLE "MOHAMMED"."SITEUSER" 
    (	"ID" NUMBER, 
-	"USERNAME" VARCHAR2(500 BYTE), 
-	"FORENAME" VARCHAR2(500 BYTE), 
-	"SURNAME" VARCHAR2(500 BYTE), 
-	"NORMALIZEDUSERNAME" VARCHAR2(500 BYTE), 
-	"EMAIL" VARCHAR2(500 BYTE), 
-	"NORMALIZEDEMAIL" VARCHAR2(500 BYTE), 
-	"EMAILCONFIRMED" NUMBER(1,0), 
-	"PASSWORDHASH" VARCHAR2(500 BYTE), 
-	"PHONENUMBER" VARCHAR2(500 BYTE), 
-	"PHONENUMBERCONFIRMED" NUMBER(1,0), 
-	"TWOFACTORENABLED" NUMBER(1,0), 
+	"USERNAME" VARCHAR2(200 BYTE), 
+	"FORENAME" VARCHAR2(200 BYTE), 
+	"SURNAME" VARCHAR2(200 BYTE), 
+	"NORMALIZEDUSERNAME" VARCHAR2(200 BYTE), 
+	"EMAIL" VARCHAR2(200 BYTE), 
+	"NORMALIZEDEMAIL" VARCHAR2(200 BYTE), 
+	"EMAILCONFIRMED" VARCHAR2(5 BYTE), 
+	"PASSWORDHASH" VARCHAR2(200 BYTE), 
+	"PHONENUMBER" VARCHAR2(200 BYTE), 
+	"PHONENUMBERCONFIRMED" VARCHAR2(5 BYTE), 
+	"TWOFACTORENABLED" VARCHAR2(5 BYTE), 
 	"CREATED" DATE
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
@@ -171,9 +171,12 @@
   TABLESPACE "SYSTEM" ;
 REM INSERTING into MOHAMMED.BUILDING
 SET DEFINE OFF;
+Insert into MOHAMMED.BUILDING (ID,NAME,BUILDING_NUMBER,COLLEGE_ID) values (65,'7',7,1);
 Insert into MOHAMMED.BUILDING (ID,NAME,BUILDING_NUMBER,COLLEGE_ID) values (35,'11',11,1);
+Insert into MOHAMMED.BUILDING (ID,NAME,BUILDING_NUMBER,COLLEGE_ID) values (63,'1',1,1);
 Insert into MOHAMMED.BUILDING (ID,NAME,BUILDING_NUMBER,COLLEGE_ID) values (36,'321',123,1);
 Insert into MOHAMMED.BUILDING (ID,NAME,BUILDING_NUMBER,COLLEGE_ID) values (37,'33',33,1);
+Insert into MOHAMMED.BUILDING (ID,NAME,BUILDING_NUMBER,COLLEGE_ID) values (64,'2',2,1);
 Insert into MOHAMMED.BUILDING (ID,NAME,BUILDING_NUMBER,COLLEGE_ID) values (38,'44',44,1);
 Insert into MOHAMMED.BUILDING (ID,NAME,BUILDING_NUMBER,COLLEGE_ID) values (39,'0',0,1);
 Insert into MOHAMMED.BUILDING (ID,NAME,BUILDING_NUMBER,COLLEGE_ID) values (40,'222',222,1);
@@ -210,14 +213,15 @@ REM INSERTING into MOHAMMED.ROLEPERMISSION
 SET DEFINE OFF;
 REM INSERTING into MOHAMMED.SITEROLE
 SET DEFINE OFF;
-Insert into MOHAMMED.SITEROLE (ID,NAME,NORMALIZEDNAME,DESCRIPTION,CREATED) values (2,'super_admin','super_admin','system_super_adminstrator',to_date('12-SEP-23','DD-MON-RR'));
-Insert into MOHAMMED.SITEROLE (ID,NAME,NORMALIZEDNAME,DESCRIPTION,CREATED) values (3,'user','user','11111111111111111111',to_date('12-SEP-23','DD-MON-RR'));
-Insert into MOHAMMED.SITEROLE (ID,NAME,NORMALIZEDNAME,DESCRIPTION,CREATED) values (4,'supervisor','supervisor','supervisor22222',to_date('15-SEP-23','DD-MON-RR'));
-Insert into MOHAMMED.SITEROLE (ID,NAME,NORMALIZEDNAME,DESCRIPTION,CREATED) values (5,'test','test','to make some tests in the system ',to_date('26-SEP-23','DD-MON-RR'));
-Insert into MOHAMMED.SITEROLE (ID,NAME,NORMALIZEDNAME,DESCRIPTION,CREATED) values (6,'super_admin','super_admin','ddddddddddde34343',to_date('02-OCT-23','DD-MON-RR'));
+Insert into MOHAMMED.SITEROLE (ID,NAME,NORMALIZEDNAME,DESCRIPTION,CREATED) values (2,'super_admin','SUPER_ADMIN','system_super_adminstrator',to_date('12-SEP-23','DD-MON-RR'));
+Insert into MOHAMMED.SITEROLE (ID,NAME,NORMALIZEDNAME,DESCRIPTION,CREATED) values (3,'user','USER','11111111111111111111',to_date('12-SEP-23','DD-MON-RR'));
+Insert into MOHAMMED.SITEROLE (ID,NAME,NORMALIZEDNAME,DESCRIPTION,CREATED) values (4,'supervisor','SUPERVISOR','supervisor22222',to_date('15-SEP-23','DD-MON-RR'));
+Insert into MOHAMMED.SITEROLE (ID,NAME,NORMALIZEDNAME,DESCRIPTION,CREATED) values (5,'test','TEST','to make some tests in the system ',to_date('26-SEP-23','DD-MON-RR'));
 REM INSERTING into MOHAMMED.SITEUSER
 SET DEFINE OFF;
-Insert into MOHAMMED.SITEUSER (ID,USERNAME,FORENAME,SURNAME,NORMALIZEDUSERNAME,EMAIL,NORMALIZEDEMAIL,EMAILCONFIRMED,PASSWORDHASH,PHONENUMBER,PHONENUMBERCONFIRMED,TWOFACTORENABLED,CREATED) values (2,'m@m.com','mohammed','mohammed','M@M.COM','m@m.com','M@M.COM',0,'AQAAAAEAACcQAAAAEDi2ptQWTp7OI4jVYahjTFmpzh6xx0PAKKxGTdSrAZi0Uims3puH3zhsls+eGyi08Q==','0551316566',0,0,to_date('12-OCT-23','DD-MON-RR'));
+Insert into MOHAMMED.SITEUSER (ID,USERNAME,FORENAME,SURNAME,NORMALIZEDUSERNAME,EMAIL,NORMALIZEDEMAIL,EMAILCONFIRMED,PASSWORDHASH,PHONENUMBER,PHONENUMBERCONFIRMED,TWOFACTORENABLED,CREATED) values (2,'m@m.com','MOHAMMED','MOHAMMED','M@M.COM','m@m.com','M@M.COM','false','AQAAAAEAACcQAAAAEDi2ptQWTp7OI4jVYahjTFmpzh6xx0PAKKxGTdSrAZi0Uims3puH3zhsls+eGyi08Q==','0551316566','false','false',to_date('12-OCT-23','DD-MON-RR'));
+Insert into MOHAMMED.SITEUSER (ID,USERNAME,FORENAME,SURNAME,NORMALIZEDUSERNAME,EMAIL,NORMALIZEDEMAIL,EMAILCONFIRMED,PASSWORDHASH,PHONENUMBER,PHONENUMBERCONFIRMED,TWOFACTORENABLED,CREATED) values (36,'a@a.com','a','a','A@A.COM','a@a.com','A@A.COM','false','AQAAAAEAACcQAAAAEHuLPqZO1BjsWyTIhOMbZhbPSgVrRgXKJ9ZrDzBTLhvXJIQd9mosfmu8FqhI8Rj+/w==','22222222','false','false',to_date('15-OCT-23','DD-MON-RR'));
+Insert into MOHAMMED.SITEUSER (ID,USERNAME,FORENAME,SURNAME,NORMALIZEDUSERNAME,EMAIL,NORMALIZEDEMAIL,EMAILCONFIRMED,PASSWORDHASH,PHONENUMBER,PHONENUMBERCONFIRMED,TWOFACTORENABLED,CREATED) values (4,'n@n.com','hanan','hanan','N@N.COM','n@n.com','N@N.COM','false','AQAAAAEAACcQAAAAEBBwH6FqszwkkYUjf+kr8axm+ruKMk4+nwrr9nwNaGd7oPDt752dtY+yU0drYrqYAw==','67738','false','false',to_date('15-OCT-23','DD-MON-RR'));
 REM INSERTING into MOHAMMED.SITEUSERROLE
 SET DEFINE OFF;
 Insert into MOHAMMED.SITEUSERROLE (USERID,ROLEID) values (2,2);
@@ -227,6 +231,7 @@ Insert into MOHAMMED.SITEUSERROLE (USERID,ROLEID) values (8,3);
 Insert into MOHAMMED.SITEUSERROLE (USERID,ROLEID) values (9,3);
 Insert into MOHAMMED.SITEUSERROLE (USERID,ROLEID) values (10,3);
 Insert into MOHAMMED.SITEUSERROLE (USERID,ROLEID) values (14,3);
+Insert into MOHAMMED.SITEUSERROLE (USERID,ROLEID) values (4,3);
 --------------------------------------------------------
 --  DDL for Index BUILDING_PK
 --------------------------------------------------------
@@ -366,6 +371,8 @@ BEGIN
     NULL;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."BUILDING_TRG" ENABLE;
 --------------------------------------------------------
@@ -383,6 +390,8 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."BUILDING_TRG1" ENABLE;
 --------------------------------------------------------
@@ -400,6 +409,8 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."COLLAGES_TRG" ENABLE;
 --------------------------------------------------------
@@ -417,6 +428,8 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."PERMISSIONS_TRG" ENABLE;
 --------------------------------------------------------
@@ -434,6 +447,8 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."ROLEPERMISSION_TRG" ENABLE;
 --------------------------------------------------------
@@ -449,6 +464,8 @@ BEGIN
     NULL;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."SITEUSER_TRG" ENABLE;
 --------------------------------------------------------
@@ -466,6 +483,8 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."SITEUSER_TRG1" ENABLE;
 --------------------------------------------------------
@@ -481,6 +500,8 @@ BEGIN
     NULL;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."BUILDING_TRG" ENABLE;
 --------------------------------------------------------
@@ -498,6 +519,8 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."BUILDING_TRG1" ENABLE;
 --------------------------------------------------------
@@ -515,6 +538,8 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."COLLAGES_TRG" ENABLE;
 --------------------------------------------------------
@@ -532,6 +557,8 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."PERMISSIONS_TRG" ENABLE;
 --------------------------------------------------------
@@ -549,6 +576,8 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."ROLEPERMISSION_TRG" ENABLE;
 --------------------------------------------------------
@@ -564,6 +593,8 @@ BEGIN
     NULL;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."SITEUSER_TRG" ENABLE;
 --------------------------------------------------------
@@ -581,6 +612,8 @@ BEGIN
     END IF;
   END COLUMN_SEQUENCES;
 END;
+
+
 /
 ALTER TRIGGER "MOHAMMED"."SITEUSER_TRG1" ENABLE;
 --------------------------------------------------------
@@ -600,7 +633,7 @@ AS
 
 BEGIN
         SELECT COUNT (*)
-        INTO ident FROM MOHAMMED.BUILDING WHERE (college_id = BCollege_ID AND building_number = BNumber );
+        INTO ident FROM BUILDING WHERE (college_id = BCollege_ID AND building_number = BNumber );
 
         IF        ident = 0
         THEN
@@ -625,6 +658,8 @@ BEGIN
          OPEN RES FOR SELECT ID,NAME,Code FROM Collages ;
 END;
 
+
+
 /
 --------------------------------------------------------
 --  DDL for Procedure DASHBORD_TODAY_RESERVATIONS
@@ -636,8 +671,10 @@ set define off;
 ) AS 
 BEGIN
   OPEN res FOR SELECT  COUNT(DISTINCT(ID))  AS total from halls;
-  
+
 END DASHBORD_TODAY_RESERVATIONS;
+
+
 
 /
 --------------------------------------------------------
@@ -653,8 +690,10 @@ set define off;
 ) AS 
 BEGIN
     OPEN res FOR SELECT * FROM halls ;
-  
+
 END GETHALLS;
+
+
 
 /
 --------------------------------------------------------
@@ -670,8 +709,10 @@ set define off;
 ) AS 
 BEGIN
     OPEN res FOR SELECT * FROM halls Where id = hallid;
-  
+
 END gethallsbyid;
+
+
 
 /
 --------------------------------------------------------
@@ -689,6 +730,27 @@ BEGIN
 		On (Building.College_Id = Collages.ID) ;
 END GET_COLLEGE_BUILDING;
 
+
+
+/
+--------------------------------------------------------
+--  DDL for Procedure GET_HALL_BUILDING
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."GET_HALL_BUILDING" 
+(
+    res out SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR 
+    SELECT halls.ID AS Id , halls.NAME AS HallName ,halls.HALL_NUMBER AS HallNumber ,
+        Building.Id AS Building_ID, Building.Name AS BuildingName ,Building.BUILDING_NUMBER AS BuildingNumber
+	FROM halls JOIN Building
+		ON (halls.Building_ID = Building.ID);
+        
+END GET_HALL_BUILDING;
+
 /
 --------------------------------------------------------
 --  DDL for Procedure IDENTITY_ADDUSERTOROLE
@@ -696,29 +758,64 @@ END GET_COLLEGE_BUILDING;
 set define off;
 
   CREATE OR REPLACE PROCEDURE "MOHAMMED"."IDENTITY_ADDUSERTOROLE" (
-  "ROLEID" IN NUMBER, 
-  "USERID" IN NUMBER) 
+  "U_ID" IN NUMBER, 
+  "R_ID" IN NUMBER) 
   
   IS
        VarRowNum  NUMBER := 0 ;
 BEGIN 
        SELECT COUNT("ROLEID")
-              
+
        INTO   VarRowNum
-	   
+
 	   FROM   SiteUserRole
-      
-	  WHERE  UserId = "USERID" AND RoleId = "ROLEID" ;
-  
-       IF VarRowNum IS NULL THEN
+
+	  WHERE  UserId = "U_ID" AND RoleId = "R_ID" ;
+
+       IF VarRowNum = 0 THEN
          INSERT INTO SiteUserRole
 			(UserId, RoleId	)
 			VALUES
-			("USERID","ROLEID") ;
+			("U_ID","R_ID") ;
 
        END IF;
-END;				 
-				
+END;
+
+
+/
+--------------------------------------------------------
+--  DDL for Procedure IDENTITY_FINDBYEMAIL
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."IDENTITY_FINDBYEMAIL" 
+(
+  NORUSEREMAIL IN VARCHAR2 ,
+  res OUT SYS_REFCURSOR
+) AS 
+BEGIN
+
+    OPEN res FOR  SELECT * FROM SiteUser
+    WHERE NormalizedEmail = NORUSEREMAIL;
+END IDENTITY_FINDBYEMAIL;
+
+
+/
+--------------------------------------------------------
+--  DDL for Procedure IDENTITY_FINDBYID
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."IDENTITY_FINDBYID" 
+(
+  U_ID IN NUMBER,
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+    OPEN res FOR 
+        SELECT * FROM SiteUser
+        WHERE Id = U_ID;
+END IDENTITY_FINDBYID;
 
 /
 --------------------------------------------------------
@@ -728,11 +825,54 @@ set define off;
 
   CREATE OR REPLACE PROCEDURE "MOHAMMED"."IDENTITY_FINDBYNAME" 
 (
-  normalizedusername in varchar2 
+  normalizedname in varchar2 ,
+  res out SYS_REFCURSOR
 ) as 
 begin
-  null;
+
+OPEN res FOR 
+SELECT * FROM SiteUser
+    WHERE NormalizedUserName = normalizedname ;
+
 end identity_findbyname;
+
+
+/
+--------------------------------------------------------
+--  DDL for Procedure IDENTITY_FINDROLEBYID
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."IDENTITY_FINDROLEBYID" 
+(
+  R_ID IN NUMBER,
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR 
+    SELECT  *  FROM SiteRole
+    WHERE Id = R_ID;
+        
+END IDENTITY_FINDROLEBYID;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure IDENTITY_FINDROLEBYNAME
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."IDENTITY_FINDROLEBYNAME" 
+(
+    NorRoleName IN VARCHAR2, 
+    res OUT SYS_REFCURSOR
+) AS 
+BEGIN
+
+    OPEN res FOR SELECT  * FROM SiteRole
+    WHERE NormalizedName = NorRoleName;
+
+END IDENTITY_FINDROLEBYNAME;
+
 
 /
 --------------------------------------------------------
@@ -745,6 +885,59 @@ set define off;
 BEGIN
   OPEN RES FOR SELECT SiteRole.Id,SiteRole.Name,SiteRole.Description FROM SiteRole ;
 END IDENTITY_GETALLROLES;
+
+
+
+/
+--------------------------------------------------------
+--  DDL for Procedure IDENTITY_GETALLUSERS
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."IDENTITY_GETALLUSERS" 
+(
+    res out SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR SELECT * FROM SiteUser;
+END IDENTITY_GETALLUSERS;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure IDENTITY_GETUSERROLES
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."IDENTITY_GETUSERROLES" 
+(
+  U_ID IN NUMBER,
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR 
+    SELECT r.* FROM SiteRole r 
+    INNER JOIN SiteUserRole ur ON ur.RoleId = r.Id 
+    WHERE ur.UserId = U_ID;
+
+END IDENTITY_GETUSERROLES;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure IDENTITY_GETUSERROLESBYUSERID
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."IDENTITY_GETUSERROLESBYUSERID" 
+(
+  USERID IN NUMBER, 
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+    OPEN res FOR SELECT r.Name FROM SiteRole r 
+    INNER JOIN SiteUserRole ur ON ur.RoleId = r.Id 
+    WHERE ur.UserId = UserId ;
+END IDENTITY_GETUSERROLESBYUSERID;
+
 
 /
 --------------------------------------------------------
@@ -760,17 +953,37 @@ set define off;
 , SURNAME IN VARCHAR2 
 , EMAIL IN VARCHAR2 
 , NORMALIZEDEMAIL IN VARCHAR2 
-, EMAILCONFIRMED IN NUMBER 
+, EMAILCONFIRMED IN VARCHAR2 
 , PASSWORDHASH IN VARCHAR2 
 , PHONENUMBER IN VARCHAR2 
-, PHONENUMBERCONFIRMED IN NUMBER 
-, TWOFACTORENABLED IN NUMBER 
+, PHONENUMBERCONFIRMED IN VARCHAR2 
+, TWOFACTORENABLED IN VARCHAR2 
 , CREATED IN DATE
 , qres out VARCHAR2
 ) 
 AS 
+    a VARCHAR2(5) := '' ;
+    b VARCHAR2(5) := '' ;
+    c VARCHAR2(5) := '' ;
 BEGIN
-  
+    if EMAILCONFIRMED = 0  then 
+        a := 'false';
+        else
+        a := 'true';
+    end if;
+
+    if PHONENUMBERCONFIRMED = 0  then 
+        b := 'false';
+         else
+        b := 'true';
+    end if;
+
+    if TWOFACTORENABLED = 0  then 
+        c := 'false';
+        else
+        c := 'true';
+    end if;
+
 INSERT INTO SiteUser 
 (
 	UserName, 
@@ -792,26 +1005,174 @@ INSERT INTO SiteUser
 	NormalizedUserName,
 	Email,
 	NormalizedEmail,
-	EmailConfirmed,
+	a,
 	Forename,
 	Surname,
 	PasswordHash,
 	PhoneNumber,
-	PhoneNumberConfirmed,
-	TwoFactorEnabled,
+	b,
+	c,
 	TO_DATE (Created)
  );
 qres := 'success'; 
 
 END IDENTITY_INSERTUSER;
 
+
+/
+--------------------------------------------------------
+--  DDL for Procedure IDENTITY_ISUSERINROLE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."IDENTITY_ISUSERINROLE" 
+(
+  R_ID IN NUMBER 
+, U_ID IN NUMBER 
+, res OUT SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR 
+    SELECT COUNT(*) FROM SiteUserRole 
+    WHERE UserId = R_ID 
+    AND RoleId = U_ID;
+
+END IDENTITY_ISUSERINROLE;
+
+
+/
+--------------------------------------------------------
+--  DDL for Procedure IDENTITY_UPDATEUSER
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."IDENTITY_UPDATEUSER" 
+(
+  U_ID IN NUMBER   
+, USERNAME IN VARCHAR2 
+, NORMALIZEDUSERNAME IN VARCHAR2 
+, FORENAME IN VARCHAR2 
+, SURNAME IN VARCHAR2 
+, EMAIL IN VARCHAR2 
+, NORMALIZEDEMAIL IN VARCHAR2 
+, EMAILCONFIRMED IN VARCHAR2 
+, PASSWORDHASH IN VARCHAR2 
+, PHONENUMBER IN VARCHAR2 
+, PHONENUMBERCONFIRMED IN VARCHAR2 
+, TWOFACTORENABLED IN VARCHAR2 
+, qres out NVARCHAR2
+) AS 
+ a VARCHAR2(5) := '' ;
+    b VARCHAR2(5) := '' ;
+    c VARCHAR2(5) := '' ;
+BEGIN
+    if EMAILCONFIRMED = 0  then 
+        a := 'false';
+        else
+        a := 'true';
+    end if;
+
+    if PHONENUMBERCONFIRMED = 0  then 
+        b := 'false';
+         else
+        b := 'true';
+    end if;
+
+    if TWOFACTORENABLED = 0  then 
+        c := 'false';
+        else
+        c := 'true';
+    end if;
+ 
+UPDATE SiteUser SET
+
+	UserName = Username,
+    NormalizedUserName = NormalizedUserName,
+    Email = Email,
+    NormalizedEmail = NormalizedEmail, 
+    EmailConfirmed =EmailConfirmed,
+    Forename = Forename,
+    Surname = Surname,
+    PasswordHash = PasswordHash,
+    PhoneNumber = PhoneNumber,
+    PhoneNumberConfirmed = PhoneNumberConfirmed,
+    TwoFactorEnabled = TwoFactorEnabled 
+
+WHERE Id = U_ID ;
+ qres := 'success' ;
+ 
+END IDENTITY_UPDATEUSER;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure PERMISSIONS_GETBYNAME
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."PERMISSIONS_GETBYNAME" 
+(
+  PERMISSIONNAME IN VARCHAR2 ,
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+	OPEN res FOR SELECT * FROM Permissions WHERE (Permissions.Name = PermissionName);
+END PERMISSIONS_GETBYNAME;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure PERMISSION_GET_ALL_BY_ROLE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."PERMISSION_GET_ALL_BY_ROLE" 
+(
+  ROLE_ID IN NUMBER,
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+		OPEN res FOR SELECT * FROM RolePermission WHERE (RoleID = ROLE_ID);
+END PERMISSION_GET_ALL_BY_ROLE;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure PERMISSION_GET_BY_ID
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."PERMISSION_GET_BY_ID" 
+(
+  PERM_ID IN NUMBER
+  , res out SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR SELECT * FROM Permissions WHERE (ID = PERM_ID);
+  
+END PERMISSION_GET_BY_ID;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure PERMISSION_USERHASPERMISSION
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE PROCEDURE "MOHAMMED"."PERMISSION_USERHASPERMISSION" 
+(
+  ROLE_ID IN NUMBER 
+, PERMISSION_ID IN NUMBER 
+, res out SYS_REFCURSOR
+) AS 
+BEGIN
+  	OPEn res FOR SELECT * FROM RolePermission 
+    WHERE(RoleID =ROLE_ID AND PermissionID =PERMISSION_ID);
+END PERMISSION_USERHASPERMISSION;
+
 /
 --------------------------------------------------------
 --  Constraints for Table BUILDING
 --------------------------------------------------------
 
-  ALTER TABLE "MOHAMMED"."BUILDING" MODIFY ("NAME" NOT NULL ENABLE);
   ALTER TABLE "MOHAMMED"."BUILDING" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "MOHAMMED"."BUILDING" MODIFY ("NAME" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table COLLAGES
 --------------------------------------------------------
@@ -839,51 +1200,51 @@ END IDENTITY_INSERTUSER;
 --  Constraints for Table RESERVATIONS
 --------------------------------------------------------
 
+  ALTER TABLE "MOHAMMED"."RESERVATIONS" MODIFY ("ID" NOT NULL ENABLE);
   ALTER TABLE "MOHAMMED"."RESERVATIONS" ADD CONSTRAINT "RESERVATIONS_PK" PRIMARY KEY ("ID")
   USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM"  ENABLE;
-  ALTER TABLE "MOHAMMED"."RESERVATIONS" MODIFY ("ID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table ROLEPERMISSION
 --------------------------------------------------------
 
-  ALTER TABLE "MOHAMMED"."ROLEPERMISSION" MODIFY ("PERMISSIONID" NOT NULL ENABLE);
-  ALTER TABLE "MOHAMMED"."ROLEPERMISSION" MODIFY ("ROLEID" NOT NULL ENABLE);
   ALTER TABLE "MOHAMMED"."ROLEPERMISSION" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "MOHAMMED"."ROLEPERMISSION" MODIFY ("ROLEID" NOT NULL ENABLE);
+  ALTER TABLE "MOHAMMED"."ROLEPERMISSION" MODIFY ("PERMISSIONID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table SITEROLE
 --------------------------------------------------------
 
+  ALTER TABLE "MOHAMMED"."SITEROLE" MODIFY ("ID" NOT NULL ENABLE);
   ALTER TABLE "MOHAMMED"."SITEROLE" ADD CONSTRAINT "SITEROLE_PK" PRIMARY KEY ("ID")
   USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM"  ENABLE;
-  ALTER TABLE "MOHAMMED"."SITEROLE" MODIFY ("ID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table SITEUSER
 --------------------------------------------------------
 
+  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("SURNAME" NOT NULL ENABLE);
+  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("NORMALIZEDEMAIL" NOT NULL ENABLE);
+  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("PASSWORDHASH" NOT NULL ENABLE);
+  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("PHONENUMBER" NOT NULL ENABLE);
   ALTER TABLE "MOHAMMED"."SITEUSER" ADD CONSTRAINT "SITEUSER_PK" PRIMARY KEY ("ID")
   USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM"  ENABLE;
-  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("PHONENUMBER" NOT NULL ENABLE);
-  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("PASSWORDHASH" NOT NULL ENABLE);
-  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("NORMALIZEDEMAIL" NOT NULL ENABLE);
-  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("EMAIL" NOT NULL ENABLE);
-  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("SURNAME" NOT NULL ENABLE);
-  ALTER TABLE "MOHAMMED"."SITEUSER" MODIFY ("ID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table SITEUSERROLE
 --------------------------------------------------------
 
+  ALTER TABLE "MOHAMMED"."SITEUSERROLE" MODIFY ("USERID" NOT NULL ENABLE);
   ALTER TABLE "MOHAMMED"."SITEUSERROLE" ADD CONSTRAINT "SITEUSERROLE_PK" PRIMARY KEY ("USERID")
   USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "SYSTEM"  ENABLE;
-  ALTER TABLE "MOHAMMED"."SITEUSERROLE" MODIFY ("USERID" NOT NULL ENABLE);

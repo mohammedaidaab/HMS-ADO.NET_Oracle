@@ -15,6 +15,7 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
+using Oracle.ManagedDataAccess.Client;
 
 namespace HMS.Infrastructure.Repositories
 {
@@ -110,14 +111,19 @@ namespace HMS.Infrastructure.Repositories
 
             List<HallBuildingVM> HalList = new List<HallBuildingVM>();
             //using (SqlConnection _SqlConnection = new SqlConnection(con))
-            using (SqlConnection _SqlConnection = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                _SqlConnection.Open();
-                _SqlConnection.CreateCommand();
-                SqlCommand sqlcom = new SqlCommand("Get_Hall_building", _SqlConnection);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                SqlDataReader dr = sqlcom.ExecuteReader();
+              
+                oracon.CreateCommand();
+                OracleCommand oracom = new OracleCommand("Get_Hall_building", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
+                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Direction = ParameterDirection.Output };
+                oracom.Parameters.Add(res);
+
+
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
                     HallBuildingVM hall = new HallBuildingVM();
@@ -130,7 +136,7 @@ namespace HMS.Infrastructure.Repositories
 
                     HalList.Add(hall);
                 }
-                _SqlConnection.Close();
+                oracon.Close();
                 return HalList;
             }
         }
