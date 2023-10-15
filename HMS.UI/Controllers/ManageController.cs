@@ -166,7 +166,7 @@ namespace HMS.MVC.Controllers
 
 			sysuser.Forename = user.FirstName;
             sysuser.Surname = user.Surname;
-               
+            sysuser.PhoneNumber = user.PhoneNumber;
 
 
 			var result = await _userManager.UpdateAsync(sysuser);

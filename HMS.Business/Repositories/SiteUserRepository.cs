@@ -174,17 +174,17 @@ namespace HMS.Infrastructure.Repositories
 
                         OracleParameter U_ID = new OracleParameter { ParameterName = "U_ID", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Id };
 
-                        OracleParameter uname = new OracleParameter { ParameterName = "Username", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Username };
-                        OracleParameter NormalizedUserName = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.NormalizedUserName };
-                        OracleParameter Forename = new OracleParameter { ParameterName = "Forename", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Forename };
-                        OracleParameter Surname = new OracleParameter { ParameterName = "Surname", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Surname };
-                        OracleParameter Email = new OracleParameter { ParameterName = "Email", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Email };
-                        OracleParameter NormalizedEmail = new OracleParameter { ParameterName = "NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.NormalizedEmail };
-                        OracleParameter EmailConfirmed = new OracleParameter { ParameterName = "EmailConfirmed", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = user.EmailConfirmed };
-                        OracleParameter PasswordHash = new OracleParameter { ParameterName = "PasswordHash", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PasswordHash };
-                        OracleParameter PhoneNumber = new OracleParameter { ParameterName = "PhoneNumber", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PhoneNumber };
-                        OracleParameter PhoneNumberConfirmed = new OracleParameter { ParameterName = "PhoneNumberConfirmed", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = Convert.ToBoolean(user.PhoneNumberConfirmed) };
-                        OracleParameter TwoFactorEnabled = new OracleParameter { ParameterName = "TwoFactorEnabled", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = Convert.ToBoolean(user.TwoFactorEnabled) };
+                        OracleParameter uname = new OracleParameter { ParameterName = "U_Username", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Username };
+                        OracleParameter NormalizedUserName = new OracleParameter { ParameterName = "U_NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.NormalizedUserName };
+                        OracleParameter Forename = new OracleParameter { ParameterName = "U_Forename", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Forename };
+                        OracleParameter Surname = new OracleParameter { ParameterName = "U_Surname", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Surname };
+                        OracleParameter Email = new OracleParameter { ParameterName = "U_Email", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.Email };
+                        OracleParameter NormalizedEmail = new OracleParameter { ParameterName = "U_NormalizedUserName", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.NormalizedEmail };
+                        OracleParameter EmailConfirmed = new OracleParameter { ParameterName = "U_EmailConfirmed", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = user.EmailConfirmed };
+                        OracleParameter PasswordHash = new OracleParameter { ParameterName = "U_PasswordHash", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PasswordHash };
+                        OracleParameter PhoneNumber = new OracleParameter { ParameterName = "U_PhoneNumber", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = user.PhoneNumber };
+                        OracleParameter PhoneNumberConfirmed = new OracleParameter { ParameterName = "U_PhoneNumberConfirmed", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = Convert.ToBoolean(user.PhoneNumberConfirmed) };
+                        OracleParameter TwoFactorEnabled = new OracleParameter { ParameterName = "U_TwoFactorEnabled", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = Convert.ToBoolean(user.TwoFactorEnabled) };
                         OracleParameter Created = new OracleParameter { ParameterName = "Created", Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Date, Value = DateTime.Now };
 
                         OracleParameter qres = new OracleParameter { ParameterName = "qres", Direction = ParameterDirection.Output, OracleDbType = OracleDbType.NVarchar2, Size = 200, };

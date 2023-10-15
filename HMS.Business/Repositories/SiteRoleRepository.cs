@@ -80,22 +80,31 @@ namespace HMS.Infrastructure.Repositories
         {
             try
             {
-                using (var conn = new SqlConnection(_config.GetConnectionString("DefaultConnection")))
+                using (var oracon = new OracleConnection(_config.GetConnectionString("DefaultConnection")))
                 {
-                    await conn.OpenAsync(cancellationToken);
+                    await oracon.OpenAsync(cancellationToken);
 
-                    using (SqlCommand cmd = new SqlCommand())
+                    using (OracleCommand oracom = new OracleCommand())
                     {
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "identity_UpdateRole";
+                        oracom.Connection = oracon;
+                        oracom.CommandType = CommandType.StoredProcedure;
+                        oracom.CommandText = "identity_UpdateRole";
 
-                        cmd.Parameters.AddWithValue("@Id", role.Id);
-                        cmd.Parameters.AddWithValue("@Name", role.Name);
-                        cmd.Parameters.AddWithValue("@NormalizedName", role.NormalizedName);
-                        cmd.Parameters.AddWithValue("@Description", role.Description ?? "");
+                        OracleParameter R_ID = new OracleParameter {ParameterName="R_id",OracleDbType=OracleDbType.Int32,Direction=ParameterDirection.Input,Value=role.Id };
+                        OracleParameter R_Name = new OracleParameter {ParameterName="Name",OracleDbType=OracleDbType.NVarchar2,Size=255,Direction=ParameterDirection.Input,Value=role.Name };
+                        OracleParameter R_Nor_Name = new OracleParameter {ParameterName= "NormalizedName", OracleDbType=OracleDbType.NVarchar2,Size=255,Direction=ParameterDirection.Input,Value=role.Id };
+                        OracleParameter R_Desc = new OracleParameter {ParameterName= "Description", OracleDbType=OracleDbType.NVarchar2,Size=255,Direction=ParameterDirection.Input,Value=role.Id };
+                        
+                        OracleParameter res = new OracleParameter {ParameterName= "res", OracleDbType=OracleDbType.NVarchar2,Size=255,Direction=ParameterDirection.Output };
 
-                        await cmd.ExecuteNonQueryAsync(cancellationToken);
+
+
+                        //oracom.Parameters.AddWithValue("@Id", role.Id);
+                        //oracom.Parameters.AddWithValue("@Name", role.Name);
+                        //oracom.Parameters.AddWithValue("@NormalizedName", role.NormalizedName);
+                        //oracom.Parameters.AddWithValue("@Description", role.Description ?? "");
+
+                        await oracom.ExecuteNonQueryAsync(cancellationToken);
 
                         return IdentityResult.Success;
                     }

@@ -100,7 +100,7 @@ namespace HMS.UI.Controllers
 
 			if (ModelState.IsValid)
 			{
-				role.NormalizedName = role.Name;
+				role.NormalizedName = role.Name.ToUpper();
 
 				if (ModelState.IsValid)
 				{
