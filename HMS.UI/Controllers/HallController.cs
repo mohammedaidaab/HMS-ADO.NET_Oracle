@@ -45,8 +45,15 @@ namespace HMS.MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var HallBuildingVM = await _hallRepository.GetAll();
-            return View(HallBuildingVM);
+            if (await _IPermissionRepository.hasPermission(User.GetUserId(), "halls-read", cancellationToken))
+            {
+                var HallBuildingVM = await _hallRepository.GetAll();
+                return View(HallBuildingVM);
+            }
+            else
+            {
+                return RedirectToAction("AccessDenied", "account");
+            }
         }
 
         public async Task<IActionResult> CreateAsync()

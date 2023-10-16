@@ -42,37 +42,37 @@ namespace HMS.UI.Controllers
 
         public async Task<IActionResult> Index()
         {
-			//if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Read", cancellationToken))
-			//{
-				var bulddings = await _IbulddingRepository.GetAll();
+            if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Read", cancellationToken))
+            {
+                var bulddings = await _IbulddingRepository.GetAll();
 
                 return View(bulddings);
-			//}
-			//return RedirectToAction("AccessDenied", "account");
+            }
+            return RedirectToAction("AccessDenied", "account");
 
-		}
+        }
 
 		public async Task<IActionResult> Create()
         {
-			//if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Create", cancellationToken))
-			//{
+            if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Create", cancellationToken))
+            {
 
-				ViewBag.collageselct = new SelectList(await _ICollageRepository.GetAll(), nameof(collage.ID), nameof(collage.Name));
+                ViewBag.collageselct = new SelectList(await _ICollageRepository.GetAll(), nameof(collage.ID), nameof(collage.Name));
 
                 return View();
-			//}
-			//else
-			//{
-			//	return RedirectToAction("AccessDenied", "account");
-			//}
-		}
+            }
+            else
+            {
+                return RedirectToAction("AccessDenied", "account");
+            }
+        }
 
         public async Task<IActionResult> store(BuildingCollegeVM buildingCollegeVM)
         {
 
             // var errors = ModelState.Values.SelectMany(v => v.Errors);
-            //if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Create", cancellationToken))
-            //{
+            if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Create", cancellationToken))
+            {
                 if (ModelState.IsValid)
                 {
                     BaseResponse res = await _IbulddingRepository.create(buildingCollegeVM);
@@ -90,13 +90,13 @@ namespace HMS.UI.Controllers
 
                     }
 
-                //}
-                //else
-                //{
-					TempData["message"] = "الرجاء التحقق من البيانات الني تم ادخالها";
-					TempData["type"] = "warning";
-					return RedirectToAction("Create", buildingCollegeVM);
-				//}
+                }
+                else
+                {
+                    TempData["message"] = "الرجاء التحقق من البيانات الني تم ادخالها";
+                    TempData["type"] = "warning";
+                    return RedirectToAction("Create", buildingCollegeVM);
+                }
             }
             else
             {
