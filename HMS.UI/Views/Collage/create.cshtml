@@ -29,7 +29,7 @@
 
 			<div class="form-group">
 				@Html.LabelFor(Model => Model.Name) <span class="text-danger">*</span>
-				@Html.TextBoxFor(Model => Model.Name,new{@class="form-control",@autocomplete="off"})
+				@Html.TextBoxFor(Model => Model.Name,new{@class="form-control",@autocomplete="off",onkeypress="return /[0-9a-zA-Z-ا-ي- -]/i.test(event.key)"})
 				@Html.ValidationMessageFor(Model => Model.Name,null,new{@class="text-danger"})
 				<span class="form-text text-muted">يرجى التحقق من ادخال اسم الكلية بصورة صحيحة املائيا تفاديا لاي اخطاء</span>
 			</div>

@@ -45,7 +45,7 @@ namespace HMS.MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if (await _IPermissionRepository.hasPermission(User.GetUserId(), "halls-read", cancellationToken))
+            if (await _IPermissionRepository.hasPermission(User.GetUserId(), "halls-Read", cancellationToken))
             {
                 var HallBuildingVM = await _hallRepository.GetAll();
                 return View(HallBuildingVM);
@@ -59,7 +59,7 @@ namespace HMS.MVC.Controllers
         public async Task<IActionResult> CreateAsync()
 		{
 
-			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "halls-create",cancellationToken))
+			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "halls-Create", cancellationToken))
             {
 				ViewBag.Buildings = new SelectList(await _buildingRepository.GetAll(), nameof(BuildingCollegeVM.ID), nameof(BuildingCollegeVM.buldingName));
 

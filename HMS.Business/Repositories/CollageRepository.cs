@@ -31,18 +31,28 @@ namespace HMS.Business.Repositories
 
         public async Task<BaseResponse> Add(collage model)
         {
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                var sqlcom = new SqlCommand("Collages_create", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("ID", model.ID);
-                sqlcom.Parameters.AddWithValue("Name", model.Name);
-                sqlcom.Parameters.AddWithValue("Code", model.Code);
+                OracleCommand oracom = new OracleCommand("Collages_create", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-				sqlcon.Open();
-				if (sqlcom.ExecuteNonQuery() > 0)
+                OracleParameter Col_Name = new OracleParameter {ParameterName="Col_Name",OracleDbType=OracleDbType.NVarchar2,Size=255,Direction=ParameterDirection.Input,Value=model.Name };
+                OracleParameter Col_Code = new OracleParameter {ParameterName="Col_Code",OracleDbType=OracleDbType.NVarchar2,Size=255,Direction=ParameterDirection.Input,Value=model.Code };
+                OracleParameter qres     = new OracleParameter {ParameterName="qres",OracleDbType=OracleDbType.NVarchar2,Size=255,Direction=ParameterDirection.Output };
+
+                oracom.Parameters.Add(Col_Name);
+                oracom.Parameters.Add(Col_Code);
+                oracom.Parameters.Add(qres);
+
+                //oracom.Parameters.AddWithValue("ID", model.ID);
+                //oracom.Parameters.AddWithValue("Name", model.Name);
+                //oracom.Parameters.AddWithValue("Code", model.Code);
+
+				oracon.Open();
+                oracom.ExecuteNonQuery();
+				if (oracom.Parameters["qres"].Value.ToString() == "success")
 				{
-					sqlcon.Close();
+					oracon.Close();
                     return new BaseResponse
                     {
                         Message = "تم اضافة بيانات الكلية بنجاح",
@@ -52,7 +62,7 @@ namespace HMS.Business.Repositories
 				}
 				else
 				{
-					sqlcon.Close();
+					oracon.Close();
 					return new BaseResponse
 					{
 						Message = "لم تتم اضافة البيانات الخاصة بالكية بنجاح",
@@ -69,16 +79,24 @@ namespace HMS.Business.Repositories
 
         public async Task<BaseResponse> Delete(int Id)
         {
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Collages_Delete", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("@ID", Id);
+                OracleCommand oracom = new OracleCommand("Collages_Delete", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-				sqlcon.Open();
-				if (sqlcom.ExecuteNonQuery() > 0)
+				OracleParameter Col_ID = new OracleParameter { ParameterName = "Col_ID", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Input, Value = Id };
+				OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.Varchar2,Size=256, Direction = ParameterDirection.Output };
+               
+                oracom.Parameters.Add(Col_ID);
+                oracom.Parameters.Add(qres);
+
+				//oracom.Parameters.AddWithValue("@ID", Id);
+
+				oracon.Open();
+                oracom.ExecuteNonQuery();
+				if (oracom.Parameters["qres"].Value.ToString() == "success")
 				{
-					sqlcon.Close();
+					oracon.Close();
 					return new BaseResponse
 					{
 						Message = "تم حذف البيانات  بنجاح",
@@ -88,7 +106,7 @@ namespace HMS.Business.Repositories
 				}
 				else
 				{
-					sqlcon.Close();
+					oracon.Close();
 					return new BaseResponse
 					{
 						Message = "لم يتم الحذف لوجود مباني متصلة بالكلية",
@@ -96,7 +114,7 @@ namespace HMS.Business.Repositories
 						IsSuccess = false
 					};
 
-				}
+				} 
 			}
             //throw new NotImplementedException();
         }
@@ -104,11 +122,11 @@ namespace HMS.Business.Repositories
         public async Task<IEnumerable<collage>> GetAll()
         {
             List<collage> ColList = new List<collage>();
-            using (OracleConnection _SqlConnection = new OracleConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
                
-                OracleCommand sqlcom = new OracleCommand("Collages_GetAll", _SqlConnection);
-                sqlcom.CommandType = CommandType.StoredProcedure;
+                OracleCommand oracom = new OracleCommand("Collages_GetAll", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter res = new OracleParameter
                 {
@@ -116,10 +134,10 @@ namespace HMS.Business.Repositories
                     OracleDbType = OracleDbType.RefCursor,
 
                 };
-                sqlcom.Parameters.Add(res);
+                oracom.Parameters.Add(res);
 
-                _SqlConnection.Open();
-                OracleDataReader dr = sqlcom.ExecuteReader();
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
                     collage collage = new collage();
@@ -128,24 +146,32 @@ namespace HMS.Business.Repositories
                     collage.Code = Convert.ToInt32(dr["Code"]);
                     ColList.Add(collage);
                 }
-                _SqlConnection.Close();
+                oracon.Close();
                 return ColList;
             }
         }
 
         public async Task<collage> GetById(int Id)
         {
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
                 collage collage = new collage();
 
-                sqlcon.CreateCommand();
-                SqlCommand sqlcom = new SqlCommand("GET_Collage_by_Id", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("ID", Id);
+                oracon.CreateCommand();
+                OracleCommand oracom = new OracleCommand("Collages_GET_byId", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-                sqlcon.Open();
-                SqlDataReader dr = sqlcom.ExecuteReader();
+
+				OracleParameter Col_ID = new OracleParameter { ParameterName = "Col_ID", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Input,Value=Id };
+				OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Direction = ParameterDirection.Output };
+
+				oracom.Parameters.Add(Col_ID);
+				oracom.Parameters.Add(res);
+
+				//oracom.Parameters.AddWithValue("ID", Id);
+
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
 
@@ -154,7 +180,7 @@ namespace HMS.Business.Repositories
                     collage.Code = Convert.ToInt32(dr["Code"]);
                 }
 
-                sqlcon.Close();
+                oracon.Close();
                 return collage;
             }
 
@@ -163,19 +189,33 @@ namespace HMS.Business.Repositories
 
         public async Task<BaseResponse> Update(collage model)
         {
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
 
-                SqlCommand sqlcom = new SqlCommand("Collages_Update", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("ID", model.ID);
-                sqlcom.Parameters.AddWithValue("Name", model.Name);
-                sqlcom.Parameters.AddWithValue("Code", model.Code);
+                OracleCommand oracom = new OracleCommand("Collages_Update", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-				sqlcon.Open();
-				if (sqlcom.ExecuteNonQuery() > 0)
+
+				OracleParameter Col_ID = new OracleParameter { ParameterName = "Col_Name", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Input, Value = model.ID };
+				OracleParameter Col_Name = new OracleParameter { ParameterName = "Col_Name", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = model.Name };
+				OracleParameter Col_Code = new OracleParameter { ParameterName = "Col_Code", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = model.Code };
+				
+                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
+
+				oracom.Parameters.Add(Col_ID);
+				oracom.Parameters.Add(Col_Name);
+				oracom.Parameters.Add(Col_Code);
+				oracom.Parameters.Add(qres);
+
+				//oracom.Parameters.AddWithValue("ID", model.ID);
+                //oracom.Parameters.AddWithValue("Name", model.Name);
+                //oracom.Parameters.AddWithValue("Code", model.Code);
+
+				oracon.Open();
+                oracom.ExecuteNonQuery();
+				if (oracom.Parameters["qres"].Value.ToString() == "success")
 				{
-					sqlcon.Close();
+					oracon.Close();
 					return new BaseResponse
 					{
 						Message = "تم تعديل بيانات الكلية بنجاح",
@@ -185,7 +225,7 @@ namespace HMS.Business.Repositories
 				}
 				else
 				{
-					sqlcon.Close();
+					oracon.Close();
 					return new BaseResponse
 					{
 						Message = "لم تتم تعديل البيانات لوجود بيانات مماثلة",
