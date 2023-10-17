@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
 using Oracle.ManagedDataAccess.Client;
+using System.Reflection;
 
 namespace HMS.Infrastructure.Repositories
 {
@@ -34,20 +35,29 @@ namespace HMS.Infrastructure.Repositories
 
         public async Task<BaseResponse> Add(Hall model)
         {
-            using (SqlConnection _sqlconnection = new SqlConnection(con))
+            using (OracleConnection oracon= new OracleConnection(con))
             {
-                var sqlcom = new SqlCommand("Halls_Create", _sqlconnection);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("ID", model.ID);
-                sqlcom.Parameters.AddWithValue("Name", model.Name);
-                sqlcom.Parameters.AddWithValue("Number", model.Number);
-                sqlcom.Parameters.AddWithValue("Building_ID", model.Building_ID);
+                var oracom = new OracleCommand("Halls_Create", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter H_id = new OracleParameter { ParameterName = "H_ID", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.ID };
+                OracleParameter HallName = new OracleParameter { ParameterName = "HallName", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = model.Name };
+                OracleParameter HallNumber = new OracleParameter { ParameterName = "HallNumber", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.Number };
+                OracleParameter Building_Id = new OracleParameter { ParameterName = "Building_Id", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.Building_ID };
+                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Output };
 
 
-                _sqlconnection.Open();
-                if (sqlcom.ExecuteNonQuery() > 0)
+                oracom.Parameters.Add(H_id);
+                oracom.Parameters.Add(HallName);
+                oracom.Parameters.Add(HallNumber);
+                oracom.Parameters.Add(Building_Id);
+                oracom.Parameters.Add(qres);
+
+                oracon.Open();
+                oracom.ExecuteNonQuery();
+                if (oracom.Parameters["qres"].Value.ToString() == "success")
                 {
-                    _sqlconnection.Close();
+                    oracon.Close();
                     return new BaseResponse
                     {
                         Message = "تم إضافة القاعة بنجاح",
@@ -57,7 +67,7 @@ namespace HMS.Infrastructure.Repositories
                 }
                 else
                 {
-                    _sqlconnection.Close();
+                    oracon.Close();
                     return new BaseResponse
                     {
                         Message = " لم تتم إضافة القاعة بنجاح لوجود بيانات مماثلة",
@@ -73,16 +83,26 @@ namespace HMS.Infrastructure.Repositories
 
         public async Task<BaseResponse> Delete(int Id)
         {
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon= new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Halls_Delete", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("@ID", Id);
+                OracleCommand oracom = new OracleCommand("Halls_Delete", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-                sqlcon.Open();
-                if (sqlcom.ExecuteNonQuery() > 0)
+
+                OracleParameter H_id = new OracleParameter { ParameterName = "H_ID", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = Id };
+                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.Varchar2,Size = 256, Direction = ParameterDirection.Output };
+
+                oracom.Parameters.Add(H_id);
+                oracom.Parameters.Add(qres);
+
+
+                //oracom.Parameters.AddWithValue("@ID", Id);
+
+                oracon.Open();
+                oracom.ExecuteNonQuery();
+                if (oracom.Parameters["qres"].Value.ToString() == "success")
                 {
-                    sqlcon.Close();
+                    oracon.Close();
                     return new BaseResponse
                     {
                         Message = "تم حذف بيانات القاعة بنجاح",
@@ -92,7 +112,7 @@ namespace HMS.Infrastructure.Repositories
                 }
                 else
                 {
-                    sqlcon.Close();
+                    oracon.Close();
                     return new BaseResponse
                     {
                         Message = "لم تتم حذف البيانات الخاصة بالقاعة بنجاح",
@@ -110,7 +130,6 @@ namespace HMS.Infrastructure.Repositories
         {
 
             List<HallBuildingVM> HalList = new List<HallBuildingVM>();
-            //using (SqlConnection _SqlConnection = new SqlConnection(con))
             using (OracleConnection oracon = new OracleConnection(con))
             {
               
@@ -145,25 +164,33 @@ namespace HMS.Infrastructure.Repositories
         {
             Hall hall = new Hall();
 
-            using (SqlConnection _SqlConnection = new SqlConnection(con))
+            using (OracleConnection oracon= new OracleConnection(con))
             {
-                _SqlConnection.CreateCommand();
+                oracon.CreateCommand();
 
-                SqlCommand sqlcom = new SqlCommand("Halls_GetById", _SqlConnection);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("@ID", Id);
+                OracleCommand oracom = new OracleCommand("Halls_GetById", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-                _SqlConnection.Open();
-                SqlDataReader dr = sqlcom.ExecuteReader();
+                OracleParameter Hall_Id = new OracleParameter { ParameterName = "Hall_Id", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = Id };
+                OracleParameter res = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.RefCursor, Size = 200, Direction = ParameterDirection.Output };
+
+                oracom.Parameters.Add(Hall_Id);
+                oracom.Parameters.Add(res);
+
+
+                //oracom.Parameters.AddWithValue("@ID", Id);
+
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
 
                 while (dr.Read())
                 {
                     hall.ID = Convert.ToInt32(dr["id"]);
                     hall.Name = dr["name"].ToString();
-                    hall.Number = Convert.ToInt32(dr["number"]);
+                    hall.Number = Convert.ToInt32(dr["Hall_Number"]);
                     hall.Building_ID = Convert.ToInt32(dr["Building_ID"]);
                 }
-                _SqlConnection.Close();
+                oracon.Close();
                 return hall;
             }
             //  throw new NotImplementedException();
@@ -171,20 +198,32 @@ namespace HMS.Infrastructure.Repositories
 
         public async Task<BaseResponse> Update(Hall model)
         {
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Halls_Update", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
+                OracleCommand oracom = new OracleCommand("Halls_Update", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-                sqlcom.Parameters.AddWithValue("@ID", model.ID);
-                sqlcom.Parameters.AddWithValue("@Name", model.Name);
-                sqlcom.Parameters.AddWithValue("@Number", model.Number);
-                sqlcom.Parameters.AddWithValue("@Building_Id", model.Building_ID);
 
-                sqlcon.Open();
-                if (sqlcom.ExecuteNonQuery() > 0)
+
+                OracleParameter H_id = new OracleParameter { ParameterName = "H_ID", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.ID };
+                OracleParameter HallName = new OracleParameter { ParameterName = "HallName", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = model.Name };
+                OracleParameter HallNumber = new OracleParameter { ParameterName = "HallNumber", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.Number };
+                OracleParameter Building_Id = new OracleParameter { ParameterName = "Building_Id", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.Building_ID };
+                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Output };
+
+
+                oracom.Parameters.Add(H_id);
+                oracom.Parameters.Add(HallName);
+                oracom.Parameters.Add(HallNumber);
+                oracom.Parameters.Add(Building_Id);
+
+                oracom.Parameters.Add(qres);
+
+                oracon.Open();
+                oracom.ExecuteNonQuery();
+                if (oracom.Parameters["qres"].Value.ToString() == "success")
                 {
-                    sqlcon.Close();
+                    oracon.Close();
                     return new BaseResponse
                     {
                         Message = "تم تعديل بيانات القاعة بنجاح",
@@ -194,7 +233,7 @@ namespace HMS.Infrastructure.Repositories
                 }
                 else
                 {
-                    sqlcon.Close();
+                    oracon.Close();
                     return new BaseResponse
                     {
                         Message = "لم تتم تعديل البيانات الخاصة بالقاعة لوجود بيانات مماثلة",

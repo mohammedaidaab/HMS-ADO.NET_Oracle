@@ -15,6 +15,7 @@ using HMS.Domain.Interfaces.Repositories;
 using HMS.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Threading;
@@ -56,8 +57,10 @@ namespace HMS.UI.Controllers
         {
             if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Create", cancellationToken))
             {
-
+                
                 ViewBag.collageselct = new SelectList(await _ICollageRepository.GetAll(), nameof(collage.ID), nameof(collage.Name));
+
+               
 
                 return View();
             }
