@@ -36,13 +36,16 @@ namespace HMS.Business.Repositories
         {
             int activehalls = 0;
 
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Dashbord_Active_halls_number", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
+                OracleCommand oracom = new OracleCommand("Dashbord_Active_halls_number", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-                sqlcon.Open();
-                SqlDataReader dr = sqlcom.ExecuteReader();
+                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
+                oracom.Parameters.Add(res);
+
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
                     int count = 0;
@@ -50,7 +53,7 @@ namespace HMS.Business.Repositories
                     activehalls = count;
                 }
 
-                sqlcon.Close();
+                oracon.Close();
                 return activehalls;
 
             }
