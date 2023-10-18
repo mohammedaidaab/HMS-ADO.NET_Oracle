@@ -12,6 +12,7 @@ using HMS.Infrastructure.Extensions;
 using HMS.MVC.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -256,8 +257,9 @@ namespace HMS.MVC.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register(string returnUrl = null)
         {
-            ViewBag.roles = new SelectList(await _ISiteRoleRepository.GetAllRoles(), nameof(SiteRole.Name), nameof(SiteRole.Name)); 
-            
+            //ViewBag.roles = new SelectList(await _ISiteRoleRepository.GetAllRoles(), nameof(SiteRole.Name), nameof(SiteRole.Name));
+            ViewData["roles"] = new SelectList(await _ISiteRoleRepository.GetAllRoles(), nameof(SiteRole.Name), nameof(SiteRole.Name));
+
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }

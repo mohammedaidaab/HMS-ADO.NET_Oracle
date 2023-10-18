@@ -18,6 +18,7 @@ using HMS.Domain.Entities.ViewModels;
 using HMS.Domain.Entities;
 using HMS.Domain.Entities.Shared;
 using Oracle.ManagedDataAccess.Client;
+using System.Reflection;
 
 namespace HMS.Business.Repositories
 {
@@ -36,8 +37,8 @@ namespace HMS.Business.Repositories
         {
             using (OracleConnection oracon = new OracleConnection(con))
             {
-                OracleCommand sqlcom = new OracleCommand("Building_create", oracon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
+                OracleCommand oracom = new OracleCommand("Building_create", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter qres = new OracleParameter
                 {
@@ -47,44 +48,41 @@ namespace HMS.Business.Repositories
                     Size = 200,
                 };
 
-                OracleParameter BName = new OracleParameter
-                {
+                OracleParameter BName = new OracleParameter{
                     Direction = ParameterDirection.Input,
                     OracleDbType = OracleDbType.NVarchar2,
                     Value = buildingCollegeVM.buldingName.ToString(),
                 };
 
-                OracleParameter BNumber = new OracleParameter
-                {
+                OracleParameter BNumber = new OracleParameter{
                     Direction = ParameterDirection.Input,
                     OracleDbType = OracleDbType.Int32,
                     Value = buildingCollegeVM.buldingnumber,
                 };
 
-                OracleParameter BCollege_Id = new OracleParameter
-                {
+                OracleParameter BCollege_Id = new OracleParameter{
                     Direction = ParameterDirection.Input,
                     OracleDbType = OracleDbType.Int32,
                     Value = buildingCollegeVM.BuldingCollageNumber,
                 };
 
-                sqlcom.Parameters.Add(BName);
-                sqlcom.Parameters.Add(BNumber);
-                sqlcom.Parameters.Add(BCollege_Id);
-                sqlcom.Parameters.Add(qres);
+                oracom.Parameters.Add(BName);
+                oracom.Parameters.Add(BNumber);
+                oracom.Parameters.Add(BCollege_Id);
+                oracom.Parameters.Add(qres);
 
-               // sqlcom.Parameters.Add("qres",OracleDbType.NVarchar2,10).Direction = ParameterDirection.Output;
+               // oracom.Parameters.Add("qres",OracleDbType.NVarchar2,10).Direction = ParameterDirection.Output;
 
 
                 try
 				{
                     oracon.Open();
-                   // sqlcom.ExecuteScalar();
-                    sqlcom.ExecuteNonQuery();
+                   // oracom.ExecuteScalar();
+                    oracom.ExecuteNonQuery();
 
-                    //string dr = sqlcom.Parameters["qres"].Value.ToString(); 
+                    //string dr = oracom.Parameters["qres"].Value.ToString(); 
 
-					if (sqlcom.Parameters["qres"].Value.ToString() == "success" )
+					if (oracom.Parameters["qres"].Value.ToString() == "success" )
                     {
                         oracon.Close();
                         return new BaseResponse
@@ -131,16 +129,25 @@ namespace HMS.Business.Repositories
 
         public async Task<BaseResponse> delete(int id)
         {
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Building_Delete", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("Id", id);
+                OracleCommand oracom = new OracleCommand("Building_Delete", oracon);
 
-                sqlcon.Open();
-                if (sqlcom.ExecuteNonQuery() > 0)
+                oracom.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter B_id = new OracleParameter { ParameterName = "B_id", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = id };
+                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
+
+                oracom.Parameters.Add(B_id);
+                oracom.Parameters.Add(qres);
+                
+
+                oracon.Open();
+                oracom.ExecuteNonQuery();
+
+                if (oracom.Parameters["qres"].Value.ToString() ==  "success")
                 {
-                    sqlcon.Close();
+                    oracon.Close();
                     return new BaseResponse
                     {
                         Message = "تم حذف بيانات المبنى بنجاح",
@@ -151,7 +158,7 @@ namespace HMS.Business.Repositories
                 }
                 else
                 {
-                    sqlcon.Close();
+                    oracon.Close();
                     return new BaseResponse
                     {
                         Message = "لم يتم حذف البيانات الخاصة بالمبنى بنجاح لوجود قاعة او اكثر مرتبطة بالمبنى المراد حذفه",
@@ -168,10 +175,10 @@ namespace HMS.Business.Repositories
         {
             List<BuildingCollegeVM> BulList = new List<BuildingCollegeVM>();
 
-            using (OracleConnection sqlcon = new OracleConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                OracleCommand sqlcom = new OracleCommand("Get_College_Building", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
+                OracleCommand oracom = new OracleCommand("Get_College_Building", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter res = new OracleParameter
                 {
@@ -180,10 +187,10 @@ namespace HMS.Business.Repositories
 
                 };
 
-                sqlcom.Parameters.Add(res);
+                oracom.Parameters.Add(res);
 
-                sqlcon.Open();
-                OracleDataReader dr = sqlcom.ExecuteReader();
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
                     BuildingCollegeVM buldding = new BuildingCollegeVM();
@@ -196,7 +203,7 @@ namespace HMS.Business.Repositories
                     BulList.Add(buldding);
                 }
 
-                sqlcon.Close();
+                oracon.Close();
                 return BulList;
             }
         }
@@ -205,14 +212,20 @@ namespace HMS.Business.Repositories
         {
             BuildingCollegeVM BuildingInfo = new BuildingCollegeVM();
 
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Get_Building_By_ID", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("ID", id);
+                OracleCommand oracom = new OracleCommand("BUILDING_GET_BYID", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-                sqlcon.Open();
-                SqlDataReader dr = sqlcom.ExecuteReader();
+
+                OracleParameter B_id = new OracleParameter { ParameterName = "B_id", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = id };
+                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Direction = ParameterDirection.Output };
+
+                oracom.Parameters.Add(B_id);
+                oracom.Parameters.Add(res);
+               
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
                     BuildingInfo.ID = Convert.ToInt32(dr["ID"]);
@@ -221,7 +234,7 @@ namespace HMS.Business.Repositories
                     BuildingInfo.BuldingCollageName = dr["BuldingCollageName"].ToString();
                     BuildingInfo.BuldingCollageNumber = Convert.ToInt32(dr["BuldingCollageNumber"]);
                 }
-                sqlcon.Close();
+                oracon.Close();
 
                 return BuildingInfo;
             }
@@ -230,21 +243,34 @@ namespace HMS.Business.Repositories
 
         public async Task<BaseResponse> update(Building building)
         {
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Building_Update", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("Id", building.ID);
-                sqlcom.Parameters.AddWithValue("Name", building.Name);
-                sqlcom.Parameters.AddWithValue("Number", building.Number);
-                sqlcom.Parameters.AddWithValue("College_Id", building.Collage_ID);
+                OracleCommand oracom = new OracleCommand("Building_Update", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
 
-                sqlcon.Open();
-                if (sqlcom.ExecuteNonQuery() > 0)
+                OracleParameter B_Id = new OracleParameter { ParameterName = "B_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = building.ID };
+                OracleParameter B_Name = new OracleParameter {ParameterName = "B_Id", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = building.Name };
+                OracleParameter B_Number = new OracleParameter {ParameterName = "B_Number", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = building.Number };
+                OracleParameter College_Id = new OracleParameter {ParameterName = "College_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = building.Collage_ID };
+                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
+
+                oracom.Parameters.Add(B_Id);
+                oracom.Parameters.Add(B_Name);
+                oracom.Parameters.Add(B_Number);
+                oracom.Parameters.Add(College_Id);
+                oracom.Parameters.Add(qres);
+
+                //oracom.Parameters.AddWithValue("Id", building.ID);
+                //oracom.Parameters.AddWithValue("Name", building.Name);
+                //oracom.Parameters.AddWithValue("Number", building.Number);
+                //oracom.Parameters.AddWithValue("College_Id", building.Collage_ID);
+
+                oracon.Open();
+                oracom.ExecuteNonQuery();
+                if (oracom.Parameters["qres"].Value.ToString() == "success")
                 {
-                    sqlcon.Close();
+                    oracon.Close();
                     return new BaseResponse
                     {
                         Message = "تم تعديل بيانات المبنى بنجاح",
@@ -255,7 +281,7 @@ namespace HMS.Business.Repositories
                 }
                 else
                 {
-                    sqlcon.Close();
+                    oracon.Close();
                     return new BaseResponse
                     {
                         Message = "لم يتم تعديل البيانات الخاصة بالمبنى بنجاح لوجود بيانات مماثلة",

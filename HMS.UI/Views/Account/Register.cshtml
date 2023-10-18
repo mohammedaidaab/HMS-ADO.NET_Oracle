@@ -55,7 +55,8 @@
                         <br />
                         <div class="form-group">
                         <label asp-for="RoleName"></label>
-                        @Html.DropDownList("RoleName" , (IEnumerable<SelectListItem>)ViewBag.roles,"",new{@class="form-control"})
+                        @* @Html.DropDownList("RoleName" , (IEnumerable<SelectListItem>)ViewBag.roles,"",new{@class="form-control"}) *@
+                        @Html.DropDownList("RoleName" , (IEnumerable<SelectListItem>)ViewData["roles"],"",new{@class="form-control"})
                         <span asp-validation-for="RoleName" class="text-danger"></span>
                     </div>
                     <br />

@@ -38338,7 +38338,7 @@ a {
 
     .menu-state-title-primary .menu-item.hover > .menu-link:not(.disabled):not(.active) .menu-title,
     .menu-state-title-primary .menu-item .menu-link:hover:not(.disabled):not(.active) .menu-title {
-        color: #047e87;
+        color: #BF8A49;
     }
 
 .menu-state-title-primary .menu-item.here > .menu-link,
@@ -38427,7 +38427,7 @@ a {
 
     .menu-state-icon-primary .menu-item.hover > .menu-link:not(.disabled):not(.active) .menu-icon i,
     .menu-state-icon-primary .menu-item .menu-link:hover:not(.disabled):not(.active) .menu-icon i {
-        color: #047e87;
+        color: #BF8A49;
     }
 
     .menu-state-icon-primary .menu-item.hover > .menu-link:not(.disabled):not(.active) .menu-icon .svg-icon svg [fill]:not(.permanent):not(g),
