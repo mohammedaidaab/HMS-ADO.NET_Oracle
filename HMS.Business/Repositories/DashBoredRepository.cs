@@ -65,13 +65,16 @@ namespace HMS.Business.Repositories
 		{
 			DateTime hallsnumber =  Convert.ToDateTime("01-01-1111");
 
-			using (SqlConnection sqlcon = new SqlConnection(con))
+			using (OracleConnection oracon = new OracleConnection(con))
 			{
-				SqlCommand sqlcom = new SqlCommand("Dashbord_LastReservation_Today", sqlcon);
-				sqlcom.CommandType = CommandType.StoredProcedure;
+				OracleCommand oracom = new OracleCommand("Dashbord_LastReservation_Today", oracon);
+				oracom.CommandType = CommandType.StoredProcedure;
 
-				sqlcon.Open();
-				SqlDataReader dr = sqlcom.ExecuteReader();
+                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
+                oracom.Parameters.Add(res);
+
+                oracon.Open();
+				OracleDataReader dr = oracom.ExecuteReader();
 				while (dr.Read())
 				{
 					DateTime count;
@@ -80,11 +83,9 @@ namespace HMS.Business.Repositories
                         count = Convert.ToDateTime(dr["MaxTime"].ToString());
                         hallsnumber = count;
 					}
-                    
-					
 				}
 
-				sqlcon.Close();
+				oracon.Close();
 				return hallsnumber;
 
 			}
@@ -94,13 +95,17 @@ namespace HMS.Business.Repositories
         {
             int hallsnumber = 0;
 
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Dashbord_halls_number", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
+                OracleCommand oracom = new OracleCommand("Dashbord_halls_number", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-                sqlcon.Open();
-                SqlDataReader dr = sqlcom.ExecuteReader();
+                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
+                oracom.Parameters.Add(res);
+
+
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
                     int count = 0;
@@ -108,7 +113,7 @@ namespace HMS.Business.Repositories
                     hallsnumber = count;
                 }
 
-                sqlcon.Close();
+                oracon.Close();
                 return hallsnumber;
 
             }
@@ -124,13 +129,7 @@ namespace HMS.Business.Repositories
                 sqlcom.CommandType = CommandType.StoredProcedure;
 
 
-                OracleParameter res = new OracleParameter
-                {
-                    Direction = ParameterDirection.Output,
-                    OracleDbType = OracleDbType.RefCursor,
-
-                };
-
+                OracleParameter res = new OracleParameter{Direction = ParameterDirection.Output, OracleDbType = OracleDbType.RefCursor,};
                 sqlcom.Parameters.Add(res);
 
                 sqlcon.Open();
@@ -152,20 +151,23 @@ namespace HMS.Business.Repositories
         {
             List<ReservationHallVM> reservationList = new List<ReservationHallVM>();
 
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Reservation_GetAll", sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
+                OracleCommand oracom = new OracleCommand("Reservation_GetAll", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-                sqlcon.Open();
-                SqlDataReader dr = sqlcom.ExecuteReader();
+                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
+                oracom.Parameters.Add(res);
+
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
                     ReservationHallVM reservation = new ReservationHallVM
                     {
                         Name = dr["Name"].ToString(),
                         Hall_name = dr["Hall_Name"].ToString(),
-                        Date = Convert.ToDateTime(dr["Date"]),
+                        Date = Convert.ToDateTime(dr["RESERVATION_DATE"]),
                         Time_Start = Convert.ToDateTime(dr["Time_Start"].ToString()),
                         Time_End = Convert.ToDateTime(dr["Time_End"].ToString()),
                         User_id = Convert.ToInt32(dr["User_Id"]),

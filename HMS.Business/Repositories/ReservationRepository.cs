@@ -17,6 +17,8 @@ using System.Text;
 using System.Threading.Tasks;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
+using Oracle.ManagedDataAccess.Client;
+using System.Reflection;
 
 namespace HMS.Business.Repositories
 {
@@ -33,27 +35,42 @@ namespace HMS.Business.Repositories
 
         public async Task<BaseResponse> create(Reservation reservation)
         {
-            
-
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                //SqlCommand sqlcom = new SqlCommand("Reservation_Create", sqlcon);
-                SqlCommand sqlcom = new SqlCommand("Reservation_CreateByConditions", sqlcon);
-
-                sqlcom.CommandType = CommandType.StoredProcedure;
-
-                sqlcom.Parameters.AddWithValue("Name", reservation.Name);
-                sqlcom.Parameters.AddWithValue("Hall_Id", reservation.Hall_Id);
-                sqlcom.Parameters.AddWithValue("Date", reservation.Date);
-                sqlcom.Parameters.AddWithValue("Time_Start", reservation.Time_Start);
-                sqlcom.Parameters.AddWithValue("Time_End", reservation.Time_End);
-                sqlcom.Parameters.AddWithValue("User_Id", reservation.User_id);
+                //OracleCommand oracom = new OracleCommand("Reservation_Create", oracon);
+                OracleCommand oracom = new OracleCommand("Reservation_CreateByConditions", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
 
-                sqlcon.Open();
-                if (sqlcom.ExecuteNonQuery() > 0)
+                OracleParameter R_Name = new OracleParameter { ParameterName = "R_Name", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Name };
+                OracleParameter R_Hall_Id = new OracleParameter { ParameterName = "R_Hall_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Hall_Id };
+                OracleParameter R_Date = new OracleParameter { ParameterName = "R_Date", OracleDbType = OracleDbType.Date, Size = 255, Direction = ParameterDirection.Input,Value= reservation.Date };
+                OracleParameter R_Time_Start = new OracleParameter { ParameterName = "R_Time_Start", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input,Value = reservation.Time_Start };
+                OracleParameter R_Time_End = new OracleParameter { ParameterName = "R_Time_End", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input , Value = reservation.Time_End};
+                OracleParameter R_User_Id = new OracleParameter { ParameterName = "R_User_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input , Value= reservation.User_id };
+
+                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
+
+                oracom.Parameters.Add(R_Name);
+                oracom.Parameters.Add(R_Hall_Id);
+                oracom.Parameters.Add(R_Date);
+                oracom.Parameters.Add(R_Time_Start);
+                oracom.Parameters.Add(R_Time_End);
+                oracom.Parameters.Add(R_User_Id);
+                oracom.Parameters.Add(qres);
+
+                //oracom.Parameters.AddWithValue("Name", reservation.Name);
+                //oracom.Parameters.AddWithValue("Hall_Id", reservation.Hall_Id);
+                //oracom.Parameters.AddWithValue("Date", reservation.Date);
+                //oracom.Parameters.AddWithValue("Time_Start", reservation.Time_Start);
+                //oracom.Parameters.AddWithValue("Time_End", reservation.Time_End);
+                //oracom.Parameters.AddWithValue("User_Id", reservation.User_id);
+
+                oracon.Open();
+                oracom.ExecuteNonQuery(); 
+                if (oracom.Parameters["qres"].Value.ToString() == "success")
                 {
-                     sqlcon.Close();
+                     oracon.Close();
                      return new BaseResponse
                      {
                         Message = "تم إضافة حجز القاعة بنجاح",
@@ -63,7 +80,7 @@ namespace HMS.Business.Repositories
                 }
                 else
                 {
-                    sqlcon.Close();
+                    oracon.Close();
                     return new BaseResponse
                     {
                         Message = "لم تتم إضافة الحجز بنجاح لوجود حجز مطبق للتريخ والوقت",
@@ -72,12 +89,8 @@ namespace HMS.Business.Repositories
                     };
 
                 }
-
-
             }
 
-
-            //throw new NotImplementedException();
         }
 
 		public async Task<IEnumerable<ReservationHallVM>> GetAll()
@@ -85,13 +98,17 @@ namespace HMS.Business.Repositories
 
             List<ReservationHallVM> reservationList = new List<ReservationHallVM>();
 
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Reservation_GetAll",sqlcon);
-                sqlcom.CommandType = CommandType.StoredProcedure;
+                OracleCommand oracom = new OracleCommand("Reservation_GetAll",oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-                sqlcon.Open();
-                SqlDataReader dr = sqlcom.ExecuteReader();
+                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
+                oracom.Parameters.Add(res);
+
+
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
                     ReservationHallVM reservation = new ReservationHallVM
@@ -99,7 +116,7 @@ namespace HMS.Business.Repositories
                         Id = Convert.ToInt32(dr["ID"]),
 						Name = dr["Name"].ToString(),
                         Hall_name = dr["Hall_Name"].ToString(),
-                        Date = Convert.ToDateTime(dr["Date"]),
+                        Date = Convert.ToDateTime(dr["RESERVATION_DATE"]),
 						Time_Start = Convert.ToDateTime(dr["Time_Start"].ToString()),
 						Time_End = Convert.ToDateTime(dr["Time_End"].ToString()),
 						User_id = Convert.ToInt32(dr["User_Id"]),
@@ -107,10 +124,11 @@ namespace HMS.Business.Repositories
                     };
 
 					reservationList.Add(reservation);
-				}
-
+                    
+                }
+                oracon.Close();
                 return reservationList;
-                sqlcon.Close();
+              
 
             }
                // throw new NotImplementedException();
@@ -120,16 +138,18 @@ namespace HMS.Business.Repositories
 		{
             ReservationHallVM reservation = new ReservationHallVM();
 
-			using (SqlConnection sqlcon = new SqlConnection(con))
+			using (OracleConnection oracon = new OracleConnection(con))
 			{
-				SqlCommand sqlcom = new SqlCommand("Reservation_GetById", sqlcon);
+				OracleCommand oracom = new OracleCommand("Reservation_GetById", oracon);
 
-				sqlcom.Parameters.AddWithValue("ID", id);
+                OracleParameter R_ID = new OracleParameter { ParameterName = "R_ID", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Id };
+                oracom.Parameters.Add(R_ID);
+                //oracom.Parameters.AddWithValue("ID", id);
 
-				sqlcom.CommandType = CommandType.StoredProcedure;
+				oracom.CommandType = CommandType.StoredProcedure;
 
-				sqlcon.Open();
-				SqlDataReader dr = sqlcom.ExecuteReader();
+				oracon.Open();
+				OracleDataReader dr = oracom.ExecuteReader();
 				while (dr.Read())
 				{
 					ReservationHallVM res = new ReservationHallVM
@@ -148,7 +168,7 @@ namespace HMS.Business.Repositories
 				}
 
 				return reservation;
-				sqlcon.Close();
+				oracon.Close();
 
 			}
 		}
@@ -157,21 +177,26 @@ namespace HMS.Business.Repositories
         {
             List<ReservationHallVM> reservationList = new List<ReservationHallVM>();
 
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Reservation_GetByUserId", sqlcon);
-                sqlcom.Parameters.AddWithValue("User_Id", id);
-                sqlcom.CommandType = CommandType.StoredProcedure;
+                OracleCommand oracom = new OracleCommand("Reservation_GetByUserId", oracon);
 
-                sqlcon.Open();
-                SqlDataReader dr = sqlcom.ExecuteReader();
+
+                OracleParameter R_User_Id = new OracleParameter { ParameterName = "R_User_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = id };
+                oracom.Parameters.Add(R_User_Id);
+
+                //oracom.Parameters.AddWithValue("User_Id", id);
+                oracom.CommandType = CommandType.StoredProcedure;
+
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
                 {
                     ReservationHallVM reservation = new ReservationHallVM
                     {
                         Name = dr["Name"].ToString(),
                         Hall_name = dr["Hall_Name"].ToString(),
-                        Date = Convert.ToDateTime(dr["Date"]),
+                        Date = Convert.ToDateTime(dr["RESERVATION_DATE"]),
                         Time_Start = Convert.ToDateTime(dr["Time_Start"].ToString()),
                         Time_End = Convert.ToDateTime(dr["Time_End"].ToString()),
                         User_id = Convert.ToInt32(dr["User_Id"]),
@@ -180,9 +205,9 @@ namespace HMS.Business.Repositories
 
                     reservationList.Add(reservation);
                 }
-
+                oracon.Close();
                 return reservationList;
-                sqlcon.Close();
+               
 
             }
             //throw new NotImplementedException();
@@ -190,25 +215,44 @@ namespace HMS.Business.Repositories
 
 		public async Task<BaseResponse> update(Reservation reservation)
 		{
-            using (SqlConnection sqlcon = new SqlConnection(con))
+            using (OracleConnection oracon = new OracleConnection(con))
             {
-                SqlCommand sqlcom = new SqlCommand("Reservation_Update", sqlcon);
+                OracleCommand oracom = new OracleCommand("Reservation_Update", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
 
-                sqlcom.CommandType = CommandType.StoredProcedure;
-                sqlcom.Parameters.AddWithValue("ID", reservation.ID);
-                sqlcom.Parameters.AddWithValue("Name", reservation.Name);
-                sqlcom.Parameters.AddWithValue("Hall_Id", reservation.Hall_Id);
-                sqlcom.Parameters.AddWithValue("Date", reservation.Date);
-                sqlcom.Parameters.AddWithValue("Time_Start", reservation.Time_Start);
-                sqlcom.Parameters.AddWithValue("Time_End", reservation.Time_End);
-                sqlcom.Parameters.AddWithValue("User_Id", reservation.User_id);
+                OracleParameter R_Id = new OracleParameter { ParameterName = "R_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.ID };
+                OracleParameter R_Name = new OracleParameter { ParameterName = "R_Name", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Name };
+                OracleParameter R_Hall_Id = new OracleParameter { ParameterName = "R_Hall_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Hall_Id };
+                OracleParameter R_Date = new OracleParameter { ParameterName = "R_Date", OracleDbType = OracleDbType.Date, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Date };
+                OracleParameter R_Time_Start = new OracleParameter { ParameterName = "R_Time_Start", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Time_Start };
+                OracleParameter R_Time_End = new OracleParameter { ParameterName = "R_Time_End", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Time_End };
+                OracleParameter R_User_Id = new OracleParameter { ParameterName = "R_User_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.User_id };
+
+                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
+
+                oracom.Parameters.Add(R_Id);
+                oracom.Parameters.Add(R_Name);
+                oracom.Parameters.Add(R_Hall_Id);
+                oracom.Parameters.Add(R_Date);
+                oracom.Parameters.Add(R_Time_Start);
+                oracom.Parameters.Add(R_Time_End);
+                oracom.Parameters.Add(R_User_Id);
+                oracom.Parameters.Add(qres);
+
+                //oracom.Parameters.AddWithValue("ID", reservation.ID);
+                //oracom.Parameters.AddWithValue("Name", reservation.Name);
+                //oracom.Parameters.AddWithValue("Hall_Id", reservation.Hall_Id);
+                //oracom.Parameters.AddWithValue("Date", reservation.Date);
+                //oracom.Parameters.AddWithValue("Time_Start", reservation.Time_Start);
+                //oracom.Parameters.AddWithValue("Time_End", reservation.Time_End);
+                //oracom.Parameters.AddWithValue("User_Id", reservation.User_id);
 
 
-                sqlcon.Open();
-                
-                if (sqlcom.ExecuteNonQuery() > 0) {
-                    
-                    sqlcon.Close();
+                oracon.Open();
+                oracom.ExecuteNonQuery();
+                if (oracom.Parameters["qres"].Value.ToString() == "success")
+                {
+                    oracon.Close();
                     return new BaseResponse
                     {
                         IsSuccess = true,
@@ -219,7 +263,7 @@ namespace HMS.Business.Repositories
                 }
                 else
                 {
-                    sqlcon.Close();
+                    oracon.Close();
 
                     return new BaseResponse {
                         IsSuccess = false,

@@ -29,15 +29,15 @@ namespace HMS.MVC.Controllers
         {
             DashBordVM dashboard = new DashBordVM
             {
-                //Number_Of_reservations = _dashBordRepository.gettodayreservations(),
+                Number_Of_reservations = _dashBordRepository.gettodayreservations(),
 
-                //Number_of_halls = _dashBordRepository.getnumberofalls(),
+                Number_of_halls = _dashBordRepository.getnumberofalls(),
 
                 Number_of_active_halls = _dashBordRepository.GetActiveHalls(),
 
-                //reservation = _dashBordRepository.reservations(),
+                reservation = _dashBordRepository.reservations(),
 
-                //Lastreservation = _dashBordRepository.GetLastReservation(),
+                Lastreservation = _dashBordRepository.GetLastReservation(),
 
             };
 
