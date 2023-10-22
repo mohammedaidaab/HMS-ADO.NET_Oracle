@@ -239,15 +239,6 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(R_User_Id);
                 oracom.Parameters.Add(qres);
 
-                //oracom.Parameters.AddWithValue("ID", reservation.ID);
-                //oracom.Parameters.AddWithValue("Name", reservation.Name);
-                //oracom.Parameters.AddWithValue("Hall_Id", reservation.Hall_Id);
-                //oracom.Parameters.AddWithValue("Date", reservation.Date);
-                //oracom.Parameters.AddWithValue("Time_Start", reservation.Time_Start);
-                //oracom.Parameters.AddWithValue("Time_End", reservation.Time_End);
-                //oracom.Parameters.AddWithValue("User_Id", reservation.User_id);
-
-
                 oracon.Open();
                 oracom.ExecuteNonQuery();
                 if (oracom.Parameters["qres"].Value.ToString() == "success")

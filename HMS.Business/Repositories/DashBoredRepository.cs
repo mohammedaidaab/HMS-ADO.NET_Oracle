@@ -15,7 +15,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -77,11 +79,13 @@ namespace HMS.Business.Repositories
 				OracleDataReader dr = oracom.ExecuteReader();
 				while (dr.Read())
 				{
-					DateTime count;
+					string count;
                     if(dr["MaxTime"] != DBNull.Value)
                     {
-                        count = Convert.ToDateTime(dr["MaxTime"].ToString());
-                        hallsnumber = count;
+                        //count = Convert.ToDateTime(dr["MaxTime"].ToString());
+                        count = dr["MaxTime"].ToString();
+                        count =     DateTime.ParseExact("01-01-1111 "+dr["MaxTime"]+":00", "MM-dd-yyyy hh:mm:ss", CultureInfo.InvariantCulture).ToString();
+                        hallsnumber = Convert.ToDateTime(count);
 					}
 				}
 
