@@ -254,7 +254,7 @@ namespace HMS.MVC.Controllers
         #region Register
 
         [HttpGet]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> Register(string returnUrl = null)
         {
             //ViewBag.roles = new SelectList(await _ISiteRoleRepository.GetAllRoles(), nameof(SiteRole.Name), nameof(SiteRole.Name));
@@ -265,7 +265,7 @@ namespace HMS.MVC.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
@@ -333,7 +333,7 @@ namespace HMS.MVC.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)

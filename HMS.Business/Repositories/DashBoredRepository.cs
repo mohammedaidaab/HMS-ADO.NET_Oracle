@@ -82,9 +82,9 @@ namespace HMS.Business.Repositories
 					string count;
                     if(dr["MaxTime"] != DBNull.Value)
                     {
-                        //count = Convert.ToDateTime(dr["MaxTime"].ToString());
                         count = dr["MaxTime"].ToString();
-                        count =     DateTime.ParseExact("01-01-1111 "+dr["MaxTime"]+":00", "MM-dd-yyyy hh:mm:ss", CultureInfo.InvariantCulture).ToString();
+                        string time  = count.Replace(".", ":");
+                        count = DateTime.ParseExact("01-01-1111 "+ time + ":00", "MM-dd-yyyy hh:mm:ss", CultureInfo.InvariantCulture).ToString();
                         hallsnumber = Convert.ToDateTime(count);
 					}
 				}
@@ -107,7 +107,6 @@ namespace HMS.Business.Repositories
                 OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
                 oracom.Parameters.Add(res);
 
-
                 oracon.Open();
                 OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
@@ -116,7 +115,6 @@ namespace HMS.Business.Repositories
                     count = Convert.ToInt32(dr["HallsNumer"]);
                     hallsnumber = count;
                 }
-
                 oracon.Close();
                 return hallsnumber;
 

@@ -19,7 +19,6 @@ namespace HMS.MVC.ViewModels.ManageViewModels
         [EmailAddress]
         public string Email { get; set; }
 
-
         [Phone]
         [Display(Name = "رقم الهاتف")]
         public string PhoneNumber { get; set; }

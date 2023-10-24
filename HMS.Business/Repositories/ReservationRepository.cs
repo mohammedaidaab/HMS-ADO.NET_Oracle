@@ -35,12 +35,12 @@ namespace HMS.Business.Repositories
 
         public async Task<BaseResponse> create(Reservation reservation)
         {
+            
             using (OracleConnection oracon = new OracleConnection(con))
             {
                 //OracleCommand oracom = new OracleCommand("Reservation_Create", oracon);
                 OracleCommand oracom = new OracleCommand("Reservation_CreateByConditions", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
-
 
                 OracleParameter R_Name = new OracleParameter { ParameterName = "R_Name", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Name };
                 OracleParameter R_Hall_Id = new OracleParameter { ParameterName = "R_Hall_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Hall_Id };
@@ -59,13 +59,6 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(R_User_Id);
                 oracom.Parameters.Add(qres);
 
-                //oracom.Parameters.AddWithValue("Name", reservation.Name);
-                //oracom.Parameters.AddWithValue("Hall_Id", reservation.Hall_Id);
-                //oracom.Parameters.AddWithValue("Date", reservation.Date);
-                //oracom.Parameters.AddWithValue("Time_Start", reservation.Time_Start);
-                //oracom.Parameters.AddWithValue("Time_End", reservation.Time_End);
-                //oracom.Parameters.AddWithValue("User_Id", reservation.User_id);
-
                 oracon.Open();
                 oracom.ExecuteNonQuery(); 
                 if (oracom.Parameters["qres"].Value.ToString() == "success")
@@ -78,6 +71,16 @@ namespace HMS.Business.Repositories
                         IsSuccess = true
                      };
                 }
+                if (oracom.Parameters["qres"].Value.ToString() == "st>et")
+                {
+					oracon.Close();
+					return new BaseResponse
+					{
+						Message = "لم تتم إضافة الحجز الرجاء التحقق من وقت البداية والنهاية",
+						Type = "error",
+						IsSuccess = false
+					};
+				}
                 else
                 {
                     oracon.Close();
