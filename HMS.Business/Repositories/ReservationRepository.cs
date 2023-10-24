@@ -59,7 +59,7 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(R_User_Id);
                 oracom.Parameters.Add(qres);
 
-                oracon.Open();
+                oracon.Open(); 
                 oracom.ExecuteNonQuery(); 
                 if (oracom.Parameters["qres"].Value.ToString() == "success")
                 {
