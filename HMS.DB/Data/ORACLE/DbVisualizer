@@ -11,7 +11,7 @@ CREATE SEQUENCE HALLS_SEQ INCREMENT BY 1 START WITH 21 MAXVALUE 9999999999999999
 DROP SEQUENCE PERMISSIONS_SEQ;
 CREATE SEQUENCE PERMISSIONS_SEQ INCREMENT BY 1 START WITH 1 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
 DROP SEQUENCE RESERVATIONS_SEQ;
-CREATE SEQUENCE RESERVATIONS_SEQ INCREMENT BY 1 START WITH 81 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+CREATE SEQUENCE RESERVATIONS_SEQ INCREMENT BY 1 START WITH 121 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
 DROP SEQUENCE ROLEPERMISSION_SEQ;
 CREATE SEQUENCE ROLEPERMISSION_SEQ INCREMENT BY 1 START WITH 101 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
 DROP SEQUENCE SITEROLE_SEQ;
@@ -49,10 +49,9 @@ INSERT INTO PERMISSIONS (ID, NAME) VALUES (15, 'colleges-Update');
 INSERT INTO PERMISSIONS (ID, NAME) VALUES (16, 'colleges-Delete');
 DROP TABLE RESERVATIONS;
 CREATE TABLE RESERVATIONS (ID NUMBER NOT NULL, NAME VARCHAR2(200), HALL_ID NUMBER, RESERVATION_DATE DATE, TIME_START DATE, TIME_END DATE, USER_ID NUMBER, CONSTRAINT RESERVATIONS_PK PRIMARY KEY (ID));
-INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (69, 'fsd', 3, TIMESTAMP '2023-10-25 00:00:00', TIMESTAMP '0024-10-23 00:00:00', TIMESTAMP '2023-10-24 15:05:00', 41);
-INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (70, 't', 3, TIMESTAMP '2023-10-25 00:00:00', TIMESTAMP '0023-10-24 00:00:00', TIMESTAMP '2023-10-24 15:05:00', 41);
-INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (67, 'gsdfgdsf', 3, TIMESTAMP '2023-10-25 00:00:00', TIMESTAMP '0024-10-23 00:00:00', TIMESTAMP '2023-10-24 15:05:00', 41);
-INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (68, 'sdfsdf', 3, TIMESTAMP '2023-10-25 00:00:00', TIMESTAMP '0024-10-23 00:00:00', TIMESTAMP '2023-10-24 15:05:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (116, 'ghdsfghs', 3, TIMESTAMP '2023-10-25 00:00:00', TIMESTAMP '2023-10-25 14:52:00', TIMESTAMP '2023-10-25 14:56:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (114, 'sdaf', 3, TIMESTAMP '2023-10-25 00:00:00', TIMESTAMP '2023-10-25 14:52:00', TIMESTAMP '2023-10-25 14:56:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (115, 'hf', 3, TIMESTAMP '2023-10-25 00:00:00', TIMESTAMP '2023-10-25 14:52:00', TIMESTAMP '2023-10-25 14:56:00', 41);
 DROP TABLE ROLEPERMISSION;
 CREATE TABLE ROLEPERMISSION (ID NUMBER NOT NULL, ROLEID NUMBER NOT NULL, PERMISSIONID NUMBER NOT NULL);
 INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (83, 2, 3);
@@ -963,37 +962,69 @@ END PERMISSION_USERHASPERMISSION;
 
 
 /
+DROP PROCEDURE RESERVATIONS_CHECK_DUBLICATE;
+--/
+CREATE PROCEDURE RESERVATIONS_CHECK_DUBLICATE 
+(R_Name IN VARCHAR2, R_Hall_Id IN number, R_Date IN date, R_Time_Start IN DATE, R_Time_End IN DATE, R_User_Id IN number,qres OUT Varchar2)
+AS
+ chdoublecate number :=0 ;
+ chtiming     number :=0 ;
+BEGIN
+
+SELECT COUNT(*) INTO chdoublecate FROM RESERVATIONS WHERE (HALL_ID = R_Hall_Id) AND (RESERVATION_DATE = TRUNC(TO_DATE(R_Date,'yyyy/MM/dd HH24:MI:ss'))) 
+                                                 
+         AND    (R_Time_Start <= Time_Start  AND  R_Time_Start >=Time_End) 
+         OR 
+                ( R_Time_End <= Time_Start  AND  R_Time_End  >= Time_End ) ; 
+
+        IF chdoublecate > 0 THEN 
+                qres := 'dublicate';
+        END IF;       
+        
+END;
+/* Procedure body */
+/
+DROP PROCEDURE RESERVATION_CHECK_DOBICATE;
+--/
+CREATE PROCEDURE RESERVATION_CHECK_DOBICATE
+(R_Name IN VARCHAR2, R_Hall_Id IN number, R_Date IN date, R_Time_Start IN DATE, R_Time_End IN DATE, R_User_Id IN number,qres OUT Varchar2)
+AS
+ chdoublecate number :=0 ;
+BEGIN
+
+SELECT COUNT(*) INTO chdoublecate FROM RESERVATIONS WHERE (HALL_ID = R_Hall_Id) AND (RESERVATION_DATE = TRUNC(TO_DATE(R_Date,'yyyy/MM/dd HH24:MI:ss')))  ; 
+
+        IF chdoublecate = 0 THEN 
+                qres := 'true';
+        ELSE
+                qres := 'flse';
+        END IF;       
+        
+END;
+/* Procedure body */
+/
 DROP PROCEDURE RESERVATION_CREATEBYCONDITIONS;
 --/
 CREATE PROCEDURE RESERVATION_CREATEBYCONDITIONS
-(R_Name IN varchar2, R_Hall_Id IN number, R_Date IN date, R_Time_Start IN DATE, R_Time_End IN DATE, R_User_Id IN number,qres OUT Varchar2)
+(R_Name2 IN varchar2, R_Hall_Id2 IN number, R_Date2 IN date, R_Time_Start2 IN DATE, R_Time_End2 IN DATE, R_User_Id2 IN number,qres2 OUT Varchar2)
 AS
- chvalue number :=0 ;
+ chtiming     number :=0 ;
 BEGIN
-        SELECT COUNT(*) INTO chvalue FROM RESERVATIONS WHERE  (HALL_ID = R_Hall_Id AND RESERVATION_DATE = R_Date) 
-                                                                 
-                                                                 AND (R_Time_Start >=  Time_Start ) 
-                                                                 
-                                                                 AND (R_Time_Start <=  Time_End )  
-                                                                 
-                                                                 OR  ( R_Time_End >= Time_Start) AND (R_Time_End <= Time_End ) ; 
+
+        SELECT COUNT (*) INTO chtiming FROM RESERVATIONS WHERE ( TO_DATE(R_Time_Start2,'yyyy/MM/dd HH24:MI:ss' ) < TO_DATE(R_Time_End2,'yyyy/MM/dd HH24:MI:ss') ) ;
         
-       IF chvalue > 0 THEN 
-                qres := 'dublicate';
+        IF chtiming > 0 THEN 
+                qres2 :='st>et';
+        END IF;  
+        
+        IF (chtiming = 0) THEN 
+                INSERT INTO 
+                        RESERVATIONS(Name,Hall_Id,RESERVATION_DATE,Time_Start,Time_End,User_Id)
+                VALUES 
+                        (R_Name2,R_Hall_Id2,R_Date2,R_Time_Start2,R_Time_End2,R_User_Id2);
+                qres2 :='success';
         END IF;
         
-        SELECT COUNT (*) INTO chvalue FROM RESERVATIONS WHERE (R_Time_Start > R_Time_End OR R_Time_Start = R_Time_End );
-        
-        IF chvalue > 0 THEN 
-                qres :='st>et';
-        END If;
-        
-        IF chvalue = 0 THEN
-                INSERT INTO RESERVATIONS(Name,Hall_Id,RESERVATION_DATE,Time_Start,Time_End,User_Id)
-                        VALUES 
-                        (R_Name,R_Hall_Id,R_Date,TO_DATE(R_Time_Start,'dd/MM/yyyy hh24:mi:ss'),R_Time_End,R_User_Id);
-                 qres :='success';
-        END IF;   
 END;
 /
 DROP PROCEDURE RESERVATION_GETALL;

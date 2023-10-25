@@ -19,6 +19,7 @@ using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
 using Oracle.ManagedDataAccess.Client;
 using System.Reflection;
+using Microsoft.AspNetCore.Localization;
 
 namespace HMS.Business.Repositories
 {
@@ -39,7 +40,8 @@ namespace HMS.Business.Repositories
             using (OracleConnection oracon = new OracleConnection(con))
             {
                 //OracleCommand oracom = new OracleCommand("Reservation_Create", oracon);
-                OracleCommand oracom = new OracleCommand("Reservation_CreateByConditions", oracon);
+                //OracleCommand oracom = new OracleCommand("Reservation_CreateByConditions", oracon);
+                OracleCommand oracom = new OracleCommand("RESERVATION_CHECK_DOBICATE", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter R_Name = new OracleParameter { ParameterName = "R_Name", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Name };
@@ -61,37 +63,78 @@ namespace HMS.Business.Repositories
 
                 oracon.Open(); 
                 oracom.ExecuteNonQuery(); 
-                if (oracom.Parameters["qres"].Value.ToString() == "success")
+                if (oracom.Parameters["qres"].Value.ToString() == "true")
                 {
-                     oracon.Close();
-                     return new BaseResponse
-                     {
-                        Message = "تم إضافة حجز القاعة بنجاح",
-                        Type = "success",
-                        IsSuccess = true
-                     };
+                    oracon.Close();
+                    using (OracleConnection oracon2 = new OracleConnection(con))
+                    {
+                        OracleCommand oracom2 = new OracleCommand("RESERVATION_CREATEBYCONDITIONS", oracon2);
+                        oracom2.CommandType = CommandType.StoredProcedure;
+
+                        OracleParameter R_Name2 = new OracleParameter { ParameterName = "R_Name2", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Name };
+                        OracleParameter R_Hall_Id2 = new OracleParameter { ParameterName = "R_Hall_Id2", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Hall_Id };
+                        OracleParameter R_Date2 = new OracleParameter { ParameterName = "R_Date2", OracleDbType = OracleDbType.Date, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Date };
+                        OracleParameter R_Time_Start2 = new OracleParameter { ParameterName = "R_Time_Start2", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Time_Start };
+                        OracleParameter R_Time_End2 = new OracleParameter { ParameterName = "R_Time_End2", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Time_End };
+                        OracleParameter R_User_Id2 = new OracleParameter { ParameterName = "R_User_Id2", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.User_id };
+
+                        OracleParameter qres2 = new OracleParameter { ParameterName = "qres2", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
+
+                        oracom2.Parameters.Add(R_Name2);
+                        oracom2.Parameters.Add(R_Hall_Id2);
+                        oracom2.Parameters.Add(R_Date2);
+                        oracom2.Parameters.Add(R_Time_Start2);
+                        oracom2.Parameters.Add(R_Time_End2);
+                        oracom2.Parameters.Add(R_User_Id2);
+                        oracom2.Parameters.Add(qres2);
+
+                        oracon2.Open();
+                        oracom2.ExecuteNonQuery();
+                        if (oracom2.Parameters["qres2"].Value.ToString() == "success")
+                        {
+                            oracon2.Close();
+                            return new BaseResponse
+                            {
+                                Message = "تم إضافة حجز القاعة بنجاح",
+                                Type = "success",
+                                IsSuccess = true
+                            };
+                        }
+                        else
+                        {
+                            oracon2.Close();
+                            return new BaseResponse
+                            {
+                                Message = "لم تتم إضافة الحجز بنجاح لوجود حجز مطبق للتريخ والوقت",
+                                Type = "error",
+                                IsSuccess = false
+                            };
+                        }
+                    }                   
                 }
-                if (oracom.Parameters["qres"].Value.ToString() == "st>et")
-                {
-					oracon.Close();
-					return new BaseResponse
-					{
-						Message = "لم تتم إضافة الحجز الرجاء التحقق من وقت البداية والنهاية",
-						Type = "error",
-						IsSuccess = false
-					};
-				}
                 else
                 {
                     oracon.Close();
                     return new BaseResponse
                     {
                         Message = "لم تتم إضافة الحجز بنجاح لوجود حجز مطبق للتريخ والوقت",
-						Type = "warning",
-						IsSuccess = false
+                        Type = "error",
+                        IsSuccess = false
                     };
-
                 }
+
+                // if (oracom.Parameters["qres"].Value.ToString() == "flse")
+                //  {
+				//	oracon.Close();
+				//	return new BaseResponse
+				//	{
+				//		Message = "لم تتم إضافة الحجز بنجاح لوجود حجز مطبق للتريخ والوقت",
+				//		Type = "error",
+				//		IsSuccess = false
+				//	};
+				//}
+
+
             }
 
         }
