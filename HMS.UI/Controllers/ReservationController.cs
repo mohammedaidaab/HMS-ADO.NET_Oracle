@@ -58,7 +58,7 @@ namespace HMS.UI.Controllers
         {
 			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Read", cancellationToken))
 			{
-				    if (User.IsInRole("super_admin"))
+				if (User.IsInRole("SUPER_ADMIN"))
                 {
                     var reservations = await _IReservationRepository.GetAll();
                     return View(reservations);
@@ -144,7 +144,7 @@ namespace HMS.UI.Controllers
         {
             reservation.User_id = Convert.ToInt32(User.GetUserId());
 
-			//var errors = ModelState.Values.SelectMany(v => v.Errors);
+			var errors = ModelState.Values.SelectMany(v => v.Errors);
 
 
 			if (ModelState.IsValid)

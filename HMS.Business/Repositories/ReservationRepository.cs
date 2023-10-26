@@ -43,15 +43,18 @@ namespace HMS.Business.Repositories
                 OracleCommand oracom = new OracleCommand("RESERVATION_CHECK_DOBICATE", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
+                OracleParameter R_Id = new OracleParameter { ParameterName = "R_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.ID };
                 OracleParameter R_Name = new OracleParameter { ParameterName = "R_Name", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Name };
                 OracleParameter R_Hall_Id = new OracleParameter { ParameterName = "R_Hall_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Hall_Id };
                 OracleParameter R_Date = new OracleParameter { ParameterName = "R_Date", OracleDbType = OracleDbType.Date, Size = 255, Direction = ParameterDirection.Input,Value= reservation.Date };
                 OracleParameter R_Time_Start = new OracleParameter { ParameterName = "R_Time_Start", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input,Value = reservation.Time_Start };
                 OracleParameter R_Time_End = new OracleParameter { ParameterName = "R_Time_End", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input , Value = reservation.Time_End};
                 OracleParameter R_User_Id = new OracleParameter { ParameterName = "R_User_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input , Value= reservation.User_id };
+                OracleParameter R_Q_state = new OracleParameter { ParameterName = "R_Q_state", OracleDbType = OracleDbType.Varchar2, Size = 255, Direction = ParameterDirection.Input, Value = "create" };
 
                 OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
 
+                oracom.Parameters.Add(R_Id);
                 oracom.Parameters.Add(R_Name);
                 oracom.Parameters.Add(R_Hall_Id);
                 oracom.Parameters.Add(R_Date);
@@ -59,6 +62,7 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(R_Time_End);
                 oracom.Parameters.Add(R_User_Id);
                 oracom.Parameters.Add(qres);
+                oracom.Parameters.Add(R_Q_state);
 
                 oracon.Open(); 
                 oracom.ExecuteNonQuery(); 
@@ -217,7 +221,9 @@ namespace HMS.Business.Repositories
 
 
                 OracleParameter R_User_Id = new OracleParameter { ParameterName = "R_User_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = id };
+                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output};
                 oracom.Parameters.Add(R_User_Id);
+                oracom.Parameters.Add(res);
 
                 //oracom.Parameters.AddWithValue("User_Id", id);
                 oracom.CommandType = CommandType.StoredProcedure;
@@ -256,15 +262,18 @@ namespace HMS.Business.Repositories
                 OracleCommand oracom = new OracleCommand("RESERVATION_CHECK_DOBICATE", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
+                OracleParameter R_Id = new OracleParameter { ParameterName = "R_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.ID };
                 OracleParameter R_Name = new OracleParameter { ParameterName = "R_Name", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Name };
                 OracleParameter R_Hall_Id = new OracleParameter { ParameterName = "R_Hall_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Hall_Id };
                 OracleParameter R_Date = new OracleParameter { ParameterName = "R_Date", OracleDbType = OracleDbType.Date, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Date };
                 OracleParameter R_Time_Start = new OracleParameter { ParameterName = "R_Time_Start", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Time_Start };
                 OracleParameter R_Time_End = new OracleParameter { ParameterName = "R_Time_End", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Time_End };
                 OracleParameter R_User_Id = new OracleParameter { ParameterName = "R_User_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.User_id };
+                OracleParameter R_Q_state = new OracleParameter { ParameterName = "R_Q_state", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = "update" };
 
                 OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
 
+                oracom.Parameters.Add(R_Id);
                 oracom.Parameters.Add(R_Name);
                 oracom.Parameters.Add(R_Hall_Id);
                 oracom.Parameters.Add(R_Date);
@@ -272,6 +281,7 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(R_Time_End);
                 oracom.Parameters.Add(R_User_Id);
                 oracom.Parameters.Add(qres);
+                oracom.Parameters.Add(R_Q_state);
 
                 oracon.Open();
                 oracom.ExecuteNonQuery();
@@ -282,7 +292,7 @@ namespace HMS.Business.Repositories
                     {
                         OracleCommand oracom2 = new OracleCommand("RESERVATION_UPDATE", oracon2);
                         oracom2.CommandType = CommandType.StoredProcedure;
-                        OracleParameter R_Id = new OracleParameter { ParameterName = "R_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.ID };
+                        OracleParameter R_Id2 = new OracleParameter { ParameterName = "R_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.ID };
                         OracleParameter R_Name2 = new OracleParameter { ParameterName = "R_Name2", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Name };
                         OracleParameter R_Hall_Id2 = new OracleParameter { ParameterName = "R_Hall_Id2", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Hall_Id };
                         OracleParameter R_Date2 = new OracleParameter { ParameterName = "R_Date2", OracleDbType = OracleDbType.Date, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Date };
@@ -292,8 +302,7 @@ namespace HMS.Business.Repositories
 
                         OracleParameter qres2 = new OracleParameter { ParameterName = "qres2", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
 
-
-                        oracom2.Parameters.Add(R_Id);
+                        oracom2.Parameters.Add(R_Id2);
                         oracom2.Parameters.Add(R_Name2);
                         oracom2.Parameters.Add(R_Hall_Id2);
                         oracom2.Parameters.Add(R_Date2);
@@ -341,54 +350,3 @@ namespace HMS.Business.Repositories
         }
 	}
 }
-//      using (OracleConnection oracon = new OracleConnection(con))
-//      {
-//          OracleCommand oracom = new OracleCommand("Reservation_Update", oracon);
-//          oracom.CommandType = CommandType.StoredProcedure;
-
-//          OracleParameter R_Id = new OracleParameter { ParameterName = "R_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.ID };
-//          OracleParameter R_Name = new OracleParameter { ParameterName = "R_Name", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Name };
-//          OracleParameter R_Hall_Id = new OracleParameter { ParameterName = "R_Hall_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Hall_Id };
-//          OracleParameter R_Date = new OracleParameter { ParameterName = "R_Date", OracleDbType = OracleDbType.Date, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Date };
-//          OracleParameter R_Time_Start = new OracleParameter { ParameterName = "R_Time_Start", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Time_Start };
-//          OracleParameter R_Time_End = new OracleParameter { ParameterName = "R_Time_End", OracleDbType = OracleDbType.TimeStamp, Size = 255, Direction = ParameterDirection.Input, Value = reservation.Time_End };
-//          OracleParameter R_User_Id = new OracleParameter { ParameterName = "R_User_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = reservation.User_id };
-
-//          OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
-
-//          oracom.Parameters.Add(R_Id);
-//          oracom.Parameters.Add(R_Name);
-//          oracom.Parameters.Add(R_Hall_Id);
-//          oracom.Parameters.Add(R_Date);
-//          oracom.Parameters.Add(R_Time_Start);
-//          oracom.Parameters.Add(R_Time_End);
-//          oracom.Parameters.Add(R_User_Id);
-//          oracom.Parameters.Add(qres);
-
-//          oracon.Open();
-//          oracom.ExecuteNonQuery();
-//          if (oracom.Parameters["qres"].Value.ToString() == "success")
-//          {
-//              oracon.Close();
-//              return new BaseResponse
-//              {
-//                  IsSuccess = true,
-//Type = "success",
-//Message = "تم تعديل بيانت حجز القاعة بنجاح"
-
-//              };
-//          }
-//          else
-//          {
-//              oracon.Close();
-
-//              return new BaseResponse {
-//                  IsSuccess = false,
-//Type = "warning",
-//Message = "الرجاء مراجعة البانات المدخلة حيث انه لم نتمكن من اكمل عملية تحديث البانات" ,
-//              };
-
-//          }
-
-
-//      }
