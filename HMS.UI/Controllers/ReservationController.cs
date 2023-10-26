@@ -93,7 +93,6 @@ namespace HMS.UI.Controllers
 			}
 		}
 
-
         public async Task<IActionResult> store(Reservation reservation)
         {
 
@@ -122,7 +121,6 @@ namespace HMS.UI.Controllers
 
 		}
 
-
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -137,8 +135,6 @@ namespace HMS.UI.Controllers
 				return RedirectToAction("AccessDenied", "account");
 			}
 		}
-
-
 
         public async Task<IActionResult> Update(Reservation reservation)
         {
@@ -169,7 +165,24 @@ namespace HMS.UI.Controllers
 			return RedirectToAction("Edit", reservation);
 		}
 
-
+		public async Task<IActionResult> Delete(int id)
+		{
+			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Delete", cancellationToken))
+			{
+				BaseResponse res = await _IReservationRepository.Delete(id);
+				if (res.IsSuccess)
+				{
+					TempData["type"] = res.Type;
+					TempData["message"] = res.Message;
+					return RedirectToAction("Index");
+				}
+			}
+			else
+			{
+				return RedirectToAction("AccessDenied", "account");
+			}
+			return RedirectToAction("Index");
+		}
 
 	}
 }

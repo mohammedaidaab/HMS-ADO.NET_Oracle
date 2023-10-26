@@ -30,6 +30,7 @@ namespace HMS.Domain.Interfaces.Repositories
 
 
         public Task<BaseResponse> update(Reservation reservation);
+        public Task<BaseResponse> Delete(int id);
 
 	}
 }

@@ -23,7 +23,7 @@ using Microsoft.AspNetCore.Localization;
 
 namespace HMS.Business.Repositories
 {
-    public class ReservationRepository : IReservationRepository
+	public class ReservationRepository : IReservationRepository
     {
         private readonly IConfiguration _configuration;
         private readonly string con;
@@ -128,6 +128,42 @@ namespace HMS.Business.Repositories
             }
 
         }
+
+		public async Task<BaseResponse> Delete(int id)
+		{
+            using (OracleConnection oracon = new OracleConnection(con))
+            {
+                OracleCommand oracom = new OracleCommand("RESERVATION_DELETE", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter R_Id = new OracleParameter { ParameterName = "R_Id", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Input, Value = id };
+                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.Varchar2, Direction = ParameterDirection.Output };
+
+                oracom.Parameters.Add(R_Id);
+                oracom.Parameters.Add (qres);
+
+                oracon.Open();
+                oracom.ExecuteNonQuery();
+                if (oracom.Parameters["qres"].Value.ToString() == "success")
+                {
+                    return new BaseResponse
+                    {
+                        Message = "تم إضافة حجز القاعة بنجاح",
+                        Type = "success",
+                        IsSuccess = true
+                    };
+                }
+                else
+                {
+					return new BaseResponse
+					{
+						Message = "لم يتم حذف الحجز ",
+						Type = "error",
+						IsSuccess = false
+					};
+				}
+            }
+		}
 
 		public async Task<IEnumerable<ReservationHallVM>> GetAll()
 		{
