@@ -1,0 +1,17 @@
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\bin\Release\net6.0\HMS.Business.deps.json
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\bin\Release\net6.0\HMS.Business.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\bin\Release\net6.0\HMS.Business.pdb
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\bin\Release\net6.0\HMS.Domain.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\bin\Release\net6.0\HMS.Identity.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\bin\Release\net6.0\HMS.Domain.pdb
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\bin\Release\net6.0\HMS.Identity.pdb
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Release\net6.0\HMS.Business.csproj.AssemblyReference.cache
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Release\net6.0\HMS.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Release\net6.0\HMS.Business.AssemblyInfoInputs.cache
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Release\net6.0\HMS.Business.AssemblyInfo.cs
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Release\net6.0\HMS.Business.csproj.CoreCompileInputs.cache
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Release\net6.0\HMS.Business.csproj.CopyComplete
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Release\net6.0\HMS.Business.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Release\net6.0\refint\HMS.Business.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Release\net6.0\HMS.Business.pdb
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Release\net6.0\ref\HMS.Business.dll

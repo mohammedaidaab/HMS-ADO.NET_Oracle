@@ -3024,6 +3024,7 @@
       "path": "system.collections/4.0.11",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3091,6 +3092,7 @@
       "path": "system.collections.concurrent/4.0.12",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3309,6 +3311,7 @@
       "path": "system.diagnostics.debug/4.0.11",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3430,6 +3433,7 @@
       "path": "system.diagnostics.tracing/4.1.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3769,6 +3773,7 @@
       "path": "system.io.filesystem/4.0.1",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3806,6 +3811,7 @@
       "path": "system.io.filesystem.primitives/4.0.1",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -4234,6 +4240,7 @@
       "path": "system.runtime.extensions/4.1.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -4812,6 +4819,7 @@
       "path": "system.text.encoding.extensions/4.0.11",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5037,6 +5045,7 @@
       "path": "system.threading.timer/4.0.1",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5137,19 +5146,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mgahmed\\.nuget\\packages\\": {}
+    "C:\\Users\\Wekser\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\HMS.UI.csproj",
+      "projectUniqueName": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\HMS.UI.csproj",
       "projectName": "HMS.UI",
-      "projectPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\HMS.UI.csproj",
-      "packagesPath": "C:\\Users\\mgahmed\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\obj\\",
+      "projectPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\HMS.UI.csproj",
+      "packagesPath": "C:\\Users\\Wekser\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mgahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Wekser\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5163,11 +5172,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Business\\HMS.Business.csproj": {
-              "projectPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Business\\HMS.Business.csproj"
+            "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Business\\HMS.Business.csproj": {
+              "projectPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Business\\HMS.Business.csproj"
             },
-            "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj": {
-              "projectPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj"
+            "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj": {
+              "projectPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj"
             }
           }
         }
@@ -5226,8 +5235,16 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
