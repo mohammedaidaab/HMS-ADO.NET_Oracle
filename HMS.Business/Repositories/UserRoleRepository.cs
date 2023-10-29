@@ -51,7 +51,6 @@ namespace HMS.Infrastructure.Repositories
 
 						OracleParameter U_ID = new OracleParameter { ParameterName = "U_ID", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = UserId };
 						OracleParameter R_ID = new OracleParameter { ParameterName = "R_ID", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = RoleId };
-						//OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 200, Direction = ParameterDirection.Output };
 
 						oracom.Parameters.Add(U_ID);
 						oracom.Parameters.Add(R_ID);
@@ -129,6 +128,7 @@ namespace HMS.Infrastructure.Repositories
 
 						OracleParameter U_ID = new OracleParameter { ParameterName = "U_ID", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = UserId };
 						OracleParameter R_ID = new OracleParameter { ParameterName = "R_ID", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = RoleId };
+
 						OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 200, Direction = ParameterDirection.Output };
 
 						oracom.Parameters.Add(U_ID);

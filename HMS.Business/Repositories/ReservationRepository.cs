@@ -10,16 +10,11 @@ using HMS.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
 using Oracle.ManagedDataAccess.Client;
-using System.Reflection;
-using Microsoft.AspNetCore.Localization;
 
 namespace HMS.Business.Repositories
 {

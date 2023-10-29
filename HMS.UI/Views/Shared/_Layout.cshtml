@@ -586,7 +586,7 @@
 											</span>
 										</a>
 									</div>
-									@if (User.IsInRole("SUPER_ADMIN") || User.IsInRole("SUPERVISOR"))
+											@if (User.IsInRole("super_admin"))
 									{
 									<div class="menu-item">
 										<a class="menu-link" href="/Hall/create">
@@ -620,7 +620,7 @@
 											<span class="menu-bullet">
 												<span class="bullet bullet-dot"></span>
 											</span>
-													@if (User.IsInRole("SUPER_ADMIN"))
+													@if (User.IsInRole("super_admin"))
 											{
 												<span class="menu-title">الحجوزات على النظام</span>
 												}else{
@@ -704,7 +704,7 @@
 								</div>
 							</div>
 							@* //////////////////////////////////////////////////// Users  section //////////////////////////////////////////////////////////////// *@
-									@if (User.IsInRole("SUPER_ADMIN"))
+									@if (User.IsInRole("super_admin"))
 							{
 								<div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 									<span class="menu-link">
