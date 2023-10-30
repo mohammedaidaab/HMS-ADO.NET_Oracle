@@ -27,6 +27,10 @@ namespace HMS.MVC.Controllers
 
         public IActionResult Index()
         {
+            if (User.IsInRole("admin"))
+            {
+
+            }
 				DashBordVM dashboard = new DashBordVM
 				{
 					Number_Of_reservations = _dashBordRepository.gettodayreservations(),
