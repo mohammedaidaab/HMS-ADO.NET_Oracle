@@ -5146,19 +5146,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Wekser\\.nuget\\packages\\": {}
+    "C:\\Users\\mgahmed\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\HMS.UI.csproj",
+      "projectUniqueName": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\HMS.UI.csproj",
       "projectName": "HMS.UI",
-      "projectPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\HMS.UI.csproj",
-      "packagesPath": "C:\\Users\\Wekser\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\obj\\",
+      "projectPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\HMS.UI.csproj",
+      "packagesPath": "C:\\Users\\mgahmed\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Wekser\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mgahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5172,11 +5172,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Business\\HMS.Business.csproj": {
-              "projectPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Business\\HMS.Business.csproj"
+            "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Business\\HMS.Business.csproj": {
+              "projectPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Business\\HMS.Business.csproj"
             },
-            "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj": {
-              "projectPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj"
+            "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj": {
+              "projectPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj"
             }
           }
         }
