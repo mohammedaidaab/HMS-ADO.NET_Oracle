@@ -293,10 +293,10 @@ namespace HMS.Infrastructure.Repositories
                         oracom.CommandType = CommandType.StoredProcedure;
                         oracom.CommandText = "identity_GetUserRolesByUserId";
 
-                        OracleParameter userid = new OracleParameter { ParameterName="USERID",OracleDbType=OracleDbType.Int32,Direction=ParameterDirection.Input };
+                        OracleParameter U_Id = new OracleParameter { ParameterName= "U_Id", OracleDbType=OracleDbType.Int32,Direction=ParameterDirection.Input ,Value=user.Id};
                         OracleParameter res = new OracleParameter { ParameterName="res",OracleDbType=OracleDbType.RefCursor,Direction=ParameterDirection.Output };
 
-                        oracom.Parameters.Add(userid);
+                        oracom.Parameters.Add(U_Id);
                         oracom.Parameters.Add(res);
 
                        // oracom.Parameters.AddWithValue("@UserId", user.Id);
