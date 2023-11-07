@@ -236,3 +236,5 @@ C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\ref
 C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.pdb
 C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.genruntimeconfig.cache
 C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\ref\HMS.UI.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.Properties.Resources.resources
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.csproj.GenerateResource.cache

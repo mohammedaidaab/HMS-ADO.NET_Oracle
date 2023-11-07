@@ -65,11 +65,6 @@ namespace HMS.Infrastructure.Repositories
                         oracom.Parameters.Add(R_Desc);
                         oracom.Parameters.Add(Created);
 
-                        //cmd.Parameters.AddWithValue("@Name", role.Name);
-                        //cmd.Parameters.AddWithValue("@NormalizedName", role.NormalizedName);
-                        //cmd.Parameters.AddWithValue("@Description", role.Description ?? "");
-                        //cmd.Parameters.AddWithValue("@Created", DateTime.Now);
-
                         await oracom.ExecuteNonQueryAsync(cancellationToken);
 
                         return IdentityResult.Success;
@@ -114,11 +109,6 @@ namespace HMS.Infrastructure.Repositories
                         oracom.Parameters.Add(R_Nor_Name);
                         oracom.Parameters.Add(R_Desc);
                         oracom.Parameters.Add(qres);
-
-                        //oracom.Parameters.AddWithValue("@Id", role.Id);
-                        //oracom.Parameters.AddWithValue("@Name", role.Name);
-                        //oracom.Parameters.AddWithValue("@NormalizedName", role.NormalizedName);
-                        //oracom.Parameters.AddWithValue("@Description", role.Description ?? "");
 
                         await oracom.ExecuteNonQueryAsync(cancellationToken);
 
