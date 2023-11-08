@@ -58,7 +58,7 @@ namespace HMS.Infrastructure.Repositories
                         OracleParameter R_Name = new OracleParameter { ParameterName = "R_Name", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = role.Name };
                         OracleParameter R_Nor_Name = new OracleParameter { ParameterName = "R_NormalizedName", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = role.NormalizedName };
                         OracleParameter R_Desc = new OracleParameter { ParameterName = "R_Description", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = role.Description };
-                        OracleParameter Created = new OracleParameter { ParameterName = "R_Description", OracleDbType = OracleDbType.Date, Size = 255, Direction = ParameterDirection.Input, Value = DateTime.Now };
+                        OracleParameter Created = new OracleParameter { ParameterName = "Created", OracleDbType = OracleDbType.Date, Size = 255, Direction = ParameterDirection.Input, Value = DateTime.Now };
 
                         oracom.Parameters.Add(R_Name);
                         oracom.Parameters.Add(R_Nor_Name);
