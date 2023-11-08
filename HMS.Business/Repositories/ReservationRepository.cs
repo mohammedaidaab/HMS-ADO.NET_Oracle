@@ -201,7 +201,7 @@ namespace HMS.Business.Repositories
                // throw new NotImplementedException();
 		}
 
-		public async Task<ReservationHallVM> GetById(int id)
+		public async Task<ReservationHallVM> GetById(int id) 
 		{
             ReservationHallVM reservation = new ReservationHallVM();
 

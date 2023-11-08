@@ -58,7 +58,7 @@ namespace HMS.UI.Controllers
         {
 			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Read", cancellationToken))
 			{
-				if (User.IsInRole("SUPER_ADMIN"))
+				if (User.IsInRole("super_admin"))
                 {
                     var reservations = await _IReservationRepository.GetAll();
                     return View(reservations);
