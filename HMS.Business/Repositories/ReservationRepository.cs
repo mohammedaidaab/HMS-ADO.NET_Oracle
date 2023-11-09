@@ -103,7 +103,7 @@ namespace HMS.Business.Repositories
                             oracon2.Close();
                             return new BaseResponse
                             {
-                                Message = "لم تتم إضافة الحجز بنجاح لوجود حجز مطبق للتريخ والوقت",
+                                Message = "لم تتم إضافة الحجز بنجاح الرجاء التحقق من وقت البداية النهاية ",
                                 Type = "error",
                                 IsSuccess = false
                             };
@@ -115,7 +115,7 @@ namespace HMS.Business.Repositories
                     oracon.Close();
                     return new BaseResponse
                     {
-                        Message = "لم تتم إضافة الحجز بنجاح لوجود حجز مطبق للتريخ والوقت",
+                        Message = "لم تتم إضافة الحجز امل لوجود حجز مماثل او خطا في اوقات الحجز ",
                         Type = "error",
                         IsSuccess = false
                     };
