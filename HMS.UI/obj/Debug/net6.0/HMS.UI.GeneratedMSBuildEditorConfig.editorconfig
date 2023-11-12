@@ -84,6 +84,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFsbFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Hall/Index2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFsbFxJbmRleDIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -140,6 +144,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/Index2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cSW5kZXgyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/test.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cdGVzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Role/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -158,6 +170,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/_MenuSection.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NZW51U2VjdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/_ValidationScriptsPartial.cshtml]

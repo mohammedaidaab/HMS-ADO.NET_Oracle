@@ -55,8 +55,21 @@ namespace HMS.MVC.Controllers
                 return RedirectToAction("AccessDenied", "account");
             }
         }
+		public async Task<IActionResult> Index2()
+		{
+			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "halls-Read", cancellationToken))
+			{
+				var HallBuildingVM = await _hallRepository.GetAll();
+				return View("index2",HallBuildingVM);
+			}
+			else
+			{
+				return RedirectToAction("AccessDenied", "account");
+			}
+		}
 
-        public async Task<IActionResult> CreateAsync()
+
+		public async Task<IActionResult> CreateAsync()
 		{
 
 			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "halls-Create", cancellationToken))

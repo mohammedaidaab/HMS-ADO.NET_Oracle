@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Serilog.Core;
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
@@ -25,6 +26,7 @@ using System.Net;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace HMS.UI.Controllers
 {
@@ -78,6 +80,72 @@ namespace HMS.UI.Controllers
 				return RedirectToAction("AccessDenied", "account");
 			}
 		}
+
+
+        // GET: reaservations
+        public async Task<ViewResult> Index2(string sortOrder, string currentFilter, string searchString, int? page)
+        
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.UserSortParm = sortOrder == "User_Name_desc" ? "User_Name_asc" : "User_Name_desc";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var res = await _IReservationRepository.GetAll();
+
+            List<ReservationHallVM> re = res.ToList();
+
+            var Reservations = from s in re
+                           select s;
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+
+                Reservations = Reservations.Where(s => s.Name.Contains(searchString));
+                                       //|| s.FirstMidName.Contains(searchString)) ;
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Reservations = Reservations.OrderByDescending(s => s.Name);
+                    break;
+                case "Date":
+                    Reservations = Reservations.OrderBy(s => s.Date);
+                    break;
+                case "date_desc":
+                    Reservations = Reservations.OrderByDescending(s => s.Date);
+                    break;
+                case "User_Name_desc":
+                    Reservations = Reservations.OrderByDescending(s => s.User_Name);
+                    break;
+                case "User_Name_asc":
+                    Reservations = Reservations.OrderBy(s => s.User_Name);
+                    break;
+                default:  // Name ascending 
+                    Reservations = Reservations.OrderBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(Reservations.ToPagedList(pageNumber, pageSize));
+        }
+
+        public IActionResult test()
+        {
+            return View("test");
+        }
 
 
         public async Task<IActionResult> Create()
