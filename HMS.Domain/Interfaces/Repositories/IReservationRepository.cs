@@ -9,10 +9,8 @@ using HMS.Domain.Entities;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Data.Entity.Core.Objects;
 using System.Threading.Tasks;
 
 namespace HMS.Domain.Interfaces.Repositories
@@ -24,8 +22,9 @@ namespace HMS.Domain.Interfaces.Repositories
         public Task<IEnumerable<ReservationHallVM>> GetAll();
 
 
-        public Task<IEnumerable<ReservationHallVM>> GetAllpaging();
-    
+        public  Task<List<ReservationHallVM>> GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder);
+
+
 
         public Task<IEnumerable<ReservationHallVM>> GetByUserId(string id);
 

@@ -71,7 +71,6 @@ C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.AssemblyInfoInputs.cache
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.AssemblyInfo.cs
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.csproj.CoreCompileInputs.cache
-C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.RazorAssemblyInfo.cache
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.RazorAssemblyInfo.cs
@@ -610,3 +609,8 @@ C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\zh-
 C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\scopedcss\Views\Shared\custom.cshtml.rz.scp.css
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\scopedcss\Views\Shared\custom.cshtml.rz.scp.css
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\EntityFramework.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\System.CodeDom.dll

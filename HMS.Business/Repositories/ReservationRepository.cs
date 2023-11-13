@@ -15,13 +15,15 @@ using System.Threading.Tasks;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
 using Oracle.ManagedDataAccess.Client;
+using System.Data.Entity.Core.Objects;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Drawing.Printing;
 
 namespace HMS.Business.Repositories
 {
-	public class ReservationRepository : IReservationRepository
+    public class ReservationRepository : IReservationRepository
     {
         private readonly IConfiguration _configuration;
         private readonly string con;
@@ -204,13 +206,36 @@ namespace HMS.Business.Repositories
                // throw new NotImplementedException();
 		}
 
-        public async Task<IEnumerable<ReservationHallVM>> GetAllpaging()
+        public async Task<List<ReservationHallVM>> GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder)
         {
-            List<ReservationHallVM> reservationList = new List<ReservationHallVM>();
 
+            var pagenoParameter = pageno.HasValue ?
+                new ObjectParameter("Pageno", pageno) :
+                new ObjectParameter("Pageno", typeof(int));
+
+            var filterParameter = filter != null ?
+                new ObjectParameter("filter", filter) :
+                new ObjectParameter("filter", typeof(string));
+
+            var pagesizeParameter = pagesize.HasValue ?
+                new ObjectParameter("pagesize", pagesize) :
+                new ObjectParameter("pagesize", typeof(int));
+
+            var sortingParameter = sorting != null ?
+                new ObjectParameter("Sorting", sorting) :
+                new ObjectParameter("Sorting", typeof(string));
+
+            var sortOrderParameter = sortOrder != null ?
+                new ObjectParameter("SortOrder", sortOrder) :
+                new ObjectParameter("SortOrder", typeof(string));
+
+            //return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReservationHallVM>("RESERVATION_GETALL_PAGING", pagenoParameter, filterParameter, pagesizeParameter, sortingParameter, sortOrderParameter);
             using (OracleConnection oracon = new OracleConnection(con))
             {
-                OracleCommand oracom = new OracleCommand("Reservation_GetAll_Paging", oracon);
+                List<ReservationHallVM> reservationList = new List<ReservationHallVM>();
+
+
+                OracleCommand oracom = new OracleCommand("RESERVATION_GETALL_PAGING", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
@@ -241,8 +266,11 @@ namespace HMS.Business.Repositories
 
 
             }
-            // throw new NotImplementedException();
+
         }
+
+        // throw new NotImplementedException();
+
 
         public async Task<ReservationHallVM> GetById(int id) 
 		{
