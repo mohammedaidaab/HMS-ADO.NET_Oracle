@@ -3,7 +3,9 @@
     ViewData["Title"] = "الملف الشخصي";
     ViewData.AddActivePage(ManageNavPages.Index);
 }
-
+@{
+    Layout = "custom";
+}
 <h4>@ViewData["Title"]</h4>
 
 @{await Html.RenderPartialAsync("_StatusMessage", Model.StatusMessage);}

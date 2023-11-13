@@ -536,11 +536,6 @@
 						@*
 				For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 				*@
-						@{
-						}
-
-
-
 						<div class="aside-menu flex-column-fluid">
 							<!--begin::Aside Menu-->
 							<div class="hover-scroll-overlay-y px-2 my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="{default: '#kt_aside_toolbar, #kt_aside_footer', lg: '#kt_header, #kt_aside_toolbar, #kt_aside_footer'}" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="5px" style="height:400px">
@@ -560,7 +555,7 @@
 									</div>
 
 									<div class="menu-item">
-										<a class="menu-link" href="/">
+										<a class="menu-link" href="/home/index" target="iframe_content">
 											<span class="menu-icon">
 												<!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
 												<span class="svg-icon svg-icon-2">
@@ -571,23 +566,6 @@
 											<span class="menu-title">الرئيسية</span>
 										</a>
 									</div>
-
-
-									<div class="menu-item">
-										@* <a href="https://www.w3schools.com" target="iframe_a">W3Schools.com</a> *@
-										<a class="menu-link" href="/Hall/index2" target="iframe_a">
-											<span class="menu-icon">
-												<!--begin::Svg Icon | path: icons/duotune/communication/com001.svg-->
-												<span class="svg-icon svg-icon-2">
-													<i class="fa-solid fa-gauge-high fa-beat"></i>
-												</span>
-												<!--end::Svg Icon-->
-											</span>
-											<span class="menu-title">tetsing iframe</span>
-										</a>
-									</div>
-
-
 
 
 									@* //////////////////////////////////////////////////// Halls  section //////////////////////////////////////////////////////////////// *@
@@ -605,7 +583,7 @@
 										</span>
 										<div class="menu-sub menu-sub-accordion menu-active-bg">
 											<div class="menu-item">
-												<a class="menu-link" href="/Hall/" target="iframe_a">
+												<a class="menu-link" href="/Hall/" target="iframe_content">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -617,7 +595,7 @@
 											@if (User.IsInRole("super_admin"))
 											{
 												<div class="menu-item">
-													<a class="menu-link" href="/Hall/create">
+													<a class="menu-link" href="/Hall/create" target="iframe_content">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
@@ -644,7 +622,7 @@
 										</span>
 										<div class="menu-sub menu-sub-accordion menu-active-bg">
 											<div class="menu-item">
-												<a class="menu-link" href="/reservation/">
+												<a class="menu-link" href="/reservation/" target="iframe_content">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -659,7 +637,7 @@
 												</a>
 											</div>
 											<div class="menu-item">
-												<a class="menu-link" href="/reservation/create">
+												<a class="menu-link" href="/reservation/create" target="iframe_content">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -684,7 +662,7 @@
 										</span>
 										<div class="menu-sub menu-sub-accordion menu-active-bg">
 											<div class="menu-item">
-												<a class="menu-link" href="/collage/">
+												<a class="menu-link" href="/collage/" target="iframe_content">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -692,7 +670,7 @@
 												</a>
 											</div>
 											<div class="menu-item">
-												<a class="menu-link" href="/collage/create">
+												<a class="menu-link" href="/collage/create" target="iframe_content">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -716,7 +694,7 @@
 										</span>
 										<div class="menu-sub menu-sub-accordion menu-active-bg">
 											<div class="menu-item">
-												<a class="menu-link" href="/building">
+												<a class="menu-link" href="/building" target="iframe_content">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -724,7 +702,7 @@
 												</a>
 											</div>
 											<div class="menu-item">
-												<a class="menu-link" href="/building/create">
+												<a class="menu-link" href="/building/create" target="iframe_content">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -751,7 +729,7 @@
 
 											<div class="menu-sub menu-sub-accordion menu-active-bg">
 												<div class="menu-item">
-													<a class="menu-link" href="/manage/userlist">
+													<a class="menu-link" href="/manage/userlist" target="iframe_content">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
@@ -759,7 +737,7 @@
 													</a>
 												</div>
 												<div class="menu-item">
-													<a class="menu-link" href="/account/Register">
+													<a class="menu-link" href="/account/Register" target="iframe_content">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
@@ -781,7 +759,7 @@
 											</span>
 											<div class="menu-sub menu-sub-accordion menu-active-bg">
 												<div class="menu-item">
-													<a class="menu-link" href="/role">
+													<a class="menu-link" href="/role" target="iframe_content">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
@@ -791,7 +769,7 @@
 											</div>
 											<div class="menu-sub menu-sub-accordion menu-active-bg">
 												<div class="menu-item">
-													<a class="menu-link" href="/role/Create">
+													<a class="menu-link" href="/role/Create" target="iframe_content">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
@@ -839,7 +817,7 @@
 						<!--end::Heaeder menu toggle-->
 						<!--begin::Header Logo-->
 						<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
-							<a href="@(Url.Action("Index","Home"))">
+									<a href="Home/index" target="iframe_content">
 								<img alt="Logo" src="~/Assets/media/vacImages/logo.png" class="logo-default h-65px" />
 								<img alt="Logo" src="~/Assets/media/vacImages/logo.png" class="logo-sticky h-65px" />
 							</a>
@@ -893,21 +871,11 @@
 				}
 				<!--end::Header-->
 				<!--begin::Content-->
-
-					<iframe src="demo_iframe.htm" name="iframe_a" height="300px" width="100%" title="Iframe Example">
+					<!--begin::Post-->
+					<iframe src="" name="iframe_content" width="100%" title="Iframe Example" style="height:100% !important">
 						@RenderBody()
 					</iframe>
-
-				@* <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
-					<!--begin::Post-->
-					<div class="content flex-row-fluid mt-30" id="kt_content" style="padding-top:80px">
-						@RenderBody()
-					</div>
 					<!--end::Post-->
-				</div> *@
-
-
-
 				<!--end::Content-->
 				<!--begin::Footer-->
 				<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">

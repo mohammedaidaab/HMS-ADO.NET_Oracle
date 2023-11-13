@@ -31,24 +31,25 @@ namespace HMS.MVC.Controllers
             {
 
             }
-				DashBordVM dashboard = new DashBordVM
-				{
-					Number_Of_reservations = _dashBordRepository.gettodayreservations(),
 
-					Number_of_halls = _dashBordRepository.getnumberofalls(),
+			DashBordVM dashboard = new DashBordVM
+			{
+				Number_Of_reservations = _dashBordRepository.gettodayreservations(),
 
-					Number_of_active_halls = _dashBordRepository.GetActiveHalls(),
+				Number_of_halls = _dashBordRepository.getnumberofalls(),
 
-					reservation = _dashBordRepository.reservations(),
+				Number_of_active_halls = _dashBordRepository.GetActiveHalls(),
 
-					Lastreservation = _dashBordRepository.GetLastReservation(),
+				reservation = _dashBordRepository.reservations(),
 
-				};
-				float res = (float.Parse(dashboard.Number_Of_reservations.ToString()) / float.Parse(dashboard.Number_of_halls.ToString())) * 100;
+				Lastreservation = _dashBordRepository.GetLastReservation(),
 
-				TempData["res"] = res;
-				return View(dashboard);
+			};
 
+			float res = (float.Parse(dashboard.Number_Of_reservations.ToString()) / float.Parse(dashboard.Number_of_halls.ToString())) * 100;
+
+			TempData["res"] = res;
+			return View("index",dashboard);
 			
         }
 
