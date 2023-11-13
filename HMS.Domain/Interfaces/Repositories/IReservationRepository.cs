@@ -22,8 +22,10 @@ namespace HMS.Domain.Interfaces.Repositories
         public Task<BaseResponse> create(Reservation reservation);
 
         public Task<IEnumerable<ReservationHallVM>> GetAll();
-        public IEnumerable<ReservationHallVM> GetReservationPagination(int start, string searchvalue,int Length, string SortColumn, string sortDirection,int pagenumber);
 
+
+        public Task<IEnumerable<ReservationHallVM>> GetAllpaging();
+    
 
         public Task<IEnumerable<ReservationHallVM>> GetByUserId(string id);
 

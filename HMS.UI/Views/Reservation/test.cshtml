@@ -1,6 +1,105 @@
-﻿@page
-@model HMS.UI.Views.Reservation.testModel
+﻿@model X.PagedList.IPagedList<HMS.Domain.Entities.ViewModels.ReservationHallVM>
+@using X.PagedList.Mvc.Core;
 @{
+    Layout = "custom";
 }
-<iframe src="../index.cshtml" width="100%" height="300" style="border:1px solid black;">
-</iframe>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "resrvations";
+}
+
+<div class="mg-div" style="background-image:url('/assets/media/images/clock.png')">
+    <div class="card card-custom mg-card">
+        <div class="card-header">
+            <div class="card-title">
+                <div class="text-center">
+                    <center>
+                        الحجوزات
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            @using (Html.BeginForm("Index2", "reservation", FormMethod.Get))
+            {
+                <div class="col-md-5">
+                    <p style="display:inline-flex">
+                        بحث بالاسم:
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string,new{@class="form-control"})
+                        <input type="submit" value="بحث" class="btn btn-danger" style="margin-right:10px" />
+                    </p>
+                </div>
+            }
+            <br />
+            <br />
+            <table class="table">
+                <tr>
+                    <th style="text-align:center">
+                        @Html.ActionLink("اسم الحجز ", "Index2", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th style="text-align:center">اسم القاعة</th>
+                    @if (User.IsInRole("super_admin"))
+                    {
+                        <th style="text-align:center">
+                            @Html.ActionLink("اسم المستخدم", "Index2", new { sortOrder = ViewBag.UserSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                    }
+                    <th style="text-align:center">
+                        @Html.ActionLink("تاريخ الحجز", "Index2", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th style="text-align:center"> وقت البداية</th>
+                    <th style="text-align:center"> وقت النهاية</th>
+                    <th style="text-align:center">العمليات</th>
+                </tr>
+
+                @foreach (var rev in Model)
+                {
+                    <tr style="text-align:center">
+                        <td>@rev.Name</td>
+                        <td>@rev.Hall_name</td>
+                        @if (User.IsInRole("super_admin"))
+                        {
+                            @if (rev.User_Name == "")
+                            {
+                                <td>  "المستخدم ليس لديه اسم على النظام" </td>
+                            }
+                            else
+                            {
+                                <td> @rev.User_Name</td>
+                            }
+                        }
+                        <td>@rev.Date.ToShortDateString()</td>
+                        <td style="width:15%">
+                            <input type="datetime" value="@rev.Time_Start.ToShortTimeString()" class="form-control" disabled>
+                        </td>
+                        <td style="width:15%">
+                            <input type="datetime" value="@rev.Time_End.ToShortTimeString()" class="form-control" disabled>
+                        </td>
+                        <td>
+                            <a href="/Reservation/edit/@rev.Id" alt="edit data">
+                                <button class="btn btn-warning">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+
+        <div class="card-fotter" style="margin:25px">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index2",
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<br />

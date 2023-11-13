@@ -15,11 +15,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Data.SqlClient;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net;
@@ -142,60 +144,65 @@ namespace HMS.UI.Controllers
             return View(Reservations.ToPagedList(pageNumber, pageSize));
         }
 
-        public IActionResult test()
+        public async Task<IActionResult> test(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View("test");
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.UserSortParm = sortOrder == "User_Name_desc" ? "User_Name_asc" : "User_Name_desc";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            //var res = await _IReservationRepository.GetAll();
+            var res = await _IReservationRepository.GetAllpaging();
+
+            List<ReservationHallVM> re = res.ToList();
+
+            var Reservations = from s in re
+                               select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+
+                Reservations = Reservations.Where(s => s.Name.Contains(searchString));
+                //|| s.FirstMidName.Contains(searchString)) ;
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Reservations = Reservations.OrderByDescending(s => s.Name);
+                    break;
+                case "Date":
+                    Reservations = Reservations.OrderBy(s => s.Date);
+                    break;
+                case "date_desc":
+                    Reservations = Reservations.OrderByDescending(s => s.Date);
+                    break;
+                case "User_Name_desc":
+                    Reservations = Reservations.OrderByDescending(s => s.User_Name);
+                    break;
+                case "User_Name_asc":
+                    Reservations = Reservations.OrderBy(s => s.User_Name);
+                    break;
+                default:  // Name ascending 
+                    Reservations = Reservations.OrderBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(Reservations.ToPagedList(pageNumber, pageSize));
         }
-
-		[HttpPost]
-		public JsonResult GetDetails()
-		{
-			List<ReservationHallVM> data = new List<ReservationHallVM>();
-			var start = Convert.ToInt32(Request.Form["start"]);		//.ToString();  (Convert.ToInt32(Request["start"]));
-			var Length = (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
-			var searchvalue = Request.Form["search[value]"].ToString() ?? "";
-			var sortcoloumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
-			var SortColumn = "";
-			var SortOrder = "";
-			var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc";
-			var recordsTotal = 0;
-			try
-			{
-				switch (sortcoloumnIndex)
-				{
-					case 0:
-						SortColumn = "First_Name";
-						break;
-					case 1:
-						SortColumn = "Last_Name";
-						break;
-					case 2:
-						SortColumn = "Email_Address";
-						break;
-					case 3:
-						SortColumn = "Created_Date";
-						break;
-					case 4:
-						SortColumn = "Role_Name";
-						break;
-					default:
-						SortColumn = "UserId";
-						break;
-				}
-				if (sortDirection == "asc")
-					SortOrder = "asc";
-				else
-					SortOrder = "desc";
-				//data = IReservationRepository.GetReservationPagination(start, searchvalue, Length, SortColumn, sortDirection, pagenumber).ToList();
-				//recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
-			}
-			catch (Exception ex)
-			{
-
-			}
-			return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal }); //JsonRequestBehavior.AllowGet);
-		}
-
 
 		public async Task<IActionResult> Create()
         {
