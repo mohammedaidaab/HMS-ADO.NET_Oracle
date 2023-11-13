@@ -147,8 +147,57 @@ namespace HMS.UI.Controllers
             return View("test");
         }
 
+		[HttpPost]
+		public JsonResult GetDetails()
+		{
+			List<ReservationHallVM> data = new List<ReservationHallVM>();
+			var start = Convert.ToInt32(Request.Form["start"]);		//.ToString();  (Convert.ToInt32(Request["start"]));
+			var Length = (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
+			var searchvalue = Request.Form["search[value]"].ToString() ?? "";
+			var sortcoloumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
+			var SortColumn = "";
+			var SortOrder = "";
+			var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc";
+			var recordsTotal = 0;
+			try
+			{
+				switch (sortcoloumnIndex)
+				{
+					case 0:
+						SortColumn = "First_Name";
+						break;
+					case 1:
+						SortColumn = "Last_Name";
+						break;
+					case 2:
+						SortColumn = "Email_Address";
+						break;
+					case 3:
+						SortColumn = "Created_Date";
+						break;
+					case 4:
+						SortColumn = "Role_Name";
+						break;
+					default:
+						SortColumn = "UserId";
+						break;
+				}
+				if (sortDirection == "asc")
+					SortOrder = "asc";
+				else
+					SortOrder = "desc";
+				//data = IReservationRepository.GetReservationPagination(start, searchvalue, Length, SortColumn, sortDirection, pagenumber).ToList();
+				//recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
+			}
+			catch (Exception ex)
+			{
 
-        public async Task<IActionResult> Create()
+			}
+			return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal }); //JsonRequestBehavior.AllowGet);
+		}
+
+
+		public async Task<IActionResult> Create()
         {
 			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Create", cancellationToken))
 			{

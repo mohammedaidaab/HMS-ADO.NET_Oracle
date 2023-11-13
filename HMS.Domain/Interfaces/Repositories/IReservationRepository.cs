@@ -9,6 +9,7 @@ using HMS.Domain.Entities;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace HMS.Domain.Interfaces.Repositories
         public Task<BaseResponse> create(Reservation reservation);
 
         public Task<IEnumerable<ReservationHallVM>> GetAll();
+        public IEnumerable<ReservationHallVM> GetReservationPagination(int start, string searchvalue,int Length, string SortColumn, string sortDirection,int pagenumber);
 
 
         public Task<IEnumerable<ReservationHallVM>> GetByUserId(string id);
@@ -30,6 +32,7 @@ namespace HMS.Domain.Interfaces.Repositories
 
 
         public Task<BaseResponse> update(Reservation reservation);
+
         public Task<BaseResponse> Delete(int id);
 
 	}

@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
 using Oracle.ManagedDataAccess.Client;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data.SqlClient;
+using System.Drawing.Printing;
 
 namespace HMS.Business.Repositories
 {
@@ -283,6 +286,50 @@ namespace HMS.Business.Repositories
             }
             //throw new NotImplementedException();
         }
+
+		public IEnumerable<ReservationHallVM> GetReservationPagination(int start, string searchvalue, int Length, string SortColumn, string sortDirection,int pagenumber)
+		{
+            using (OracleConnection oracon = new OracleConnection(con))
+            {
+                OracleCommand oracom = new OracleCommand("GetUserDetails", oracon);
+                oracom.CommandType= CommandType.StoredProcedure;
+
+                OracleParameter pagenoParameter = new OracleParameter { ParameterName = "Pageno",OracleDbType=OracleDbType.Int32,Size=255,Direction=ParameterDirection.Input,Value= pagenumber};
+                OracleParameter pagesizeParameter = new OracleParameter { ParameterName = "pagesize", OracleDbType=OracleDbType.Int32,Size=255,Direction=ParameterDirection.Input,Value= pagenumber};
+                OracleParameter filterParameter = new OracleParameter { ParameterName = "filter", OracleDbType=OracleDbType.Int32,Size=255,Direction=ParameterDirection.Input,Value= pagenumber};
+                OracleParameter sortingParameter = new OracleParameter { ParameterName = "Sorting", OracleDbType=OracleDbType.Int32,Size=255,Direction=ParameterDirection.Input,Value= pagenumber};
+                OracleParameter sortOrderParameter = new OracleParameter { ParameterName = "SortOrder", OracleDbType=OracleDbType.Int32,Size=255,Direction=ParameterDirection.Input,Value= pagenumber};
+
+
+			}
+
+            return null;
+            //IEnumerable<ReservationHallVM> reservationHallVM = new ReservationHallVM();
+
+          
+
+            //   var pagenoParameter = pageno.HasValue ?
+			//new ObjectParameter("Pageno", pageno) :
+			//new ObjectParameter("Pageno", typeof(int));
+
+			//var filterParameter = filter != null ?
+			//	new ObjectParameter("filter", filter) :
+			//	new ObjectParameter("filter", typeof(string));
+
+			//var pagesizeParameter = pagesize.HasValue ?
+			//	new ObjectParameter("pagesize", pagesize) :
+			//	new ObjectParameter("pagesize", typeof(int));
+
+			//var sortingParameter = sorting != null ?
+			//	new ObjectParameter("Sorting", sorting) :
+			//	new ObjectParameter("Sorting", typeof(string));
+
+			//var sortOrderParameter = sortOrder != null ?
+			//	new ObjectParameter("SortOrder", sortOrder) :
+			//	new ObjectParameter("SortOrder", typeof(string));
+
+			//return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReservationHallVM>("GetUserDetails", pagenoParameter, filterParameter, pagesizeParameter, sortingParameter, sortOrderParameter);
+		}
 
 		public async Task<BaseResponse> update(Reservation reservation)
 		{
