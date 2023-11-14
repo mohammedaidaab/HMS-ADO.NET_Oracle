@@ -155,17 +155,17 @@ namespace HMS.UI.Controllers
         [HttpGet]
         public  JsonResult GetDetails()
         {
-            List<ReservationHallVM> data = new List<ReservationHallVM>();
+            object data = new object();
             //var data = "" ; 
 
-            var start = 1;//  (Convert.ToInt32(Request.Form["start"])); 
-            var Length = 10;// (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
-            var searchvalue = "";// Request.Form["search[value]"].ToString() ?? "";
-            var sortcoloumnIndex = 0;// Request.Form["columns[" + Request.Form["order[0][column]"];// Convert.ToInt32(Request["order[0][column]"]);
+            var start =  (Convert.ToInt32(Request.Form["start"])); 
+            var Length = (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
+            var searchvalue =  Request.Form["search[value]"].ToString() ?? "";
+            var sortcoloumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
             var SortColumn = "";
             var SortOrder = "";
-            var sortDirection = "";//Request.Form["order[0][dir]"].ToString() ?? "asc" ;
-            var recordsTotal = 5;
+            var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc" ;
+            var recordsTotal = 0;
             try
             {
                 switch (sortcoloumnIndex)

@@ -229,7 +229,8 @@ namespace HMS.Business.Repositories
                 new ObjectParameter("SortOrder", sortOrder) :
                 new ObjectParameter("SortOrder", typeof(string));
 
-            //return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReservationHallVM>("RESERVATION_GETALL_PAGING", pagenoParameter, filterParameter, pagesizeParameter, sortingParameter, sortOrderParameter);
+            //var d =  ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReservationHallVM>("RESERVATION_GETALL_PAGING", pagenoParameter, filterParameter, pagesizeParameter, sortingParameter, sortOrderParameter);
+            
             using (OracleConnection oracon = new OracleConnection(con))
             {
                 List<ReservationHallVM> reservationList = new List<ReservationHallVM>();
@@ -239,13 +240,19 @@ namespace HMS.Business.Repositories
                 oracom.CommandType = CommandType.StoredProcedure;
 
                 OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
+                OracleParameter dbfilter = new OracleParameter { ParameterName = "dbfilter", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=filter};
+                //OracleParameter total = new OracleParameter { ParameterName = "total", OracleDbType = OracleDbType.RefCursor, Direction = ParameterDirection.Output};
+
+
                 oracom.Parameters.Add(res);
+                oracom.Parameters.Add(dbfilter);
+                //oracom.Parameters.Add(total);
 
 
                 oracon.Open();
                 OracleDataReader dr = oracom.ExecuteReader();
                 while (dr.Read())
-                {
+                {                    
                     ReservationHallVM reservation = new ReservationHallVM
                     {
                         Id = Convert.ToInt32(dr["ID"]),
@@ -257,9 +264,15 @@ namespace HMS.Business.Repositories
                         User_id = Convert.ToInt32(dr["User_Id"]),
                         User_Name = dr["User_Name"].ToString()
                     };
-
                     reservationList.Add(reservation);
 
+                }
+                if (dr.NextResult() == true)
+                {
+                    while (dr.Read())
+                    {
+                        //Second cursor goes here
+                    }
                 }
                 oracon.Close();
                 return reservationList;

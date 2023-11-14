@@ -624,3 +624,9 @@ C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Mic
 C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\System.CodeDom.dll
 C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\obj\Debug\net6.0\HMS.UI.MvcApplicationPartsAssemblyInfo.cs
