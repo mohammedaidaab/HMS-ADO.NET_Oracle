@@ -614,3 +614,13 @@ C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Enti
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\EntityFramework.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

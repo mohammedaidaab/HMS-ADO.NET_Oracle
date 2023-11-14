@@ -206,7 +206,7 @@ namespace HMS.Business.Repositories
                // throw new NotImplementedException();
 		}
 
-        public async Task<List<ReservationHallVM>> GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder)
+        public  List<ReservationHallVM> GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder)
         {
 
             var pagenoParameter = pageno.HasValue ?

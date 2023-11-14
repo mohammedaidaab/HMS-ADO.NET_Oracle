@@ -36,3 +36,5 @@ C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Debug\net6.0
 C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Debug\net6.0\ref\HMS.Domain.dll
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\bin\Debug\net6.0\HMS.Domain.runtimeconfig.json
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Debug\net6.0\HMS.Domain.genruntimeconfig.cache
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\bin\Debug\net6.0\HMS.Domain.runtimeconfig.json
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Debug\net6.0\HMS.Domain.genruntimeconfig.cache

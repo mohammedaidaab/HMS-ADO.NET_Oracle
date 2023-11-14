@@ -151,11 +151,12 @@ namespace HMS.UI.Controllers
             return View();
         }
 
-        //[HttpPost]
-        public  async JsonResult GetDetails()
+        [HttpPost]
+        [HttpGet]
+        public  JsonResult GetDetails()
         {
-            //List<ReservationHallVM> data = new List<ReservationHallVM>();
-            var data = "" ; 
+            List<ReservationHallVM> data = new List<ReservationHallVM>();
+            //var data = "" ; 
 
             var start = 1;//  (Convert.ToInt32(Request.Form["start"])); 
             var Length = 10;// (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
@@ -163,8 +164,8 @@ namespace HMS.UI.Controllers
             var sortcoloumnIndex = 0;// Request.Form["columns[" + Request.Form["order[0][column]"];// Convert.ToInt32(Request["order[0][column]"]);
             var SortColumn = "";
             var SortOrder = "";
-            var sortDirection = "asc";//Request.Form["order[0][dir]"].ToString() ?? "asc" ;
-            var recordsTotal = 0;
+            var sortDirection = "";//Request.Form["order[0][dir]"].ToString() ?? "asc" ;
+            var recordsTotal = 5;
             try
             {
                 switch (sortcoloumnIndex)
@@ -193,12 +194,14 @@ namespace HMS.UI.Controllers
                 else
                     SortOrder = "desc";
 
-                var data2 = await _IReservationRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);//.ToList();
-                List<ReservationHallVM> re =  new List<ReservationHallVM>(data2).ToList();
+                var data2 =  _IReservationRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);//.ToList();
 
-                var json = await JsonSerializer.Serialize(re, null);
-                    //recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
-            }
+                List<ReservationHallVM> re =  new List<ReservationHallVM>(data2);
+
+                data = data2;
+                
+					//recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
+			}
             catch (Exception ex)
             {
 

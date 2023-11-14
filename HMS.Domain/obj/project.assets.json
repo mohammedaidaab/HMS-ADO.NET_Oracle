@@ -5389,19 +5389,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Wekser\\.nuget\\packages\\": {}
+    "C:\\Users\\mgahmed\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj",
       "projectName": "HMS.Domain",
-      "projectPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj",
-      "packagesPath": "C:\\Users\\Wekser\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\obj\\",
+      "projectPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj",
+      "packagesPath": "C:\\Users\\mgahmed\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Wekser\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mgahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

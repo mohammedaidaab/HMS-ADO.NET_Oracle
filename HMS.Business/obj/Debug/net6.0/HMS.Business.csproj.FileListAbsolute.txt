@@ -51,3 +51,5 @@ C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Debug\net6
 C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Debug\net6.0\ref\HMS.Business.dll
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\bin\Debug\net6.0\HMS.Business.runtimeconfig.json
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Debug\net6.0\HMS.Business.genruntimeconfig.cache
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\bin\Debug\net6.0\HMS.Business.runtimeconfig.json
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Business\obj\Debug\net6.0\HMS.Business.genruntimeconfig.cache
