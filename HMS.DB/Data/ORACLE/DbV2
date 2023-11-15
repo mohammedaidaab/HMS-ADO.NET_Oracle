@@ -1108,11 +1108,14 @@ DROP PROCEDURE RESERVATION_GETALL_PAGING;
 CREATE OR REPLACE PROCEDURE "C##MOHAMMED"."RESERVATION_GETALL_PAGING"
 (dbpageno IN NUMBER,dbpagesize IN NUMBER ,dbfilter IN NVARCHAR2,dbsorting IN NVARCHAR2,dbsortingtype IN NVARCHAR2,total OUT NUMBER,res OUT SYS_REFCURSOR)
 AS
-        string  VARCHAR2 (500) := dbfilter;
-        sort NVARCHAR2(500)  := dbsorting ;
+        string  VARCHAR2 (500)   := dbfilter;
+        sort NVARCHAR2(500)      := dbsorting ;
         sorttype NVARCHAR2(500)  := dbsortingtype ;
-        
+        psize NUMBER(10) := 0;
 BEGIN
+       
+        SELECT COUNT(1) INTO total FROM RESERVATIONS;
+        
         
         OPEN res FOR SELECT  RESERVATIONS.ID,RESERVATIONS.Name,RESERVATIONS.Hall_Id,RESERVATIONS.Time_Start AS Time_Start,
                                RESERVATIONS.Time_End AS Time_End,RESERVATION_DATE AS RESERVATION_DATE,RESERVATIONS.USER_ID 
@@ -1120,8 +1123,8 @@ BEGIN
                 FROM RESERVATIONS 
                         join Halls on RESERVATIONS.Hall_Id = Halls.ID
                         join SiteUser on RESERVATIONS.User_Id = SiteUser.Id 
-                WHERE RESERVATIONS.NAME LIKE '%' || string || '%'
-                order by (case when sort = 'user_Name' AND sorttype = 'asc' then User_Name  END) ASC,
+                WHERE RESERVATIONS.NAME LIKE '%' || string || '%' 
+                order by         (case when sort = 'user_Name' AND sorttype = 'asc' then User_Name  END) ASC,
                 		 (case when sort = 'user_Name' AND sorttype = 'desc' then User_Name  END) DESC ,
                 		 
                			 (case when sort = 'name' AND sorttype = 'asc' then Name end) ASC ,
@@ -1133,17 +1136,14 @@ BEGIN
                			 (case when sort = 'time_End' AND sorttype = 'asc' then Time_End end) ASC  ,
                			 (case when sort = 'time_End' AND sorttype = 'desc' then Time_End end) DESC,
                			 
-               			 
                			 (case when sort = 'hall_name' AND sorttype = 'asc' then Time_Start end) ASC  ,
                			 (case when sort = 'hall_name' AND sorttype = 'desc' then Time_Start end) DESC ,
-               			 
                			 
                			 (case when sort = 'date' AND sorttype = 'asc' then Time_Start end) ASC  ,
                			 (case when sort = 'date' AND sorttype = 'desc' then Time_Start end) DESC  
                			 
-                  OFFSET dbpageno ROWS FETCH NEXT dbpagesize ROWS ONLY;
-                  
-                  SELECT COUNT(1) INTO total FROM RESERVATIONS ; 
+                  OFFSET dbpageno ROWS FETCH NEXT dbpagesize  ROWS ONLY;
+                   
                 
 END;
 /
