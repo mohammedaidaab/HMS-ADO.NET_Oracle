@@ -1121,10 +1121,26 @@ BEGIN
                         join Halls on RESERVATIONS.Hall_Id = Halls.ID
                         join SiteUser on RESERVATIONS.User_Id = SiteUser.Id 
                 WHERE RESERVATIONS.NAME LIKE '%' || string || '%'
-                order by (case when sort = 'User_Name' then User_Name END) ,
-               			 (case when sort = 'name' then Name end),
-               			 (case when sort = 'time_Start' then Time_Start end),
-               			 (case when sort = 'time_End' then Time_End end)
+                order by (case when sort = 'user_Name' AND sorttype = 'asc' then User_Name  END) ASC,
+                		 (case when sort = 'user_Name' AND sorttype = 'desc' then User_Name  END) DESC ,
+                		 
+               			 (case when sort = 'name' AND sorttype = 'asc' then Name end) ASC ,
+               			 (case when sort = 'name' AND sorttype = 'desc' then Name end) DESC ,
+               			 
+               			 (case when sort = 'time_Start' AND sorttype = 'asc' then Time_Start end) ASC  ,
+               			 (case when sort = 'time_Start' AND sorttype = 'desc' then Time_Start end) DESC  ,
+               			 
+               			 (case when sort = 'time_End' AND sorttype = 'asc' then Time_End end) ASC  ,
+               			 (case when sort = 'time_End' AND sorttype = 'desc' then Time_End end) DESC,
+               			 
+               			 
+               			 (case when sort = 'hall_name' AND sorttype = 'asc' then Time_Start end) ASC  ,
+               			 (case when sort = 'hall_name' AND sorttype = 'desc' then Time_Start end) DESC ,
+               			 
+               			 
+               			 (case when sort = 'date' AND sorttype = 'asc' then Time_Start end) ASC  ,
+               			 (case when sort = 'date' AND sorttype = 'desc' then Time_Start end) DESC  
+               			 
                   ;
                 
 END;

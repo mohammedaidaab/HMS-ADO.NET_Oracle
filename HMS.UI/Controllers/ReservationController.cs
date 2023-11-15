@@ -171,7 +171,7 @@ namespace HMS.UI.Controllers
                 switch (sortcoloumnIndex)
                 {
                     case 0:
-                        SortColumn = "Name";
+                        SortColumn = "name";
                         break;
                     case 1:
                         SortColumn = "time_Start";
@@ -186,7 +186,7 @@ namespace HMS.UI.Controllers
                         SortColumn = "hall_name";
                         break;
                     default:
-                        SortColumn = "User_Name";
+                        SortColumn = "user_Name";
                         break;
                 }
                 if (sortDirection == "asc")

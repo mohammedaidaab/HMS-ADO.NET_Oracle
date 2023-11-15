@@ -243,8 +243,9 @@ namespace HMS.Business.Repositories
                 
                 OracleParameter dbfilter = new OracleParameter { ParameterName = "dbfilter", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=filter};
                 OracleParameter dbsorting = new OracleParameter { ParameterName = "dbsorting", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value= sorting };
+                OracleParameter dbsortingtype = new OracleParameter { ParameterName = "dbsortingtype", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = sortOrder };
+
                 OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
-                OracleParameter dbsortingtype = new OracleParameter { ParameterName = "dbsortingtype", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value = sortOrder };
 
                 //OracleParameter total = new OracleParameter { ParameterName = "total", OracleDbType = OracleDbType.RefCursor, Direction = ParameterDirection.Output};
 
@@ -253,6 +254,7 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(dbfilter);
                 oracom.Parameters.Add(dbsorting);
                 oracom.Parameters.Add(dbsortingtype);
+
                 oracom.Parameters.Add(res);
                 //oracom.Parameters.Add(total);
 
