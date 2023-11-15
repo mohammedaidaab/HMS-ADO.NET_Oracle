@@ -1105,10 +1105,13 @@ END;
 /
 DROP PROCEDURE RESERVATION_GETALL_PAGING;
 --/
-CREATE PROCEDURE RESERVATION_GETALL_PAGING
-(res OUT SYS_REFCURSOR,dbfilter IN NVARCHAR2)
+CREATE OR REPLACE PROCEDURE MOHAMMED.RESERVATION_GETALL_PAGING
+(dbfilter IN NVARCHAR2,dbsorting IN NVARCHAR2,dbsortingtype IN NVARCHAR2,res OUT SYS_REFCURSOR)
 AS
-        string VARCHAR2 (500) := dbfilter;
+        string  VARCHAR2 (500) := dbfilter;
+        sort NVARCHAR2(500)  := dbsorting ;
+        sorttype NVARCHAR2(500)  := dbsortingtype ;
+
 BEGIN
         
         OPEN res FOR SELECT  RESERVATIONS.ID,RESERVATIONS.Name,RESERVATIONS.Hall_Id,RESERVATIONS.Time_Start AS Time_Start,
@@ -1118,9 +1121,12 @@ BEGIN
                         join Halls on RESERVATIONS.Hall_Id = Halls.ID
                         join SiteUser on RESERVATIONS.User_Id = SiteUser.Id 
                 WHERE RESERVATIONS.NAME LIKE '%' || string || '%'
-                ORDER BY Time_Start  ;
+                order by (case when sort = 'User_Name' then User_Name END) ,
+               			 (case when sort = 'name' then Name end),
+               			 (case when sort = 'time_Start' then Time_Start end),
+               			 (case when sort = 'time_End' then Time_End end)
+                  ;
                 
-        OPEN res FOR SELECT COUNT(1)  FROM RESERVATIONS ;
 END;
 /
 DROP PROCEDURE RESERVATION_GETBYID;

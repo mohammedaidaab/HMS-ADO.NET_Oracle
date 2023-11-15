@@ -165,7 +165,7 @@ namespace HMS.UI.Controllers
             var SortColumn = "";
             var SortOrder = "";
             var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc" ;
-            var recordsTotal = 0;
+            var recordsTotal = 50;
             try
             {
                 switch (sortcoloumnIndex)
@@ -174,19 +174,19 @@ namespace HMS.UI.Controllers
                         SortColumn = "Name";
                         break;
                     case 1:
-                        SortColumn = "Last_Name";
+                        SortColumn = "time_Start";
                         break;
                     case 2:
-                        SortColumn = "Email_Address";
+                        SortColumn = "time_End";
                         break;
                     case 3:
-                        SortColumn = "Created_Date";
+                        SortColumn = "date";
                         break;
                     case 4:
-                        SortColumn = "Role_Name";
+                        SortColumn = "hall_name";
                         break;
                     default:
-                        SortColumn = "UserId";
+                        SortColumn = "User_Name";
                         break;
                 }
                 if (sortDirection == "asc")
@@ -194,9 +194,7 @@ namespace HMS.UI.Controllers
                 else
                     SortOrder = "desc";
 
-                var data2 =  _IReservationRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);//.ToList();
-
-                List<ReservationHallVM> re =  new List<ReservationHallVM>(data2);
+                var data2 = _IReservationRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);//.ToList();
 
                 data = data2;
                 

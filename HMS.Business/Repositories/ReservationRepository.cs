@@ -209,25 +209,25 @@ namespace HMS.Business.Repositories
         public  List<ReservationHallVM> GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder)
         {
 
-            var pagenoParameter = pageno.HasValue ?
-                new ObjectParameter("Pageno", pageno) :
-                new ObjectParameter("Pageno", typeof(int));
+            //var pagenoParameter = pageno.HasValue ?
+            //    new ObjectParameter("Pageno", pageno) :
+            //    new ObjectParameter("Pageno", typeof(int));
 
-            var filterParameter = filter != null ?
-                new ObjectParameter("filter", filter) :
-                new ObjectParameter("filter", typeof(string));
+            //var filterParameter = filter != null ?
+            //    new ObjectParameter("filter", filter) :
+            //    new ObjectParameter("filter", typeof(string));
 
-            var pagesizeParameter = pagesize.HasValue ?
-                new ObjectParameter("pagesize", pagesize) :
-                new ObjectParameter("pagesize", typeof(int));
+            //var pagesizeParameter = pagesize.HasValue ?
+            //    new ObjectParameter("pagesize", pagesize) :
+            //    new ObjectParameter("pagesize", typeof(int));
 
-            var sortingParameter = sorting != null ?
-                new ObjectParameter("Sorting", sorting) :
-                new ObjectParameter("Sorting", typeof(string));
+            //var sortingParameter = sorting != null ?
+            //    new ObjectParameter("Sorting", sorting) :
+            //    new ObjectParameter("Sorting", typeof(string));
 
-            var sortOrderParameter = sortOrder != null ?
-                new ObjectParameter("SortOrder", sortOrder) :
-                new ObjectParameter("SortOrder", typeof(string));
+            //var sortOrderParameter = sortOrder != null ?
+            //    new ObjectParameter("SortOrder", sortOrder) :
+            //    new ObjectParameter("SortOrder", typeof(string));
 
             //var d =  ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReservationHallVM>("RESERVATION_GETALL_PAGING", pagenoParameter, filterParameter, pagesizeParameter, sortingParameter, sortOrderParameter);
             
@@ -238,14 +238,22 @@ namespace HMS.Business.Repositories
 
                 OracleCommand oracom = new OracleCommand("RESERVATION_GETALL_PAGING", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
+                
 
-                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
+                
                 OracleParameter dbfilter = new OracleParameter { ParameterName = "dbfilter", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=filter};
+                OracleParameter dbsorting = new OracleParameter { ParameterName = "dbsorting", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value= sorting };
+                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
+                OracleParameter dbsortingtype = new OracleParameter { ParameterName = "dbsortingtype", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value = sortOrder };
+
                 //OracleParameter total = new OracleParameter { ParameterName = "total", OracleDbType = OracleDbType.RefCursor, Direction = ParameterDirection.Output};
 
 
-                oracom.Parameters.Add(res);
+               
                 oracom.Parameters.Add(dbfilter);
+                oracom.Parameters.Add(dbsorting);
+                oracom.Parameters.Add(dbsortingtype);
+                oracom.Parameters.Add(res);
                 //oracom.Parameters.Add(total);
 
 

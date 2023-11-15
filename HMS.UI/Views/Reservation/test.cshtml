@@ -5,10 +5,10 @@
 <table id="data" class="table table-bordered">
     <thead>
         <tr>
+            <th>Name</th>
             <th>time_Start</th>
             <th>time_End</th>
             <th>date</th>
-            <th>name</th>
             <th>hall_name</th>
             <th>user_Name</th>
         </tr>
@@ -21,7 +21,6 @@
         $("#data").DataTable({
             "processing": true,
             "serverSide": true,
-            "pageLength": 5,
             "filter": true,
             "orderMulti": false,
             "destroy": true,
@@ -33,10 +32,10 @@
             },
 
             "columns": [
+                { "data": "name", "name": "Name", "autoWidth": true },
                 { "data": "time_Start", "name": "time_Start", "autoWidth": true },
                 { "data": "time_End", "name": "time_End", "autoWidth": true },
                 { "data": "date", "name": "date", "autoWidth": true },
-                { "data": "name", "name": "name", "autoWidth": true },
                 { "data": "hall_name", "name": "hall_name", "autoWidth": true },
                 { "data": "user_Name", "name": "user_Name", "autoWidth": true },
             ]
