@@ -165,7 +165,7 @@ namespace HMS.UI.Controllers
             var SortColumn = "";
             var SortOrder = "";
             var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc" ;
-            var recordsTotal = 50;
+            var recordsTotal = 0 ;
             try
             {
                 switch (sortcoloumnIndex)
@@ -196,8 +196,9 @@ namespace HMS.UI.Controllers
 
                 var data2 = _IReservationRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);//.ToList();
 
-                data = data2;
-                
+                data = data2.reservations;
+                recordsTotal = data2.totalPages;
+
 					//recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
 			}
             catch (Exception ex)

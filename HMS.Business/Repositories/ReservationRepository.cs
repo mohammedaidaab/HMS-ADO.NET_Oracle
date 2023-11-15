@@ -206,7 +206,7 @@ namespace HMS.Business.Repositories
                // throw new NotImplementedException();
 		}
 
-        public  List<ReservationHallVM> GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder)
+        public  ReservationHallPagingVM GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder)
         {
 
             //var pagenoParameter = pageno.HasValue ?
@@ -233,6 +233,7 @@ namespace HMS.Business.Repositories
             
             using (OracleConnection oracon = new OracleConnection(con))
             {
+                
                 List<ReservationHallVM> reservationList = new List<ReservationHallVM>();
                 int totalreservations;
 
@@ -241,6 +242,8 @@ namespace HMS.Business.Repositories
                 
 
                 
+                OracleParameter dbpageno = new OracleParameter { ParameterName = "dbpageno", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=pageno};
+                OracleParameter dbpagesize = new OracleParameter { ParameterName = "dbpagesize", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=pagesize};
                 OracleParameter dbfilter = new OracleParameter { ParameterName = "dbfilter", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=filter};
                 OracleParameter dbsorting = new OracleParameter { ParameterName = "dbsorting", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value= sorting };
                 OracleParameter dbsortingtype = new OracleParameter { ParameterName = "dbsortingtype", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = sortOrder };
@@ -251,6 +254,8 @@ namespace HMS.Business.Repositories
 
 
                
+                oracom.Parameters.Add(dbpageno);
+                oracom.Parameters.Add(dbpagesize);
                 oracom.Parameters.Add(dbfilter);
                 oracom.Parameters.Add(dbsorting);
                 oracom.Parameters.Add(dbsortingtype);
@@ -278,19 +283,17 @@ namespace HMS.Business.Repositories
                     reservationList.Add(reservation);
 
                 }
-                if (dr.NextResult() == true)
-                {
-                    while (dr.Read())
-                    {
-                        //Second cursor goes here
-                    }
-                }
+
                 oracon.Close();
+                totalreservations = int.Parse(oracom.Parameters["total"].Value.ToString()); ;
 
-                totalreservations = Convert.ToInt32(oracom.Parameters["total"].Value);
+                ReservationHallPagingVM respage = new ReservationHallPagingVM
+                {
+                    reservations = reservationList,
+                    totalPages = totalreservations
+                };
 
-
-                return reservationList;
+                return respage;
 
 
             }

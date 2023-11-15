@@ -1105,13 +1105,13 @@ END;
 /
 DROP PROCEDURE RESERVATION_GETALL_PAGING;
 --/
-CREATE OR REPLACE PROCEDURE MOHAMMED.RESERVATION_GETALL_PAGING
-(dbfilter IN NVARCHAR2,dbsorting IN NVARCHAR2,dbsortingtype IN NVARCHAR2,res OUT SYS_REFCURSOR)
+CREATE OR REPLACE PROCEDURE "C##MOHAMMED"."RESERVATION_GETALL_PAGING"
+(dbpageno IN NUMBER,dbpagesize IN NUMBER ,dbfilter IN NVARCHAR2,dbsorting IN NVARCHAR2,dbsortingtype IN NVARCHAR2,total OUT NUMBER,res OUT SYS_REFCURSOR)
 AS
         string  VARCHAR2 (500) := dbfilter;
         sort NVARCHAR2(500)  := dbsorting ;
         sorttype NVARCHAR2(500)  := dbsortingtype ;
-
+        
 BEGIN
         
         OPEN res FOR SELECT  RESERVATIONS.ID,RESERVATIONS.Name,RESERVATIONS.Hall_Id,RESERVATIONS.Time_Start AS Time_Start,
@@ -1141,7 +1141,9 @@ BEGIN
                			 (case when sort = 'date' AND sorttype = 'asc' then Time_Start end) ASC  ,
                			 (case when sort = 'date' AND sorttype = 'desc' then Time_Start end) DESC  
                			 
-                  ;
+                  OFFSET dbpageno ROWS FETCH NEXT dbpagesize ROWS ONLY;
+                  
+                  SELECT COUNT(1) INTO total FROM RESERVATIONS ; 
                 
 END;
 /
