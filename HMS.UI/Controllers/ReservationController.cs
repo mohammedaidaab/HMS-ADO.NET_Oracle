@@ -208,6 +208,54 @@ namespace HMS.UI.Controllers
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
         }
 
+        public async Task<IActionResult> paging(string search, int pagenum ,int rowsize , string direction)
+        {
+           
+            if (direction == "asc")
+            {
+                direction = "ASC";
+            }
+            else
+            {
+                direction = "desc";
+            }
+
+            if (pagenum == 0)
+            {
+                pagenum = 1;
+            }
+            else
+            {
+                pagenum = pagenum;
+            }
+
+            if (search == "")
+            {
+
+            }
+
+            if (rowsize == 0)
+            {
+                rowsize = 5;
+            }
+            else
+            {
+                rowsize = rowsize;
+            }
+
+            var res = await _IReservationRepository.manualpaging(search, pagenum, rowsize, direction);
+
+            ReservationHallPagingVM data = new ReservationHallPagingVM
+            {
+                reservations = res.reservations ,
+                CurrentPage = pagenum,
+                totalPages = res.totalPages / rowsize,
+            };
+
+            return View(data);
+        }
+
+
         public async Task<IActionResult> Create()
         {
 			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Create", cancellationToken))

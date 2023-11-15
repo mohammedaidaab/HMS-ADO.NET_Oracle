@@ -13,5 +13,6 @@ namespace HMS.Domain.Entities.ViewModels
         public int totalPages { get; set; }
 
         public int CurrentPage { get; set; }
+
     }
 }

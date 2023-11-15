@@ -25,6 +25,8 @@ namespace HMS.Domain.Interfaces.Repositories
         public ReservationHallPagingVM GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder);
         //public ObjectResult<ReservationHallVM> GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder);
 
+        public Task<ReservationHallPagingVM> manualpaging(string search, int pagenum, int rowsize, string direction);
+
 
         public Task<IEnumerable<ReservationHallVM>> GetByUserId(string id);
 
