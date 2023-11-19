@@ -353,8 +353,6 @@ namespace HMS.Business.Repositories
         }
 
 
-
-
         public async Task<ReservationHallVM> GetById(int id) 
 		{
             ReservationHallVM reservation = new ReservationHallVM();

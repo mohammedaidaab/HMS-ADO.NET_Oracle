@@ -1,24 +1,25 @@
-﻿GetDataTableData();
-function GetDataTableData() {
-    $("#data").DataTable({
-        "processing": true,
-        "serverSide": true,
-        "filter": true,
-        "orderMulti": false,
-        "destroy": true,
-        "ordering": true,
-        "ajax": {
-            "url": '/Home/GetDetails',
-            "type": "POST",
-            "datatype": "json"
-        },
+﻿
+    function GetDataTableData() {
+        $("#data").DataTable({
+            "processing": true,
+            "serverSide": true,
+            "filter": true,
+            "orderMulti": false,
+            "destroy": true,
+            "ordering": true,
+            "ajax": {
+                "url": '/Reservation/GetDetails',
+                "type": "POST",
+                "datatype": "json"
+            },
 
-        "columns": [
-            { "data": "First_Name", "name": "First_Name", "autoWidth": true }
-            , { "data": "User_Name", "name": "User_Name", "autoWidth": true }
-            , { "data": "Time_Start", "name": "Time_Start", "autoWidth": true }
-            , { "data": "Created_Date", "name": "Created_Date", "autoWidth": true }
-            , { "data": "TotalRecords", "name": "TotalRecords", "autoWidth": true }
-        ]
-    });
-}
+            "columns": [
+                { "data": "name", "name": "Name", "autoWidth": true },
+                { "data": "time_Start", "name": "time_Start", "autoWidth": true },
+                { "data": "time_End", "name": "time_End", "autoWidth": true },
+                { "data": "date", "name": "date", "autoWidth": true },
+                { "data": "hall_name", "name": "hall_name", "autoWidth": true },
+                { "data": "user_Name", "name": "user_Name", "autoWidth": true },
+            ]
+        });
+    }

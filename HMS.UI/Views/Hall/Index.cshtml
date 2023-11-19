@@ -39,7 +39,7 @@
         </div>
     </div>
         <div class="card-body" >
-        <table id="hallsTable" class="hover" style="width:100%;text-align:center">
+       @*  <table id="hallsTable" class="hover" style="width:100%;text-align:center">
             <thead>
                 <tr>
                     <th>
@@ -70,7 +70,7 @@
                                @*  <button class="btn btn-success">
                                     حجز القاعة
                                     <i class="fa-regular fa-calendar-check fa-2xl"></i>
-                                </button> *@
+                                </button> 
                                 @if (User.IsInRole("supervisor") || User.IsInRole("super_admin"))
                                 {
                                     <a href="/hall/edit/@item.ID">
@@ -126,7 +126,27 @@
 
             </tbody>
         </table>
+ *@
 
+        <table id="hallsData" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.Building_Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Model => Model.Number)
+                    </th>
+                    <th style="text-align:end">
+                        العمليات
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
 
 
     </div>
@@ -160,8 +180,36 @@
             $('#myInput').trigger('focus')
         });
     </script>
-    
-  
+
+
+    <script>
+        GetDataTableData();
+        function GetDataTableData() {
+            $("#hallsData").DataTable({
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false,
+                "destroy": true,
+                "ordering": true,
+                "ajax": {
+                    "url": '/Halls/GetDetails',
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    { "data": "name", "name": "Name", "autoWidth": true },
+                    { "data": "time_Start", "name": "time_Start", "autoWidth": true },
+                    { "data": "time_End", "name": "time_End", "autoWidth": true },
+                    { "data": "date", "name": "date", "autoWidth": true },
+                    { "data": "hall_name", "name": "hall_name", "autoWidth": true },
+                    { "data": "user_Name", "name": "user_Name", "autoWidth": true },
+                ]
+            });
+        }
+    </script>
+
 
 
    

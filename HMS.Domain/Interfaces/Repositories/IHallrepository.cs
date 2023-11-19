@@ -8,6 +8,7 @@
 using HMS.Data.Entities;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,6 +25,8 @@ namespace HMS.Domain.Interfaces.Repositories
         Task<BaseResponse> Update(Hall model);
 
         Task<BaseResponse> Delete(int Id);
+        public HallBuildingPagingVM GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder);
+
 
     }
 }

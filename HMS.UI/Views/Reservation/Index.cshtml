@@ -26,57 +26,19 @@
             </div>
         </div>
             <div class="card-body">
-               <table id="example" class="hover" style="width:100%" style="text-align:right">
-                <thead>
-                    <tr>
-                        <th style="text-align:center">اسم الحجز</th>
-                        <th style="text-align:center">اسم القاعة</th>
-                        @if(User.IsInRole("super_admin")){
-                            <th style="text-align:center">اسم المستخدم</th>
-                        }
-                        <th style="text-align:center">تاريخ الحجز</th>
-                        <th style="text-align:center"> وقت البداية</th>
-                        <th style="text-align:center"> وقت النهاية</th>
-                        <th style="text-align:center">العمليات</th>
-                    </tr>
-                </thead>
-
-                <tbody style="text-align:center">
-
-                    @foreach (var rev in Model)
-                    {
-                        <tr>
-                            <td>@rev.Name</td>
-                            <td>@rev.Hall_name</td>
-                            @if (User.IsInRole("super_admin"))
-                            {
-                                @if (rev.User_Name == "") {
-                                    <td>  "المستخدم ليس لديه اسم على النظام" </td>
-                                    }else{
-                                    <td> @rev.User_Name  </td>
-                                }
-                            }
-                            <td>@rev.Date.ToShortDateString()</td>
-                            <td style="width:15%">
-                                <input type="datetime" value="@rev.Time_Start.ToShortTimeString()" class="form-control" disabled  > 
-                            </td>
-                            <td style="width:15%">
-                                <input type="datetime" value="@rev.Time_End.ToShortTimeString()" class="form-control" disabled>
-                            </td>
-                            <td>
-                                <a href="/Reservation/edit/@rev.Id" alt="edit data">
-                                    <button class="btn btn-warning">
-                                        <i class="fa fa-edit" ></i>
-                                    </button>    
-                                </a>
-                            </td>
+                <table id="data" class="table table-bordered">
+                    <thead>
+                        <tr style="text-align:center !important">
+                            <th>اسم الحجز</th>
+                            <th>وقت البداية</th>
+                            <th>وقت الانتهاء</th>
+                            <th>التاريخ</th>
+                            <th>اسم القاعة</th>
+                            <th>اسم المستخدم</th>
                         </tr>
-                    }
-                </tbody>
-
-
-           
-            </table>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         <div class="card-fotter">
         </div>
@@ -99,6 +61,31 @@
 
 
     <script>
-        new DataTable('#example');
+        GetDataTableData();
+        function GetDataTableData() {
+            $("#data").DataTable({
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false,
+                "destroy": true,
+                "ordering": true,
+                "ajax": {
+                    "url": '/Reservation/GetDetails',
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    { "data": "name", "name": "Name", "autoWidth": true },
+                    { "data": "time_Start", "name": "time_Start", "autoWidth": true },
+                    { "data": "time_End", "name": "time_End", "autoWidth": true },
+                    { "data": "date", "name": "date", "autoWidth": true },
+                    { "data": "hall_name", "name": "hall_name", "autoWidth": true },
+                    { "data": "user_Name", "name": "user_Name", "autoWidth": true },
+                ]
+            });
+        }
     </script>
+
 }
