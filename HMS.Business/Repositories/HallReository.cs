@@ -200,7 +200,7 @@ namespace HMS.Infrastructure.Repositories
                 {
                     HallBuildingVM hall = new HallBuildingVM();
 
-                    hall.ID = Convert.ToInt32(dr["id"]);
+                    hall.ID = Convert.ToInt32(dr["Id"]);
                     hall.Name = dr["HallName"].ToString();
                     hall.Number = Convert.ToInt32(dr["HallNumber"]);
                     hall.Building_ID = Convert.ToInt32(dr["Building_ID"]);

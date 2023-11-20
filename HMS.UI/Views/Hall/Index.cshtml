@@ -128,9 +128,12 @@
         </table>
  *@
 
-        <table id="hallsData" class="table table-bordered">
+            <table id="Data" class="table table-bordered">
             <thead>
                 <tr>
+                    <th>
+                        id
+                    </th>
                     <th>
                         @Html.DisplayNameFor(Model => Model.Building_Name)
                     </th>
@@ -140,9 +143,12 @@
                     <th>
                         @Html.DisplayNameFor(Model => Model.Number)
                     </th>
-                    <th style="text-align:end">
-                        العمليات
-                    </th>
+                        <th>
+                           dd
+                        </th>
+                        <th>
+                            dd
+                        </th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -182,10 +188,13 @@
     </script>
 
 
+
+
+
     <script>
         GetDataTableData();
         function GetDataTableData() {
-            $("#hallsData").DataTable({
+            $("#Data").DataTable({
                 "processing": true,
                 "serverSide": true,
                 "filter": true,
@@ -193,24 +202,31 @@
                 "destroy": true,
                 "ordering": true,
                 "ajax": {
-                    "url": '/Halls/GetDetails',
+                    "url": '/Hall/GetDetails',
                     "type": "POST",
                     "datatype": "json"
                 },
 
                 "columns": [
-                    { "data": "name", "name": "Name", "autoWidth": true },
-                    { "data": "time_Start", "name": "time_Start", "autoWidth": true },
-                    { "data": "time_End", "name": "time_End", "autoWidth": true },
-                    { "data": "date", "name": "date", "autoWidth": true },
-                    { "data": "hall_name", "name": "hall_name", "autoWidth": true },
-                    { "data": "user_Name", "name": "user_Name", "autoWidth": true },
+                    { "data": "id", "name": "id", "autoWidth": true },
+                    { "data": "building_Name", "name": "building_Name", "autoWidth": true },
+                    { "data": "name", "name": "name", "autoWidth": true },
+                    { "data": "number", "name": "number", "autoWidth": true },
+                    {
+                        "mData": null,
+                        "bSortable": false,
+                        "mRender": function (o) { return '<a href=/' + o.userid + '>' + 'Edit' + '</a>'; }
+                    },
+                    {
+                        "mData": null,
+                        "bSortable": false,
+                        "mRender": function (o) { return '<a href=edit/' + o.userid + '>' + 'Edit' + '</a>'; }
+                    }
                 ]
             });
         }
+
     </script>
-
-
-
    
 }
+

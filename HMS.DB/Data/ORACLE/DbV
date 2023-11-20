@@ -263,18 +263,8 @@ CREATE PROCEDURE COLLAGES_GETALL
 (res out SYS_REFCURSOR)
 AS
 BEGIN
-         OPEN RES FOR SELECT ID,NAME,Code FROM Collages ;
+    OPEN RES FOR SELECT ID,NAME,Code FROM Collages ;
 END;
-
-
-
-
-
-
-
-
-
-
 /
 DROP PROCEDURE COLLAGES_GETALL_PAGING;
 --/
@@ -577,8 +567,10 @@ BEGIN
                          (case when sort = 'BuildingName' AND sorttype = 'desc' then BuildingName  END) DESC 
         
                               
-                         OFFSET dbpageno ROWS FETCH NEXT dbpagesize  ROWS ONLY
-                         ;
+                         OFFSET dbpageno ROWS FETCH NEXT dbpagesize  ROWS ONLY;
+                         
+                         
+                  SELECT COUNT(1) INTO total FROM HALLS;
 END;
 /
 DROP PROCEDURE HALLS_GETBYID;
@@ -1197,17 +1189,14 @@ CREATE PROCEDURE RESERVATION_GETALL (res OUT SYS_REFCURSOR)
 
 AS
 BEGIN
-        OPEN res FOR SELECT  RESERVATIONS.ID,RESERVATIONS.Name,RESERVATIONS.Hall_Id,RESERVATIONS.Time_Start AS Time_Start,
-                               RESERVATIONS.Time_End AS Time_End,RESERVATION_DATE AS RESERVATION_DATE,RESERVATIONS.USER_ID 
-                ,Halls.Name AS Hall_Name, SiteUser.Forename AS User_Name
-                FROM RESERVATIONS 
-                        join Halls on RESERVATIONS.Hall_Id = Halls.ID
-                        join SiteUser on RESERVATIONS.User_Id = SiteUser.Id
-                ORDER BY Time_Start;
-END; 
-
-
-
+    OPEN res FOR SELECT  RESERVATIONS.ID,RESERVATIONS.Name,RESERVATIONS.Hall_Id,RESERVATIONS.Time_Start AS Time_Start,
+                           RESERVATIONS.Time_End AS Time_End,RESERVATION_DATE AS RESERVATION_DATE,RESERVATIONS.USER_ID 
+            ,Halls.Name AS Hall_Name, SiteUser.Forename AS User_Name
+            FROM RESERVATIONS 
+                    join Halls on RESERVATIONS.Hall_Id = Halls.ID
+                    join SiteUser on RESERVATIONS.User_Id = SiteUser.Id
+            ORDER BY Time_Start;
+END;
 /
 DROP PROCEDURE RESERVATION_GETALL_PAGING;
 --/
