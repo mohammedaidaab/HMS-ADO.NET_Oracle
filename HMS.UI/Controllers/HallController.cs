@@ -69,7 +69,6 @@ namespace HMS.MVC.Controllers
 		}
 
         [HttpPost]
-        [HttpGet]
         public JsonResult GetDetails()
         {
             object data = new object();
