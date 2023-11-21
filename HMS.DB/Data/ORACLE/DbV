@@ -39,7 +39,8 @@ INSERT INTO COLLAGES (ID, NAME, CODE) VALUES (43, 'ww', 112);
 DROP TABLE HALLS;
 CREATE TABLE HALLS (ID NUMBER NOT NULL, NAME VARCHAR2(200), HALL_NUMBER NUMBER, BUILDING_ID NUMBER, CONSTRAINT HALLS_PK PRIMARY KEY (ID));
 INSERT INTO HALLS (ID, NAME, HALL_NUMBER, BUILDING_ID) VALUES (3, 'h1', 4425, 2);
-DROP TABLE PERMISSIONS; 
+INSERT INTO HALLS (ID, NAME, HALL_NUMBER, BUILDING_ID) VALUES (82, 'sdw', 4432, 2);
+DROP TABLE PERMISSIONS;
 CREATE TABLE PERMISSIONS (ID NUMBER NOT NULL, NAME VARCHAR2(50), CONSTRAINT PERMISSIONS_PK PRIMARY KEY (ID));
 INSERT INTO PERMISSIONS (ID, NAME) VALUES (1, 'halls-Read');
 INSERT INTO PERMISSIONS (ID, NAME) VALUES (2, 'halls-Create');
@@ -560,14 +561,14 @@ BEGIN
                         
                 WHERE halls.NAME LIKE '%' || string || '%' 
                 order by             
-                         (case when sort = 'HallName' AND sorttype = 'asc' then HallName end) ASC ,
-                         (case when sort = 'HallName' AND sorttype = 'desc' then HallName end) DESC ,
+                         (case when sort = 'name' AND sorttype = 'asc' then HallName end) ASC ,
+                         (case when sort = 'name' AND sorttype = 'desc' then HallName end) DESC ,
         
-                         (case when sort = 'HallNumber' AND sorttype = 'asc' then HallNumber  END) ASC,
-                         (case when sort = 'HallNumber' AND sorttype = 'desc' then HallNumber  END) DESC, 
+                         (case when sort = 'building_Name' AND sorttype = 'asc' then BuildingNumber  END) ASC,
+                         (case when sort = 'building_Name' AND sorttype = 'desc' then BuildingNumber  END) DESC, 
                         
-                         (case when sort = 'BuildingName' AND sorttype = 'asc' then BuildingName  END) ASC,
-                         (case when sort = 'BuildingName' AND sorttype = 'desc' then BuildingName  END) DESC 
+                         (case when sort = 'number' AND sorttype = 'asc' then HallNumber  END) ASC,
+                         (case when sort = 'number' AND sorttype = 'desc' then HallNumber  END) DESC 
         
                               
                          OFFSET dbpageno ROWS FETCH NEXT dbpagesize  ROWS ONLY;
