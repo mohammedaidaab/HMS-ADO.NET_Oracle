@@ -35,6 +35,14 @@
                             <th>التاريخ</th>
                             <th>اسم القاعة</th>
                             <th>اسم المستخدم</th>
+                            <th>
+                            @if (User.IsInRole("super-admin"))
+                            {
+                                <p>
+                                    تعديل
+                                </p>    
+                            }
+                            </th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -83,6 +91,11 @@
                     { "data": "date", "name": "date", "autoWidth": true },
                     { "data": "hall_name", "name": "hall_name", "autoWidth": true },
                     { "data": "user_Name", "name": "user_Name", "autoWidth": true },
+                    {
+                        "mData": null,
+                        "bSortable": false,
+                        "mRender": function (data) { return '@if (User.IsInRole("super_admin"))  {  <a href="edit/' + data.id + '"><button class="btn btn-warning"> تعديل الحجز  <i class="fa-solid fa-edit fa-2xl"></i> </button> </a> }'; }
+                    },
                 ]
             });
         }

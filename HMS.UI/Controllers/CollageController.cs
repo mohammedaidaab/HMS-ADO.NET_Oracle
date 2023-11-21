@@ -19,6 +19,7 @@ using HMS.Data;
 using HMS.Business.Repositories;
 using HMS.Infrastructure.Extensions;
 using System.Threading;
+using System;
 
 namespace HMS.UI.Controllers
 {
@@ -48,6 +49,64 @@ namespace HMS.UI.Controllers
                 return RedirectToAction("AccessDenied", "account");
 	        }
         }
+
+        [HttpPost]
+        [HttpGet]
+        public JsonResult GetDetails()
+        {
+            object data = new object();
+            //var data = "" ; 
+
+            var start = (Convert.ToInt32(Request.Form["start"]));
+            var Length = (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
+            var searchvalue = Request.Form["search[value]"].ToString() ?? "";
+            var sortcoloumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
+            var SortColumn = "";
+            var SortOrder = "";
+            var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc";
+            var recordsTotal = 0;
+            try
+            {
+                switch (sortcoloumnIndex)
+                {
+                    case 0:
+                        SortColumn = "name";
+                        break;
+                    case 1:
+                        SortColumn = "time_Start";
+                        break;
+                    case 2:
+                        SortColumn = "time_End";
+                        break;
+                    case 3:
+                        SortColumn = "date";
+                        break;
+                    case 4:
+                        SortColumn = "hall_name";
+                        break;
+                    default:
+                        SortColumn = "user_Name";
+                        break;
+                }
+                if (sortDirection == "asc")
+                    SortOrder = "asc";
+                else
+                    SortOrder = "desc";
+
+                var data2 = _collageRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);//.ToList();
+
+                data = data2.colleges;
+                recordsTotal = data2.totalPages;
+
+                //recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
+        }
+
 
         public async Task<IActionResult> Create()
         {
