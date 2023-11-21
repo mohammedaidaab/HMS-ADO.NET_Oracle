@@ -72,7 +72,6 @@ namespace HMS.MVC.Controllers
         public JsonResult GetDetails()
         {
             object data = new object();
-            //var data = "" ; 
 
             var start = (Convert.ToInt32(Request.Form["start"]));
             var Length = (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
@@ -90,19 +89,10 @@ namespace HMS.MVC.Controllers
                         SortColumn = "name";
                         break;
                     case 1:
-                        SortColumn = "time_Start";
-                        break;
-                    case 2:
-                        SortColumn = "time_End";
-                        break;
-                    case 3:
-                        SortColumn = "date";
-                        break;
-                    case 4:
-                        SortColumn = "hall_name";
+                        SortColumn = "building_Name";
                         break;
                     default:
-                        SortColumn = "user_Name";
+                        SortColumn = "number";
                         break;
                 }
                 if (sortDirection == "asc")
@@ -115,7 +105,6 @@ namespace HMS.MVC.Controllers
                 data = data2.HallBuildings;
                 recordsTotal = data2.totalPages;
 
-                //recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
             }
             catch (Exception ex)
             {
