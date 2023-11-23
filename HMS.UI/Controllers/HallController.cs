@@ -67,7 +67,6 @@ namespace HMS.MVC.Controllers
 				return RedirectToAction("AccessDenied", "account");
 			}
 		}
-
         [HttpPost]
         public JsonResult GetDetails()
         {
@@ -112,7 +111,6 @@ namespace HMS.MVC.Controllers
             }
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
         }
-
         public async Task<IActionResult> CreateAsync()
 		{
 
@@ -128,7 +126,6 @@ namespace HMS.MVC.Controllers
 			}
 
 		}
-
         [HttpPost]
         public async Task<IActionResult> store(Hall hall)
         {
@@ -156,13 +153,11 @@ namespace HMS.MVC.Controllers
             return RedirectToAction("create", hall);
 
         }
-
         public async Task<IActionResult> Details(int Id)
         {
             var hall = await _hallRepository.GetById(Id);
             return View(hall);
         }
-
         public async Task<IActionResult> Edit(int id)
         {
 			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "halls-Update", cancellationToken))
@@ -179,7 +174,6 @@ namespace HMS.MVC.Controllers
 				return RedirectToAction("AccessDenied", "account");
 			}
 		}
-
         [HttpPost]
         public async Task<IActionResult> Edit(Hall hall)
         {
@@ -207,7 +201,6 @@ namespace HMS.MVC.Controllers
 
             return RedirectToAction("Edit", hall);
         }
-
         public async Task<IActionResult> Delete(int id)
         {
 			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "halls-Delete", cancellationToken))

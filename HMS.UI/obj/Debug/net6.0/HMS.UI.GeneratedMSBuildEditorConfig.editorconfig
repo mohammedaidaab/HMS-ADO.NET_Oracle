@@ -84,10 +84,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFsbFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Hall/Index2.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFsbFxJbmRleDIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Home/dash.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxkYXNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -146,10 +142,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/Index2.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cSW5kZXgyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/paging.cshtml]

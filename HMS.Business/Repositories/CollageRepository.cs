@@ -213,7 +213,6 @@ namespace HMS.Business.Repositories
 
         }
 
-
         public async Task<collage> GetById(int Id)
         {
             using (OracleConnection oracon = new OracleConnection(con))

@@ -133,7 +133,6 @@ namespace HMS.MVC.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View(nameof(ExternalLogin), model);
         }
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

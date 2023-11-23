@@ -41,7 +41,6 @@ namespace HMS.UI.Controllers
             _ICollageRepository = collageRepository;
             _IPermissionRepository = permissionRepository;
         }
-
         public async Task<IActionResult> Index()
         {
             if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Read", cancellationToken))
@@ -53,8 +52,6 @@ namespace HMS.UI.Controllers
             return RedirectToAction("AccessDenied", "account");
 
         }
-
-
         [HttpPost]
         public JsonResult GetDetails()
         {
@@ -110,8 +107,6 @@ namespace HMS.UI.Controllers
             }
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
         }
-
-
         public async Task<IActionResult> Create()
         {
             if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Create", cancellationToken))
@@ -128,7 +123,6 @@ namespace HMS.UI.Controllers
                 return RedirectToAction("AccessDenied", "account");
             }
         }
-
         public async Task<IActionResult> store(BuildingCollegeVM buildingCollegeVM)
         {
 
@@ -166,7 +160,6 @@ namespace HMS.UI.Controllers
 			}
 
 		}
-
         public async Task<IActionResult> Edit(int id)
         {
 			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Update", cancellationToken))
@@ -182,7 +175,6 @@ namespace HMS.UI.Controllers
 				return RedirectToAction("AccessDenied", "account");
 			}
 		}
-
         public async Task<IActionResult> update(BuildingCollegeVM buildingCollegeVM)
         {
 
@@ -224,8 +216,6 @@ namespace HMS.UI.Controllers
             //return View("Edit", buildingCollegeVM.ID);
             return Content("sdfasdfsad");
         }
-
-
         public async Task<IActionResult> delete(int id)
         {
             if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Update", cancellationToken))

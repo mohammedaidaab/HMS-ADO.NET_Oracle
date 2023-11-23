@@ -161,7 +161,6 @@ namespace HMS.Business.Repositories
 			}
 		}
 
-
 		public async Task<BaseResponse> update(List<Permission> permission, int roleId)
 		{
 			using (OracleConnection oracon = new OracleConnection(con))
@@ -246,7 +245,6 @@ namespace HMS.Business.Repositories
 				return permission;
 			}
 		}
-
 	
 		public async Task<bool> hasPermission(string id, string permission,CancellationToken cancellation)
 		{

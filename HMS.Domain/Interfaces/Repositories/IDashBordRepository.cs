@@ -20,10 +20,7 @@ namespace HMS.Domain.Interfaces.Repositories
         public int gettodayreservations();
         public int getnumberofalls();
         public int GetActiveHalls();
-
         public List<ReservationHallVM> reservations();
-
-
         public DateTime GetLastReservation();
 
     }

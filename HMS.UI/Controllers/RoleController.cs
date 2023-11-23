@@ -34,7 +34,6 @@ namespace HMS.UI.Controllers
             _SiteRoleRepository = siteRoleRepository;
             _PermissionRepository = permissionRepository;
         }
-
         public async Task<IActionResult> Index()
         {
             var  roles  = await  _SiteRoleRepository.GetAllRoles();
@@ -130,7 +129,6 @@ namespace HMS.UI.Controllers
 
 			return View("edit", role.Id);
 		}
-
 
 	}
 }

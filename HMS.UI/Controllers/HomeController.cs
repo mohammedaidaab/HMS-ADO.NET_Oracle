@@ -19,12 +19,10 @@ namespace HMS.MVC.Controllers
     public class HomeController : Controller
     {
         private IDashBordRepository _dashBordRepository;
-
         public HomeController(IDashBordRepository dashBordRepository)
         {
             _dashBordRepository = dashBordRepository;
         }
-
         public IActionResult Index()
         {
             if (User.IsInRole("admin"))
@@ -52,7 +50,6 @@ namespace HMS.MVC.Controllers
 			return View("index",dashboard);
 			
         }
-
          public IActionResult dash()
         {
             if (User.IsInRole("admin"))
@@ -80,7 +77,6 @@ namespace HMS.MVC.Controllers
 			return View("dash",dashboard);
 			
          }
-
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

@@ -68,7 +68,6 @@ namespace HMS.Infrastructure.Repositories
             return list;
         }
 
-
         /// <summary>
         /// Create new SiteUser from a external login (i.e. facebook twitter)
         /// </summary>

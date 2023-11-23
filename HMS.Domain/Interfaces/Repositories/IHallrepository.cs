@@ -17,16 +17,11 @@ namespace HMS.Domain.Interfaces.Repositories
     public interface IHallrepository
     {
         Task<IEnumerable<HallBuildingVM>> GetAll();
-
         Task<Hall> GetById(int Id);
-
         Task<BaseResponse> Add(Hall model);
-
         Task<BaseResponse> Update(Hall model);
-
         Task<BaseResponse> Delete(int Id);
         public HallBuildingPagingVM GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder);
-
 
     }
 }

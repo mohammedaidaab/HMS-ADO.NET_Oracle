@@ -25,7 +25,6 @@ namespace HMS.Infrastructure.Repositories
     {
         //private readonly string con = "Data Source=.;Initial Catalog=HMS;User ID=sa;Password=root;TrustServerCertificate=True;";
         private readonly string con = "";
-
         private IConfiguration _config { get; set; }
 
         public HallReository(IConfiguration config)
@@ -224,7 +223,6 @@ namespace HMS.Infrastructure.Repositories
             }
 
         }
-
 
         public async Task<Hall> GetById(int Id)
         {

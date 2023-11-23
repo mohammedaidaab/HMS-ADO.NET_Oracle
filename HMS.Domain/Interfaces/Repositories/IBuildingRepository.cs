@@ -20,14 +20,10 @@ namespace HMS.Domain.Interfaces.Repositories
     {
 
         public Task<IEnumerable<BuildingCollegeVM>> GetAll();
-
         public Task<BaseResponse> create(BuildingCollegeVM buildingCollegeVM);
-
         Task<BuildingCollegeVM> GetById(int id);
-
         public Task<BaseResponse> update(Building building);
         public Task<BaseResponse> delete(int id);
-
         public BuildingCollegePagingVM GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder);
 
     }

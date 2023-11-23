@@ -17,15 +17,10 @@ namespace HMS.Domain.Interfaces.Repositories
     public interface ICollageRepository
     {
         Task<IEnumerable<collage>> GetAll();
-
         Task<collage> GetById(int Id);
-
         Task<BaseResponse> Add(collage model);
-
         Task<BaseResponse> Update(collage model);
-
         Task<BaseResponse> Delete(int Id);
-
         public CollegePAgingVM GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder);
 
     }

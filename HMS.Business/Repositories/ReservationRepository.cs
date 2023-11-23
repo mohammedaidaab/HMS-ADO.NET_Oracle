@@ -277,7 +277,6 @@ namespace HMS.Business.Repositories
 
         }
 
-
         public async Task<ReservationHallPagingVM> manualpaging(string search, int pagenum, int rowsize, string direction)
         {
             
@@ -351,7 +350,6 @@ namespace HMS.Business.Repositories
 
 
         }
-
 
         public async Task<ReservationHallVM> GetById(int id) 
 		{
@@ -435,7 +433,6 @@ namespace HMS.Business.Repositories
             }
             //throw new NotImplementedException();
         }
-
 
         public async Task<BaseResponse> update(Reservation reservation)
 		{

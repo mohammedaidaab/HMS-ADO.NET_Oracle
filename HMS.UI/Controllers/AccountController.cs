@@ -32,7 +32,6 @@ namespace HMS.MVC.Controllers
         private readonly SignInManager<SiteUser> _signInManager;
         private readonly ISiteRoleRepository _ISiteRoleRepository;
         // private readonly IEmailService _emailService;
-
         public AccountController(UserManager<SiteUser> userManager, SignInManager<SiteUser> signInManager,ISiteRoleRepository siteRoleRepository) //,IEmailService emailService)
         {
             _userManager = userManager;
@@ -40,10 +39,8 @@ namespace HMS.MVC.Controllers
             _ISiteRoleRepository = siteRoleRepository;
             //  _emailService = emailService;
         }
-
         [TempData]
         public string ErrorMessage { get; set; }
-
         #region Login
 
         [HttpGet]
@@ -331,7 +328,6 @@ namespace HMS.MVC.Controllers
             Log.Logger.Information("User logged out.");
             return RedirectToAction(nameof(Login), "Account");
         }
-
         [HttpGet]
         //[AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)

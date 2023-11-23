@@ -21,9 +21,7 @@ namespace HMS.Domain.Interfaces.Repositories
         Task<SiteRole> FindByNameAsync(string normalizedRoleName, CancellationToken cancellationToken);
         Task<IList<string>> GetRolesByUserIdAsync(SiteUser user, CancellationToken cancellationToken);
         Task<IdentityResult> UpdateAsync(SiteRole role, CancellationToken cancellationToken);
-
         Task<IEnumerable<SiteRole>> GetAllRoles();
-
         public Task<SiteRole> GetRolesByUserId(SiteUser user, CancellationToken cancellationToken);
 
 	}

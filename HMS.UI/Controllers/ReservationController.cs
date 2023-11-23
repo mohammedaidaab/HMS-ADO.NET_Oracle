@@ -85,7 +85,6 @@ namespace HMS.UI.Controllers
 			}
 		}
 
-
         // GET: reaservations
         public async Task<ViewResult> Index2(string sortOrder, string currentFilter, string searchString, int? page)
         
@@ -253,7 +252,6 @@ namespace HMS.UI.Controllers
 
             return View(data);
         }
-
 
         public async Task<IActionResult> Create()
         {

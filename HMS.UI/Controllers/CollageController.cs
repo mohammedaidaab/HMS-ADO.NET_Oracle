@@ -36,7 +36,6 @@ namespace HMS.UI.Controllers
             _collageRepository = collageRepository;
             _IPermissionRepository = permissionRepository;
 		}
-		
         public async Task<IActionResult> Index()
         {
 			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "colleges-Read", cancellationToken))
@@ -49,7 +48,6 @@ namespace HMS.UI.Controllers
                 return RedirectToAction("AccessDenied", "account");
 	        }
         }
-
         [HttpPost]
         public JsonResult GetDetails()
         {
@@ -105,8 +103,6 @@ namespace HMS.UI.Controllers
             }
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
         }
-
-
         public async Task<IActionResult> Create()
         {
 			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "colleges-Read", cancellationToken))
@@ -118,7 +114,6 @@ namespace HMS.UI.Controllers
 				return RedirectToAction("AccessDenied", "account");
 			}
 		}
-
         public async Task<IActionResult> store(collage collage)
         {
             if (ModelState.IsValid)
@@ -144,19 +139,16 @@ namespace HMS.UI.Controllers
             }
 
         }
-
         public async Task<IActionResult> Details(int id)
         {
             var collage = await _collageRepository.GetById(id);
             return View(collage);
         }
-
         public async Task<IActionResult> Edit(int id)
         {
             var collage = await _collageRepository.GetById(id);
             return View(collage);
         }
-
         [HttpPost]
         public async Task<IActionResult> update(collage collage)
         {
@@ -183,8 +175,6 @@ namespace HMS.UI.Controllers
             return Redirect("/collage/edit/"+collage.ID);
 
 		}
-
-
 		public async Task<IActionResult> Delete(int id)
         {
             BaseResponse res = await _collageRepository.Delete(id);
