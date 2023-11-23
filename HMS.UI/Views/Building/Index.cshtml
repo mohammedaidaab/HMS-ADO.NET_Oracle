@@ -36,92 +36,75 @@
         </div>
     </div>
         <div class="card-body">
-            <table id="hallsTable" class="hover" style="width:100%;text-align:center">
+            <table id="Data" class="table table-bordered" style="text-align:center">
                 <thead>
                     <tr>
-                        <th>
+                        <th style="text-align:center !important">
                             @Html.DisplayNameFor(Model => Model.buldingName)
                         </th>
-                        <th>
+                        <th style="text-align:center !important">
                             @Html.DisplayNameFor(Model => Model.buldingnumber)
                         </th>
-                        <th>
+                         <th style="text-align:center !important">
                             @Html.DisplayNameFor(Model => Model.BuldingCollageName)
                         </th>
-                        <th style="text-align:end">
-                            العمليات
+
+                        <th style="text-align:center !important">
+                            @if (User.IsInRole("super_admin"))
+                            {
+                                <p>
+                                    تعديل
+                                </p>
+                            }
+                        </th>
+
+                        <th style="text-align:center !important">
+                            @if (User.IsInRole("super_admin"))
+                            {
+                                <p>
+                                    حذف
+                                </p>
+                            }
                         </th>
                     </tr>
                 </thead>
-
-                <tbody>
-                    @if (Model != null && Model.Any())
-                    {
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-
-                                <td>@item.buldingName</td>
-                                <td>@item.buldingnumber</td>
-                                <td>@item.BuldingCollageName</td>
-
-                                <td style="text-align:end">
-                                   @if (User.IsInRole("super_admin") || User.IsInRole("supervisor"))
-                                    {
-
-                                        <a href="/building/edit/@item.ID">
-                                            <button class="btn btn-warning">
-                                                تعدل المبنى
-                                                <i class="fa-regular fa-pen-to-square fa-2xl"></i>
-                                            </button>
-                                        </a>
-                                    }
-                                    @if (User.IsInRole("super_admin"))
-                                    {
-
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop-@item.ID">
-                                            حذف المينى <i class="fa-solid fa-trash-can fa-2xl"></i>
-                                        </button>
-
-                                    }
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="staticBackdrop-@item.ID" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content" style="text-align:right">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="staticBackdropLabel">تاكيد الحذف</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p class="text-dark-25 text-danger" style="text-align:center;opacity:0.5">
-                                                        هذا الاجراء نهائي ولا يمكن العودة بعده
-                                                    </p>
-                                                    <lable>اسم المبنى</lable>
-                                                    <input type="text" value="@item.buldingName" class="form-control" readonly disabled>
-                                                    <br>
-                                                    <label>رقم المبنى</label>
-                                                    <input type="text" value="@item.buldingnumber" class="form-control" readonly disabled>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <a href="/Building/delete/@item.ID">
-                                                        <button type="button" class="btn btn-danger">تاكيد الحذف</button>
-                                                    </a>
-
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </td>
-                            </tr>
-                        }
-                    }
-
-                </tbody>
+                <tbody></tbody>
             </table>
+
+            @foreach (var item in Model)
+            {
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop-@item.ID" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="text-align:right">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">تاكيد الحذف</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-dark-25 text-danger" style="text-align:center;opacity:0.5">
+                                    هذا الاجراء نهائي ولا يمكن العودة بعده
+                                </p>
+                                <lable>اسم المبنى</lable>
+                                <input type="text" value="@item.buldingName" class="form-control" readonly disabled>
+                                <br>
+                                <label>رقم المبنى</label>
+                                <input type="text" value="@item.buldingnumber" class="form-control" readonly disabled>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="/Building/delete/@item.ID">
+                                    <button type="button" class="btn btn-danger">تاكيد الحذف</button>
+                                </a>
+
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">تراجع</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
         </div>
     <div class="card-fotter">
         <center>
@@ -143,4 +126,42 @@
     <script>
         new DataTable('#hallsTable');
     </script>
+
+
+
+    <script>
+        GetDataTableData();
+        function GetDataTableData() {
+            $("#Data").DataTable({
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false,
+                "destroy": true,
+                "ordering": true,
+                "ajax": {
+                    "url": '/Building/GetDetails',
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "buldingName", "name": "buldingName", "autoWidth": true },
+                    { "data": "buldingnumber", "name": "buldingnumber", "autoWidth": true },
+                    { "data": "buldingCollageName", "name": "BuldingCollageName", "autoWidth": true },
+                    {
+                        "mData": null,
+                        "bSortable": false,
+                        "mRender": function (data) { return '<a href=/building/Edit/' + data.id + '>' + '<button class="btn btn-warning">تعديل</button>' + '</a>'; }
+                    },
+                    {
+                        "mData": null,
+                        "bSortable": false,
+                        "mRender": function (data) { return '@if (User.IsInRole("super_admin"))  {<button type = "button" class="btn btn-danger" data-toggle="modal" data-target="#staticBackdrop-' + data.id + '"> حذف المبنى <i class="fa-solid fa-trash-can fa-2xl"></i> </button>        }'; }
+                    },
+                ]
+            });
+        }
+
+    </script>
+
 }

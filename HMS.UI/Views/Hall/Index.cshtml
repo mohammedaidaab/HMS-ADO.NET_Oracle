@@ -12,9 +12,6 @@
 //Halls ManageMent System
 /////////////////////////////////////////////////////
 *@
-@{
-}
-
 
 @{
     ViewData["title"] = "Halls";
@@ -129,8 +126,6 @@
         });
     </script>
 
-
-
     <script>
         GetDataTableData();
         function GetDataTableData() {
@@ -154,7 +149,7 @@
                     {
                         "mData": null,
                         "bSortable": false,
-                        "mRender": function (data) { return '<a href=Edit/' + data.id + '>' + 'Edit' + '</a>'; }
+                        "mRender": function (data) { return '<a href=/Hall/Edit/' + data.id + '>' + '<button class="btn btn-warning">تعديل</button>' + '</a>'; }
                     },
                    {
                         "mData": null,

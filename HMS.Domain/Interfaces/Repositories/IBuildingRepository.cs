@@ -27,5 +27,8 @@ namespace HMS.Domain.Interfaces.Repositories
 
         public Task<BaseResponse> update(Building building);
         public Task<BaseResponse> delete(int id);
+
+        public BuildingCollegePagingVM GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder);
+
     }
 }
