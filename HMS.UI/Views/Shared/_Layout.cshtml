@@ -821,7 +821,7 @@
 						<!--end::Heaeder menu toggle-->
 						<!--begin::Header Logo-->
 						<div class="header-logo me-5 me-md-10 flex-grow-1 flex-lg-grow-0">
-									<a href="Home/index" target="iframe_content">
+									<a href="Home/dash" target="iframe_content">
 								<img alt="Logo" src="~/Assets/media/vacImages/logo.png" class="logo-default h-65px" />
 								<img alt="Logo" src="~/Assets/media/vacImages/logo.png" class="logo-sticky h-65px" />
 							</a>
@@ -876,7 +876,7 @@
 				<!--end::Header-->
 				<!--begin::Content-->
 					<!--begin::Post-->
-					<iframe src="" name="iframe_content" width="100%" title="Iframe Example" style="height:100% !important">
+					<iframe src="/home/dash" name="iframe_content" id="iframe_content" width="100%" title="Iframe Example" style="height:100% !important">
 						@RenderBody()
 					</iframe>
 					<!--end::Post-->
@@ -1050,7 +1050,12 @@ else
 		<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
 		<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
-
+		<script>
+			// if ($("#iframe_content").contents().find("body").length) {
+			// 	// some html page loaded in iframe
+			// 	window.location.href('home/dash');
+			// }
+		</script>
 		@RenderSection("Scripts", required: false)
 
 	</body>

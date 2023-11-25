@@ -50,7 +50,7 @@ namespace HMS.UI.Controllers
                 return View(bulddings);
             }
             return RedirectToAction("AccessDenied", "account");
-
+            
         }
         [HttpPost]
         public JsonResult GetDetails()
