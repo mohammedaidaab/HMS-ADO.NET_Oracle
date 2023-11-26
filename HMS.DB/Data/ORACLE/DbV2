@@ -1,0 +1,1574 @@
+DROP SEQUENCE BUILDING_SEQ;
+CREATE SEQUENCE BUILDING_SEQ INCREMENT BY 1 START WITH 21 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE BUILDING_SEQ1;
+CREATE SEQUENCE BUILDING_SEQ1 INCREMENT BY 1 START WITH 101 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE BUILDING_SEQ2;
+CREATE SEQUENCE BUILDING_SEQ2 INCREMENT BY 1 START WITH 41 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE COLLAGES_SEQ;
+CREATE SEQUENCE COLLAGES_SEQ INCREMENT BY 1 START WITH 81 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE HALLS_SEQ;
+CREATE SEQUENCE HALLS_SEQ INCREMENT BY 1 START WITH 101 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE ISEQ$$_78636;
+CREATE SEQUENCE ISEQ$$_78636 INCREMENT BY 1 START WITH 1 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE ISEQ$$_78639;
+CREATE SEQUENCE ISEQ$$_78639 INCREMENT BY 1 START WITH 1 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE ISEQ$$_78642;
+CREATE SEQUENCE ISEQ$$_78642 INCREMENT BY 1 START WITH 1 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE ISEQ$$_78929;
+CREATE SEQUENCE ISEQ$$_78929 INCREMENT BY 1 START WITH 1 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE PERMISSIONS_SEQ;
+CREATE SEQUENCE PERMISSIONS_SEQ INCREMENT BY 1 START WITH 1 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE RESERVATIONS_SEQ;
+CREATE SEQUENCE RESERVATIONS_SEQ INCREMENT BY 1 START WITH 221 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE ROLEPERMISSION_SEQ;
+CREATE SEQUENCE ROLEPERMISSION_SEQ INCREMENT BY 1 START WITH 201 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE SITEROLE_SEQ;
+CREATE SEQUENCE SITEROLE_SEQ INCREMENT BY 1 START WITH 61 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE SITEROLE_SEQ1;
+CREATE SEQUENCE SITEROLE_SEQ1 INCREMENT BY 1 START WITH 21 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE SITEUSER_SEQ;
+CREATE SEQUENCE SITEUSER_SEQ INCREMENT BY 1 START WITH 1 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP SEQUENCE SITEUSER_SEQ1;
+CREATE SEQUENCE SITEUSER_SEQ1 INCREMENT BY 1 START WITH 121 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+DROP TABLE BUILDING;
+CREATE TABLE BUILDING (ID NUMBER NOT NULL, NAME VARCHAR2(200) NOT NULL, BUILDING_NUMBER NUMBER, COLLEGE_ID NUMBER, CONSTRAINT BUILDING_PK PRIMARY KEY (ID));
+INSERT INTO BUILDING (ID, NAME, BUILDING_NUMBER, COLLEGE_ID) VALUES (2, 'b1', 11, 43);
+INSERT INTO BUILDING (ID, NAME, BUILDING_NUMBER, COLLEGE_ID) VALUES (21, 'b2', 1213, 61);
+DROP TABLE COLLAGES;
+CREATE TABLE COLLAGES (ID NUMBER NOT NULL, NAME VARCHAR2(200), CODE NUMBER, CONSTRAINT COLLAGES_PK PRIMARY KEY (ID));
+INSERT INTO COLLAGES (ID, NAME, CODE) VALUES (43, 'www', 112);
+INSERT INTO COLLAGES (ID, NAME, CODE) VALUES (61, 'col2', 635);
+DROP TABLE HALLS;
+CREATE TABLE HALLS (ID NUMBER NOT NULL, NAME VARCHAR2(200), HALL_NUMBER NUMBER, BUILDING_ID NUMBER, CONSTRAINT HALLS_PK PRIMARY KEY (ID));
+INSERT INTO HALLS (ID, NAME, HALL_NUMBER, BUILDING_ID) VALUES (3, 'h1', 4425, 2);
+INSERT INTO HALLS (ID, NAME, HALL_NUMBER, BUILDING_ID) VALUES (82, 'sdw2', 4432, 21);
+DROP TABLE PERMISSIONS;
+CREATE TABLE PERMISSIONS (ID NUMBER NOT NULL, NAME VARCHAR2(50), CONSTRAINT PERMISSIONS_PK PRIMARY KEY (ID));
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (1, 'halls-Read');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (2, 'halls-Create');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (3, 'halls-Update');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (4, 'halls-Delete');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (5, 'reservations-Read');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (6, 'reservations-Create');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (7, 'reservations-Update');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (8, 'reservations-Delete');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (9, 'buildings-Read');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (10, 'buildings-Create');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (11, 'buildings-Update');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (12, 'buildings-Delete');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (13, 'colleges-Read');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (14, 'colleges-Create');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (15, 'colleges-Update');
+INSERT INTO PERMISSIONS (ID, NAME) VALUES (16, 'colleges-Delete');
+DROP TABLE RESERVATIONS;
+CREATE TABLE RESERVATIONS (ID NUMBER NOT NULL, NAME VARCHAR2(200), HALL_ID NUMBER, RESERVATION_DATE DATE, TIME_START DATE, TIME_END DATE, USER_ID NUMBER, CONSTRAINT RESERVATIONS_PK PRIMARY KEY (ID));
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (144, 'sdfad', 3, TIMESTAMP '2023-10-26 00:00:00', TIMESTAMP '2023-10-26 10:25:00', TIMESTAMP '2023-10-26 10:30:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (145, 'saffdasd', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (1, 'sdfad', 3, TIMESTAMP '2023-10-26 00:00:00', TIMESTAMP '2023-10-26 10:25:00', TIMESTAMP '2023-10-26 10:30:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (2, 'saffdasd', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (3, 'saffdasd', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (4, 'sdfad', 3, TIMESTAMP '2023-10-26 00:00:00', TIMESTAMP '2023-10-26 10:25:00', TIMESTAMP '2023-10-26 10:30:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (5, 'saffdasd', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (7, 'saffdasd', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (8, 'sdfad', 3, TIMESTAMP '2023-10-26 00:00:00', TIMESTAMP '2023-10-26 10:25:00', TIMESTAMP '2023-10-26 10:30:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (9, 'saffdasd', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (10, 'sdfad', 3, TIMESTAMP '2023-10-26 00:00:00', TIMESTAMP '2023-10-26 10:25:00', TIMESTAMP '2023-10-26 10:30:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (11, 'saffdasd', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (12, 'sdfad', 3, TIMESTAMP '2023-10-26 00:00:00', TIMESTAMP '2023-10-26 10:25:00', TIMESTAMP '2023-10-26 10:30:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (13, 'saffdasd', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (14, 'sdfad', 3, TIMESTAMP '2023-10-26 00:00:00', TIMESTAMP '2023-10-26 10:25:00', TIMESTAMP '2023-10-26 10:30:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (16, 'kj', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (17, 'safd', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (18, 'fdasd', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (19, 'kglfsajsd', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (20, 's236fkls', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (21, 'sg4sgs', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (22, 'aaad', 3, TIMESTAMP '2023-10-27 00:00:00', TIMESTAMP '2023-10-26 13:34:00', TIMESTAMP '2023-10-26 13:39:00', 41);
+INSERT INTO RESERVATIONS (ID, NAME, HALL_ID, RESERVATION_DATE, TIME_START, TIME_END, USER_ID) VALUES (201, '??? ??????', 3, TIMESTAMP '2023-11-23 00:00:00', TIMESTAMP '2023-11-23 10:43:00', TIMESTAMP '2023-11-23 10:45:00', 41);
+DROP TABLE ROLEPERMISSION;
+CREATE TABLE ROLEPERMISSION (ID NUMBER NOT NULL, ROLEID NUMBER NOT NULL, PERMISSIONID NUMBER NOT NULL, CONSTRAINT ROLEPERMISSION_PK PRIMARY KEY (ID));
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (83, 2, 3);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (84, 2, 4);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (85, 2, 5);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (86, 2, 6);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (87, 2, 7);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (88, 2, 8);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (89, 2, 9);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (90, 2, 10);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (91, 2, 11);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (81, 2, 1);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (82, 2, 2);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (92, 2, 12);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (93, 2, 13);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (94, 2, 14);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (95, 2, 15);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (96, 2, 16);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (181, 3, 1);
+INSERT INTO ROLEPERMISSION (ID, ROLEID, PERMISSIONID) VALUES (182, 3, 5);
+DROP TABLE SITEROLE;
+CREATE TABLE SITEROLE (ID NUMBER NOT NULL, NAME VARCHAR2(200), NORMALIZEDNAME VARCHAR2(200), DESCRIPTION VARCHAR2(200), CREATED DATE DEFAULT SYSDATE
+    NOT NULL, CONSTRAINT SITEROLE_PK PRIMARY KEY (ID));
+INSERT INTO SITEROLE (ID, NAME, NORMALIZEDNAME, DESCRIPTION, CREATED) VALUES (2, 'super_admin', 'SUPER_ADMIN', 'for the admistrator in the system ', TIMESTAMP '2023-09-12 00:00:00');
+INSERT INTO SITEROLE (ID, NAME, NORMALIZEDNAME, DESCRIPTION, CREATED) VALUES (3, 'user', 'USER', '11111111111111111111', TIMESTAMP '2023-09-12 00:00:00');
+INSERT INTO SITEROLE (ID, NAME, NORMALIZEDNAME, DESCRIPTION, CREATED) VALUES (4, 'supervisor', 'SUPERVISOR', 'supervisor22222', TIMESTAMP '2023-09-15 00:00:00');
+INSERT INTO SITEROLE (ID, NAME, NORMALIZEDNAME, DESCRIPTION, CREATED) VALUES (5, 'test', 'TEST', 'to make some tests in the system ', TIMESTAMP '2023-09-26 00:00:00');
+INSERT INTO SITEROLE (ID, NAME, NORMALIZEDNAME, DESCRIPTION, CREATED) VALUES (1, 'oratest', 'ORATEST', 'oracle testing inseting ', TIMESTAMP '2023-10-16 00:00:00');
+DROP TABLE SITEUSER;
+CREATE TABLE SITEUSER (ID NUMBER NOT NULL, USERNAME VARCHAR2(200), FORENAME VARCHAR2(200), SURNAME VARCHAR2(200) NOT NULL, NORMALIZEDUSERNAME VARCHAR2(200), EMAIL VARCHAR2(200) NOT NULL, NORMALIZEDEMAIL VARCHAR2(200) NOT NULL, EMAILCONFIRMED VARCHAR2(5), PASSWORDHASH VARCHAR2(200) NOT NULL, PHONENUMBER VARCHAR2(200) NOT NULL, PHONENUMBERCONFIRMED VARCHAR2(5), TWOFACTORENABLED VARCHAR2(5), CREATED DATE, CONSTRAINT SITEUSER_PK PRIMARY KEY (ID));
+INSERT INTO SITEUSER (ID, USERNAME, FORENAME, SURNAME, NORMALIZEDUSERNAME, EMAIL, NORMALIZEDEMAIL, EMAILCONFIRMED, PASSWORDHASH, PHONENUMBER, PHONENUMBERCONFIRMED, TWOFACTORENABLED, CREATED) VALUES (41, 'm@m.com', 'moammed gafar', 'moammed gaffar', 'M@M.COM', 'm@m.com', 'M@M.COM', 'false', 'AQAAAAEAACcQAAAAEN8GgjlJ8IJgYNI2tJyOE09eFX8DxR47T3mmHfmacddvdIdTbQGWBHRGcAEN8PZ5+A==', '123421231', 'false', 'false', TIMESTAMP '2023-10-15 00:00:00');
+INSERT INTO SITEUSER (ID, USERNAME, FORENAME, SURNAME, NORMALIZEDUSERNAME, EMAIL, NORMALIZEDEMAIL, EMAILCONFIRMED, PASSWORDHASH, PHONENUMBER, PHONENUMBERCONFIRMED, TWOFACTORENABLED, CREATED) VALUES (61, 't@t.com', 'mohammed gaffer', 'aidaab', 'T@T.COM', 't@t.com', 'T@T.COM', 'false', 'AQAAAAEAACcQAAAAEKzOaE716JBJiB5DMGWI2bBO1Qu0y3d72+0Ji7npj/xzfWq8IAVob4L0T25wvpb/UA==', '887642454', 'false', 'false', TIMESTAMP '2023-10-16 00:00:00');
+DROP TABLE SITEUSERROLE;
+CREATE TABLE SITEUSERROLE (USERID NUMBER NOT NULL, ROLEID NUMBER, CONSTRAINT SITEUSERROLE_PK PRIMARY KEY (USERID));
+INSERT INTO SITEUSERROLE (USERID, ROLEID) VALUES (41, 2);
+INSERT INTO SITEUSERROLE (USERID, ROLEID) VALUES (61, 3);
+DROP PROCEDURE BUILDING_CREATE;
+--/
+CREATE PROCEDURE BUILDING_CREATE (
+BName NVARCHAR2,
+BNumber NUMBER,
+BCollege_Id NUMBER ,
+
+qres  out NVARCHAR2 
+)
+AS 
+        ident number ;
+
+BEGIN
+        SELECT COUNT (*)
+        INTO ident FROM BUILDING WHERE (college_id = BCollege_ID AND building_number = BNumber );
+
+        IF        ident = 0
+        THEN
+                  INSERT INTO building( name , building_number , college_id ) VALUES( BName, BNumber, BCollege_Id);
+                   qres := 'success';
+        ELSE
+                    qres := 'fail';
+        END IF;
+
+END BUILDING_CREATE;
+
+
+
+
+
+
+
+
+/
+DROP PROCEDURE BUILDING_DELETE;
+--/
+CREATE PROCEDURE BUILDING_DELETE 
+(B_Id IN number, qres OUT VARCHAR2)
+AS
+        chvalue number := 0 ;
+BEGIN
+  SELECT COUNT (*) INTO chvalue FROM BuILDING WHERE (ID = B_Id);
+
+        IF chvalue > 0 THEN 
+                DELETE FROM BUILDING WHERE (ID = B_ID);
+        qres := 'success';
+        ELSE 
+        qres := 'fail';
+        END IF ;
+
+END;
+
+
+
+/
+DROP PROCEDURE BUILDING_GET_BYID;
+--/
+CREATE PROCEDURE BUILDING_GET_BYID 
+(B_Id IN number,res OUT SYS_REFCURSOR)
+AS
+BEGIN
+  OPEN res FOR SELECT Building.ID AS ID
+                     ,Building.NAME AS buldingName
+                     ,Building.BUILDING_NUMBER AS buldingnumber
+                     ,Collages.NAME AS BuldingCollageName 
+                     ,Collages.ID AS BuldingCollageNumber
+		From Building Join Collages 
+			On (Building.COLLEGE_ID = Collages.ID)
+			WHERE (Building.Id = B_Id);
+END;
+
+
+
+/
+DROP PROCEDURE BUILDING_UPDATE;
+--/
+CREATE PROCEDURE BUILDING_UPDATE 
+(B_Id IN number, B_Name IN VARCHAR2, B_Number IN VARCHAR2, College_Id IN VARCHAR2,qres OUT VARCHAR2)
+AS
+        chvalue number := 0 ; 
+BEGIN
+       SELECT COUNT(*) INTO chvalue FROM BUILDING WHERE (BUILDING_NUMBER = B_Number AND COLLEGE_ID = College_Id) AND (ID <> B_Id) ;
+
+       If chvalue = 0 THEN 
+        UPDATE BUILDING SET
+                Name = B_Name ,
+                BUILDING_NUMBER = B_Number,
+                COLLEGE_ID = College_Id
+        WHERE 
+                ID = B_Id ;
+                qres := 'success';
+       ELSE 
+                qres := 'fail';
+       END IF;
+END;
+
+
+
+/
+DROP PROCEDURE COLLAGES_CREATE;
+--/
+CREATE PROCEDURE COLLAGES_CREATE 
+(Col_Name IN VARCHAR2, Col_Code IN VARCHAR2,qres OUT NVARCHAR2)
+AS
+      chvalue number := 0 ;
+BEGIN
+        SELECT COUNT (1) INTO chvalue FROM COLLAGES WHERE(Code = Col_Code);
+
+        IF chvalue = 0 THEN 
+                INSERT INTO COLLAGES (Name , Code)
+                        VALUES (Col_Name , Col_Code);
+           qres := 'success';
+        ELSE
+           qres := 'fail';
+        END IF;
+
+END;
+
+
+/
+DROP PROCEDURE COLLAGES_DELETE;
+--/
+CREATE PROCEDURE COLLAGES_DELETE 
+(Col_ID IN number,qres OUT VARCHAR2)
+AS
+        chvalue number :=0;
+BEGIN
+        SELECT COUNT (1) INTO chvalue FROM BUILDING WHERE (BUILDING.COLLEGE_ID = Col_ID);
+        IF chvalue = 0 THEN 
+                DELETE FROM COLLAGES 
+                        WHERE ID = Col_ID ;
+                qres := 'success';
+        ELSE
+                qres := 'fail';
+        END IF ;
+
+  DBMS_OUTPUT.PUT_LINE('Sample output');
+END;
+
+
+/
+DROP PROCEDURE COLLAGES_GETALL;
+--/
+CREATE PROCEDURE COLLAGES_GETALL 
+(res out SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN RES FOR SELECT ID,NAME,Code FROM Collages ;
+END;
+/
+DROP PROCEDURE COLLAGES_GETALL_PAGING;
+--/
+CREATE PROCEDURE COLLAGES_GETALL_PAGING
+(dbpageno IN NUMBER , dbpagesize IN NUMBER ,dbfilter IN NVARCHAR2,dbsorting IN NVARCHAR2,dbsortingtype IN NVARCHAR2,total OUT NUMBER,res OUT SYS_REFCURSOR)
+AS
+        string  VARCHAR2 (500)   := dbfilter;
+        sort NVARCHAR2(500)      := dbsorting ;
+        sorttype NVARCHAR2(500)  := dbsortingtype ;
+        psize NUMBER(10) 	 := 0;
+BEGIN
+          OPEN RES FOR SELECT ID,NAME,Code FROM Collages
+          WHERE Collages.NAME LIKE '%' || string || '%' OR  Collages.Code LIKE '%' || string || '%' 
+          order by             
+                 (case when sort = 'name' AND sorttype = 'asc' then NAME end) ASC ,
+                 (case when sort = 'name' AND sorttype = 'desc' then NAME end) DESC ,
+
+                 (case when sort = 'code' AND sorttype = 'asc' then Code  END) ASC,
+                 (case when sort = 'code' AND sorttype = 'desc' then Code  END) DESC 
+
+                 OFFSET dbpageno ROWS FETCH NEXT dbpagesize  ROWS ONLY;
+    
+        SELECT COUNT(1) INTO total FROM collages ;
+           
+END;
+/
+DROP PROCEDURE COLLAGES_GET_BYID;
+--/
+CREATE PROCEDURE COLLAGES_GET_BYID 
+(Col_ID IN number,res OUT SYS_REFCURSOR)
+AS
+BEGIN
+
+  OPEN res FOR SELECT Collages.ID,Collages.Name,Collages.Code FROM Collages
+        WHERE 
+        Collages.ID = Col_ID ;
+
+END;
+
+
+
+
+/
+DROP PROCEDURE COLLAGES_UPDATE;
+--/
+CREATE PROCEDURE COLLAGES_UPDATE 
+(Col_ID IN number, Col_Name IN VARCHAR2, Col_Code IN number,qres OUT VARCHAR2)
+AS
+        chvalue number := 0;
+BEGIN
+        SELECT COUNT (1) INTO chvalue FROM COLLAGES WHERE (CODE = Col_Code                                                            
+                                                           AND Name = Col_Name);
+
+        IF chvalue = 0 THEN 
+                UPDATE Collages SET
+			Name = Col_Name
+			,Code = Col_code
+		WHERE
+			ID = Col_ID ;
+                qres := 'success';
+        Else     
+                qres := 'fail';
+        END IF;
+END;
+
+
+/
+DROP PROCEDURE DASHBORD_ACTIVE_HALLS_NUMBER;
+--/
+CREATE PROCEDURE DASHBORD_ACTIVE_HALLS_NUMBER 
+(res OUT SYS_REFCURSOR)
+AS
+
+BEGIN
+  OPEN res FOR SELECT DISTINCT(COUNT(HALL_ID)) AS Active_Halls FROM Reservations
+		WHERE
+			TIME_START < CURRENT_DATE
+		AND
+			TIME_END > CURRENT_DATE
+		AND	
+			 RESERVATION_DATE = trunc(CURRENT_DATE)  ;
+END;
+
+
+
+/
+DROP PROCEDURE DASHBORD_HALLS_NUMBER;
+--/
+CREATE PROCEDURE DASHBORD_HALLS_NUMBER ( res OUT SYS_REFCURSOR)
+
+AS
+BEGIN
+        OPEN res FOR SELECT COUNT(id) as HallsNumer from Halls ;
+END;
+
+
+
+/
+DROP PROCEDURE DASHBORD_LASTRESERVATION_TODAY;
+--/
+CREATE PROCEDURE DASHBORD_LASTRESERVATION_TODAY (res OUT SYS_REFCURSOR)
+
+AS
+BEGIN
+  OPEN res FOR SELECT MAX(Time_End) AS MaxTime from Reservations
+	WHERE TRUNC(RESERVATION_DATE) = TRUNC(CURRENT_DATE) ;
+END;
+
+
+
+/
+DROP PROCEDURE DASHBORD_TODAY_RESERVATIONS;
+--/
+CREATE PROCEDURE DASHBORD_TODAY_RESERVATIONS ( 
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR SELECT  COUNT(DISTINCT(ID))  AS total from RESERVATIONS WHERE RESERVATION_DATE = trunc(CURRENT_DATE);
+
+END DASHBORD_TODAY_RESERVATIONS;
+
+
+
+
+
+
+
+
+
+
+/
+DROP PROCEDURE GETHALLS;
+--/
+CREATE PROCEDURE GETHALLS 
+(
+  --ID IN NUMBER ,
+  
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+    OPEN res FOR SELECT * FROM halls ;
+
+END GETHALLS;
+
+
+
+
+
+
+
+
+
+
+/
+DROP PROCEDURE GETHALLSBYID;
+--/
+CREATE PROCEDURE GETHALLSBYID 
+(
+  hallid IN NUMBER ,
+  
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+    OPEN res FOR SELECT * FROM halls Where id = hallid;
+
+END gethallsbyid;
+
+
+
+
+
+
+
+
+
+
+/
+DROP PROCEDURE GET_COLLEGE_BUILDING;
+--/
+CREATE PROCEDURE GET_COLLEGE_BUILDING 
+   (res out SYS_REFCURSOR)
+AS
+BEGIN
+  OPEN RES FOR 
+        SELECT Building.ID,Building.Name AS buldingName ,Building.building_Number AS buldingnumber,Collages.Name AS BuldingCollageName
+		FROM Building join Collages
+		On (Building.College_Id = Collages.ID) ;
+END GET_COLLEGE_BUILDING;
+
+
+
+
+
+
+
+
+
+
+/
+DROP PROCEDURE GET_COLLEGE_BUILDING_PAGING;
+--/
+CREATE PROCEDURE GET_COLLEGE_BUILDING_PAGING
+(dbpageno IN NUMBER , dbpagesize IN NUMBER ,dbfilter IN NVARCHAR2,dbsorting IN NVARCHAR2,dbsortingtype IN NVARCHAR2,total OUT NUMBER,res OUT SYS_REFCURSOR)
+
+AS
+        string  VARCHAR2 (500)   := dbfilter;
+        sort NVARCHAR2(500)      := dbsorting ;
+        sorttype NVARCHAR2(500)  := dbsortingtype ;
+        psize NUMBER(10) 	 := 0;
+BEGIN
+  OPEN res FOR 
+        SELECT Building.ID,Building.Name AS buldingName ,Building.building_Number AS buldingnumber,Collages.Name AS BuldingCollageName
+		FROM Building join Collages On (Building.College_Id = Collages.ID)
+         WHERE Building.Name LIKE '%' || string || '%' 
+          order by             
+                 (case when sort = 'buldingName' AND sorttype = 'asc' then buldingName end) ASC ,
+                 (case when sort = 'buldingName' AND sorttype = 'desc' then buldingName end) DESC ,
+
+                 (case when sort = 'buldingnumber' AND sorttype = 'asc' then buldingnumber  END) ASC,
+                 (case when sort = 'buldingnumber' AND sorttype = 'desc' then buldingnumber  END) DESC,
+                 
+                 (case when sort = 'buldingCollageName' AND sorttype = 'asc' then BuldingCollageName  END) ASC,
+                 (case when sort = 'buldingCollageName' AND sorttype = 'desc' then BuldingCollageName  END) DESC  
+
+                 OFFSET dbpageno ROWS FETCH NEXT dbpagesize  ROWS ONLY;
+    
+        SELECT COUNT(1) INTO total FROM collages ;
+END;
+/
+DROP PROCEDURE GET_HALL_BUILDING;
+--/
+CREATE PROCEDURE GET_HALL_BUILDING 
+(
+    res out SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR 
+    SELECT halls.ID AS Id , halls.NAME AS HallName ,halls.HALL_NUMBER AS HallNumber ,
+        Building.Id AS Building_ID, Building.Name AS BuildingName ,Building.BUILDING_NUMBER AS BuildingNumber
+	FROM halls JOIN Building
+		ON (halls.Building_ID = Building.ID);
+
+END GET_HALL_BUILDING;
+
+
+
+
+
+
+
+
+/
+DROP PROCEDURE HALLS_CREATE;
+--/
+CREATE PROCEDURE HALLS_CREATE 
+(H_ID IN number, HallName IN VARCHAR2, HallNumber IN number, Building_Id IN number,qres OUT VARCHAR2)
+AS
+        chvalue number := 0 ;
+BEGIN
+
+        SELECT COUNT (1) INTO chvalue FROM HALLS WHERE (HALL_NUMBER = HallNumber) AND (Building_ID = Building_Id);
+
+
+        IF chvalue = 0 THEN 
+                INSERT INTO Halls(Name,HALL_NUMBER,Building_ID) 
+                        VALUES 
+                        (HallName,HallNumber,Building_Id);
+        qres := 'success';
+
+        ELSE 
+        qres := 'fail';
+        END IF ;
+
+END;
+
+
+/
+DROP PROCEDURE HALLS_DELETE;
+--/
+CREATE PROCEDURE HALLS_DELETE 
+(H_ID IN number, qres OUT VARCHAR2)
+AS
+        chvalue number := 0 ;
+BEGIN
+        SELECT COUNT (1) INTO chvalue FROM RESERVATIONS WHERE (HAll_Id = H_id);
+
+        IF chvalue = 0 THEN 
+                DELETE FROM Halls
+			WHERE
+			(
+				ID = H_ID
+			);
+                qres := 'success';
+        ELSE 
+                qres := 'fail';
+        END IF;
+END;
+
+
+/
+DROP PROCEDURE HALLS_GETALL_PAGING;
+--/
+CREATE PROCEDURE HALLS_GETALL_PAGING
+(dbpageno IN NUMBER , dbpagesize IN NUMBER ,dbfilter IN NVARCHAR2,dbsorting IN NVARCHAR2,dbsortingtype IN NVARCHAR2,total OUT NUMBER,res OUT SYS_REFCURSOR)
+AS
+        string  VARCHAR2 (500)   := dbfilter;
+        sort NVARCHAR2(500)      := dbsorting ;
+        sorttype NVARCHAR2(500)  := dbsortingtype ;
+        psize NUMBER(10) 	 := 0;
+BEGIN
+        OPEN res FOR 
+                SELECT  
+                        halls.ID AS Id , 
+                        halls.NAME AS HallName ,
+                        halls.HALL_NUMBER AS HallNumber ,
+                        Building.Id AS Building_ID, 
+                        Building.Name AS BuildingName,
+                        Building.BUILDING_NUMBER AS BuildingNumber
+                        
+                FROM halls JOIN Building
+                        ON (halls.Building_ID = Building.ID)
+                        
+                WHERE halls.NAME LIKE '%' || string || '%' OR Building.Name LIKE '%' || string || '%' OR  halls.HALL_NUMBER LIKE '%' || string || '%'
+                order by             
+                         (case when sort = 'name' AND sorttype = 'asc' then HallName end) ASC ,
+                         (case when sort = 'name' AND sorttype = 'desc' then HallName end) DESC ,
+        
+                         (case when sort = 'building_Name' AND sorttype = 'asc' then BuildingName  END) ASC,
+                         (case when sort = 'building_Name' AND sorttype = 'desc' then BuildingName  END) DESC, 
+                        
+                         (case when sort = 'number' AND sorttype = 'asc' then HallNumber  END) ASC,
+                         (case when sort = 'number' AND sorttype = 'desc' then HallNumber  END) DESC 
+        
+                              
+                         OFFSET dbpageno ROWS FETCH NEXT dbpagesize  ROWS ONLY;
+                         
+                         
+                  SELECT COUNT(1) INTO total FROM HALLS;
+END;
+/
+DROP PROCEDURE HALLS_GETBYID;
+--/
+CREATE PROCEDURE HALLS_GETBYID 
+(Hall_Id IN number,res OUT SYS_REFCURSOR)
+AS
+BEGIN
+  OPEN res FOR SELECT * FROM HAllS WHERE (ID = HAll_Id);
+END;
+
+
+
+/
+DROP PROCEDURE HALLS_UPDATE;
+--/
+CREATE PROCEDURE HALLS_UPDATE 
+(H_ID IN number, HallName IN VARCHAR2, HallNumber IN number, NEW_Building_Id IN number,qres OUT VARCHAR2)
+AS
+        chvalue number := 0 ;
+BEGIN
+        SELECT COUNt (1) INTO chvalue FROM HALLS WHERE (Hall_Number = HallNumber AND BUILDING_ID = NEW_Building_Id AND Name = HallName) ;
+
+        IF chvalue = 0 THEN 
+                UPDATE Halls 
+		SET 
+			 Name =	 HallName
+			,Hall_Number = HallNumber
+			,Building_ID =  NEW_Building_Id
+		WHERE 
+			Halls.ID = H_ID;
+                qres := 'success';
+        ELSE
+                qres := 'fail';
+        END IF;
+END;
+
+
+/
+DROP PROCEDURE IDENTITY_ADDUSERTOROLE;
+--/
+CREATE PROCEDURE IDENTITY_ADDUSERTOROLE (
+  "U_ID" IN NUMBER, 
+  "R_ID" IN NUMBER) 
+  
+  IS
+       VarRowNum  NUMBER := 0 ;
+BEGIN 
+       SELECT COUNT("ROLEID")
+
+       INTO   VarRowNum
+
+	   FROM   SiteUserRole
+
+	  WHERE  UserId = "U_ID" AND RoleId = "R_ID" ;
+
+       IF VarRowNum = 0 THEN
+         INSERT INTO SiteUserRole
+			(UserId, RoleId	)
+			VALUES
+			("U_ID","R_ID") ;
+
+       END IF;
+END;
+
+
+
+
+
+
+
+
+
+/
+DROP PROCEDURE IDENTITY_FINDBYEMAIL;
+--/
+CREATE PROCEDURE IDENTITY_FINDBYEMAIL 
+(
+  NORUSEREMAIL IN VARCHAR2 ,
+  res OUT SYS_REFCURSOR
+) AS 
+BEGIN
+
+    OPEN res FOR  SELECT * FROM SiteUser
+    WHERE NormalizedEmail = NORUSEREMAIL;
+END IDENTITY_FINDBYEMAIL;
+/
+DROP PROCEDURE IDENTITY_FINDBYID;
+--/
+CREATE PROCEDURE IDENTITY_FINDBYID 
+(
+  U_ID IN NUMBER,
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+    OPEN res FOR 
+        SELECT * FROM SiteUser
+        WHERE Id = U_ID;
+END IDENTITY_FINDBYID;
+
+
+
+
+
+
+/
+DROP PROCEDURE IDENTITY_FINDBYNAME;
+--/
+CREATE PROCEDURE IDENTITY_FINDBYNAME 
+(
+  normalizedname in varchar2 ,
+  res out SYS_REFCURSOR
+) as 
+begin
+        OPEN res FOR 
+        SELECT * FROM SiteUser
+            WHERE NormalizedUserName = normalizedname AND ROWNUM = 1;
+end identity_findbyname;
+
+
+
+
+
+
+/
+DROP PROCEDURE IDENTITY_FINDROLEBYID;
+--/
+CREATE PROCEDURE IDENTITY_FINDROLEBYID 
+(
+  R_ID IN NUMBER,
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR 
+    SELECT  *  FROM SiteRole
+    WHERE Id = R_ID;
+
+END IDENTITY_FINDROLEBYID;
+/
+DROP PROCEDURE IDENTITY_FINDROLEBYNAME;
+--/
+CREATE PROCEDURE IDENTITY_FINDROLEBYNAME 
+(
+    NorRoleName IN VARCHAR2, 
+    res OUT SYS_REFCURSOR
+) AS 
+BEGIN
+        --null;
+    OPEN res FOR SELECT  * FROM SiteRole  WHERE NormalizedName = NorRoleName;
+
+END IDENTITY_FINDROLEBYNAME;
+/
+DROP PROCEDURE IDENTITY_GETALLROLES;
+--/
+CREATE PROCEDURE IDENTITY_GETALLROLES (res out SYS_REFCURSOR) AS
+
+BEGIN
+  OPEN RES FOR SELECT SiteRole.Id,SiteRole.Name,SiteRole.Description FROM SiteRole ;
+END IDENTITY_GETALLROLES;
+
+
+
+
+
+
+
+
+
+
+/
+DROP PROCEDURE IDENTITY_GETALLUSERS;
+--/
+CREATE PROCEDURE IDENTITY_GETALLUSERS 
+(
+    res out SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR SELECT * FROM SiteUser;
+END IDENTITY_GETALLUSERS;
+/
+DROP PROCEDURE IDENTITY_GETUSERROLES;
+--/
+CREATE PROCEDURE IDENTITY_GETUSERROLES 
+(
+  U_ID IN NUMBER,
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR 
+    SELECT r.* FROM SiteRole r 
+    INNER JOIN SiteUserRole ur ON ur.ROLEID = r.Id 
+    WHERE ur.USERID = U_ID  ;
+
+END IDENTITY_GETUSERROLES;
+
+
+/
+DROP PROCEDURE IDENTITY_GETUSERROLESBYUSERID;
+--/
+CREATE PROCEDURE IDENTITY_GETUSERROLESBYUSERID 
+( U_ID IN NUMBER, res out SYS_REFCURSOR) 
+AS 
+BEGIN
+    OPEN res FOR SELECT r.Name FROM SiteRole r 
+    INNER JOIN SiteUserRole ur ON ur.RoleId = r.Id 
+    WHERE ur.UserId = U_ID ;
+END IDENTITY_GETUSERROLESBYUSERID;
+
+
+/
+DROP PROCEDURE IDENTITY_INSERTROLE;
+--/
+CREATE PROCEDURE IDENTITY_INSERTROLE 
+(R_Name IN VARCHAR2, 
+R_NormalizedName IN VARCHAR2, 
+R_Description IN VARCHAR2, 
+Created IN date)
+AS
+        chvalue number := 0; 
+BEGIN
+        SELECT COUNT (1) INTO chvalue FROM SiteRole WHERE (Name = R_Name) ;
+
+       IF (chvalue = 0) THEN
+         INSERT INTO SiteRole 
+                (
+                        Name, 
+                        NormalizedName, 
+                        Description,
+                        Created
+                )
+                VALUES
+                (
+                        R_Name,
+                        R_NormalizedName,
+                        R_Description,
+                        TO_DATE(Created)
+                );
+
+        END IF;
+END;
+
+
+/
+DROP PROCEDURE IDENTITY_INSERTUSER;
+--/
+CREATE PROCEDURE IDENTITY_INSERTUSER 
+(
+  USERNAME IN VARCHAR2 
+, NORMALIZEDUSERNAME IN VARCHAR2 
+, FORENAME IN VARCHAR2 
+, SURNAME IN VARCHAR2 
+, EMAIL IN VARCHAR2 
+, NORMALIZEDEMAIL IN VARCHAR2 
+, EMAILCONFIRMED IN VARCHAR2 
+, PASSWORDHASH IN VARCHAR2 
+, PHONENUMBER IN VARCHAR2 
+, PHONENUMBERCONFIRMED IN VARCHAR2 
+, TWOFACTORENABLED IN VARCHAR2 
+, CREATED IN DATE
+, qres out VARCHAR2
+) 
+AS 
+    a VARCHAR2(5) := '' ;
+    b VARCHAR2(5) := '' ;
+    c VARCHAR2(5) := '' ;
+BEGIN
+    if EMAILCONFIRMED = 0  then 
+        a := 'false';
+        else
+        a := 'true';
+    end if;
+
+    if PHONENUMBERCONFIRMED = 0  then 
+        b := 'false';
+         else
+        b := 'true';
+    end if;
+
+    if TWOFACTORENABLED = 0  then 
+        c := 'false';
+        else
+        c := 'true';
+    end if;
+
+INSERT INTO SiteUser 
+(
+	UserName, 
+    NormalizedUserName, 
+    Email,
+    NormalizedEmail, 
+    EmailConfirmed,
+    Forename,
+    Surname,
+    PasswordHash,
+    PhoneNumber, 
+    PhoneNumberConfirmed, 
+    TwoFactorEnabled,
+	Created
+ )
+ VALUES
+ (
+	Username,
+	NormalizedUserName,
+	Email,
+	NormalizedEmail,
+	a,
+	Forename,
+	Surname,
+	PasswordHash,
+	PhoneNumber,
+	b,
+	c,
+	TO_DATE (Created)
+ );
+qres := 'success'; 
+
+END IDENTITY_INSERTUSER;
+
+
+
+
+
+
+
+
+
+/
+DROP PROCEDURE IDENTITY_ISUSERINROLE;
+--/
+CREATE PROCEDURE IDENTITY_ISUSERINROLE 
+(
+  R_ID IN NUMBER 
+, U_ID IN NUMBER 
+, res OUT SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR 
+    SELECT COUNT(1) FROM SiteUserRole 
+    WHERE UserId = R_ID 
+    AND RoleId = U_ID;
+
+END IDENTITY_ISUSERINROLE;
+
+
+/
+DROP PROCEDURE IDENTITY_UPDATEROLE;
+--/
+CREATE PROCEDURE IDENTITY_UPDATEROLE 
+(R_ID IN number,
+ R_Name IN VARCHAR2,
+ R_NormalizedName IN VARCHAR2,
+ R_Description IN VARCHAR2,
+ qres out VARCHAR2 )
+AS
+BEGIN
+
+        UPDATE SiteRole SET
+
+            Name = R_Name,
+            NormalizedName = R_NormalizedName,
+            Description = R_Description
+
+        WHERE Id = R_ID;
+
+        qres := 'successful';
+END;
+
+
+
+
+
+
+/
+DROP PROCEDURE IDENTITY_UPDATEUSER;
+--/
+CREATE PROCEDURE IDENTITY_UPDATEUSER 
+(
+  U_ID IN NUMBER   
+, U_USERNAME IN VARCHAR2 
+, U_NORMALIZEDUSERNAME IN VARCHAR2 
+, U_FORENAME IN VARCHAR2 
+, U_SURNAME IN VARCHAR2 
+, U_EMAIL IN VARCHAR2 
+, U_NORMALIZEDEMAIL IN VARCHAR2 
+, U_EMAILCONFIRMED IN VARCHAR2 
+, U_PASSWORDHASH IN VARCHAR2 
+, U_PHONENUMBER IN VARCHAR2 
+, U_PHONENUMBERCONFIRMED IN VARCHAR2 
+, U_TWOFACTORENABLED IN VARCHAR2 
+, qres out NVARCHAR2
+) AS
+     
+    a VARCHAR2(5) := '' ;
+    b VARCHAR2(5) := '' ;
+    c VARCHAR2(5) := '' ;
+BEGIN
+    if U_EMAILCONFIRMED = 0  then 
+        a := 'false';
+        else
+        a := 'true';
+    end if;
+
+    if U_PHONENUMBERCONFIRMED = 0  then 
+        b := 'false';
+         else
+        b := 'true';
+    end if;
+
+    if U_TWOFACTORENABLED = 0  then 
+        c := 'false';
+        else
+        c := 'true';
+    end if;
+
+UPDATE SiteUser SET
+
+        UserName = U_Username,
+        NormalizedUserName = U_NormalizedUserName,
+        Email = U_Email,
+        NormalizedEmail = U_NormalizedEmail, 
+        EmailConfirmed =a,
+        Forename = U_Forename,
+        Surname = U_Surname,
+        PasswordHash = U_PasswordHash,
+        PhoneNumber = U_PhoneNumber,
+        PhoneNumberConfirmed = b,
+        TwoFactorEnabled = c 
+
+        WHERE Id = U_ID ;
+        qres := 'success' ;
+
+END IDENTITY_UPDATEUSER;
+
+
+
+
+
+
+
+
+/
+DROP PROCEDURE PERMISSIONS_GETBYNAME;
+--/
+CREATE PROCEDURE PERMISSIONS_GETBYNAME 
+(
+  PERMISSIONNAME IN VARCHAR2 ,
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+	OPEN res FOR SELECT * FROM Permissions WHERE (Permissions.Name = PERMISSIONNAME);
+END PERMISSIONS_GETBYNAME;
+
+
+
+
+
+
+/
+DROP PROCEDURE PERMISSION_GET_ALL_BY_ROLE;
+--/
+CREATE PROCEDURE PERMISSION_GET_ALL_BY_ROLE 
+(
+  ROLE_ID IN NUMBER,
+  res out SYS_REFCURSOR
+) AS 
+BEGIN
+		OPEN res FOR SELECT * FROM RolePermission WHERE (RoleID = ROLE_ID);
+END PERMISSION_GET_ALL_BY_ROLE;
+/
+DROP PROCEDURE PERMISSION_GET_BY_ID;
+--/
+CREATE PROCEDURE PERMISSION_GET_BY_ID 
+(
+  PERM_ID IN NUMBER
+  , res out SYS_REFCURSOR
+) AS 
+BEGIN
+  OPEN res FOR SELECT * FROM Permissions WHERE (ID = PERM_ID);
+
+END PERMISSION_GET_BY_ID;
+/
+DROP PROCEDURE PERMISSION_INSERT;
+--/
+CREATE PROCEDURE PERMISSION_INSERT 
+(R_ID IN number, Perm_ID IN number)
+AS
+BEGIN
+  INSERT INTO RolePermission (RoleID , PermissionID)
+		VALUES (R_ID , Perm_ID) ;
+END;
+
+
+
+
+
+/
+DROP PROCEDURE PERMISSION_RESET;
+--/
+CREATE PROCEDURE PERMISSION_RESET 
+(R_ID IN number)
+AS
+
+BEGIN
+   DELETE FROM RolePermission WHERE (RoleID = R_ID);
+END;
+
+
+
+
+
+/
+DROP PROCEDURE PERMISSION_USERHASPERMISSION;
+--/
+CREATE PROCEDURE PERMISSION_USERHASPERMISSION 
+(
+  ROLE_ID IN NUMBER 
+, PERMISSION_ID IN NUMBER 
+, res out SYS_REFCURSOR
+) AS 
+BEGIN
+  	OPEn res FOR SELECT * FROM RolePermission 
+    WHERE(RoleID =ROLE_ID AND PermissionID =PERMISSION_ID);
+END PERMISSION_USERHASPERMISSION;
+
+
+
+
+
+
+/
+DROP PROCEDURE RESERVATIONS_CHECK_DUBLICATE;
+--/
+CREATE PROCEDURE RESERVATIONS_CHECK_DUBLICATE 
+(R_Name IN VARCHAR2, R_Hall_Id IN number, R_Date IN date, R_Time_Start IN DATE, R_Time_End IN DATE, R_User_Id IN number,qres OUT Varchar2)
+AS
+ chdoublecate number :=0 ;
+ chtiming     number :=0 ;
+BEGIN
+
+SELECT COUNT(1) INTO chdoublecate FROM RESERVATIONS WHERE (HALL_ID = R_Hall_Id) AND (RESERVATION_DATE = TRUNC(TO_DATE(R_Date,'yyyy/MM/dd HH24:MI:ss'))) 
+
+         AND    (R_Time_Start <= Time_Start  AND  R_Time_Start >=Time_End) 
+         OR 
+                ( R_Time_End <= Time_Start  AND  R_Time_End  >= Time_End ) ; 
+
+        IF chdoublecate > 0 THEN 
+                qres := 'dublicate';
+        END IF;       
+
+END;
+/* Procedure body */
+
+
+/
+DROP PROCEDURE RESERVATION_CHECK_DOBICATE;
+--/
+CREATE PROCEDURE RESERVATION_CHECK_DOBICATE 
+(R_Id IN NUMBER ,R_Name IN VARCHAR2, R_Hall_Id IN number, R_Date IN date, R_Time_Start IN DATE, R_Time_End IN DATE, R_User_Id IN number, qres OUT Varchar2, R_Q_state IN VARCHAR2)
+AS
+ chdoublecate number :=0 ;
+BEGIN
+        IF (R_Q_state != 'update') THEN
+                SELECT COUNT(*) INTO chdoublecate FROM RESERVATIONS WHERE (HALL_ID = R_Hall_Id) AND (RESERVATION_DATE =TO_DATE(R_Date) )
+                                  AND ( R_Time_Start  >= TIME_START  AND R_Time_Start <= TIME_END )
+                                  OR ( R_Time_END  >= TIME_START  AND R_Time_END <= TIME_END ) ; 
+
+                IF chdoublecate = 0 THEN 
+                        qres := 'true';
+                ELSE
+                        qres := 'flse';
+                END IF;
+        ELSE
+                 SELECT COUNT(*) INTO chdoublecate FROM RESERVATIONS WHERE (  (HALL_ID = R_Hall_Id) AND (RESERVATION_DATE = TO_DATE(R_Date) )
+                                  AND ( R_Time_Start  >= TIME_START  AND R_Time_Start <= TIME_END )
+                                  OR ( R_Time_END  >= TIME_START  AND R_Time_END <= TIME_END ) ) AND ID != R_Id; 
+
+                IF chdoublecate = 0  THEN 
+                        qres := 'true';
+                ELSE
+                        qres := 'flse';
+                END IF;
+        END IF;
+END;
+/* Procedure body */
+
+
+
+/
+DROP PROCEDURE RESERVATION_CREATEBYCONDITIONS;
+--/
+CREATE PROCEDURE RESERVATION_CREATEBYCONDITIONS 
+(R_Name2 IN varchar2, R_Hall_Id2 IN number, R_Date2 IN date, R_Time_Start2 IN DATE, R_Time_End2 IN DATE, R_User_Id2 IN number,qres2 OUT Varchar2)
+AS
+ chtiming     number :=0 ;
+BEGIN
+
+        --SELECT COUNT (*) INTO chtiming FROM RESERVATIONS WHERE (R_Time_Start2 > R_Time_End2 ) ;
+
+        IF (R_Time_Start2 >= R_Time_End2 ) THEN 
+                qres2 :='st>et';
+        else
+                INSERT INTO 
+                        RESERVATIONS(Name,Hall_Id,RESERVATION_DATE,Time_Start,Time_End,User_Id)
+                VALUES 
+                        (R_Name2,R_Hall_Id2,R_Date2,R_Time_Start2,R_Time_End2,R_User_Id2);
+                qres2 :='success';
+        END IF;
+
+END;
+
+
+/
+DROP PROCEDURE RESERVATION_GETALL;
+--/
+CREATE PROCEDURE RESERVATION_GETALL (res OUT SYS_REFCURSOR)
+
+AS
+BEGIN
+    OPEN res FOR SELECT  RESERVATIONS.ID,RESERVATIONS.Name,RESERVATIONS.Hall_Id,RESERVATIONS.Time_Start AS Time_Start,
+                           RESERVATIONS.Time_End AS Time_End,RESERVATION_DATE AS RESERVATION_DATE,RESERVATIONS.USER_ID 
+            ,Halls.Name AS Hall_Name, SiteUser.Forename AS User_Name
+            FROM RESERVATIONS 
+                    join Halls on RESERVATIONS.Hall_Id = Halls.ID
+                    join SiteUser on RESERVATIONS.User_Id = SiteUser.Id
+            ORDER BY Time_Start;
+END;
+/
+DROP PROCEDURE RESERVATION_GETALL_PAGING;
+--/
+CREATE PROCEDURE RESERVATION_GETALL_PAGING 
+(dbpageno IN NUMBER , dbpagesize IN NUMBER ,dbfilter IN NVARCHAR2,dbsorting IN NVARCHAR2,dbsortingtype IN NVARCHAR2,total OUT NUMBER,res OUT SYS_REFCURSOR)
+AS
+        string  VARCHAR2 (500)   := dbfilter;
+        sort NVARCHAR2(500)      := dbsorting ;
+        sorttype NVARCHAR2(500)  := dbsortingtype ;
+        psize NUMBER(10) 		 := 0;
+BEGIN
+
+        SELECT COUNT(1) INTO total FROM RESERVATIONS;
+
+
+        OPEN res FOR SELECT  RESERVATIONS.ID,RESERVATIONS.Name,RESERVATIONS.Hall_Id,RESERVATIONS.Time_Start AS Time_Start,
+                               RESERVATIONS.Time_End AS Time_End,RESERVATION_DATE AS RESERVATION_DATE,RESERVATIONS.USER_ID 
+                ,Halls.Name AS Hall_Name, SiteUser.Forename AS User_Name
+                FROM RESERVATIONS 
+                        join Halls on RESERVATIONS.Hall_Id = Halls.ID
+                        join SiteUser on RESERVATIONS.User_Id = SiteUser.Id 
+                WHERE RESERVATIONS.NAME LIKE '%' || string || '%' 
+                order by (case when sort = 'user_Name' AND sorttype = 'asc' then User_Name  END) ASC,
+                		 (case when sort = 'user_Name' AND sorttype = 'desc' then User_Name  END) DESC ,
+
+               			 (case when sort = 'name' AND sorttype = 'asc' then Name end) ASC ,
+               			 (case when sort = 'name' AND sorttype = 'desc' then Name end) DESC ,
+
+               			 (case when sort = 'time_Start' AND sorttype = 'asc' then Time_Start end) ASC  ,
+               			 (case when sort = 'time_Start' AND sorttype = 'desc' then Time_Start end) DESC  ,
+
+               			 (case when sort = 'time_End' AND sorttype = 'asc' then Time_End end) ASC  ,
+               			 (case when sort = 'time_End' AND sorttype = 'desc' then Time_End end) DESC,
+
+               			 (case when sort = 'hall_name' AND sorttype = 'asc' then Time_Start end) ASC  ,
+               			 (case when sort = 'hall_name' AND sorttype = 'desc' then Time_Start end) DESC ,
+
+               			 (case when sort = 'date' AND sorttype = 'asc' then Time_Start end) ASC  ,
+               			 (case when sort = 'date' AND sorttype = 'desc' then Time_Start end) DESC 
+
+                 OFFSET dbpageno ROWS FETCH NEXT dbpagesize  ROWS ONLY;
+
+
+END RESERVATION_GETALL_PAGING;
+/
+DROP PROCEDURE RESERVATION_GETBYID;
+--/
+CREATE PROCEDURE RESERVATION_GETBYID 
+(R_ID IN number,res OUT SYS_REFCURSOR)
+AS
+BEGIN
+  OPEN res FOR SELECT Reservations.ID,Reservations.Name,Reservations.Hall_Id,Reservations.Time_Start,Reservations.Time_End,Reservations.RESERVATION_DATE,Reservations.User_Id 
+	,Halls.Name AS Hall_Name, SiteUser.Forename AS User_Name
+	FROM Reservations 
+		join Halls on Reservations.Hall_Id = Halls.ID
+		join SiteUser on Reservations.User_Id = SiteUser.Id
+	WHERE Reservations.ID = R_ID ;
+END;
+
+
+
+/
+DROP PROCEDURE RESERVATION_GETBYUSERID;
+--/
+CREATE PROCEDURE RESERVATION_GETBYUSERID 
+(R_User_Id IN number , res OUT SYS_REFCURSOR)
+AS
+BEGIN
+ OPEn res FOR SELECT Reservations.ID,Reservations.Name,Reservations.Hall_Id,Reservations.Time_Start,Reservations.Time_End,
+                        Reservations.RESERVATION_DATE,Reservations.User_Id 
+	,Halls.Name AS Hall_Name
+	FROM Reservations join Halls on Reservations.Hall_Id = Halls.ID
+	WHERE Reservations.User_Id = R_User_Id 
+	ORDER BY Time_Start ;
+END;
+
+
+
+/
+DROP PROCEDURE RESERVATION_UPDATE;
+--/
+CREATE PROCEDURE RESERVATION_UPDATE 
+(R_Id2 IN number , R_Name2 IN varchar2, R_Hall_Id2 IN number, R_Date2 IN date, R_Time_Start2 IN DATE, R_Time_End2 IN DATE, R_User_Id2 IN number,qres2 OUT Varchar2)
+AS
+ chtiming     number :=0 ;
+BEGIN
+
+        SELECT COUNT (1) INTO chtiming FROM RESERVATIONS WHERE (R_Time_Start2 > R_Time_End2 ) ;
+
+        IF chtiming > 0 THEN 
+                qres2 :='st>et';
+        else
+                UPDATE RESERVATIONS 
+                SET
+                 Name = R_Name2,
+                 Hall_Id = R_Hall_Id2,
+                 RESERVATION_DATE = R_Date2,
+                 Time_Start = R_Time_Start2,
+                 Time_End = R_Time_End2,
+                 User_Id = R_User_Id2
+                WHERE
+                     ID = R_Id2 ; 
+
+                qres2 :='success';
+        END IF;
+
+END;
+
+
+/
+DROP PROCEDURE TEST;
+--/
+CREATE PROCEDURE TEST (res OUT SYS_REFCURSOR)
+
+AS
+        num integer := 0 ;
+BEGIN
+   OPEN res FOR SELECT *  FROM RESERVATIONS ;
+END;
+/
+DROP TRIGGER BUILDING_TRG;
+--/
+CREATE TRIGGER BUILDING_TRG 
+BEFORE INSERT ON BUILDING 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    NULL;
+  END COLUMN_SEQUENCES;
+END;
+
+
+
+
+
+
+
+
+
+/
+DROP TRIGGER BUILDING_TRG1;
+--/
+CREATE TRIGGER BUILDING_TRG1 
+BEFORE INSERT ON BUILDING 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    NULL;
+  END COLUMN_SEQUENCES;
+END;
+
+
+
+
+/
+DROP TRIGGER BUILDING_TRG2;
+--/
+CREATE TRIGGER BUILDING_TRG2 
+BEFORE INSERT ON BUILDING 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT BUILDING_SEQ2.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+
+
+
+
+/
+DROP TRIGGER COLLAGES_TRG;
+--/
+CREATE TRIGGER COLLAGES_TRG 
+BEFORE INSERT ON COLLAGES 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT COLLAGES_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+
+
+
+
+
+
+
+
+
+/
+DROP TRIGGER HALLS_TRG;
+--/
+CREATE TRIGGER HALLS_TRG 
+BEFORE INSERT ON HALLS 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT HALLS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+
+
+
+/
+DROP TRIGGER PERMISSIONS_TRG;
+--/
+CREATE TRIGGER PERMISSIONS_TRG 
+BEFORE INSERT ON PERMISSIONS 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT PERMISSIONS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+
+
+
+
+
+
+
+
+
+/
+DROP TRIGGER RESERVATIONS_TRG;
+--/
+CREATE TRIGGER RESERVATIONS_TRG 
+BEFORE INSERT ON RESERVATIONS 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT RESERVATIONS_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+
+
+
+/
+DROP TRIGGER ROLEPERMISSION_TRG;
+--/
+CREATE TRIGGER ROLEPERMISSION_TRG 
+BEFORE INSERT ON ROLEPERMISSION 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT ROLEPERMISSION_SEQ.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+
+
+
+
+
+
+
+
+
+/
+DROP TRIGGER SITEROLE_TRG;
+--/
+CREATE TRIGGER SITEROLE_TRG 
+BEFORE INSERT ON SITEROLE 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT SITEROLE_SEQ1.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+
+
+/
+DROP TRIGGER SITEUSER_TRG;
+--/
+CREATE TRIGGER SITEUSER_TRG 
+BEFORE INSERT ON SITEUSER 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    NULL;
+  END COLUMN_SEQUENCES;
+END;
+
+
+
+
+
+
+
+
+
+/
+DROP TRIGGER SITEUSER_TRG1;
+--/
+CREATE TRIGGER SITEUSER_TRG1 
+BEFORE INSERT ON SITEUSER 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT SITEUSER_SEQ1.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+
+
+
+
+
+
+
+
+
+/
