@@ -56,7 +56,6 @@ namespace HMS.UI.Controllers
         public JsonResult GetDetails()
         {
             object data = new object();
-            //var data = "" ; 
 
             var start = (Convert.ToInt32(Request.Form["start"]));
             var Length = (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
@@ -93,7 +92,6 @@ namespace HMS.UI.Controllers
                 data = data2.colleges;
                 recordsTotal = data2.totalPages;
 
-                //recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
             }
             catch (Exception ex)
             {
@@ -120,7 +118,6 @@ namespace HMS.UI.Controllers
         public async Task<IActionResult> store(BuildingCollegeVM buildingCollegeVM)
         {
 
-            // var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (await _IPermissionRepository.hasPermission(User.GetUserId(), "buildings-Create", cancellationToken))
             {
                 if (ModelState.IsValid)
@@ -172,7 +169,6 @@ namespace HMS.UI.Controllers
         public async Task<IActionResult> update(BuildingCollegeVM buildingCollegeVM)
         {
 
-            //var errors = ModelState.Values.SelectMany(v => v.Errors);
 
             if (ModelState.IsValid)
             {
@@ -207,7 +203,6 @@ namespace HMS.UI.Controllers
 
             TempData["message"] = "حدث خط ما الرجاء التحقق من استكمال جميع الحقول او التواصل مع مدير النظام في حال استمرار المشكلة";
 
-            //return View("Edit", buildingCollegeVM.ID);
             return Content("sdfasdfsad");
         }
         public async Task<IActionResult> delete(int id)

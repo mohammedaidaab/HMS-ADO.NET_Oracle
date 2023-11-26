@@ -81,12 +81,11 @@ namespace HMS.UI.Controllers
                 else
                     SortOrder = "desc";
 
-                var data2 = _collageRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);//.ToList();
+                var data2 = _collageRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);
 
                 data = data2.colleges;
                 recordsTotal = data2.totalPages;
 
-                //recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
             }
             catch (Exception ex)
             {

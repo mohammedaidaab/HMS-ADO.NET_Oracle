@@ -47,8 +47,6 @@ namespace HMS.UI.Controllers
 
         public async Task<IActionResult> Store(SiteRole role, CancellationToken cancellationToken) {
 
-			//var errors = ModelState.Values.SelectMany(v => v.Errors);
-
 			role.NormalizedName = role.Name.ToUpper();
 
             if (ModelState.IsValid)
@@ -86,8 +84,6 @@ namespace HMS.UI.Controllers
                 permissions = await _PermissionRepository.GetAllByRole(role),
             };
 
-
-           // var permissions = await _PermissionRepository.GetAllByRole(role);
 
             return View(rolePermissionVM);
         }

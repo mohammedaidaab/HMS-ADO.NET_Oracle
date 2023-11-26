@@ -44,12 +44,9 @@ namespace HMS.UI.Controllers
         private readonly IPermissionRepository _IPermissionRepository;
 		private readonly CancellationToken cancellationToken;
 
-		public ReservationController(IHallrepository iHallRepository, 
-                                     IReservationRepository ireservationrepository,
-                                     ISiteUserRepository siteUserRepository,
-                                     UserManager<SiteUser> userManager,
-                                     IPermissionRepository permissionRepository
-                                     )
+		public ReservationController(IHallrepository iHallRepository,IReservationRepository ireservationrepository,
+                                     ISiteUserRepository siteUserRepository,UserManager<SiteUser> userManager,
+                                     IPermissionRepository permissionRepository)
         {
             _IHallRepository = iHallRepository;
             _IReservationRepository = ireservationrepository;
@@ -86,70 +83,6 @@ namespace HMS.UI.Controllers
 		}
 
         // GET: reaservations
-        public async Task<ViewResult> Index2(string sortOrder, string currentFilter, string searchString, int? page)
-        
-        {
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.UserSortParm = sortOrder == "User_Name_desc" ? "User_Name_asc" : "User_Name_desc";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
-            var res = await _IReservationRepository.GetAll();
-
-            List<ReservationHallVM> re = res.ToList();
-
-            var Reservations = from s in re
-                           select s;
-            
-            if (!String.IsNullOrEmpty(searchString))
-            {
-
-                Reservations = Reservations.Where(s => s.Name.Contains(searchString));
-                                       //|| s.FirstMidName.Contains(searchString)) ;
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    Reservations = Reservations.OrderByDescending(s => s.Name);
-                    break;
-                case "Date":
-                    Reservations = Reservations.OrderBy(s => s.Date);
-                    break;
-                case "date_desc":
-                    Reservations = Reservations.OrderByDescending(s => s.Date);
-                    break;
-                case "User_Name_desc":
-                    Reservations = Reservations.OrderByDescending(s => s.User_Name);
-                    break;
-                case "User_Name_asc":
-                    Reservations = Reservations.OrderBy(s => s.User_Name);
-                    break;
-                default:  // Name ascending 
-                    Reservations = Reservations.OrderBy(s => s.Name);
-                    break;
-            }
-
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-            return View(Reservations.ToPagedList(pageNumber, pageSize));
-        }
-
-        public async Task<IActionResult> test()
-        {
-            return View();
-        }
-
         [HttpPost]
         public  JsonResult GetDetails()
         {
@@ -204,53 +137,6 @@ namespace HMS.UI.Controllers
 
             }
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
-        }
-
-        public async Task<IActionResult> paging(string search, int pagenum ,int rowsize , string direction)
-        {
-           
-            if (direction == "asc")
-            {
-                direction = "ASC";
-            }
-            else
-            {
-                direction = "desc";
-            }
-
-            if (pagenum == 0)
-            {
-                pagenum = 1;
-            }
-            else
-            {
-                pagenum = pagenum;
-            }
-
-            if (search == "")
-            {
-
-            }
-
-            if (rowsize == 0)
-            {
-                rowsize = 5;
-            }
-            else
-            {
-                rowsize = rowsize;
-            }
-
-            var res = await _IReservationRepository.manualpaging(search, pagenum, rowsize, direction);
-
-            ReservationHallPagingVM data = new ReservationHallPagingVM
-            {
-                reservations = res.reservations ,
-                CurrentPage = pagenum,
-                totalPages = res.totalPages / rowsize,
-            };
-
-            return View(data);
         }
 
         public async Task<IActionResult> Create()

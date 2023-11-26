@@ -31,13 +31,11 @@ namespace HMS.MVC.Controllers
         private readonly UserManager<SiteUser> _userManager;
         private readonly SignInManager<SiteUser> _signInManager;
         private readonly ISiteRoleRepository _ISiteRoleRepository;
-        // private readonly IEmailService _emailService;
         public AccountController(UserManager<SiteUser> userManager, SignInManager<SiteUser> signInManager,ISiteRoleRepository siteRoleRepository) //,IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _ISiteRoleRepository = siteRoleRepository;
-            //  _emailService = emailService;
         }
         [TempData]
         public string ErrorMessage { get; set; }
