@@ -71,22 +71,16 @@ namespace HMS.UI.Controllers
                 switch (sortcoloumnIndex)
                 {
                     case 0:
-                        SortColumn = "name";
+                        SortColumn = "buldingName";
                         break;
                     case 1:
-                        SortColumn = "time_Start";
+                        SortColumn = "buldingnumber";
                         break;
                     case 2:
-                        SortColumn = "time_End";
-                        break;
-                    case 3:
-                        SortColumn = "date";
-                        break;
-                    case 4:
-                        SortColumn = "hall_name";
+                        SortColumn = "buldingCollageName";
                         break;
                     default:
-                        SortColumn = "user_Name";
+                        SortColumn = "buldingName";
                         break;
                 }
                 if (sortDirection == "asc")

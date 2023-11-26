@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Identity\\HMS.Identity.csproj": {}
+    "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Identity\\HMS.Identity.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj": {
+    "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj",
         "projectName": "HMS.Domain",
-        "projectPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj",
-        "packagesPath": "C:\\Users\\Wekser\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\obj\\",
+        "projectPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj",
+        "packagesPath": "C:\\Users\\mgahmed\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Wekser\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mgahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -77,17 +77,17 @@
         }
       }
     },
-    "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Identity\\HMS.Identity.csproj": {
+    "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Identity\\HMS.Identity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Identity\\HMS.Identity.csproj",
+        "projectUniqueName": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Identity\\HMS.Identity.csproj",
         "projectName": "HMS.Identity",
-        "projectPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Identity\\HMS.Identity.csproj",
-        "packagesPath": "C:\\Users\\Wekser\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Identity\\obj\\",
+        "projectPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Identity\\HMS.Identity.csproj",
+        "packagesPath": "C:\\Users\\mgahmed\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Identity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Wekser\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mgahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -101,8 +101,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj": {
-                "projectPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj"
+              "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj": {
+                "projectPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.Domain\\HMS.Domain.csproj"
               }
             }
           }

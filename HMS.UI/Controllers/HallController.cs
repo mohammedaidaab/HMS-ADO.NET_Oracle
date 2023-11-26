@@ -90,8 +90,11 @@ namespace HMS.MVC.Controllers
                     case 1:
                         SortColumn = "building_Name";
                         break;
-                    default:
+                    case 2:
                         SortColumn = "number";
+                        break;
+                    default:
+                        SortColumn = "name";
                         break;
                 }
                 if (sortDirection == "asc")

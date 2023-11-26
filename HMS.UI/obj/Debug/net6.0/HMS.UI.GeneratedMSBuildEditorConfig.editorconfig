@@ -9,185 +9,185 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = HMS.UI
 build_property.RootNamespace = HMS.UI
-build_property.ProjectDir = C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\
+build_property.ProjectDir = C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI
+build_property.MSBuildProjectDirectory = C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.UI
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/AccessDenied.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/Lockout.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/Lockout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2Nrb3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/Login.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/Register.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/ResetPassword.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/SignedOut.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Account/SignedOut.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxTaWduZWRPdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Building/Create.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Building/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVpbGRpbmdcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Building/Edit.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Building/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVpbGRpbmdcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Building/Index.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Building/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVpbGRpbmdcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Collage/create.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Collage/create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29sbGFnZVxjcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Collage/Details.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Collage/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29sbGFnZVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Collage/Edit.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Collage/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29sbGFnZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Collage/Index.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Collage/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29sbGFnZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Hall/Create.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Hall/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFsbFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Hall/Details.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Hall/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFsbFxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Hall/Edit.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Hall/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFsbFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Hall/Index.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Hall/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFsbFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Home/dash.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Home/dash.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxkYXNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Home/Index.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Home/Privacy.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/ChangePassword.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXENoYW5nZVBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/Edit.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/EnableAuthenticator.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/EnableAuthenticator.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXEVuYWJsZUF1dGhlbnRpY2F0b3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/Index.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/SetPassword.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/SetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXFNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/UserList.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/UserList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXFVzZXJMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/_ManageNav.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/_ManageNav.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXF9NYW5hZ2VOYXYuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/_StatusMessage.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/_StatusMessage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXF9TdGF0dXNNZXNzYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/_ViewImports.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Manage/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXF9WaWV3SW1wb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/Create.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/Edit.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/Index.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/paging.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/paging.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25ccGFnaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/test.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Reservation/test.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cdGVzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Role/Create.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Role/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Role/Edit.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Role/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Role/Index.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Role/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/Error.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/_ViewImports.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/_ViewStart.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/custom.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/custom.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXGN1c3RvbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-hb3v4emrb1
 
-[C:/Users/Wekser/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/_Layout.cshtml]
+[C:/Users/mgahmed/Documents/GitHub/HMS-ADO.NET_Oracle/HMS.UI/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-mgylvgtb2e

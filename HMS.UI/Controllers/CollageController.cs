@@ -70,19 +70,10 @@ namespace HMS.UI.Controllers
                         SortColumn = "name";
                         break;
                     case 1:
-                        SortColumn = "time_Start";
-                        break;
-                    case 2:
-                        SortColumn = "time_End";
-                        break;
-                    case 3:
-                        SortColumn = "date";
-                        break;
-                    case 4:
-                        SortColumn = "hall_name";
+                        SortColumn = "code";
                         break;
                     default:
-                        SortColumn = "user_Name";
+                        SortColumn = "name";
                         break;
                 }
                 if (sortDirection == "asc")

@@ -272,7 +272,7 @@ namespace HMS.Infrastructure.Repositories
                 OracleParameter H_id = new OracleParameter { ParameterName = "H_ID", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.ID };
                 OracleParameter HallName = new OracleParameter { ParameterName = "HallName", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = model.Name };
                 OracleParameter HallNumber = new OracleParameter { ParameterName = "HallNumber", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.Number };
-                OracleParameter Building_Id = new OracleParameter { ParameterName = "Building_Id", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.Building_ID };
+                OracleParameter Building_Id = new OracleParameter { ParameterName = "NEW_Building_Id", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.Building_ID };
                 OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Output };
 
 

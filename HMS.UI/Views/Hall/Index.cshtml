@@ -39,13 +39,13 @@
             <table id="Data" class="table table-bordered" style="text-align:center">
             <thead>
                 <tr>
-                        <th style="text-align:center !important">
-                        @Html.DisplayNameFor(Model => Model.Building_Name)
-                    </th>
-                        <th style="text-align:center !important">
+                    <th style="text-align:center !important">
                         @Html.DisplayNameFor(Model => Model.Name)
                     </th>
-                        <th style="text-align:center !important">
+                    <th style="text-align:center !important">
+                        @Html.DisplayNameFor(Model => Model.Building_Name)
+                    </th>
+                    <th style="text-align:center !important">
                         @Html.DisplayNameFor(Model => Model.Number)
                     </th>
                     <th style="text-align:center !important">
@@ -142,8 +142,8 @@
                     "datatype": "json"
                 },
                 "columns": [
-                    { "data": "building_Name", "name": "building_Name", "autoWidth": true },
                     { "data": "name", "name": "name", "autoWidth": true },
+                    { "data": "building_Name", "name": "building_Name", "autoWidth": true },
                     { "data": "number", "name": "number", "autoWidth": true },
                     
                     {
