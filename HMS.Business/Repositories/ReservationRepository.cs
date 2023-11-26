@@ -257,6 +257,8 @@ namespace HMS.Business.Repositories
                         User_id = Convert.ToInt32(dr["User_Id"]),
                         User_Name = dr["User_Name"].ToString()
                     };
+                    //reservation.Time_Start =Convert.ToDateTime(reservation.Time_Start.ToString("HH:mm"));
+                    //reservation.Time_End = Convert.ToDateTime(reservation.Time_End.ToString("HH:mm"));
                     reservationList.Add(reservation);
 
                 }
