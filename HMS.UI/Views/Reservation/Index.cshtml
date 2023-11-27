@@ -16,38 +16,37 @@
 
 <div class="mg-div" style="background-image:url('/assets/media/images/clock.png')">
     <div class="card card-custom mg-card">
-        <div class="card-header">
+        <div class="card-header" style="align-content:center">
             <div class="card-title">
-                <div class="text-center">
-                    <center>
-                      الحجوزات
-                    </center>
-                </div>
+                الحجوزات
+            </div>
+            <div>
+                <a href="/reservation/canceledreservations"><input type="button" class="btn btn-danger" value="الحجوزات الملغية" /></a>
             </div>
         </div>
-            <div class="card-body">
-                <table id="data" class="table table-bordered">
-                    <thead>
-                        <tr style="text-align:center !important">
-                            <th>اسم الحجز</th>
-                            <th>وقت البداية</th>
-                            <th>وقت الانتهاء</th>
-                            <th>التاريخ</th>
-                            <th>اسم القاعة</th>
-                            <th>اسم المستخدم</th>
-                            <th>
+        <div class="card-body">
+            <table id="data" class="table table-bordered">
+                <thead>
+                    <tr style="text-align:center !important">
+                        <th>اسم الحجز</th>
+                        <th>وقت البداية</th>
+                        <th>وقت الانتهاء</th>
+                        <th>التاريخ</th>
+                        <th>اسم القاعة</th>
+                        <th>اسم المستخدم</th>
+                        <th>
                             @if (User.IsInRole("super-admin"))
                             {
                                 <p>
                                     تعديل
-                                </p>    
+                                </p>
                             }
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
         <div class="card-fotter">
         </div>
 

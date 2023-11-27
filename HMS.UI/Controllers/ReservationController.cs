@@ -42,26 +42,26 @@ namespace HMS.UI.Controllers
         private ISiteUserRepository _ISiteUserRepository;
         private UserManager<SiteUser> _UserManager;
         private readonly IPermissionRepository _IPermissionRepository;
-		private readonly CancellationToken cancellationToken;
+        private readonly CancellationToken cancellationToken;
 
-		public ReservationController(IHallrepository iHallRepository,IReservationRepository ireservationrepository,
-                                     ISiteUserRepository siteUserRepository,UserManager<SiteUser> userManager,
+        public ReservationController(IHallrepository iHallRepository, IReservationRepository ireservationrepository,
+                                     ISiteUserRepository siteUserRepository, UserManager<SiteUser> userManager,
                                      IPermissionRepository permissionRepository)
         {
             _IHallRepository = iHallRepository;
             _IReservationRepository = ireservationrepository;
             _ISiteUserRepository = siteUserRepository;
             _UserManager = userManager;
-			_IPermissionRepository = permissionRepository;
+            _IPermissionRepository = permissionRepository;
 
-		}
+        }
 
 
         public async Task<IActionResult> Index()
         {
-			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Read", cancellationToken))
-			{
-				if (User.IsInRole("super_admin"))
+            if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Read", cancellationToken))
+            {
+                if (User.IsInRole("super_admin"))
                 {
                     var reservations = await _IReservationRepository.GetAll();
                     return View(reservations);
@@ -70,33 +70,33 @@ namespace HMS.UI.Controllers
                 else
                 {
                     var userid = _UserManager.GetUserId(User);
-                   
+
                     var reservations = await _IReservationRepository.GetByUserId(userid);
                     return View(reservations);
 
                 }
-			}
-			else
-			{
-				return RedirectToAction("AccessDenied", "account");
-			}
-		}
+            }
+            else
+            {
+                return RedirectToAction("AccessDenied", "account");
+            }
+        }
 
         // GET: reaservations
         [HttpPost]
-        public  JsonResult GetDetails()
+        public JsonResult GetDetails()
         {
             object data = new object();
             //var data = "" ; 
 
-            var start =  (Convert.ToInt32(Request.Form["start"])); 
+            var start = (Convert.ToInt32(Request.Form["start"]));
             var Length = (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
-            var searchvalue =  Request.Form["search[value]"].ToString() ?? "";
+            var searchvalue = Request.Form["search[value]"].ToString() ?? "";
             var sortcoloumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
             var SortColumn = "";
             var SortOrder = "";
-            var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc" ;
-            var recordsTotal = 0 ;
+            var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc";
+            var recordsTotal = 0;
             try
             {
                 switch (sortcoloumnIndex)
@@ -130,8 +130,8 @@ namespace HMS.UI.Controllers
                 data = data2.reservations;
                 recordsTotal = data2.totalPages;
 
-					//recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
-			}
+                //recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
+            }
             catch (Exception ex)
             {
 
@@ -141,16 +141,16 @@ namespace HMS.UI.Controllers
 
         public async Task<IActionResult> Create()
         {
-			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Create", cancellationToken))
-			{
-				ViewBag.HallList = new SelectList(await _IHallRepository.GetAll(), nameof(Hall.ID), nameof(Hall.Name));
+            if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Create", cancellationToken))
+            {
+                ViewBag.HallList = new SelectList(await _IHallRepository.GetAll(), nameof(Hall.ID), nameof(Hall.Name));
                 return View();
-			}
-			else
-			{
-				return RedirectToAction("AccessDenied", "account");
-			}
-		}
+            }
+            else
+            {
+                return RedirectToAction("AccessDenied", "account");
+            }
+        }
 
         public async Task<IActionResult> store(Reservation reservation)
         {
@@ -159,89 +159,157 @@ namespace HMS.UI.Controllers
 
             if (ModelState.IsValid)
             {
-               BaseResponse res = await _IReservationRepository.create(reservation);
-               
-                if (res.IsSuccess == true) 
+                BaseResponse res = await _IReservationRepository.create(reservation);
+
+                if (res.IsSuccess == true)
                 {
-                    TempData["message"]=res.Message;
+                    TempData["message"] = res.Message;
                     TempData["type"] = res.Type;
                     return RedirectToAction("Index");
                 }
                 else
                 {
-					TempData["message"] = res.Message;
-					TempData["type"] = res.Type;
-					return RedirectToAction("create", reservation);
+                    TempData["message"] = res.Message;
+                    TempData["type"] = res.Type;
+                    return RedirectToAction("create", reservation);
 
-				}
+                }
 
-			}
-            return NotFound();   
+            }
+            return NotFound();
 
-		}
+        }
 
         public async Task<IActionResult> Edit(int id)
         {
 
-			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Update", cancellationToken))
-			{
-				ReservationHallVM reservation = await _IReservationRepository.GetById(id);
-				ViewBag.HallList = new SelectList(await _IHallRepository.GetAll(), nameof(Hall.ID), nameof(Hall.Name),nameof(reservation.Hall_Id));
-				return View(reservation);
-			}
-			else
-			{
-				return RedirectToAction("AccessDenied", "account");
-			}
-		}
+            if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Update", cancellationToken))
+            {
+                ReservationHallVM reservation = await _IReservationRepository.GetById(id);
+                ViewBag.HallList = new SelectList(await _IHallRepository.GetAll(), nameof(Hall.ID), nameof(Hall.Name), nameof(reservation.Hall_Id));
+                return View(reservation);
+            }
+            else
+            {
+                return RedirectToAction("AccessDenied", "account");
+            }
+        }
 
         public async Task<IActionResult> Update(Reservation reservation)
         {
             reservation.User_id = Convert.ToInt32(User.GetUserId());
 
-			var errors = ModelState.Values.SelectMany(v => v.Errors);
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
 
 
-			if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-				BaseResponse res = await _IReservationRepository.update(reservation);
-				if (res.IsSuccess == true)
-				{
-					TempData["message"] = res.Message;
-					TempData["type"] = res.Type;
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					TempData["message"] = res.Message;
-					TempData["type"] = res.Type;
-					return RedirectToAction("Edit", reservation);
-				}
-			}
+                BaseResponse res = await _IReservationRepository.update(reservation);
+                if (res.IsSuccess == true)
+                {
+                    TempData["message"] = res.Message;
+                    TempData["type"] = res.Type;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["message"] = res.Message;
+                    TempData["type"] = res.Type;
+                    return RedirectToAction("Edit", reservation);
+                }
+            }
 
 
-			TempData["message"] = "حدثت مشكلة غير متوقعة الرجاء التواصل مع مشرف النظام  في جحال استمرار الاشكالية";
-			return RedirectToAction("Edit", reservation);
-		}
+            TempData["message"] = "حدثت مشكلة غير متوقعة الرجاء التواصل مع مشرف النظام  في جحال استمرار الاشكالية";
+            return RedirectToAction("Edit", reservation);
+        }
 
-		public async Task<IActionResult> Delete(int id)
-		{
-			if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Delete", cancellationToken))
-			{
-				BaseResponse res = await _IReservationRepository.Delete(id);
-				if (res.IsSuccess)
-				{
-					TempData["type"] = res.Type;
-					TempData["message"] = res.Message;
-					return RedirectToAction("Index");
-				}
-			}
-			else
-			{
-				return RedirectToAction("AccessDenied", "account");
-			}
-			return RedirectToAction("Index");
-		}
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Delete", cancellationToken))
+            {
+                BaseResponse res = await _IReservationRepository.Delete(id);
+                if (res.IsSuccess)
+                {
+                    TempData["type"] = res.Type;
+                    TempData["message"] = res.Message;
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                return RedirectToAction("AccessDenied", "account");
+            }
+            return RedirectToAction("Index");
+        }
 
-	}
+        public IActionResult canceledreservations()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult GetCanceled()
+        {
+            object data = new object();
+
+            var start = (Convert.ToInt32(Request.Form["start"]));
+            var Length = (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
+            var searchvalue = Request.Form["search[value]"].ToString() ?? "";
+            var sortcoloumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
+            var SortColumn = "";
+            var SortOrder = "";
+            var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc";
+            var recordsTotal = 0;
+            try
+            {
+                switch (sortcoloumnIndex)
+                {
+                    case 0:
+                        SortColumn = "name";
+                        break;
+                    default:
+                        SortColumn = "user_Name";
+                        break;
+                }
+                if (sortDirection == "asc")
+                    SortOrder = "asc";
+                else
+                    SortOrder = "desc";
+
+                var data2 = _IReservationRepository.GetCanceled(start, searchvalue, Length, SortColumn, sortDirection);
+
+                data = data2.reservations;
+                recordsTotal = data2.totalPages;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
+        }
+
+
+        public async Task<IActionResult> reactive(int id)
+        {
+            if (id != 0)
+            {
+                BaseResponse res  = await _IReservationRepository.reactive(id);
+                if (res.IsSuccess == true)
+                {
+                    TempData["message"] = res.Message;
+                    TempData["type"] = res.Type;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["message"] = res.Message;
+                    TempData["type"] = res.Type;
+                    return RedirectToAction("canceledreservations");
+                }
+
+            }
+            return RedirectToAction("index");
+        }
+    }
 }

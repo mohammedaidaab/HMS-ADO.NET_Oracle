@@ -1,0 +1,96 @@
+﻿@*
+//////////////////////////////////////////////////
+//Author : Mohammed Gaffer Aidaab
+//For : King Faisual University
+//Under : ISB integrated sulution business Company
+//Halls ManageMent System
+/////////////////////////////////////////////////////
+*@
+@{
+    Layout = "custom";
+}
+
+
+
+<div class="mg-div" style="background-image:url('/assets/media/images/cancel.png')">
+    <div class="card card-custom mg-card">
+        <div class="card-header" style="align-content:center">
+            <div class="card-title">
+                الحجوزات  الملغاة
+            </div>
+        </div>
+            <div class="card-body">
+                <table id="data" class="table table-bordered">
+                    <thead>
+                        <tr style="text-align:center !important">
+                            <th>اسم الحجز</th>
+                            <th>تاريخ الالغاء</th>
+                            <th>اسم القاعة</th>
+                            <th>اسم المستخدم</th>
+                            <th>
+                            @if (User.IsInRole("super-admin"))
+                            {
+                                <p>
+                                    تنشيط
+                                </p>    
+                            }
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        <div class="card-fotter">
+        </div>
+
+
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    @if (TempData["message"] != null)
+    {
+        <script>messagebox.swall('@TempData["message"]', '@TempData["type"]')</script>
+    }
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+
+    <script>
+        GetDataTableData();
+        function GetDataTableData() {
+            $("#data").DataTable({
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "orderMulti": false,
+                "destroy": true,
+                "ordering": true,
+                "ajax": {
+                    "url": '/Reservation/GetCanceled',
+                    "type": "POST",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    { "data": "name", "name": "Name", "autoWidth": true },
+                    { "data": "date", "name": "date", "autoWidth": true },
+                    { "data": "hall_name", "name": "hall_name", "autoWidth": true },
+                    { "data": "user_Name", "name": "user_Name", "autoWidth": true },
+                    {
+                        "mData": null,
+                        "bSortable": false,
+                        "mRender": function (data) { return '@if (User.IsInRole("super_admin")) {  <a href="/reservation/reactive/' + data.id + '"><button class="btn btn-success"> إعادة تفعيل  <i class="fa-solid fa-edit fa-2xl"></i> </button> </a>      }'; }
+                    },
+                ]
+            });
+        }
+    </script>
+
+
+}
