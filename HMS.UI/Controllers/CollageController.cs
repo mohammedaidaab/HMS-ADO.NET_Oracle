@@ -8,15 +8,11 @@
 ///
 
 using HMS.Data;
-using HMS.Data.Entities;
 using HMS.Domain.Entities.Shared;
 using HMS.Domain.Interfaces.Repositories;
-using HMS.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using HMS.Data;
-using HMS.Business.Repositories;
 using HMS.Infrastructure.Extensions;
 using System.Threading;
 using System;
@@ -52,14 +48,13 @@ namespace HMS.UI.Controllers
         public JsonResult GetDetails()
         {
             object data = new object();
-            //var data = "" ; 
 
             var start = (Convert.ToInt32(Request.Form["start"]));
             var Length = (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
             var searchvalue = Request.Form["search[value]"].ToString() ?? "";
             var sortcoloumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
-            var SortColumn = "";
-            var SortOrder = "";
+            var SortColumn = string.Empty;
+            var SortOrder = string.Empty;
             var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc";
             var recordsTotal = 0;
             try
@@ -89,7 +84,7 @@ namespace HMS.UI.Controllers
             }
             catch (Exception ex)
             {
-
+                return Json(ex.ToString());
             }
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
         }

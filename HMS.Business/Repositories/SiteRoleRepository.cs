@@ -291,7 +291,7 @@ namespace HMS.Infrastructure.Repositories
 
                        // oracom.Parameters.AddWithValue("@UserId", user.Id);
 
-                        OracleDataReader rdr = oracom.ExecuteReader();
+                        OracleDataReader rdr = (OracleDataReader)await oracom.ExecuteReaderAsync();
 
                         while (rdr.Read())
                         {
@@ -326,7 +326,7 @@ namespace HMS.Infrastructure.Repositories
                 oracom.Parameters.Add(res);
 
                 oraccon.Open();
-                OracleDataReader dr = oracom.ExecuteReader();
+                OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
                 while (dr.Read())
                 {
                     SiteRole role = new SiteRole
@@ -370,7 +370,7 @@ namespace HMS.Infrastructure.Repositories
 
                         //oracom.Parameters.AddWithValue("@UserId", user.Id);
 
-						OracleDataReader rdr = oracom.ExecuteReader();
+						OracleDataReader rdr = (OracleDataReader)await oracom.ExecuteReaderAsync();
 
 						while (rdr.Read())
 						{

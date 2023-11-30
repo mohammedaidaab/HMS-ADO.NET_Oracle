@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mxt2cPcYu9IPaKEMCTFdTBxjmzu+KfQpOCNxsHUV4gg=",
+  "Hash": "UsXRVO55elQ4hfhlLup7W95LEGfdVdzRkOyXAAD4dTA=",
   "Source": "HMS.UI",
   "BasePath": "_content/HMS.UI",
   "Mode": "Default",
@@ -21758,6 +21758,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\media\\images\\calender.png"
+    },
+    {
+      "Identity": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\wwwroot\\assets\\media\\images\\cancel.png",
+      "SourceId": "HMS.UI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\wwwroot\\",
+      "BasePath": "_content/HMS.UI",
+      "RelativePath": "assets/media/images/cancel.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\media\\images\\cancel.png"
     },
     {
       "Identity": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\wwwroot\\assets\\media\\images\\class.png",

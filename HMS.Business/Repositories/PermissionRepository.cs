@@ -51,7 +51,7 @@ namespace HMS.Business.Repositories
                 SqlCommand sqlcom = new SqlCommand("Permission_get_all", sqlcon);
                 sqlcom.CommandType = CommandType.StoredProcedure;
 
-                SqlDataReader dr = sqlcom.ExecuteReader();
+                SqlDataReader dr = (SqlDataReader)await sqlcom.ExecuteReaderAsync();
 
                 while (dr.Read())
                 {
@@ -83,7 +83,7 @@ namespace HMS.Business.Repositories
 				oracom.Parameters.Add(res);	
                 
                 oracon.Open();
-                OracleDataReader dr = oracom.ExecuteReader();
+                OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
                 while (dr.Read())
                 {
                     Permission RolePermission = new Permission();
@@ -145,7 +145,7 @@ namespace HMS.Business.Repositories
 					oracom.Parameters.Add(res);
 
 					oracon.Open();
-					OracleDataReader dr = oracom.ExecuteReader();
+					OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
 					while (dr.Read())
 					{
 						Permission Permission = new Permission();
@@ -175,7 +175,7 @@ namespace HMS.Business.Repositories
                 //oracom.Parameters.AddWithValue("@RoleID", roleId);
 
 				oracon.Open();
-				oracom.ExecuteNonQuery();
+				await oracom.ExecuteNonQueryAsync();
 				oracon.Close();
 				try
 				{
@@ -234,7 +234,7 @@ namespace HMS.Business.Repositories
                 //oracom.Parameters.AddWithValue("@PermissionName", permition);
 
                 oracon.Open();
-				OracleDataReader dr = oracom.ExecuteReader();
+				OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
 				while (dr.Read())
 				{
 					permission.ID = Convert.ToInt32(dr["ID"]);

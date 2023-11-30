@@ -65,8 +65,8 @@ namespace HMS.MVC.Controllers
             var Length = (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
             var searchvalue = Request.Form["search[value]"].ToString() ?? "";
             var sortcoloumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
-            var SortColumn = "";
-            var SortOrder = "";
+            var SortColumn = string.Empty;
+            var SortOrder = string.Empty;
             var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc";
             var recordsTotal = 0;
             try
@@ -99,7 +99,7 @@ namespace HMS.MVC.Controllers
             }
             catch (Exception ex)
             {
-
+                return Json(ex.ToString());
             }
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
         }

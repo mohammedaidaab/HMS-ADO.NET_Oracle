@@ -45,12 +45,9 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(Col_Code);
                 oracom.Parameters.Add(qres);
 
-                //oracom.Parameters.AddWithValue("ID", model.ID);
-                //oracom.Parameters.AddWithValue("Name", model.Name);
-                //oracom.Parameters.AddWithValue("Code", model.Code);
 
 				oracon.Open();
-                oracom.ExecuteNonQuery();
+                await oracom.ExecuteNonQueryAsync();
 				if (oracom.Parameters["qres"].Value.ToString() == "success")
 				{
 					oracon.Close();
@@ -91,10 +88,9 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(Col_ID);
                 oracom.Parameters.Add(qres);
 
-				//oracom.Parameters.AddWithValue("@ID", Id);
 
 				oracon.Open();
-                oracom.ExecuteNonQuery();
+                await oracom.ExecuteNonQueryAsync();
 				if (oracom.Parameters["qres"].Value.ToString() == "success")
 				{
 					oracon.Close();
@@ -138,7 +134,7 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(res);
 
                 oracon.Open();
-                OracleDataReader dr = oracom.ExecuteReader();
+                OracleDataReader dr = (OracleDataReader) await oracom.ExecuteReaderAsync();
                 while (dr.Read())
                 {
                     collage collage = new collage();
@@ -233,7 +229,7 @@ namespace HMS.Business.Repositories
 				//oracom.Parameters.AddWithValue("ID", Id);
 
                 oracon.Open();
-                OracleDataReader dr = oracom.ExecuteReader();
+                OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
                 while (dr.Read())
                 {
 
@@ -269,12 +265,8 @@ namespace HMS.Business.Repositories
 				oracom.Parameters.Add(Col_Code);
 				oracom.Parameters.Add(qres);
 
-				//oracom.Parameters.AddWithValue("ID", model.ID);
-                //oracom.Parameters.AddWithValue("Name", model.Name);
-                //oracom.Parameters.AddWithValue("Code", model.Code);
-
 				oracon.Open();
-                oracom.ExecuteNonQuery();
+                await oracom.ExecuteNonQueryAsync();
 				if (oracom.Parameters["qres"].Value.ToString() == "success")
 				{
 					oracon.Close();
@@ -299,7 +291,6 @@ namespace HMS.Business.Repositories
 
 
 			}
-            //throw new NotImplementedException();
         }
 
     }

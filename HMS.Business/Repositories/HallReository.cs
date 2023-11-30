@@ -54,7 +54,7 @@ namespace HMS.Infrastructure.Repositories
                 oracom.Parameters.Add(qres);
 
                 oracon.Open();
-                oracom.ExecuteNonQuery();
+                await oracom.ExecuteNonQueryAsync();
                 if (oracom.Parameters["qres"].Value.ToString() == "success")
                 {
                     oracon.Close();
@@ -99,7 +99,7 @@ namespace HMS.Infrastructure.Repositories
                 //oracom.Parameters.AddWithValue("@ID", Id);
 
                 oracon.Open();
-                oracom.ExecuteNonQuery();
+                await oracom.ExecuteNonQueryAsync();
                 if (oracom.Parameters["qres"].Value.ToString() == "success")
                 {
                     oracon.Close();
@@ -142,7 +142,7 @@ namespace HMS.Infrastructure.Repositories
 
 
                 oracon.Open();
-                OracleDataReader dr = oracom.ExecuteReader();
+                OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
                 while (dr.Read())
                 {
                     HallBuildingVM hall = new HallBuildingVM();
@@ -245,7 +245,7 @@ namespace HMS.Infrastructure.Repositories
                 //oracom.Parameters.AddWithValue("@ID", Id);
 
                 oracon.Open();
-                OracleDataReader dr = oracom.ExecuteReader();
+                OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
 
                 while (dr.Read())
                 {
@@ -284,7 +284,7 @@ namespace HMS.Infrastructure.Repositories
                 oracom.Parameters.Add(qres);
 
                 oracon.Open();
-                oracom.ExecuteNonQuery();
+                await oracom.ExecuteNonQueryAsync();
                 if (oracom.Parameters["qres"].Value.ToString() == "success")
                 {
                     oracon.Close();

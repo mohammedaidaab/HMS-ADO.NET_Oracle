@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Drawing.Printing;
+using Oracle.ManagedDataAccess.Types;
 
 namespace HMS.Business.Repositories
 {
@@ -65,7 +66,7 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(R_Q_state);
 
                 oracon.Open(); 
-                oracom.ExecuteNonQuery(); 
+                await oracom.ExecuteNonQueryAsync(); 
                 if (oracom.Parameters["qres"].Value.ToString() == "true")
                 {
                     oracon.Close();
@@ -136,14 +137,14 @@ namespace HMS.Business.Repositories
                 OracleCommand oracom = new OracleCommand("RESERVATION_DELETE", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
-                OracleParameter R_Id = new OracleParameter { ParameterName = "R_Id", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Input, Value = id };
-                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.Varchar2, Direction = ParameterDirection.Output };
+                OracleParameter R_Id = new() { ParameterName = "R_Id", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Input, Value = id };
+                OracleParameter qres = new(){ ParameterName = "qres", OracleDbType = OracleDbType.Varchar2, Direction = ParameterDirection.Output };
 
                 oracom.Parameters.Add(R_Id);
                 oracom.Parameters.Add (qres);
 
                 oracon.Open();
-                oracom.ExecuteNonQuery();
+                await oracom.ExecuteNonQueryAsync();
                 if (oracom.Parameters["qres"].Value.ToString() == "success")
                 {
                     return new BaseResponse
@@ -180,7 +181,7 @@ namespace HMS.Business.Repositories
 
 
                 oracon.Open();
-                OracleDataReader dr = oracom.ExecuteReader();
+                OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
                 while (dr.Read())
                 {
                     ReservationHallVM reservation = new ReservationHallVM
@@ -290,12 +291,11 @@ namespace HMS.Business.Repositories
                 OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
                 oracom.Parameters.Add(R_ID);
                 oracom.Parameters.Add(res);
-                //oracom.Parameters.AddWithValue("ID", id);
 
 				oracom.CommandType = CommandType.StoredProcedure;
 
 				oracon.Open();
-				OracleDataReader dr = oracom.ExecuteReader();
+				OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
 				while (dr.Read())
 				{
 					ReservationHallVM reserv = new ReservationHallVM
@@ -333,11 +333,10 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(R_User_Id);
                 oracom.Parameters.Add(res);
 
-                //oracom.Parameters.AddWithValue("User_Id", id);
                 oracom.CommandType = CommandType.StoredProcedure;
 
                 oracon.Open();
-                OracleDataReader dr = oracom.ExecuteReader();
+                OracleDataReader dr = (OracleDataReader) await oracom.ExecuteReaderAsync();
                 while (dr.Read())
                 {
                     ReservationHallVM reservation = new ReservationHallVM
@@ -358,7 +357,6 @@ namespace HMS.Business.Repositories
                
 
             }
-            //throw new NotImplementedException();
         }
 
         public async Task<BaseResponse> update(Reservation reservation)
@@ -366,7 +364,6 @@ namespace HMS.Business.Repositories
             using(OracleConnection oracon = new OracleConnection(con)) 
             { 
 
-                //OracleCommand oracom = new OracleCommand("Reservation_Create", oracon);
                 OracleCommand oracom = new OracleCommand("RESERVATION_CHECK_DOBICATE", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
@@ -392,7 +389,7 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(R_Q_state);
 
                 oracon.Open();
-                oracom.ExecuteNonQuery();
+                await oracom.ExecuteNonQueryAsync();
                 if (oracom.Parameters["qres"].Value.ToString() == "true")
                 {
                     oracon.Close();
@@ -546,7 +543,7 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(qres);
 
                 oracon.Open();
-                oracom.ExecuteNonQuery();
+                await oracom.ExecuteNonQueryAsync();
                 if (oracom.Parameters["qres"].Value.ToString() == "success")
                 {
                     oracon.Close();

@@ -4989,6 +4989,10 @@
       "PackagePath": "staticwebassets\\assets\\media\\images\\calender.png"
     },
     {
+      "Id": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\wwwroot\\assets\\media\\images\\cancel.png",
+      "PackagePath": "staticwebassets\\assets\\media\\images\\cancel.png"
+    },
+    {
       "Id": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.UI\\wwwroot\\assets\\media\\images\\class.png",
       "PackagePath": "staticwebassets\\assets\\media\\images\\class.png"
     },

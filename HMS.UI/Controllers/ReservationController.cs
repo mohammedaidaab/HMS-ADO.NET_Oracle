@@ -87,14 +87,13 @@ namespace HMS.UI.Controllers
         public JsonResult GetDetails()
         {
             object data = new object();
-            //var data = "" ; 
 
             var start = (Convert.ToInt32(Request.Form["start"]));
             var Length = (Convert.ToInt32(Request.Form["length"])) == 0 ? 10 : (Convert.ToInt32(Request.Form["length"]));
             var searchvalue = Request.Form["search[value]"].ToString() ?? "";
             var sortcoloumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
-            var SortColumn = "";
-            var SortOrder = "";
+            var SortColumn = string.Empty;
+            var SortOrder = string.Empty;
             var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc";
             var recordsTotal = 0;
             try
@@ -125,16 +124,15 @@ namespace HMS.UI.Controllers
                 else
                     SortOrder = "desc";
 
-                var data2 = _IReservationRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);//.ToList();
+                var data2 = _IReservationRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);
 
                 data = data2.reservations;
                 recordsTotal = data2.totalPages;
 
-                //recordsTotal = data.Count > 0 ? data[0].TotalRecords : 0;
             }
             catch (Exception ex)
             {
-
+                return Json(ex.ToString());
             }
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
         }
@@ -248,7 +246,7 @@ namespace HMS.UI.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult GetCanceled()
+        public JsonResult GetCanceled() 
         {
             object data = new object();
 
@@ -257,7 +255,7 @@ namespace HMS.UI.Controllers
             var searchvalue = Request.Form["search[value]"].ToString() ?? "";
             var sortcoloumnIndex = Convert.ToInt32(Request.Form["order[0][column]"]);
             var SortColumn = "";
-            var SortOrder = "";
+            var SortOrder = string.Empty;
             var sortDirection = Request.Form["order[0][dir]"].ToString() ?? "asc";
             var recordsTotal = 0;
             try
@@ -284,7 +282,7 @@ namespace HMS.UI.Controllers
             }
             catch (Exception ex)
             {
-
+                return Json(ex.ToString());
             }
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
         }
