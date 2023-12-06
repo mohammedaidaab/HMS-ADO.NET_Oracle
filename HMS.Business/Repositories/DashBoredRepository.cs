@@ -60,7 +60,6 @@ namespace HMS.Business.Repositories
 
             }
 
-            // throw new NotImplementedException();
         }
 
 		public DateTime GetLastReservation()
@@ -83,8 +82,6 @@ namespace HMS.Business.Repositories
                     if(dr["MaxTime"] != DBNull.Value)
                     {
                         count = dr["MaxTime"].ToString();
-                       // string time  = count.Replace(".", ":");
-                     //   count = DateTime.ParseExact("01-01-1111 "+ time + ":00", "MM-dd-yyyy hh:mm:ss", CultureInfo.InvariantCulture).ToString();
                         hallsnumber = Convert.ToDateTime(count);
 					}
 				}

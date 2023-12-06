@@ -46,7 +46,6 @@ namespace HMS.Infrastructure.Repositories
                 OracleParameter Building_Id = new OracleParameter { ParameterName = "Building_Id", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.Building_ID };
                 OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Output };
 
-
                 oracom.Parameters.Add(H_id);
                 oracom.Parameters.Add(HallName);
                 oracom.Parameters.Add(HallNumber);
@@ -122,8 +121,6 @@ namespace HMS.Infrastructure.Repositories
 
                 }
             }
-
-            //throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<HallBuildingVM>> GetAll()
@@ -170,7 +167,6 @@ namespace HMS.Infrastructure.Repositories
 
                 OracleCommand oracom = new OracleCommand("HALLS_GETALL_PAGING", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
-
 
                 OracleParameter dbpageno = new OracleParameter { ParameterName = "dbpageno", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = pageno };
                 OracleParameter dbpagesize = new OracleParameter { ParameterName = "dbpagesize", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = pagesize };
@@ -241,9 +237,6 @@ namespace HMS.Infrastructure.Repositories
                 oracom.Parameters.Add(Hall_Id);
                 oracom.Parameters.Add(res);
 
-
-                //oracom.Parameters.AddWithValue("@ID", Id);
-
                 oracon.Open();
                 OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
 
@@ -257,7 +250,6 @@ namespace HMS.Infrastructure.Repositories
                 oracon.Close();
                 return hall;
             }
-            //  throw new NotImplementedException();
         }
 
         public async Task<BaseResponse> Update(Hall model)
@@ -267,14 +259,11 @@ namespace HMS.Infrastructure.Repositories
                 OracleCommand oracom = new OracleCommand("Halls_Update", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
-
-
                 OracleParameter H_id = new OracleParameter { ParameterName = "H_ID", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.ID };
                 OracleParameter HallName = new OracleParameter { ParameterName = "HallName", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Input, Value = model.Name };
                 OracleParameter HallNumber = new OracleParameter { ParameterName = "HallNumber", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.Number };
                 OracleParameter Building_Id = new OracleParameter { ParameterName = "NEW_Building_Id", OracleDbType = OracleDbType.Int32, Size = 200, Direction = ParameterDirection.Input, Value = model.Building_ID };
                 OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 200, Direction = ParameterDirection.Output };
-
 
                 oracom.Parameters.Add(H_id);
                 oracom.Parameters.Add(HallName);

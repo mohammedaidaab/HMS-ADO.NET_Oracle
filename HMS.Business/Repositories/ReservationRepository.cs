@@ -121,7 +121,7 @@ namespace HMS.Business.Repositories
                     oracon.Close();
                     return new BaseResponse
                     {
-                        Message = "لم تتم إضافة الحجز امل لوجود حجز مماثل او خطا في اوقات الحجز ",
+                        Message = "لم تتم إضافة الحجز لوجود حجز مماثل او خطا في اوقات الحجز ",
                         Type = "error",
                         IsSuccess = false
                     };
@@ -149,7 +149,7 @@ namespace HMS.Business.Repositories
                 {
                     return new BaseResponse
                     {
-                        Message = "تم إضافة حجز القاعة بنجاح",
+                        Message = "تم حذف حجز القاعة بنجاح",
                         Type = "success",
                         IsSuccess = true
                     };
@@ -204,7 +204,6 @@ namespace HMS.Business.Repositories
               
 
             }
-               // throw new NotImplementedException();
 		}
 
         public  ReservationHallPagingVM GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder)
@@ -218,8 +217,6 @@ namespace HMS.Business.Repositories
                 OracleCommand oracom = new OracleCommand("RESERVATION_GETALL_PAGING", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
                 
-
-                
                 OracleParameter dbpageno = new OracleParameter { ParameterName = "dbpageno", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=pageno};
                 OracleParameter dbpagesize = new OracleParameter { ParameterName = "dbpagesize", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=pagesize};
                 OracleParameter dbfilter = new OracleParameter { ParameterName = "dbfilter", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=filter};
@@ -229,9 +226,6 @@ namespace HMS.Business.Repositories
 
                 OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
 
-
-
-               
                 oracom.Parameters.Add(dbpageno);
                 oracom.Parameters.Add(dbpagesize);
                 oracom.Parameters.Add(dbfilter);
@@ -239,9 +233,7 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(dbsortingtype);
                 oracom.Parameters.Add(total);
 
-
                 oracom.Parameters.Add(res);
-
 
                 oracon.Open();
                 OracleDataReader dr = oracom.ExecuteReader();
@@ -260,7 +252,6 @@ namespace HMS.Business.Repositories
                     };
 
                     reservationList.Add(reservation);
-
                 }
 
                 oracon.Close();
@@ -273,8 +264,6 @@ namespace HMS.Business.Repositories
                 };
 
                 return respage;
-
-
             }
 
         }
@@ -307,15 +296,12 @@ namespace HMS.Business.Repositories
 						Time_Start = Convert.ToDateTime(dr["Time_Start"].ToString()),
 						Time_End = Convert.ToDateTime(dr["Time_End"].ToString()),
 						User_id = Convert.ToInt32(dr["User_Id"]),
-
 					};
 
                     reservation = reserv;
 				}
                 oracon.Close();
                 return reservation;
-				
-
 			}
 		}
 
@@ -465,8 +451,6 @@ namespace HMS.Business.Repositories
                 OracleCommand oracom = new OracleCommand("RESERVATION_GET_CANCELED_PAGING", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
-
-
                 OracleParameter dbpageno = new OracleParameter { ParameterName = "dbpageno", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = pageno };
                 OracleParameter dbpagesize = new OracleParameter { ParameterName = "dbpagesize", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = pagesize };
                 OracleParameter dbfilter = new OracleParameter { ParameterName = "dbfilter", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = filter };
@@ -476,9 +460,6 @@ namespace HMS.Business.Repositories
 
                 OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
 
-
-
-
                 oracom.Parameters.Add(dbpageno);
                 oracom.Parameters.Add(dbpagesize);
                 oracom.Parameters.Add(dbfilter);
@@ -486,9 +467,7 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(dbsortingtype);
                 oracom.Parameters.Add(total);
 
-
                 oracom.Parameters.Add(res);
-
 
                 oracon.Open();
                 OracleDataReader dr = oracom.ExecuteReader();
@@ -520,8 +499,6 @@ namespace HMS.Business.Repositories
                 };
 
                 return respage;
-
-
             }
 
         }

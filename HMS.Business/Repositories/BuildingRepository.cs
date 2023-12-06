@@ -37,15 +37,15 @@ namespace HMS.Business.Repositories
 
         public async Task<BaseResponse> create(BuildingCollegeVM buildingCollegeVM)
         {
-            using (OracleConnection oracon = new OracleConnection(con))
+			using (OracleConnection oracon = new(con))
             {
-                OracleCommand oracom = new OracleCommand("Building_create", oracon);
+                OracleCommand oracom = new ("Building_create", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
-                OracleParameter qres = new OracleParameter { ParameterName = "qres", Direction = ParameterDirection.Output, OracleDbType = OracleDbType.NVarchar2, Size = 200, };
-                OracleParameter BName = new OracleParameter { Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = buildingCollegeVM.buldingName.ToString(), };
-                OracleParameter BNumber = new OracleParameter { Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = buildingCollegeVM.buldingnumber, };
-                OracleParameter BCollege_Id = new OracleParameter { Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = buildingCollegeVM.BuldingCollageNumber, };
+                OracleParameter qres = new(){ ParameterName = "qres", Direction = ParameterDirection.Output, OracleDbType = OracleDbType.NVarchar2, Size = 200, };
+                OracleParameter BName = new(){ Direction = ParameterDirection.Input, OracleDbType = OracleDbType.NVarchar2, Value = buildingCollegeVM.buldingName.ToString(), };
+                OracleParameter BNumber = new(){ Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = buildingCollegeVM.buldingnumber, };
+                OracleParameter BCollege_Id = new(){ Direction = ParameterDirection.Input, OracleDbType = OracleDbType.Int32, Value = buildingCollegeVM.BuldingCollageNumber, };
 
                 oracom.Parameters.Add(BName);
                 oracom.Parameters.Add(BNumber);
@@ -95,14 +95,14 @@ namespace HMS.Business.Repositories
 
         public async Task<BaseResponse> delete(int id)
         {
-            using (OracleConnection oracon = new OracleConnection(con))
+            using (OracleConnection oracon = new(con))
             {
-                OracleCommand oracom = new OracleCommand("Building_Delete", oracon);
+                OracleCommand oracom = new ("Building_Delete", oracon);
 
                 oracom.CommandType = CommandType.StoredProcedure;
 
-                OracleParameter B_id = new OracleParameter { ParameterName = "B_id", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = id };
-                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
+                OracleParameter B_id = new(){ ParameterName = "B_id", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = id };
+                OracleParameter qres = new(){ ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
 
                 oracom.Parameters.Add(B_id);
                 oracom.Parameters.Add(qres);
@@ -141,12 +141,12 @@ namespace HMS.Business.Repositories
         {
             List<BuildingCollegeVM> BulList = new List<BuildingCollegeVM>();
 
-            using (OracleConnection oracon = new OracleConnection(con))
+            using (OracleConnection oracon = new(con))
             {
-                OracleCommand oracom = new OracleCommand("Get_College_Building", oracon);
+                OracleCommand oracom = new ("Get_College_Building", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
-                OracleParameter res = new OracleParameter{Direction = ParameterDirection.Output,OracleDbType = OracleDbType.RefCursor,};
+                OracleParameter res = new (){Direction = ParameterDirection.Output,OracleDbType = OracleDbType.RefCursor,};
 
                 oracom.Parameters.Add(res);
 
@@ -155,7 +155,7 @@ namespace HMS.Business.Repositories
                 {
                     sda.SelectCommand.CommandType = CommandType.StoredProcedure;
 
-                    OracleParameter res2 = new OracleParameter { Direction = ParameterDirection.Output, OracleDbType = OracleDbType.RefCursor, };
+                    OracleParameter res2 = new(){ Direction = ParameterDirection.Output, OracleDbType = OracleDbType.RefCursor, };
 
                     sda.SelectCommand.Parameters.Add(res2);
 
@@ -163,8 +163,12 @@ namespace HMS.Business.Repositories
                     sda.Fill(ds);
                     var d = ds.Tables;
 
-
-                }
+					var empList = ds.Tables[0].AsEnumerable()
+	                .Select(dataRow => new HallBuildingVM
+	                {
+		                Name = dataRow.Field<string>("buldingName")
+	                }).ToList();
+				}
 
                 oracon.Open();
                 OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
@@ -190,14 +194,14 @@ namespace HMS.Business.Repositories
         {
             BuildingCollegeVM BuildingInfo = new BuildingCollegeVM();
 
-            using (OracleConnection oracon = new OracleConnection(con))
+            using (OracleConnection oracon = new(con))
             {
-                OracleCommand oracom = new OracleCommand("BUILDING_GET_BYID", oracon);
+                OracleCommand oracom = new ("BUILDING_GET_BYID", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
 
-                OracleParameter B_id = new OracleParameter { ParameterName = "B_id", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = id };
-                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Direction = ParameterDirection.Output };
+                OracleParameter B_id = new(){ ParameterName = "B_id", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = id };
+                OracleParameter res = new(){ ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Direction = ParameterDirection.Output };
 
                 oracom.Parameters.Add(B_id);
                 oracom.Parameters.Add(res);
@@ -220,28 +224,23 @@ namespace HMS.Business.Repositories
 
         public async Task<BaseResponse> update(Building building)
         {
-            using (OracleConnection oracon = new OracleConnection(con))
+            using (OracleConnection oracon = new(con))
             {
-                OracleCommand oracom = new OracleCommand("Building_Update", oracon);
+                OracleCommand oracom = new ("Building_Update", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
 
-                OracleParameter B_Id = new OracleParameter { ParameterName = "B_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = building.ID };
-                OracleParameter B_Name = new OracleParameter {ParameterName = "B_Id", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = building.Name };
-                OracleParameter B_Number = new OracleParameter {ParameterName = "B_Number", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = building.Number };
-                OracleParameter College_Id = new OracleParameter {ParameterName = "College_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = building.Collage_ID };
-                OracleParameter qres = new OracleParameter { ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
+                OracleParameter B_Id = new(){ ParameterName = "B_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = building.ID };
+                OracleParameter B_Name = new(){ParameterName = "B_Id", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = building.Name };
+                OracleParameter B_Number = new(){ParameterName = "B_Number", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = building.Number };
+                OracleParameter College_Id = new(){ParameterName = "College_Id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input, Value = building.Collage_ID };
+                OracleParameter qres = new(){ ParameterName = "qres", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Output };
 
                 oracom.Parameters.Add(B_Id);
                 oracom.Parameters.Add(B_Name);
                 oracom.Parameters.Add(B_Number);
                 oracom.Parameters.Add(College_Id);
                 oracom.Parameters.Add(qres);
-
-                //oracom.Parameters.AddWithValue("Id", building.ID);
-                //oracom.Parameters.AddWithValue("Name", building.Name);
-                //oracom.Parameters.AddWithValue("Number", building.Number);
-                //oracom.Parameters.AddWithValue("College_Id", building.Collage_ID);
 
                 oracon.Open();
                 await oracom.ExecuteNonQueryAsync();
@@ -273,24 +272,24 @@ namespace HMS.Business.Repositories
 
         public BuildingCollegePagingVM GetAllpaging(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder)
         {
-            using (OracleConnection oracon = new OracleConnection(con))
+            using (OracleConnection oracon = new(con))
             {
 
                 List<BuildingCollegeVM> BulList = new List<BuildingCollegeVM>();
                 int totalreservations;
 
-                OracleCommand oracom = new OracleCommand("GET_COLLEGE_BUILDING_PAGING", oracon);
+                OracleCommand oracom = new ("GET_COLLEGE_BUILDING_PAGING", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
 
 
-                OracleParameter dbpageno = new OracleParameter { ParameterName = "dbpageno", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = pageno };
-                OracleParameter dbpagesize = new OracleParameter { ParameterName = "dbpagesize", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = pagesize };
-                OracleParameter dbfilter = new OracleParameter { ParameterName = "dbfilter", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = filter };
-                OracleParameter dbsorting = new OracleParameter { ParameterName = "dbsorting", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = sorting };
-                OracleParameter dbsortingtype = new OracleParameter { ParameterName = "dbsortingtype", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = sortOrder };
-                OracleParameter total = new OracleParameter { ParameterName = "total", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Output };
+                OracleParameter dbpageno = new(){ ParameterName = "dbpageno", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = pageno };
+                OracleParameter dbpagesize = new(){ ParameterName = "dbpagesize", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = pagesize };
+                OracleParameter dbfilter = new(){ ParameterName = "dbfilter", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = filter };
+                OracleParameter dbsorting = new(){ ParameterName = "dbsorting", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = sorting };
+                OracleParameter dbsortingtype = new(){ ParameterName = "dbsortingtype", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = sortOrder };
+                OracleParameter total = new(){ ParameterName = "total", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Output };
 
-                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
+                OracleParameter res = new(){ ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
 
 
                 oracom.Parameters.Add(dbpageno);

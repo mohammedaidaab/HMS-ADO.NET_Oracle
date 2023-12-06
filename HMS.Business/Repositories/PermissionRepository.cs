@@ -172,8 +172,6 @@ namespace HMS.Business.Repositories
                 OracleParameter R_ID = new OracleParameter { ParameterName = "R_ID", OracleDbType = OracleDbType.Varchar2, Direction = ParameterDirection.Input, Value = roleId };
                 oracom.Parameters.Add(R_ID);
                 
-                //oracom.Parameters.AddWithValue("@RoleID", roleId);
-
 				oracon.Open();
 				await oracom.ExecuteNonQueryAsync();
 				oracon.Close();
@@ -189,9 +187,6 @@ namespace HMS.Business.Repositories
 
                         oracom2.Parameters.Add(role_id);
                         oracom2.Parameters.Add(perm_id);
-
-                        //oracom2.Parameters.AddWithValue("RoleId", roleId);
-						//oracom2.Parameters.AddWithValue("PermissionID", perm.ID);
 
 						oracon.Open();
 						oracom2.ExecuteNonQuery();
@@ -231,8 +226,6 @@ namespace HMS.Business.Repositories
                 oracom.Parameters.Add(perm_name);
                 oracom.Parameters.Add(res);
 
-                //oracom.Parameters.AddWithValue("@PermissionName", permition);
-
                 oracon.Open();
 				OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
 				while (dr.Read())
@@ -271,9 +264,6 @@ namespace HMS.Business.Repositories
                         oracom.Parameters.Add(role_id);
                         oracom.Parameters.Add(perm_id);
                         oracom.Parameters.Add(res);
-
-						// oracom.Parameters.AddWithValue("RoleID", role.Id);
-						//oracom.Parameters.AddWithValue("PermissionID", checkpermission.ID);
 
 						var value = Convert.ToInt32(oracom.ExecuteScalar());
 

@@ -65,7 +65,7 @@ namespace HMS.UI.Controllers
 					return View("create", role);
                 }
             }
-			TempData["message"] = "يوجد خطا ف يالبانات المدخلة الرجء مراجعة البانات";
+			TempData["message"] = "يوجد خطا في البانات المدخلة الرجء مراجعة البانات";
 			TempData["type"] = "danger";
             return View("create", role);
 
@@ -112,13 +112,13 @@ namespace HMS.UI.Controllers
 					}
 					else
 					{
-						TempData["message"] = "لم يتم تعديل البيانات الرجاء التحقق من اليانات المدخلة";
+						TempData["message"] = "لم يتم تعديل البيانات الرجاء التحقق من البيانات المدخلة";
 						TempData["type"] = "warning";
 						return View("Edit", role.Id);
 					}
 				}
 
-				TempData["message"] = "يوجد خطا ف يالبانات المدخلة الرجء مراجعة البانات";
+				TempData["message"] = "يوجد خطا في البانات المدخلة الرجاء مراجعة البانات";
 				TempData["type"] = "danger";
 				return View("edit", role.Id);
 			}

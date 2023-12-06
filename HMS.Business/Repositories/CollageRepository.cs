@@ -96,7 +96,7 @@ namespace HMS.Business.Repositories
 					oracon.Close();
 					return new BaseResponse
 					{
-						Message = "تم حذف البيانات  بنجاح",
+						Message = "تم حذف البيانات بنجاح",
 						Type = "success",
 						IsSuccess = true
 					};
@@ -113,7 +113,6 @@ namespace HMS.Business.Repositories
 
 				} 
 			}
-            //throw new NotImplementedException();
         }
 
         public async Task<IEnumerable<collage>> GetAll()
@@ -203,8 +202,6 @@ namespace HMS.Business.Repositories
                 };
 
                 return collegelist;
-
-
             }
 
         }
@@ -225,8 +222,6 @@ namespace HMS.Business.Repositories
 
 				oracom.Parameters.Add(Col_ID);
 				oracom.Parameters.Add(res);
-
-				//oracom.Parameters.AddWithValue("ID", Id);
 
                 oracon.Open();
                 OracleDataReader dr = (OracleDataReader)await oracom.ExecuteReaderAsync();
@@ -252,7 +247,6 @@ namespace HMS.Business.Repositories
 
                 OracleCommand oracom = new OracleCommand("Collages_Update", oracon);
                 oracom.CommandType = CommandType.StoredProcedure;
-
 
 				OracleParameter Col_ID = new OracleParameter { ParameterName = "Col_Name", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Input, Value = model.ID };
 				OracleParameter Col_Name = new OracleParameter { ParameterName = "Col_Name", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = model.Name };
@@ -282,7 +276,7 @@ namespace HMS.Business.Repositories
 					oracon.Close();
 					return new BaseResponse
 					{
-						Message = "لم تتم تعديل البيانات لوجود بيانات مماثلة",
+						Message = "لم يتم تعديل البيانات لوجود بيانات مماثلة",
 						Type = "warning",
 						IsSuccess = false
 					};

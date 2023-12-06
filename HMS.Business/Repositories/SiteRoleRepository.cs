@@ -182,8 +182,6 @@ namespace HMS.Infrastructure.Repositories
                         oracom.Parameters.Add(NorRoleName);
                         oracom.Parameters.Add(res);
 
-						//oracom.Parameters.AddWithValue("@NormalizedRoleName", normalizedRoleName);
-
                         using (var rdr = await oracom.ExecuteReaderAsync(CommandBehavior.SingleRow))
                         {
                             if (rdr.Read())
@@ -233,8 +231,6 @@ namespace HMS.Infrastructure.Repositories
 
                         oracom.Parameters.Add(role_id);
                         oracom.Parameters.Add(res);
-
-                        //oracom.Parameters.AddWithValue("@Id", roleId);
 
                         using (var rdr = await oracom.ExecuteReaderAsync(CommandBehavior.SingleRow, cancellationToken))
                         {
@@ -288,8 +284,6 @@ namespace HMS.Infrastructure.Repositories
 
                         oracom.Parameters.Add(U_Id);
                         oracom.Parameters.Add(res);
-
-                       // oracom.Parameters.AddWithValue("@UserId", user.Id);
 
                         OracleDataReader rdr = (OracleDataReader)await oracom.ExecuteReaderAsync();
 
@@ -347,7 +341,6 @@ namespace HMS.Infrastructure.Repositories
 
 		public async Task<SiteRole> GetRolesByUserId(SiteUser user, CancellationToken cancellationToken)
 		{
-			// IUserStore requires a IQueryable list
 			 SiteRole  role = new SiteRole();
 
 			try
@@ -367,8 +360,6 @@ namespace HMS.Infrastructure.Repositories
                         
                         oracom.Parameters.Add(user_id); 
                         oracom.Parameters.Add(res);
-
-                        //oracom.Parameters.AddWithValue("@UserId", user.Id);
 
 						OracleDataReader rdr = (OracleDataReader)await oracom.ExecuteReaderAsync();
 

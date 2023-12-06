@@ -122,7 +122,7 @@ namespace HMS.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> userlist()
+        public IActionResult userlist()
         {
             var user = _ISiteUserRepository.GetUserList();
 
@@ -148,7 +148,7 @@ namespace HMS.MVC.Controllers
 
         }
 
-        public async Task<IActionResult> EditUser(IndexViewModel user,string? newPassword)
+        public async Task<IActionResult> EditUser(IndexViewModel user,string newPassword)
         {
             var sysuser = await _userManager.FindByEmailAsync(user.Email);
 

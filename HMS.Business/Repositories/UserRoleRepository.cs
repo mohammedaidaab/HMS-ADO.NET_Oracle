@@ -54,10 +54,6 @@ namespace HMS.Infrastructure.Repositories
 
 						oracom.Parameters.Add(U_ID);
 						oracom.Parameters.Add(R_ID);
-						//oracom.Parameters.Add(res);
-
-						//oracom.Parameters.AddWithValue("@UserId", UserId);
-						//oracom.Parameters.AddWithValue("@RoleId", RoleId);
 
 						await oracom.ExecuteNonQueryAsync(cancellationToken);
                     }
@@ -134,9 +130,6 @@ namespace HMS.Infrastructure.Repositories
 						oracom.Parameters.Add(U_ID);
 						oracom.Parameters.Add(R_ID);
 						oracom.Parameters.Add(res);
-
-						//oracom.Parameters.AddWithValue("@UserId", UserId);
-                        //oracom.Parameters.AddWithValue("@RoleId", RoleId);
 
                         var value = Convert.ToInt32(oracom.ExecuteScalar());
 

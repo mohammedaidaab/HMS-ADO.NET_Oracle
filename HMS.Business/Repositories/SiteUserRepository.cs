@@ -362,8 +362,6 @@ namespace HMS.Infrastructure.Repositories
 						oracom.Parameters.Add(noruseremail);
 						oracom.Parameters.Add(res);
 
-						//cmd.Parameters.Add("@NormalizedUserName", normalizedEmail);
-
                         using (var rdr = await oracom.ExecuteReaderAsync(CommandBehavior.SingleRow))
                         {
                             if (rdr.Read())
@@ -383,10 +381,6 @@ namespace HMS.Infrastructure.Repositories
                                     PhoneNumberConfirmed = bool.Parse(rdr["PhoneNumberConfirmed"].ToString()),
                                     TwoFactorEnabled = bool.Parse(rdr["TwoFactorEnabled"].ToString()),
                                     Created = DateTime.Parse(rdr["Created"].ToString()),
-                                    //Facebook = rdr["Facebook"].ToString(),
-                                    //Twitter = rdr["Twitter"].ToString(),
-                                    //Instagram = rdr["Instagram"].ToString(),
-                                    //Website = rdr["Website"].ToString()
                                 };
                             }
                             return user;
