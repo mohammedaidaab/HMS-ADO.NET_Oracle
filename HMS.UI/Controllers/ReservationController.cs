@@ -44,9 +44,7 @@ namespace HMS.UI.Controllers
         private readonly IPermissionRepository _IPermissionRepository;
         private readonly CancellationToken cancellationToken;
 
-        public ReservationController(IHallrepository iHallRepository, IReservationRepository ireservationrepository,
-                                     ISiteUserRepository siteUserRepository, UserManager<SiteUser> userManager,
-                                     IPermissionRepository permissionRepository)
+        public ReservationController(IHallrepository iHallRepository, IReservationRepository ireservationrepository,ISiteUserRepository siteUserRepository, UserManager<SiteUser> userManager,IPermissionRepository permissionRepository)
         {
             _IHallRepository = iHallRepository;
             _IReservationRepository = ireservationrepository;
@@ -55,7 +53,6 @@ namespace HMS.UI.Controllers
             _IPermissionRepository = permissionRepository;
 
         }
-
 
         public async Task<IActionResult> Index()
         {
@@ -86,6 +83,10 @@ namespace HMS.UI.Controllers
         [HttpPost]
         public JsonResult GetDetails()
         {
+
+            var u_id = User.GetUserId();
+            ReservationHallPagingVM data2 = new();
+
             object data = new object();
 
             var start = (Convert.ToInt32(Request.Form["start"]));
@@ -124,8 +125,15 @@ namespace HMS.UI.Controllers
                 else
                     SortOrder = "desc";
 
-                var data2 = _IReservationRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);
 
+                if (User.IsInRole("super_admin"))
+                {
+                    data2 = _IReservationRepository.GetAllpaging(start, searchvalue, Length, SortColumn, sortDirection);
+                }
+                else
+                {
+                    data2 = _IReservationRepository.GetAllpagingByUserId(start, searchvalue, Length, SortColumn, sortDirection,Convert.ToInt32(u_id));
+                }
                 data = data2.reservations;
                 recordsTotal = data2.totalPages;
 
@@ -294,7 +302,7 @@ namespace HMS.UI.Controllers
                 {
                     TempData["message"] = res.Message;
                     TempData["type"] = res.Type;
-                    return RedirectToAction("Index");
+                    return RedirectToAction("canceledreservations");
                 }
                 else
                 {
@@ -324,7 +332,6 @@ namespace HMS.UI.Controllers
                     TempData["type"] = res.Type;
                     return RedirectToAction("Remove");
                 }
-
             }
             else
             {

@@ -267,6 +267,69 @@ namespace HMS.Business.Repositories
             }
 
         }
+        public  ReservationHallPagingVM GetAllpagingByUserId(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder,int U_id)
+        {   
+            using (OracleConnection oracon = new OracleConnection(con))
+            {
+                
+                List<ReservationHallVM> reservationList = new List<ReservationHallVM>();
+                int totalreservations;
+
+                OracleCommand oracom = new OracleCommand("RESERVATION_GETALL_PAGING_By_UserID", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
+                
+                OracleParameter u_id = new OracleParameter { ParameterName = "u_id", OracleDbType = OracleDbType.Int32, Size = 255, Direction = ParameterDirection.Input,Value= U_id };
+                OracleParameter dbpageno = new OracleParameter { ParameterName = "dbpageno", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=pageno};
+                OracleParameter dbpagesize = new OracleParameter { ParameterName = "dbpagesize", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=pagesize};
+                OracleParameter dbfilter = new OracleParameter { ParameterName = "dbfilter", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value=filter};
+                OracleParameter dbsorting = new OracleParameter { ParameterName = "dbsorting", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input,Value= sorting };
+                OracleParameter dbsortingtype = new OracleParameter { ParameterName = "dbsortingtype", OracleDbType = OracleDbType.NVarchar2, Size = 255, Direction = ParameterDirection.Input, Value = sortOrder };
+                OracleParameter total = new OracleParameter { ParameterName = "total", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Output };
+
+                OracleParameter res = new OracleParameter { ParameterName = "res", OracleDbType = OracleDbType.RefCursor, Size = 255, Direction = ParameterDirection.Output };
+
+                oracom.Parameters.Add(u_id);
+                oracom.Parameters.Add(dbpageno);
+                oracom.Parameters.Add(dbpagesize);
+                oracom.Parameters.Add(dbfilter);
+                oracom.Parameters.Add(dbsorting);
+                oracom.Parameters.Add(dbsortingtype);
+                oracom.Parameters.Add(total);
+
+                oracom.Parameters.Add(res);
+
+                oracon.Open();
+                OracleDataReader dr = oracom.ExecuteReader();
+                while (dr.Read())
+                {                    
+                    ReservationHallVM reservation = new ReservationHallVM
+                    {
+                        Id = Convert.ToInt32(dr["ID"]),
+                        Name = dr["Name"].ToString(),
+                        Hall_name = dr["Hall_Name"].ToString(),
+                        Date = Convert.ToDateTime(dr["RESERVATION_DATE"]),
+                        Time_Start = Convert.ToDateTime(dr["Time_Start"].ToString()),
+                        Time_End = Convert.ToDateTime(dr["Time_End"].ToString()),
+                        User_id = Convert.ToInt32(dr["User_Id"]),
+                        User_Name = dr["User_Name"].ToString()
+                    };
+
+                    reservationList.Add(reservation);
+                }
+
+                oracon.Close();
+                totalreservations = int.Parse(oracom.Parameters["total"].Value.ToString()); ;
+
+                ReservationHallPagingVM respage = new ReservationHallPagingVM
+                {
+                    reservations = reservationList,
+                    totalPages = totalreservations
+                };
+
+                return respage;
+            }
+
+        }
 
         public async Task<ReservationHallVM> GetById(int id) 
 		{

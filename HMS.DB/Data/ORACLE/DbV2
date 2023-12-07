@@ -17,7 +17,7 @@ CREATE SEQUENCE ISEQ$$_77774 INCREMENT BY 1 START WITH 41 MAXVALUE 9999999999999
 DROP SEQUENCE ISEQ$$_77781;
 CREATE SEQUENCE ISEQ$$_77781 INCREMENT BY 1 START WITH 21 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
 DROP SEQUENCE ISEQ$$_77786;
-CREATE SEQUENCE ISEQ$$_77786 INCREMENT BY 1 START WITH 21 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
+CREATE SEQUENCE ISEQ$$_77786 INCREMENT BY 1 START WITH 41 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
 DROP SEQUENCE ISEQ$$_78636;
 CREATE SEQUENCE ISEQ$$_78636 INCREMENT BY 1 START WITH 1 MAXVALUE 9999999999999999999999999999 MINVALUE 1 NOCYCLE CACHE 20 NOORDER;
 DROP SEQUENCE ISEQ$$_78639;
@@ -1337,6 +1337,49 @@ END RESERVATION_GETALL_PAGING;
 
 
 /
+DROP PROCEDURE RESERVATION_GETALL_PAGING_BY_USERID;
+--/
+CREATE PROCEDURE RESERVATION_GETALL_PAGING_BY_USERID
+(u_id IN NUMBER ,dbpageno IN NUMBER , dbpagesize IN NUMBER ,dbfilter IN NVARCHAR2,dbsorting IN NVARCHAR2,dbsortingtype IN NVARCHAR2,total OUT NUMBER,res OUT SYS_REFCURSOR)
+AS
+        string  VARCHAR2 (500)   := dbfilter;
+        sort NVARCHAR2(500)      := dbsorting ;
+        sorttype NVARCHAR2(500)  := dbsortingtype ;
+        psize NUMBER(10) 		 := 0;
+BEGIN
+
+        SELECT COUNT(1) INTO total FROM RESERVATIONS WHERE (RESERVATIONS.ACTIVE = 1);
+
+
+        OPEN res FOR SELECT  RESERVATIONS.ID,RESERVATIONS.Name,RESERVATIONS.Hall_Id,RESERVATIONS.Time_Start AS Time_Start,
+                               RESERVATIONS.Time_End AS Time_End,RESERVATION_DATE AS RESERVATION_DATE,RESERVATIONS.USER_ID 
+                ,Halls.Name AS Hall_Name, SiteUser.Forename AS User_Name
+                FROM RESERVATIONS 
+                        join Halls on RESERVATIONS.Hall_Id = Halls.ID
+                        join SiteUser on RESERVATIONS.User_Id = SiteUser.Id 
+                WHERE RESERVATIONS.NAME LIKE '%' || string || '%'   AND (RESERVATIONS.ACTIVE = 1)  AND USER_ID = u_id
+                order by (case when sort = 'user_Name' AND sorttype = 'asc' then User_Name  END) ASC,
+                		 (case when sort = 'user_Name' AND sorttype = 'desc' then User_Name  END) DESC ,
+
+               			 (case when sort = 'name' AND sorttype = 'asc' then Name end) ASC ,
+               			 (case when sort = 'name' AND sorttype = 'desc' then Name end) DESC ,
+
+               			 (case when sort = 'time_Start' AND sorttype = 'asc' then Time_Start end) ASC  ,
+               			 (case when sort = 'time_Start' AND sorttype = 'desc' then Time_Start end) DESC  ,
+
+               			 (case when sort = 'time_End' AND sorttype = 'asc' then Time_End end) ASC  ,
+               			 (case when sort = 'time_End' AND sorttype = 'desc' then Time_End end) DESC,
+
+               			 (case when sort = 'hall_name' AND sorttype = 'asc' then Time_Start end) ASC  ,
+               			 (case when sort = 'hall_name' AND sorttype = 'desc' then Time_Start end) DESC ,
+
+               			 (case when sort = 'date' AND sorttype = 'asc' then Time_Start end) ASC  ,
+               			 (case when sort = 'date' AND sorttype = 'desc' then Time_Start end) DESC 
+
+                 OFFSET dbpageno ROWS FETCH NEXT dbpagesize  ROWS ONLY;
+
+END;
+/
 DROP PROCEDURE RESERVATION_GETBYID;
 --/
 CREATE PROCEDURE RESERVATION_GETBYID 
@@ -1366,7 +1409,7 @@ BEGIN
                         Reservations.RESERVATION_DATE,Reservations.User_Id 
 	,Halls.Name AS Hall_Name
 	FROM Reservations join Halls on Reservations.Hall_Id = Halls.ID
-	WHERE Reservations.User_Id = R_User_Id 
+	WHERE Reservations.USER_ID = R_User_Id 
 	ORDER BY Time_Start ;
 END;
 
