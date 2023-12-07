@@ -10,7 +10,6 @@ using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
 using System.Threading.Tasks;
 
 namespace HMS.Domain.Interfaces.Repositories
@@ -26,5 +25,6 @@ namespace HMS.Domain.Interfaces.Repositories
         public Task<BaseResponse> Delete(int id);
         public ReservationHallPagingVM GetCanceled(Nullable<int> pageno, string filter, Nullable<int> pagesize, string sorting, string sortOrder);
         public Task<BaseResponse> reactive(int id);
+        public Task<BaseResponse> Remove(int id);
     }
 }

@@ -545,5 +545,44 @@ namespace HMS.Business.Repositories
               
         }
 
+        public async Task<BaseResponse> Remove(int id)
+        {
+            using (OracleConnection oracon = new(con))
+            {
+                OracleCommand oracom = new("RESERVATION_DEACTIVE", oracon);
+                oracom.CommandType = CommandType.StoredProcedure;
+
+                OracleParameter R_id = new (){ ParameterName = "R_id", OracleDbType = OracleDbType.Int32, Direction = ParameterDirection.Input, Value = id };
+                OracleParameter qres = new (){ ParameterName = "qres", OracleDbType = OracleDbType.Varchar2, Direction = ParameterDirection.Output,Size=255 };
+
+                oracom.Parameters.Add (R_id);
+                oracom.Parameters.Add (qres);
+                
+                oracon.Open();
+                await oracom.ExecuteNonQueryAsync();
+
+                if (oracom.Parameters["qres"].Value.ToString() == "success")
+                {
+                    oracon.Close();
+                    return new BaseResponse
+                    {
+                        IsSuccess = true,
+                        Message = "تم الغاء تفعيل الحجز ينجاح",
+                        Type = "success",
+                    };
+                }
+                else
+                {
+                    return new BaseResponse
+                    {
+                        IsSuccess = false,
+                        Type = "error",
+                        Message = "لم يتم الغاء الحجز الخاص بالقاعة الرجاء التواصل مع مسؤول النظام"
+                    };
+                }
+
+            }
+        }
+
     }
 }

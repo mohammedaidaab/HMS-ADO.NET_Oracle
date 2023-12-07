@@ -5,7 +5,6 @@
 //Halls ManageMent System
 /////////////////////////////////////////////////////
 
-using HMS.Data;
 using System.ComponentModel.DataAnnotations;
 
 namespace HMS.Domain.Entities

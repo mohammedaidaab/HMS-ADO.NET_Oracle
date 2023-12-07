@@ -12,7 +12,6 @@ namespace HMS.MVC
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                //.WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 20)
                 .CreateLogger();
 
             try
@@ -38,7 +37,6 @@ namespace HMS.MVC
                 })
                 .ConfigureLogging(logging =>
                 {
-                    // clear default logging providers
                     logging.AddSerilog();
                 });
     }

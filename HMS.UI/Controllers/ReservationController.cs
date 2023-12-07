@@ -216,8 +216,6 @@ namespace HMS.UI.Controllers
                     return RedirectToAction("Edit", reservation);
                 }
             }
-
-
             TempData["message"] = "حدثت مشكلة غير متوقعة الرجاء التواصل مع مشرف النظام  في جحال استمرار الاشكالية";
             return RedirectToAction("Edit", reservation);
         }
@@ -287,7 +285,6 @@ namespace HMS.UI.Controllers
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
         }
 
-
         public async Task<IActionResult> reactive(int id)
         {
             if (id != 0)
@@ -308,6 +305,31 @@ namespace HMS.UI.Controllers
 
             }
             return RedirectToAction("index");
+        }
+
+        public async Task<IActionResult> Remove(int id)
+        {
+            if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Delete", cancellationToken))
+            {
+              BaseResponse res = await _IReservationRepository.Remove(id);
+                if (res.IsSuccess == true)
+                {
+                    TempData["message"] = res.Message;
+                    TempData["type"] = res.Type;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["message"] = res.Message;
+                    TempData["type"] = res.Type;
+                    return RedirectToAction("Remove");
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("AccessDenied", "account");
+            }
         }
     }
 }

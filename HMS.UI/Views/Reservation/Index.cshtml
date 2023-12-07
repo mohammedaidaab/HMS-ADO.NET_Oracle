@@ -27,7 +27,7 @@
         <div class="card-body">
             <table id="data" class="table table-bordered">
                 <thead>
-                    <tr style="text-align:center !important">
+                    <tr style="text-align:center !important;text-align-last:center">
                         <th>اسم الحجز</th>
                         <th>وقت البداية</th>
                         <th>وقت الانتهاء</th>
@@ -35,10 +35,18 @@
                         <th>اسم القاعة</th>
                         <th>اسم المستخدم</th>
                         <th>
-                            @if (User.IsInRole("super-admin"))
+                            @if (User.IsInRole("super_admin"))
                             {
                                 <p>
                                     تعديل
+                                </p>
+                            }
+                        </th>
+                        <th>
+                            @if (User.IsInRole("super_admin"))
+                            {
+                                <p>
+                                    الغاء التفعيل
                                 </p>
                             }
                         </th>
@@ -93,7 +101,12 @@
                     {
                         "mData": null,
                         "bSortable": false,
-                        "mRender": function (data) { return '@if (User.IsInRole("super_admin"))  {  <a href="edit/' + data.id + '"><button class="btn btn-warning"> تعديل الحجز  <i class="fa-solid fa-edit fa-2xl"></i> </button> </a> }'; }
+                        "mRender": function (data) { return '@if (User.IsInRole("super_admin"))  {  <a href="/Reservation/edit/' + data.id + '"><button class="btn btn-warning"> تعديل الحجز  <i class="fa-solid fa-edit fa-2xl"></i> </button> </a> }'; }
+                    },
+                    {
+                        "mData": null,
+                        "bSortable": false,
+                        "mRender": function (data) { return '@if (User.IsInRole("super_admin")){<a href="/Reservation/Remove/' + data.id + '"><button class="btn btn-secondary"> الغاء الحجز <i class="fa-solid fa-stop fa-2xl"></i> </button> </a>}'; }
                     },
                 ]
             });

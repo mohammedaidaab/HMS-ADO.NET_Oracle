@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Wekser\\.nuget\\packages\\": {}
+    "C:\\Users\\mgahmed\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.DB\\HMS.DB.csproj",
+      "projectUniqueName": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.DB\\HMS.DB.csproj",
       "projectName": "HMS.DB",
-      "projectPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.DB\\HMS.DB.csproj",
-      "packagesPath": "C:\\Users\\Wekser\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Wekser\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.DB\\obj\\",
+      "projectPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.DB\\HMS.DB.csproj",
+      "packagesPath": "C:\\Users\\mgahmed\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mgahmed\\Documents\\GitHub\\HMS-ADO.NET_Oracle\\HMS.DB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Wekser\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mgahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

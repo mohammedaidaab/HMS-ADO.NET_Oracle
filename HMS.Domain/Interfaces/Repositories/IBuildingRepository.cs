@@ -10,8 +10,6 @@ using HMS.Domain.Entities.Shared;
 using HMS.Domain.Entities.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HMS.Domain.Interfaces.Repositories
