@@ -51,7 +51,6 @@ namespace HMS.UI.Controllers
             _ISiteUserRepository = siteUserRepository;
             _UserManager = userManager;
             _IPermissionRepository = permissionRepository;
-
         }
 
         public async Task<IActionResult> Index()
@@ -78,7 +77,6 @@ namespace HMS.UI.Controllers
                 return RedirectToAction("AccessDenied", "account");
             }
         }
-
         // GET: reaservations
         [HttpPost]
         public JsonResult GetDetails()
@@ -144,7 +142,6 @@ namespace HMS.UI.Controllers
             }
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
         }
-
         public async Task<IActionResult> Create()
         {
             if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Create", cancellationToken))
@@ -157,7 +154,6 @@ namespace HMS.UI.Controllers
                 return RedirectToAction("AccessDenied", "account");
             }
         }
-
         public async Task<IActionResult> store(Reservation reservation)
         {
 
@@ -185,7 +181,6 @@ namespace HMS.UI.Controllers
             return NotFound();
 
         }
-
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -200,7 +195,6 @@ namespace HMS.UI.Controllers
                 return RedirectToAction("AccessDenied", "account");
             }
         }
-
         public async Task<IActionResult> Update(Reservation reservation)
         {
             reservation.User_id = Convert.ToInt32(User.GetUserId());
@@ -227,7 +221,6 @@ namespace HMS.UI.Controllers
             TempData["message"] = "حدثت مشكلة غير متوقعة الرجاء التواصل مع مشرف النظام  في جحال استمرار الاشكالية";
             return RedirectToAction("Edit", reservation);
         }
-
         public async Task<IActionResult> Delete(int id)
         {
             if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Delete", cancellationToken))
@@ -246,7 +239,6 @@ namespace HMS.UI.Controllers
             }
             return RedirectToAction("Index");
         }
-
         public IActionResult canceledreservations()
         {
             return View();
@@ -292,7 +284,6 @@ namespace HMS.UI.Controllers
             }
             return Json(new { data = data, recordsTotal = recordsTotal, recordsFiltered = recordsTotal });
         }
-
         public async Task<IActionResult> reactive(int id)
         {
             if (id != 0)
@@ -314,7 +305,6 @@ namespace HMS.UI.Controllers
             }
             return RedirectToAction("index");
         }
-
         public async Task<IActionResult> Remove(int id)
         {
             if (await _IPermissionRepository.hasPermission(User.GetUserId(), "reservations-Delete", cancellationToken))

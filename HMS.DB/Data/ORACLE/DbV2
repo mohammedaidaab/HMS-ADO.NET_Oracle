@@ -110,7 +110,7 @@ AS
 BEGIN
   SELECT COUNT (*) INTO chvalue FROM BuILDING WHERE (ID = B_Id);
 
-        IF chvalue > 0 THEN 
+        IF chvalue = 0 THEN 
                 DELETE FROM BUILDING WHERE (ID = B_ID);
         qres := 'success';
         ELSE 

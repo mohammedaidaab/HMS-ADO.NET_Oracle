@@ -10,3 +10,17 @@ C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\refint\HMS.Domain.dll
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\HMS.Domain.pdb
 C:\Users\Wekser\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\ref\HMS.Domain.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\bin\Release\net6.0\HMS.Domain.deps.json
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\bin\Release\net6.0\HMS.Domain.runtimeconfig.json
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\bin\Release\net6.0\HMS.Domain.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\bin\Release\net6.0\HMS.Domain.pdb
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\HMS.Domain.csproj.AssemblyReference.cache
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\HMS.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\HMS.Domain.AssemblyInfoInputs.cache
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\HMS.Domain.AssemblyInfo.cs
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\HMS.Domain.csproj.CoreCompileInputs.cache
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\HMS.Domain.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\refint\HMS.Domain.dll
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\HMS.Domain.pdb
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\HMS.Domain.genruntimeconfig.cache
+C:\Users\mgahmed\Documents\GitHub\HMS-ADO.NET_Oracle\HMS.Domain\obj\Release\net6.0\ref\HMS.Domain.dll
